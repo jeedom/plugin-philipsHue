@@ -526,6 +526,17 @@ class philipsHue extends eqLogic {
 				$cmd->remove();
 			}
 		}
+
+		$cmd = $this->getCmd(null, 'set_schedule');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setLogicalId('set_schedule');
+			$cmd->setName(__('Progammation', __FILE__));
+		}
+		$cmd->setType('action');
+		$cmd->setSubType('message');
+		$cmd->setEqLogic_id($this->getId());
+		$cmd->save();
 	}
 
 }
@@ -584,26 +595,63 @@ class philipsHueCmd extends cmd {
 				$hue->sendCommand($command);
 				break;
 			case 'alert_on':
-				if ($obj->getAlert() == "none") {
-					$response = $obj->setOn(true);
-					$response = $obj->setAlert('lselect');
+				if ($obj->getAlert() == 'none') {
+					$obj->setOn(true);
+					$obj->setAlert('lselect');
 				}
 				break;
 			case 'alert_off':
-				if ($obj->getAlert() != "none") {
-					$response = $obj->setAlert('none');
+				if ($obj->getAlert() != 'none') {
+					$obj->setAlert('none');
 				}
 				break;
 			case 'rainbow_on':
-				if ($obj->getEffect() == "none") {
-					$response = $obj->setOn(true);
-					$response = $obj->setEffect('colorloop');
+				if ($obj->getEffect() == 'none') {
+					$obj->setOn(true);
+					$obj->setEffect('colorloop');
 				}
 				break;
 			case 'rainbow_off':
-				if ($obj->getEffect() != "none") {
+				if ($obj->getEffect() != 'none') {
 					$obj->setEffect('none');
 				}
+				break;
+			case 'set_schedule':
+				if ($eqLogic->getConfiguration('category') == 'light') {
+					$command = new \Phue\Command\SetLightState($obj);
+				} else {
+					$command = new \Phue\Command\SetGroupState($obj);
+				}
+				//color|luminosity|saturation|alert|rainbow|transistion
+				$params = explode('|', $_options['message']);
+				if (isset($params[0]) && trim($params[0]) !== '') {
+					$parameter = philipsHue::setHexCode2($params[0]);
+					$command->xy($parameter['xy'][0], $parameter['xy'][1]);
+				}
+				if (isset($params[1]) && trim($params[1]) !== '') {
+					$command->brightness($params[1]);
+				}
+				if (isset($params[2]) && trim($params[2]) !== '') {
+					$command->saturation($params[2]);
+				}
+				if (isset($params[3]) && trim($params[3]) !== '') {
+					if ($params[3] == 1) {
+						$command->setAlert('lselect');
+					} else {
+						$command->setAlert('none');
+					}
+				}
+				if (isset($params[4]) && trim($params[4]) !== '') {
+					$command->setEffect($params[4]);
+				}
+				if (isset($params[5]) && trim($params[5]) !== '') {
+					$command->transitionTime($params[5]);
+				}
+				print_r($command);
+				return;
+				$hue->sendCommand(
+					new \Phue\Command\CreateSchedule('Jeedom programmation', $_options['title'], $command)
+				);
 				break;
 		}
 		philipsHue::cron15($eqLogic->getId());

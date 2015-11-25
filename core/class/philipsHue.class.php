@@ -593,11 +593,16 @@ class philipsHue extends eqLogic {
 				if (!$scene->isActive()) {
 					continue;
 				}
+				$name = $scene->getName();
+				$name = trim(substr($name, 0, strpos($name, ' on ')));
+				if ($name == '') {
+					continue;
+				}
 				$cmd = $this->getCmd(null, 'set_scene_' . $scene->getId());
 				if (!is_object($cmd)) {
 					$cmd = new philipsHueCmd();
 					$cmd->setLogicalId('set_scene_' . $scene->getId());
-					$cmd->setName(__('Scène ' . $scene->getName(), __FILE__));
+					$cmd->setName(__('Scène ' . $name, __FILE__));
 				}
 				$cmd->setType('action');
 				$cmd->setSubType('other');
@@ -723,9 +728,11 @@ class philipsHueCmd extends cmd {
 				return;
 			default:
 				if (strpos($this->getLogicalId(), 'set_scene_') !== false) {
-					$hue->sendCommand(
-						(new \Phue\Command\SetGroupState(0))->scene($this->getConfiguration('id'))
-					);
+					$command = new \Phue\Command\SetGroupState(0);
+					$command->scene($this->getConfiguration('id'));
+					$command->transitionTime($transistion_time);
+					log::add('philipsHue', 'debug', print_r($command, true));
+					$hue->sendCommand($command);
 				}
 				return;
 		}

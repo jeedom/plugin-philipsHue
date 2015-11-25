@@ -101,7 +101,7 @@ class philipsHue extends eqLogic {
 			if ($eqLogic->getIsEnable() == 0) {
 				continue;
 			}
-			if ($eqLogic->setConfiguration('category') == 'group') {
+			if ($eqLogic->getConfiguration('category') == 'group') {
 				continue;
 			}
 			try {

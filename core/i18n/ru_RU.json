@@ -1,0 +1,40 @@
+{
+    "plugins/philipsHue/plugin_info/info.xml": {
+        "Plugin pour commander les lampes Philips Hue": "Плагин для управления лампами Philips Hue",
+        "Lors de la première synchronisation, vous devez appuyer sur le bouton \"LINK\" du bridge avant de cliquer sur \"Synchroniser avec le bridge\"": "Во время первой синхронизации, вы должны нажать \"LINK\" до использования кнопки «Синхронизировать мост\""
+    },
+    "plugins/philipsHue/desktop/php/philipsHue.php": {
+        "Ajouter un équipement": "Добавить оборудование",
+        "Gestion des groupes": "Управление Группами",
+        "Rechercher": "Искать",
+        "Mes Philips Hue": "Mes Philips Hue",
+        "Général": "Главная",
+        "Nom de l'équipement philipsHue": "Название оборудования Philips Hue",
+        "Objet parent": "Родительский объект",
+        "Aucun": "Нет",
+        "Catégorie": "Категория",
+        "Activer": "Активировать",
+        "Visible": "Видимый",
+        "Adresse IP": "IP Адрес ",
+        "Synchroniser avec le Bridge": "Синхронизация с мостом",
+        "Device": "Устройство",
+        " Ajouter une commande philipsHue": "Добавить команду philipsHue",
+        "Nom": "Имя",
+        "Type": "Тип",
+        "Parametre(s)": "Параметр (ы)",
+        "Supprimer": "Удалить",
+        "Sauvegarder": "Сохранить"
+    },
+    "plugins/philipsHue/desktop/js/philipsHue.js": {
+        "Gestion des groupes": "Управление Группами",
+        "Parametres (JSON)": "Параметры (JSON)",
+        "Tester": "Тест"
+    },
+    "plugins/philipsHue/desktop/modal/manage.groups.php": {
+        "Ajouter un groupe": "Добавить Группу",
+        "ID GROUPE": "ID Группы",
+        "NOM": "ИМЯ",
+        "LAMPES": "ЛАМПЫ",
+        "ACTION": "ДЕЙСТВИЕ"
+    }
+}

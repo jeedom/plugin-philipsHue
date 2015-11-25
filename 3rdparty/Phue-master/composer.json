@@ -1,0 +1,42 @@
+{
+    "name": "sqmk/phue",
+    "description": "Phue - Philips Hue PHP client",
+    "type": "library",
+    "keywords": [
+        "phue",
+        "philips",
+        "hue",
+        "client"
+    ],
+    "homepage": "http://github.com/sqmk/Phue",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name":  "Michael Squires",
+            "email": "sqmk@php.net",
+            "role":  "lead"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "0.8.0",
+        "phpunit/PHPUnit": "3.7.25",
+        "squizlabs/php_codesniffer": "1.4.6"
+    },
+    "suggest": {
+        "ext-curl": "Allows usage of cURL transport adapter"
+    },
+    "autoload": {
+        "psr-0": {
+            "Phue": "library/"
+        }
+    },
+    "bin": [
+        "bin/phue-create-user",
+        "bin/phue-bridge-finder",
+        "bin/phue-light-finder",
+        "bin/phue-list-lights"
+    ]
+}

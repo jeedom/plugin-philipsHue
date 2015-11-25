@@ -1,0 +1,5 @@
+* V0.9 : fix UI
+* V0.7 : Bug fix
+* V0.6 : Optimisations
+* V0.5 : Refonte totale
+* V0.1 : Première release

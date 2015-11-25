@@ -1,0 +1,19 @@
+== philipsHue
+
+=== Description
+Plugin pour commander les lampes Philips Hue.
+
+image:../images/philipsHue_screenshot1.png[]
+image:../images/philipsHue_screenshot2.png[]
+
+'''
+=== Configuration
+include::configuration.asciidoc[]
+
+'''
+=== FAQ
+include::faq.asciidoc[]
+
+'''
+=== Changelog
+include::changelog.asciidoc[]

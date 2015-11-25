@@ -1,0 +1,60 @@
+<div class="eqLogic-widget eqLogic" style="background-color: #background_color#;padding : 0px; #style#" data-eqLogic_id="#id#" data-version="mobile">
+    <center>#name#</center>
+    <center>
+		<div class="cmd cmd-widget" data-type="action" data-subtype="color" data-cmd_id="#color_id#" >
+    <div class="action_colorpicker">
+    	<script>
+    	$.include(['plugins/philipsHue/core/template/dashboard/farbtastic.js', 'plugins/philipsHue/core/template/dashboard/farbtastic.css'], function() {
+            $('.cmd[data-cmd_id=#color_id#] .action_colorpicker').off();
+            if ($('.cmd[data-cmd_id=#color_id#] .action_colorpicker').length > 0) {
+                $('.cmd[data-cmd_id=#color_id#] .action_colorpicker').farbtastic();
+                $.farbtastic($('.cmd[data-cmd_id=#color_id#] .action_colorpicker')).setColor(('#etat_color#' != '') ? '#etat_color#' : '#000000');
+                $('.cmd[data-cmd_id=#color_id#] .action_colorpicker').on('mouseup', function() {
+                    jeedom.cmd.execute({id: '#color_id#', value: {color: $.farbtastic($(this)).color}});
+                });
+            }
+        });
+    	</script>
+    </div>
+</div>
+<br>
+	<div class="cmd" data-type="action" data-subtype="other" data-cmd_id="#on_id#">
+	    	<a class="action ui-btn ui-mini ui-btn-inline ui-btn-raised action cmdName" style="background-color:#cmdColor# !important;">ON / OFF</a>
+		</div> <br>
+		<div class="cmd" data-type="action" data-subtype="other" data-cmd_id="#alert_on_id#">
+	    	<a class="action ui-btn ui-mini ui-btn-inline ui-btn-raised action cmdName" style="background-color:#cmdColor# !important;">ALERTE</a>
+		</div> <br>
+		<div class="cmd" data-type="action" data-subtype="other" data-cmd_id="#rainbow_on_id#">
+	    	<a class="action ui-btn ui-mini ui-btn-inline ui-btn-raised action cmdName" style="background-color:#cmdColor# !important;">RAINBOW</a>
+		</div> 
+	</center>
+<script>
+	if('#type#'=='group'){
+		$('.cmd[data-cmd_id=#alert_on_id#]').hide();
+	}
+	$('.cmd[data-cmd_id=#on_id#] .action').on('click', function() {
+		if('#etat#'==1){
+        	jeedom.cmd.execute({id: '#off_id#'});
+        }else{
+        	jeedom.cmd.execute({id: '#on_id#'});
+        }
+    });
+    $('.cmd[data-cmd_id=#alert_on_id#] .action').on('click', function() {
+    	if('#etat_alerte#'==1){
+    		jeedom.cmd.execute({id: '#alert_off_id#'});
+    	}else{
+    		jeedom.cmd.execute({id: '#alert_on_id#'});
+    	}        
+    });
+    $('.cmd[data-cmd_id=#rainbow_on_id#] .action').on('click', function() {
+    	if('#etat_rainbow#'==1){
+    		jeedom.cmd.execute({id: '#rainbow_off_id#'});
+    	}else{
+    		jeedom.cmd.execute({id: '#rainbow_on_id#'});
+    	}        
+    });
+    
+     
+        
+</script>
+<br></div>

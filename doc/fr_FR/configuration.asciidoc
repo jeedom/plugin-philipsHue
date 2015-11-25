@@ -1,0 +1,15 @@
+La configuration se fait dans le plugin Philips Hue.
+
+Vous devez renseigner l'adresse IP de votre pont Philips Hue puis cliquez sur le bouton "Synchroniser avec le bridge".
+Important ! Lors de la première synchronisation, vous devez appuyer sur le bouton "LINK" du bridge avant de cliquer sur "Synchroniser avec le bridge"
+
+Vous pouvez ensuite séléctionner la lampe ou le groupe voulu.
+
+image::../images/philipsHue1.png[]
+
+La gestion des groupes :
+
+Afin de gérer les groupes, veuillez cliquer sur "Gestion des des groupes".
+Il est alors possible de créer, modifier et supprimer les groupes.
+
+image::../images/philipsHue2.png[]

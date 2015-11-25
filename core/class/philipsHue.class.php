@@ -271,6 +271,7 @@ class philipsHue extends eqLogic {
 			'#object_name#' => '',
 			'#version#' => $_version,
 			'#style#' => '',
+			'#type#' => $this->getConfiguration('type'),
 			'#uid#' => 'philipsHue' . $this->getId() . self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER,
 		);
 

@@ -37,23 +37,6 @@ try {
 		ajax::success($return);
 	}
 
-	if (init('action') == 'loadGroups') {
-		$groups = philipsHue::loadGroups(init('id'));
-		$return['nb_groups'] = count($groups);
-		$return['groups'] = $groups;
-		ajax::success($return);
-	}
-
-	if (init('action') == 'saveGroup') {
-		philipsHue::saveGroup(init('id'));
-		ajax::success($return);
-	}
-
-	if (init('action') == 'deleteGroup') {
-		philipsHue::deleteGroup(init('id'));
-		ajax::success($return);
-	}
-
 	throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
 	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {

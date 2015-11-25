@@ -60,24 +60,24 @@
   $('.eqLogic[data-eqLogic_id=#id#] .refresh').on('click', function () {
       jeedom.cmd.execute({id: '#refresh_id#'});
   });
-  if('#category#'=='group'){
-    $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#alert_on_id#]').hide();
-    $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#alert_off_id#]').hide();
-}
-if('#state#'==1){
-    $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#on_id#]').hide();
+  if('#category#'!='group'){
+      if('#state#'==1){
+        $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#on_id#]').hide();
+    }else{
+        $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#off_id#]').hide();
+    }
+    if('#alert_state#'==1){
+        $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#alert_on_id#]').hide();
+    }else{
+        $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#alert_off_id#]').hide();
+    }
+    if('#rainbow_state#'==1){
+        $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#rainbow_on_id#]').hide();
+    }else{
+        $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#rainbow_off_id#]').hide();
+    }
 }else{
-    $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#off_id#]').hide();
-}
-if('#alert_state#'==1){
-    $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#alert_on_id#]').hide();
-}else{
-    $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#alert_off_id#]').hide();
-}
-if('#rainbow_state#'==1){
-    $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#rainbow_on_id#]').hide();
-}else{
-    $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#rainbow_off_id#]').hide();
+    $('.eqLogic[data-eqLogic_id=#id#] .refresh').hide();
 }
 $('.eqLogic[data-eqLogic_uid=#uid#] .btnAction').on('click',function(){
     jeedom.cmd.execute({id: $(this).attr('data-cmd_id')});

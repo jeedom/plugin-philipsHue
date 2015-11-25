@@ -233,43 +233,50 @@ class philipsHue extends eqLogic {
 		return $arrData;
 	}
 
-	/*public function toHtml($_version = 'dashboard') {
+	/*     * *********************Méthodes d'instance************************* */
+
+	public function toHtml($_version = 'dashboard') {
 		if ($this->getIsEnable() != 1) {
 			return '';
 		}
 		if (!$this->hasRight('r')) {
 			return '';
 		}
-		$_version = jeedom::versionAlias($_version);
+		$version = jeedom::versionAlias($_version);
+		if ($this->getDisplay('hideOn' . $version) == 1) {
+			return '';
+		}
+		$mc = cache::byKey('philipsHueWidget' . $_version . $this->getId());
+		if ($mc->getValue() != '') {
+			//return preg_replace("/" . preg_quote(self::UIDDELIMITER) . "(.*?)" . preg_quote(self::UIDDELIMITER) . "/", self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER, $mc->getValue());
+		}
 		$vcolor = 'cmdColor';
-		if ($version == 'mobile') {
+		if ($_version == 'mobile') {
 			$vcolor = 'mcmdColor';
 		}
+		$parameters = $this->getDisplay('parameters');
 		$cmdColor = ($this->getPrimaryCategory() == '') ? '' : jeedom::getConfiguration('eqLogic:category:' . $this->getPrimaryCategory() . ':' . $vcolor);
 		if (is_array($parameters) && isset($parameters['background_cmd_color'])) {
 			$cmdColor = $parameters['background_cmd_color'];
-		}
-		if (substr($this->getConfiguration('device'), 0, 1) == "l") {
-			$type = "lamp";
-		} else {
-			$type = "group";
 		}
 		$replace = array(
 			'#id#' => $this->getId(),
 			'#info#' => (isset($info)) ? $info : '',
 			'#name#' => $this->getName(),
-			'#eqLink#' => $this->getLinkToConfiguration(),
+			'#eqLink#' => ($this->hasRight('w')) ? $this->getLinkToConfiguration() : '#',
 			'#text_color#' => $this->getConfiguration('text_color'),
-			'#background_color#' => $this->getBackgroundColor($_version),
 			'#cmdColor#' => $cmdColor,
+			'#background_color#' => $this->getBackgroundColor($_version),
 			'#hideThumbnail#' => 0,
-			'#type#' => $type,
 			'#object_name#' => '',
+			'#version#' => $_version,
+			'#style#' => '',
+			'#uid#' => 'philipsHue' . $this->getId() . self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER,
 		);
 
-		if (($_version == 'dview' || $_version == 'mview') && $this->getDisplay('doNotShowObjectNameOnView', 0) == 0) {
+		if ($_version == 'dview' || $_version == 'mview') {
 			$object = $this->getObject();
-			$replace['#object_name#'] = (is_object($object)) ? '(' . $object->getName() . ')' : '';
+			$replace['#name#'] = (is_object($object)) ? $object->getName() . ' - ' . $replace['#name#'] : $replace['#name#'];
 		}
 		if (($_version == 'dview' || $_version == 'mview') && $this->getDisplay('doNotShowNameOnView') == 1) {
 			$replace['#name#'] = '';
@@ -277,47 +284,21 @@ class philipsHue extends eqLogic {
 		if (($_version == 'mobile' || $_version == 'dashboard') && $this->getDisplay('doNotShowNameOnDashboard') == 1) {
 			$replace['#name#'] = '';
 		}
-		$cmd_state = $this->getCmd(null, 'state');
-		if (is_object($cmd_state)) {
-			$replace['#etat#'] = $cmd_state->execCmd(null, 2);
-			$replace['#etat_id#'] = $cmd_state->getId();
-		}
-		$cmd_etat_luminosite = $this->getCmd(null, 'etat_luminosite');
-		if (is_object($cmd_etat_luminosite)) {
-			$replace['#etat_luminosite#'] = $cmd_etat_luminosite->execCmd(null, 2);
-			$replace['#etat_luminosite_id#'] = $cmd_etat_luminosite->getId();
-		}
-		$cmd_etat_saturation = $this->getCmd(null, 'etat_saturation');
-		if (is_object($cmd_etat_saturation)) {
-			$replace['#etat_saturation#'] = $cmd_etat_saturation->execCmd(null, 2);
-			$replace['#etat_saturation_id#'] = $cmd_etat_saturation->getId();
-		}
-		$cmd_etat_color = $this->getCmd(null, 'etat_color');
-		if (is_object($cmd_etat_color)) {
-			$replace['#etat_color#'] = $cmd_etat_color->execCmd(null, 2);
-			$replace['#etat_color_id#'] = $cmd_etat_color->getId();
-		}
-		$cmd_etat_alert = $this->getCmd(null, 'etat_alert');
-		if (is_object($cmd_etat_alert)) {
-			$replace['#etat_alerte#'] = $cmd_etat_alert->execCmd(null, 2);
-			$replace['#etat_alerte_id#'] = $cmd_etat_alert->getId();
-		}
-		$cmd_etat_rainbow = $this->getCmd(null, 'etat_rainbow');
-		if (is_object($cmd_etat_rainbow)) {
-			$replace['#etat_rainbow#'] = $cmd_etat_rainbow->execCmd(null, 2);
-			$replace['#etat_rainbow_id#'] = $cmd_etat_rainbow->getId();
-		}
-		foreach ($this->getCmd('action') as $cmd) {
+
+		foreach ($this->getCmd() as $cmd) {
 			$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
-		}
-		$parameters = $this->getDisplay('parameters');
-		if (is_array($parameters)) {
-			foreach ($parameters as $key => $value) {
-				$replace['#' . $key . '#'] = $value;
+			if ($cmd->getType() == 'info') {
+				$replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd(null, 2);
+				if ($cmd->getSubType() == 'numeric' && $replace['#' . $cmd->getLogicalId() . '#'] === '') {
+					$replace['#' . $cmd->getLogicalId() . '#'] = 0;
+				}
+				$replace['#' . $cmd->getLogicalId() . '_collect#'] = $cmd->getCollectDate();
 			}
 		}
-		return template_replace($replace, getTemplate('core', jeedom::versionAlias($_version), 'philipsHue', 'philipsHue'));
-	}*/
+		$html = template_replace($replace, getTemplate('core', jeedom::versionAlias($version), 'philipsHue', 'philipsHue'));
+		cache::set('networksWidget' . $_version . $this->getId(), $html, 0);
+		return $html;
+	}
 
 	/*     * *********************Methode d'instance************************* */
 

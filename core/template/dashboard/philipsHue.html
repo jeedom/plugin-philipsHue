@@ -1,173 +1,89 @@
-<div class="eqLogic-widget eqLogic noResize" style="width: 300px;background-color: #background_color#;padding : 0px; #style#" data-eqLogic_id="#id#" data-version="dashboard">
-    <style type="text/css">
-	
-	.hue {
-	 margin-left: auto;
-	    margin-right: auto;
-	  vertical-align: middle;
-	  -webkit-mask-size: cover;mask-size: cover;
-	}
-	
-	@-webkit-keyframes alert {
-	0% {-webkit-mask : url("plugins/philipsHue/core/template/dashboard/lightbulb-hue-on-512px.svg") no-repeat 50% 50%; mask : url("plugins/philipsHue/core/template/dashboard/lightbulb-hue-on-512px.svg") no-repeat 50% 50%;}
-	100% {width: 65px;height: 115px;-webkit-mask : url("plugins/philipsHue/core/template/dashboard/lightbulb-hue-512px.svg") no-repeat 50% 50%; mask : url("plugins/philipsHue/core/template/dashboard/lightbulb-hue-512px.svg") no-repeat 50% 50%;}
-	}
-	
-	@keyframes alert {
-	0% {-webkit-mask : url("plugins/philipsHue/core/template/dashboard/lightbulb-hue-on-512px.svg") no-repeat 50% 50%; mask : url("plugins/philipsHue/core/template/dashboard/lightbulb-hue-on-512px.svg") no-repeat 50% 50%;}
-	100% {width: 65px;height: 115px;-webkit-mask : url("plugins/philipsHue/core/template/dashboard/lightbulb-hue-512px.svg") no-repeat 50% 50%; mask : url("plugins/philipsHue/core/template/dashboard/lightbulb-hue-512px.svg") no-repeat 50% 50%;}
-	}
-	
-	@-webkit-keyframes rainbow {
-	0% {background-color:red; }
-	16% {background-color:orange; }
-	32% {background-color:yellow; }
-	48% {background-color:green; }
-	60% {background-color:blue; }
-	72% {background-color:indigo; }
-	84% {background-color:violet; }
-	}
-	
-	@keyframes rainbow {
-	0% {background-color:red; }
-	16% {background-color:orange; }
-	32% {background-color:yellow; }
-	48% {background-color:green; }
-	60% {background-color:blue; }
-	72% {background-color:indigo; }
-	84% {background-color:violet; }
-	}
-	
-	</style>
-    <center><strong><a href="#eqLink#" style="size : 1.6em;"> #name#  </a></strong></center>
-    <div class="row">
-    <div class="col-md-6">
-        <div class="hue" data-type="info" data-subtype="numeric" data-cmd_id="#color_id#">
-        <script>
-        if('#etat_alerte#'==1){
-        	$('.hue[data-cmd_id=#color_id#]').css('background-color','#etat_color#');
-        	$('.hue[data-cmd_id=#color_id#]').css('width','128px');
-        	$('.hue[data-cmd_id=#color_id#]').css('height','164px');
-        	$('.hue[data-cmd_id=#color_id#]').css('-webkit-animation','alert 1s infinite ');
-        	$('.hue[data-cmd_id=#color_id#]').css('animation','alert 1s infinite ');
-        }else if('#etat_rainbow#'==1){
-        	$('.hue[data-cmd_id=#color_id#]').css('width','128px');
-        	$('.hue[data-cmd_id=#color_id#]').css('height','164px');
-        	$('.hue[data-cmd_id=#color_id#]').css('-webkit-mask','url("plugins/philipsHue/core/template/dashboard/lightbulb-hue-on-512px.svg") no-repeat 50% 50%');
-        	$('.hue[data-cmd_id=#color_id#]').css('mask','url("plugins/philipsHue/core/template/dashboard/lightbulb-hue-on-512px.svg") no-repeat 50% 50%');
-        	$('.hue[data-cmd_id=#color_id#]').css('background','red');
-        	$('.hue[data-cmd_id=#color_id#]').css('-webkit-animation','rainbow 24s infinite linear');
-        	$('.hue[data-cmd_id=#color_id#]').css('animation','rainbow 24s infinite linear');
-        }else if('#etat#'==1){
-        	$('.hue[data-cmd_id=#color_id#]').css('background-color','#etat_color#');
-        	$('.hue[data-cmd_id=#color_id#]').css('width','128px');
-        	$('.hue[data-cmd_id=#color_id#]').css('height','164px');
-        	$('.hue[data-cmd_id=#color_id#]').css('-webkit-mask','url("plugins/philipsHue/core/template/dashboard/lightbulb-hue-on-512px.svg") no-repeat 50% 50%');
-        	$('.hue[data-cmd_id=#color_id#]').css('mask','url("plugins/philipsHue/core/template/dashboard/lightbulb-hue-on-512px.svg") no-repeat 50% 50%');
-        }else{
-        	$('.hue[data-cmd_id=#color_id#]').css('background-color','#000000');
-        	$('.hue[data-cmd_id=#color_id#]').css('width','65px');
-        	$('.hue[data-cmd_id=#color_id#]').css('height','115px');
-        	$('.hue[data-cmd_id=#color_id#]').css('-webkit-mask','url("plugins/philipsHue/core/template/dashboard/lightbulb-hue-512px.svg") no-repeat 50% 50%');
-        	$('.hue[data-cmd_id=#color_id#]').css('mask','url("plugins/philipsHue/core/template/dashboard/lightbulb-hue-512px.svg") no-repeat 50% 50%');
-        }
-        </script>
-        </div>
-    </div>
-    <div class="col-md-6">
-    	<div class="row">
-            <div class="cmd cmd-widget" data-type="action" data-subtype="color" data-cmd_id="#color_id#" style="min-height: 170px;width: 146px;">
-    <div class="action_colorpicker">
-    	<script>
-    	$.include(['plugins/philipsHue/core/template/dashboard/farbtastic.js', 'plugins/philipsHue/core/template/dashboard/farbtastic.css'], function() {
-            $('.cmd[data-cmd_id=#color_id#] .action_colorpicker').off();
-            if ($('.cmd[data-cmd_id=#color_id#] .action_colorpicker').length > 0) {
-                $('.cmd[data-cmd_id=#color_id#] .action_colorpicker').farbtastic();
-                $.farbtastic($('.cmd[data-cmd_id=#color_id#] .action_colorpicker')).setColor(('#etat_color#' != '') ? '#etat_color#' : '#000000');
-                $('.cmd[data-cmd_id=#color_id#] .action_colorpicker').on('mouseup', function() {
-                    jeedom.cmd.execute({id: '#color_id#', value: {color: $.farbtastic($(this)).color}});
-                });
-            }
-        });
-    	</script>
-    </div>
+<div class="eqLogic-widget eqLogic noResize" style="width: 300px;background-color: #background_color#;padding : 0px; #style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="dashboard">
+	<i class='fa fa-refresh pull-right cursor refresh' style="margin-top: 3px;margin-right: 3px;"></i>
+	<span class="cmd cmd-widget" data-cmd_id="#refresh_id#" style="display:none;"></span>
+	<span class="statusCmd" style="position : absolute;left : 5px; width : 30px;z-index: 1030;"></span>
+	<center><a href="#eqLink#" style="font-size : 1.5em;"> #name# </a></center>
+	<div class="row" style="margin-left :5px;">
+		<div class="col-xs-6">
+			<div>
+				<span class="cmd cmd-widget" data-cmd_id="#luminosity_id#">
+					<i class="fa fa-lightbulb-o"></i>
+					<div class="slider" style="margin : 5px 10px 8px 10px;width: 80px;" value="#luminosity_state#"></div>
+					<script>
+						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#luminosity_id#] .slider").bootstrapSlider({
+							min: 0,
+							max: 255,
+							value: ('#luminosity_state#' == '') ? 0 : parseInt('#luminosity_state#')
+						});
+						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#luminosity_id#] .slider.slider-horizontal").css('z-index',1);
+						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#luminosity_id#] .slider").on('slideStop', function (ev) {
+							jeedom.cmd.execute({id: '#luminosity_id#', value: {slider: ev.value}});
+						});
+					</script>
+				</span>
+			</div>
+			<div>
+				<span class="cmd cmd-widget" data-cmd_id="#saturation_id#">
+					<i class="fa fa-sun-o"></i>
+					<div class="slider" style="margin : 5px 10px 8px 10px;width: 80px;" value="#saturation_state#"></div>
+					<script>
+						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#saturation_id#] .slider").bootstrapSlider({
+							min: 0,
+							max: 255,
+							value: ('#saturation_state#' == '') ? 0 : parseInt('#saturation_state#')
+						});
+						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#saturation_id#] .slider.slider-horizontal").css('z-index',1);
+						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#saturation_id#] .slider").on('slideStop', function (ev) {
+							jeedom.cmd.execute({id: '#saturation_id#', value: {slider: ev.value}});
+						});
+					</script>
+				</span>
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="cmd cmd-widget" data-cmd_id="#color_id#" style="width: 146px;height: 34px;">
+				<input class="action_colorpicker_change form-control cursor" type="color" style="display: inline;width: 90px;height:32px;">
+				<script>
+					$('.eqLogic[data-eqLogic_uid=#uid#] .action_colorpicker_change').value(('#color_state#' != '') ? '#color_state#'.substr(0,7) : '#000000');
+					$('.eqLogic[data-eqLogic_uid=#uid#] .action_colorpicker_change').on('change', function() {
+						jeedom.cmd.execute({id: '#color_id#', value: {color: $(this).value()}});
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+	<center>
+		<a class="btn btn-sm btn-default cmd btnAction" style="background-color:#cmdColor# !important;" data-cmd_id="#on_id#">On</a>
+		<a class="btn btn-sm btn-default cmd btnAction" style="background-color:#cmdColor# !important;" data-cmd_id="#off_id#">Off</a>
+		<a class="btn btn-sm btn-default cmd btnAction" style="background-color:#cmdColor# !important;" data-cmd_id="#alert_on_id#">Alerte On</a>
+		<a class="btn btn-sm btn-default cmd btnAction" style="background-color:#cmdColor# !important;" data-cmd_id="#alert_off_id#">Alert Off</a>
+		<a class="btn btn-sm btn-default cmd btnAction" style="background-color:#cmdColor# !important;" data-cmd_id="#rainbow_on_id#">Rainbow On</a>
+		<a class="btn btn-sm btn-default cmd btnAction" style="background-color:#cmdColor# !important;" data-cmd_id="#rainbow_off_id#">Rainbow off</a>
+	</center>
+	<script>
+		$('.eqLogic[data-eqLogic_id=#id#] .refresh').on('click', function () {
+			jeedom.cmd.execute({id: '#refresh_id#'});
+		});
+		if('#type#'=='group'){
+			$('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#alert_on_id#]').hide();
+		}
+		if('#state#'==1){
+			$('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#on_id#]').hide();
+		}else{
+			$('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#off_id#]').hide();
+		}
+		if('#alert_state#'==1){
+			$('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#alert_on_id#]').hide();
+		}else{
+			$('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#alert_off_id#]').hide();
+		}
+		if('#rainbow_state#'==1){
+			$('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#rainbow_on_id#]').hide();
+		}else{
+			$('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#rainbow_off_id#]').hide();
+		}
+		$('.eqLogic[data-eqLogic_uid=#uid#] .btnAction').on('click',function(){
+			jeedom.cmd.execute({id: $(this).attr('data-cmd_id')});
+		});
+	</script>
 </div>
-        </div>
-    </div>
-	</div>
-	<div class="row">
-		<div class="col-md-1"></div><div class="col-md-4">Luminosité : </div>
-		
-		<div class="cmd  cmd-widget col-md-4" data-type="info" data-subtype="numeric" data-cmd_id="#luminosite_id#" >
-			<div class="luminosite" style="margin : 5px 10px 8px 10px;width: 80px;" value="#etat_luminosite#" ></div>
-	    	<script>
-		    	$(".cmd[data-cmd_id=#luminosite_id#] .luminosite").bootstrapSlider({
-	            	min: 0,
-	            	max: 255,
-	            	value: ('#etat_luminosite#' == '') ? 0 : parseInt('#etat_luminosite#')
-	        	});
-	        	$(".cmd[data-cmd_id=#luminosite_id#] .luminosite").on('slideStop', function (ev) {
-					jeedom.cmd.execute({id: '#luminosite_id#', value: {slider: ev.value}});
-				});
-	    	</script>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-1"></div><div class="col-md-4">Saturation : </div>
-		<div class="cmd  cmd-widget col-md-4" data-type="action" data-subtype="slider" data-cmd_id="#saturation_id#" >
-	    	<div class="saturation" style="margin : 5px 10px 8px 10px;width: 80px;" value="#etat_saturation#" ></div>
-	    	<script>
-		    	$(".cmd[data-cmd_id=#saturation_id#] .saturation").bootstrapSlider({
-	            	min: 0,
-	            	max: 255,
-	            	value: ('#etat_saturation#' == '') ? 0 : parseInt('#etat_saturation#')
-	        	});
-	        	$(".cmd[data-cmd_id=#saturation_id#] .saturation").on('slideStop', function (ev) {
-					jeedom.cmd.execute({id: '#saturation_id#', value: {slider: ev.value}});
-				});
-	    	</script>
-		</div>
-	</div><br> 
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="cmd col-md-3" data-type="action" data-subtype="other" data-cmd_id="#on_id#">
-	    	<a class="btn btn-xs btn-default action cmdName" style="background-color:#cmdColor# !important;border-color : transparent !important;">ON / OFF</a>
-		</div> 
-		<div class="cmd col-md-3" data-type="action" data-subtype="other" data-cmd_id="#alert_on_id#">
-	    	<a class="btn btn-xs btn-default action cmdName" style="background-color:#cmdColor# !important;border-color : transparent !important;">ALERTE</a>
-		</div> 
-		<div class="cmd col-md-3" data-type="action" data-subtype="other" data-cmd_id="#rainbow_on_id#">
-	    	<a class="btn btn-xs btn-default action cmdName" style="background-color:#cmdColor# !important;border-color : transparent !important;">RAINBOW</a>
-		</div> 
-	</div>
-
-<script>
-	if('#type#'=='group'){
-		$('.cmd[data-cmd_id=#alert_on_id#]').hide();
-	}
-	$('.cmd[data-cmd_id=#on_id#] .action').on('click', function() {
-		if('#etat#'==1){
-        	jeedom.cmd.execute({id: '#off_id#'});
-        }else{
-        	jeedom.cmd.execute({id: '#on_id#'});
-        }
-    });
-    $('.cmd[data-cmd_id=#alert_on_id#] .action').on('click', function() {
-    	if('#etat_alerte#'==1){
-    		jeedom.cmd.execute({id: '#alert_off_id#'});
-    	}else{
-    		jeedom.cmd.execute({id: '#alert_on_id#'});
-    	}        
-    });
-    $('.cmd[data-cmd_id=#rainbow_on_id#] .action').on('click', function() {
-    	if('#etat_rainbow#'==1){
-    		jeedom.cmd.execute({id: '#rainbow_off_id#'});
-    	}else{
-    		jeedom.cmd.execute({id: '#rainbow_on_id#'});
-    	}        
-    });
-    
-     
-        
-</script>
-<br></div>

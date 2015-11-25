@@ -80,7 +80,6 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
 	echo '</label>';
 }
 ?>
-
          </div>
        </div>
        <div class="form-group">

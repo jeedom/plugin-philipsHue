@@ -64,6 +64,20 @@ class philipsHue extends eqLogic {
 			$eqLogic->setConfiguration('softwareVersion', $light->getSoftwareVersion());
 			$eqLogic->save();
 		}
+		foreach ($hue->getgroups() as $id => $group) {
+			$eqLogic = self::byLogicalId('group' . $id, 'philipsHue');
+			if (!is_object($eqLogic)) {
+				$eqLogic = new self();
+				$eqLogic->setLogicalId('group' . $id);
+				$eqLogic->setName($group->getName());
+				$eqLogic->setEqType_name('philipsHue');
+				$eqLogic->setIsVisible(1);
+				$eqLogic->setIsEnable(1);
+			}
+			$eqLogic->setConfiguration('category', 'group');
+			$eqLogic->setConfiguration('id', $id);
+			$eqLogic->save();
+		}
 		self::cron15();
 	}
 
@@ -275,7 +289,7 @@ class philipsHue extends eqLogic {
 			'#object_name#' => '',
 			'#version#' => $_version,
 			'#style#' => '',
-			'#type#' => $this->getConfiguration('type'),
+			'#category#' => $this->getConfiguration('category'),
 			'#uid#' => 'philipsHue' . $this->getId() . self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER,
 		);
 

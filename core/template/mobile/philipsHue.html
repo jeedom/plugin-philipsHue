@@ -60,7 +60,7 @@
   $('.eqLogic[data-eqLogic_id=#id#] .refresh').on('click', function () {
       jeedom.cmd.execute({id: '#refresh_id#'});
   });
-  if('#type#'=='group'){
+  if('#category#'=='group'){
     $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#alert_on_id#]').hide();
     $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#alert_off_id#]').hide();
 }

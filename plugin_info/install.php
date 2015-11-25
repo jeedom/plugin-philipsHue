@@ -18,38 +18,4 @@
 
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
-
-function philipsHue_install() {
-    $cron = cron::byClassAndFunction('philipsHue', 'pull');
-    if (!is_object($cron)) {
-        $cron = new cron();
-        $cron->setClass('philipsHue');
-        $cron->setFunction('pull');
-        $cron->setEnable(1);
-        $cron->setDeamon(0);
-        $cron->setSchedule('* * * * *');
-        $cron->save();
-    }
-}
-
-function philipsHue_update() {
-    $cron = cron::byClassAndFunction('philipsHue', 'pull');
-    if (!is_object($cron)) {
-        $cron = new cron();
-        $cron->setClass('philipsHue');
-        $cron->setFunction('pull');
-        $cron->setEnable(1);
-        $cron->setDeamon(0);
-        $cron->setSchedule('* * * * *');
-        $cron->save();
-    }
-    $cron->stop();
-}
-
-function philipsHue_remove() {
-    $cron = cron::byClassAndFunction('philipsHue', 'pull');
-    if (is_object($cron)) {
-        $cron->remove();
-    }
-}
 ?>

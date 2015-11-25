@@ -17,41 +17,46 @@
  */
 
 try {
-    require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
-    include_file('core', 'authentification', 'php');
+	require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+	include_file('core', 'authentification', 'php');
 
-    if (!isConnect('admin')) {
-        throw new Exception(__('401 - Accès non autorisé', __FILE__));
-    }
+	if (!isConnect('admin')) {
+		throw new Exception(__('401 - Accès non autorisé', __FILE__));
+	}
 
-    if (init('action') == 'associateBridge') {
-        $bridge = philipsHue::associateBridge(init('id'));
-        $return['cmd'] = array();
+	if (init('action') == 'syncPhilipsHue') {
+		philipsHue::syncBridge();
+		ajax::success();
+	}
+
+	if (init('action') == 'associateBridge') {
+		$bridge = philipsHue::associateBridge(init('id'));
+		$return['cmd'] = array();
 		$return['cmd'] = $bridge;
-        
-        ajax::success($return);
-    }
-	
-	if (init('action') == 'loadGroups') {
-        $groups = philipsHue::loadGroups(init('id'));
-		$return['nb_groups'] = count($groups);
-        $return['groups'] = $groups;
-        ajax::success($return);
-    }
-	
-	if (init('action') == 'saveGroup') {
-        philipsHue::saveGroup(init('id'));
-		ajax::success($return);
-    }
-	
-	if (init('action') == 'deleteGroup') {
-        philipsHue::deleteGroup(init('id'));
-		ajax::success($return);
-    }
 
-    throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
-    /*     * *********Catch exeption*************** */
+		ajax::success($return);
+	}
+
+	if (init('action') == 'loadGroups') {
+		$groups = philipsHue::loadGroups(init('id'));
+		$return['nb_groups'] = count($groups);
+		$return['groups'] = $groups;
+		ajax::success($return);
+	}
+
+	if (init('action') == 'saveGroup') {
+		philipsHue::saveGroup(init('id'));
+		ajax::success($return);
+	}
+
+	if (init('action') == 'deleteGroup') {
+		philipsHue::deleteGroup(init('id'));
+		ajax::success($return);
+	}
+
+	throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
+	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {
-    ajax::error(displayExeption($e), $e->getCode());
+	ajax::error(displayExeption($e), $e->getCode());
 }
 ?>

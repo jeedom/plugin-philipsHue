@@ -23,11 +23,42 @@
         "Type": "Type",
         "Parametre(s)": "Parametre(s)",
         "Supprimer": "Supprimer",
-        "Sauvegarder": "Sauvegarder"
+        "Sauvegarder": "Sauvegarder",
+        "Nom de l'équipement Philips Hue": "Nom de l'équipement Philips Hue",
+        "Informations": "Informations",
+        "Model": "Model",
+        "Version du logiciel": "Version du logiciel",
+        "Action": "Action"
     },
     "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {
         "Gestion des groupes": "Gestion des groupes",
         "Parametres (JSON)": "Parametres (JSON)",
-        "Tester": "Tester"
+        "Tester": "Tester",
+        "Nom": "Nom"
+    },
+    "plugins\/philipsHue\/core\/class\/philipsHue.class.php": {
+        "On": "On",
+        "Off": "Off",
+        "Etat On Off": "Etat On Off",
+        "Luminosité": "Luminosité",
+        "Etat Luminosité": "Etat Luminosité",
+        "Saturation": "Saturation",
+        "Etat Saturation": "Etat Saturation",
+        "Couleur": "Couleur",
+        "Etat Couleur": "Etat Couleur",
+        "Alerte On": "Alerte On",
+        "Alerte Off": "Alerte Off",
+        "Etat Alerte": "Etat Alerte",
+        "Arc en ciel On": "Arc en ciel On",
+        "Arc en ciel Off": "Arc en ciel Off",
+        "Etat Arc en ciel": "Etat Arc en ciel",
+        "Rafraîchir": "Rafraîchir"
+    },
+    "plugins\/philipsHue\/plugin_info\/configuration.php": {
+        "IP du bridge": "IP du bridge",
+        "Synchronisation réussie": "Synchronisation réussie",
+        "Découverte": "Découverte",
+        "Rechercher les équipements Sonos": "Rechercher les équipements Sonos",
+        "Synchroniser": "Synchroniser"
     }
 }

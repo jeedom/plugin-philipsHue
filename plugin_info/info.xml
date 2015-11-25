@@ -9,6 +9,7 @@
     <installation>Lors de la première synchronisation, vous devez appuyer sur le bouton "LINK" du bridge avant de cliquer sur "Synchroniser avec le bridge"</installation>
     <require>1.10</require>
     <version>0.9</version>
-    <category>automation protocol</category>
+    <category>communication</category>
+    <include type="php">philipsHue.inc</include>
 </info>
 

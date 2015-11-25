@@ -150,6 +150,10 @@ class philipsHue extends eqLogic {
 				}
 
 				if ($changed) {
+					$mc = cache::byKey('philipsHueWidgetmobile' . $eqLogic->getId());
+					$mc->remove();
+					$mc = cache::byKey('philipsHueWidgetdashboard' . $eqLogic->getId());
+					$mc->remove();
 					$eqLogic->refreshWidget();
 				}
 			} catch (Exception $e) {

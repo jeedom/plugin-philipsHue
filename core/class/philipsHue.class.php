@@ -193,9 +193,11 @@ class philipsHue extends eqLogic {
 			$g = ($g <= 0.0031308) ? 12.92 * $g : (1.0 + 0.055) * pow($g, (1.0 / 2.4)) - 0.055;
 			$b = ($b <= 0.0031308) ? 12.92 * $b : (1.0 + 0.055) * pow($b, (1.0 / 2.4)) - 0.055;
 			$maxValue = max($r, $g, $b);
-			$r /= $maxValue;
-			$g /= $maxValue;
-			$b /= $maxValue;
+			if ($maxValue > 0) {
+				$r /= $maxValue;
+				$g /= $maxValue;
+				$b /= $maxValue;
+			}
 			$r = $r * 255;if ($r < 0) {$r = 255;}
 			$hex_value = dechex($r);
 			if (strlen($hex_value) < 2) {$hex_value = "0" . $hex_value;}
@@ -537,6 +539,30 @@ class philipsHue extends eqLogic {
 		$cmd->setSubType('message');
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();
+
+		$cmd = $this->getCmd(null, 'transition');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setLogicalId('transition');
+			$cmd->setName(__('Transition', __FILE__));
+		}
+		$cmd->setType('action');
+		$cmd->setSubType('slider');
+		$cmd->setEqLogic_id($this->getId());
+		$cmd->setConfiguration('minValue', '0');
+		$cmd->setConfiguration('maxValue', '1800');
+		$cmd->save();
+
+		$cmd = $this->getCmd(null, 'transition_state');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setLogicalId('transition_state');
+			$cmd->setName(__('Transition status', __FILE__));
+		}
+		$cmd->setType('info');
+		$cmd->setSubType('numeric');
+		$cmd->setEqLogic_id($this->getId());
+		$cmd->save();
 	}
 
 }
@@ -553,13 +579,26 @@ class philipsHueCmd extends cmd {
 			return;
 		}
 		$eqLogic = $this->getEqLogic();
+
+		$transition = $eqLogic->getCmd(null, 'transition_state');
+		$transistion_time = 0;
+		if (is_object($transition)) {
+			$transistion_time = $transition->execCmd(null, 2);
+			if ($transistion_time !== 0) {
+				$transition->event(0);
+			}
+		}
 		$hue = philipsHue::getPhilipsHue();
 		switch ($eqLogic->getConfiguration('category')) {
 			case 'light':
 				$obj = $hue->getLights()[$eqLogic->getConfiguration('id')];
+				$command = new \Phue\Command\SetLightState($obj);
+				$command->transitionTime(0);
 				break;
 			case 'group':
 				$obj = $hue->getGroups()[$eqLogic->getConfiguration('id')];
+				$command = new \Phue\Command\SetGroupState($obj);
+				$command->transitionTime(0);
 				break;
 			default:
 				return;
@@ -577,19 +616,16 @@ class philipsHueCmd extends cmd {
 				break;
 			case 'luminosity':
 				$obj->setOn(true);
-				$obj->setBrightness($_options['slider']);
+				$command->brightness($_options['slider']);
+				$hue->sendCommand($command);
 				break;
 			case 'saturation':
 				$obj->setOn(true);
-				$obj->setSaturation($_options['slider']);
+				$command->saturation($_options['slider']);
+				$hue->sendCommand($command);
 				break;
 			case 'color':
 				$obj->setOn(true);
-				if ($eqLogic->getConfiguration('category') == 'light') {
-					$command = new \Phue\Command\SetLightState($obj);
-				} else {
-					$command = new \Phue\Command\SetGroupState($obj);
-				}
 				$parameter = philipsHue::setHexCode2($_options['color']);
 				$command->xy($parameter['xy'][0], $parameter['xy'][1]);
 				$hue->sendCommand($command);
@@ -616,6 +652,11 @@ class philipsHueCmd extends cmd {
 					$obj->setEffect('none');
 				}
 				break;
+			case 'transition':
+				if (is_object($transition)) {
+					$transition->event($_options['slider']);
+				}
+				return;
 			case 'set_schedule':
 				if ($eqLogic->getConfiguration('category') == 'light') {
 					$command = new \Phue\Command\SetLightState($obj);
@@ -647,8 +688,6 @@ class philipsHueCmd extends cmd {
 				if (isset($params[5]) && trim($params[5]) !== '') {
 					$command->transitionTime($params[5]);
 				}
-				print_r($command);
-				return;
 				$hue->sendCommand(
 					new \Phue\Command\CreateSchedule('Jeedom programmation', $_options['title'], $command)
 				);

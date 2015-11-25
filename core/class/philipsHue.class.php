@@ -529,16 +529,16 @@ class philipsHue extends eqLogic {
 			}
 		}
 
-		$cmd = $this->getCmd(null, 'set_schedule');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('set_schedule');
-			$cmd->setName(__('Progammation', __FILE__));
-		}
-		$cmd->setType('action');
-		$cmd->setSubType('message');
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->save();
+		/*$cmd = $this->getCmd(null, 'set_schedule');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setLogicalId('set_schedule');
+				$cmd->setName(__('Progammation', __FILE__));
+			}
+			$cmd->setType('action');
+			$cmd->setSubType('message');
+			$cmd->setEqLogic_id($this->getId());
+		*/
 
 		$cmd = $this->getCmd(null, 'transition');
 		if (!is_object($cmd)) {
@@ -593,64 +593,63 @@ class philipsHueCmd extends cmd {
 			case 'light':
 				$obj = $hue->getLights()[$eqLogic->getConfiguration('id')];
 				$command = new \Phue\Command\SetLightState($obj);
-				$command->transitionTime(0);
+				$command->transitionTime($transistion_time);
+				$command->on(true);
 				break;
 			case 'group':
 				$obj = $hue->getGroups()[$eqLogic->getConfiguration('id')];
 				$command = new \Phue\Command\SetGroupState($obj);
-				$command->transitionTime(0);
+				$command->transitionTime($transistion_time);
+				$command->on(true);
 				break;
 			default:
 				return;
 		}
 		switch ($this->getLogicalId()) {
 			case 'on':
-				$obj->setOn(true);
+
 				break;
 			case 'off':
 				if ($eqLogic->getConfiguration('model') != "LWB004") {
-					$obj->setEffect('none');
+					$command->effect('none');
 				}
-				$obj->setAlert('none');
-				$obj->setOn(false);
+				$command->alert('none');
+				$command->on(false);
 				break;
 			case 'luminosity':
-				$obj->setOn(true);
 				$command->brightness($_options['slider']);
-				$hue->sendCommand($command);
 				break;
 			case 'saturation':
-				$obj->setOn(true);
 				$command->saturation($_options['slider']);
-				$hue->sendCommand($command);
 				break;
 			case 'color':
 				$obj->setOn(true);
 				$parameter = philipsHue::setHexCode2($_options['color']);
 				$command->xy($parameter['xy'][0], $parameter['xy'][1]);
-				$hue->sendCommand($command);
 				break;
 			case 'alert_on':
-				if ($obj->getAlert() == 'none') {
-					$obj->setOn(true);
-					$obj->setAlert('lselect');
+				if ($obj->getAlert() != 'none') {
+					return;
 				}
+				$command->alert('lselect');
 				break;
 			case 'alert_off':
-				if ($obj->getAlert() != 'none') {
-					$obj->setAlert('none');
+				if ($obj->getAlert() == 'none') {
+					return;
 				}
+				$command->alert('none');
 				break;
 			case 'rainbow_on':
-				if ($obj->getEffect() == 'none') {
-					$obj->setOn(true);
-					$obj->setEffect('colorloop');
+				if ($obj->getEffect() != 'none') {
+					return;
 				}
+				$command->effect('colorloop');
 				break;
 			case 'rainbow_off':
-				if ($obj->getEffect() != 'none') {
-					$obj->setEffect('none');
+				if ($obj->getEffect() == 'none') {
+					return;
 				}
+				$command->effect('none');
 				break;
 			case 'transition':
 				if (is_object($transition)) {
@@ -658,11 +657,6 @@ class philipsHueCmd extends cmd {
 				}
 				return;
 			case 'set_schedule':
-				if ($eqLogic->getConfiguration('category') == 'light') {
-					$command = new \Phue\Command\SetLightState($obj);
-				} else {
-					$command = new \Phue\Command\SetGroupState($obj);
-				}
 				//color|luminosity|saturation|alert|rainbow|transistion
 				$params = explode('|', $_options['message']);
 				if (isset($params[0]) && trim($params[0]) !== '') {
@@ -677,22 +671,29 @@ class philipsHueCmd extends cmd {
 				}
 				if (isset($params[3]) && trim($params[3]) !== '') {
 					if ($params[3] == 1) {
-						$command->setAlert('lselect');
+						$command->alert('lselect');
 					} else {
-						$command->setAlert('none');
+						$command->alert('none');
 					}
 				}
 				if (isset($params[4]) && trim($params[4]) !== '') {
-					$command->setEffect($params[4]);
+					if ($params[3] == 1) {
+						$command->effect('colorloop');
+					} else {
+						$command->effect('none');
+					}
 				}
 				if (isset($params[5]) && trim($params[5]) !== '') {
 					$command->transitionTime($params[5]);
+				} else {
+					$command->transitionTime(0);
 				}
 				$hue->sendCommand(
 					new \Phue\Command\CreateSchedule('Jeedom programmation', $_options['title'], $command)
 				);
-				break;
+				return;
 		}
+		$hue->sendCommand($command);
 		philipsHue::cron15($eqLogic->getId());
 
 		/*     * **********************Getteur Setteur*************************** */

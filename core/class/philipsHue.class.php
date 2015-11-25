@@ -64,6 +64,18 @@ class philipsHue extends eqLogic {
 			$eqLogic->setConfiguration('softwareVersion', $light->getSoftwareVersion());
 			$eqLogic->save();
 		}
+		$eqLogic = self::byLogicalId('group0', 'philipsHue');
+		if (!is_object($eqLogic)) {
+			$eqLogic = new self();
+			$eqLogic->setLogicalId('group0');
+			$eqLogic->setName(__('Toute les lampes', __FILE__));
+			$eqLogic->setEqType_name('philipsHue');
+			$eqLogic->setIsVisible(1);
+			$eqLogic->setIsEnable(1);
+		}
+		$eqLogic->setConfiguration('category', 'group');
+		$eqLogic->setConfiguration('id', 0);
+		$eqLogic->save();
 		foreach ($hue->getgroups() as $id => $group) {
 			$eqLogic = self::byLogicalId('group' . $id, 'philipsHue');
 			if (!is_object($eqLogic)) {
@@ -87,6 +99,9 @@ class philipsHue extends eqLogic {
 				continue;
 			}
 			if ($eqLogic->getIsEnable() == 0) {
+				continue;
+			}
+			if ($eqLogic->setConfiguration('category') == 'group') {
 				continue;
 			}
 			try {
@@ -324,17 +339,18 @@ class philipsHue extends eqLogic {
 	/*     * *********************Methode d'instance************************* */
 
 	public function postSave() {
-
-		$cmd = $this->getCmd(null, 'refresh');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('refresh');
-			$cmd->setName(__('Rafraîchir', __FILE__));
+		if ($this->getConfiguration('category') != 'group') {
+			$cmd = $this->getCmd(null, 'refresh');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setLogicalId('refresh');
+				$cmd->setName(__('Rafraîchir', __FILE__));
+			}
+			$cmd->setType('action');
+			$cmd->setSubType('other');
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->save();
 		}
-		$cmd->setType('action');
-		$cmd->setSubType('other');
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->save();
 
 		$cmd = $this->getCmd(null, 'on');
 		if (!is_object($cmd)) {
@@ -358,17 +374,19 @@ class philipsHue extends eqLogic {
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();
 
-		$cmd = $this->getCmd(null, 'state');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('state');
-			$cmd->setName(__('Etat On Off', __FILE__));
+		if ($this->getConfiguration('category') != 'group') {
+			$cmd = $this->getCmd(null, 'state');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setLogicalId('state');
+				$cmd->setName(__('Etat On Off', __FILE__));
+			}
+			$cmd->setType('info');
+			$cmd->setSubType('binary');
+			$cmd->setEventOnly(1);
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->save();
 		}
-		$cmd->setType('info');
-		$cmd->setSubType('binary');
-		$cmd->setEventOnly(1);
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->save();
 
 		$cmd = $this->getCmd(null, 'luminosity');
 		if (!is_object($cmd)) {
@@ -432,18 +450,20 @@ class philipsHue extends eqLogic {
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();
 
-		$cmd = $this->getCmd(null, 'color_state');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('color_state');
-			$cmd->setName(__('Etat Couleur', __FILE__));
+		if ($this->getConfiguration('category') != 'group') {
+			$cmd = $this->getCmd(null, 'color_state');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setLogicalId('color_state');
+				$cmd->setName(__('Etat Couleur', __FILE__));
+			}
+			$cmd->setType('info');
+			$cmd->setSubType('string');
+			$cmd->setUnite('');
+			$cmd->setEventOnly(1);
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->save();
 		}
-		$cmd->setType('info');
-		$cmd->setSubType('string');
-		$cmd->setUnite('');
-		$cmd->setEventOnly(1);
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->save();
 
 		$cmd = $this->getCmd(null, 'alert_on');
 		if (!is_object($cmd)) {
@@ -467,17 +487,19 @@ class philipsHue extends eqLogic {
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();
 
-		$cmd = $this->getCmd(null, 'alert_state');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('alert_state');
-			$cmd->setName(__('Etat Alerte', __FILE__));
+		if ($this->getConfiguration('category') != 'group') {
+			$cmd = $this->getCmd(null, 'alert_state');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setLogicalId('alert_state');
+				$cmd->setName(__('Etat Alerte', __FILE__));
+			}
+			$cmd->setType('info');
+			$cmd->setSubType('binary');
+			$cmd->setEventOnly(1);
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->save();
 		}
-		$cmd->setType('info');
-		$cmd->setSubType('binary');
-		$cmd->setEventOnly(1);
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->save();
 
 		if ($this->getConfiguration('model') != "LWB004") {
 			$cmd = $this->getCmd(null, 'rainbow_on');
@@ -502,18 +524,20 @@ class philipsHue extends eqLogic {
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->save();
 
-			$cmd = $this->getCmd(null, 'rainbow_state');
-			if (!is_object($cmd)) {
-				$cmd = new philipsHueCmd();
-				$cmd->setLogicalId('rainbow_state');
-				$cmd->setIsVisible(1);
-				$cmd->setName(__('Etat Arc en ciel', __FILE__));
+			if ($this->getConfiguration('category') != 'group') {
+				$cmd = $this->getCmd(null, 'rainbow_state');
+				if (!is_object($cmd)) {
+					$cmd = new philipsHueCmd();
+					$cmd->setLogicalId('rainbow_state');
+					$cmd->setIsVisible(1);
+					$cmd->setName(__('Etat Arc en ciel', __FILE__));
+				}
+				$cmd->setType('info');
+				$cmd->setSubType('binary');
+				$cmd->setEventOnly(1);
+				$cmd->setEqLogic_id($this->getId());
+				$cmd->save();
 			}
-			$cmd->setType('info');
-			$cmd->setSubType('binary');
-			$cmd->setEventOnly(1);
-			$cmd->setEqLogic_id($this->getId());
-			$cmd->save();
 		} else {
 			$cmd = $this->getCmd(null, 'rainbow_on');
 			if (is_object($cmd)) {
@@ -563,6 +587,26 @@ class philipsHue extends eqLogic {
 		$cmd->setSubType('numeric');
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();
+
+		if ($this->getConfiguration('id') == 0 && $this->getConfiguration('category') == 'group') {
+			foreach (self::getPhilipsHue()->getScenes() as $scene) {
+				if (!$scene->isActive()) {
+					continue;
+				}
+				$cmd = $this->getCmd(null, 'set_scene_' . $scene->getId());
+				if (!is_object($cmd)) {
+					$cmd = new philipsHueCmd();
+					$cmd->setLogicalId('set_scene_' . $scene->getId());
+					$cmd->setName(__('Scène ' . $scene->getName(), __FILE__));
+				}
+				$cmd->setType('action');
+				$cmd->setSubType('other');
+				$cmd->setConfiguration('id', $scene->getId());
+				$cmd->setEqLogic_id($this->getId());
+				$cmd->save();
+			}
+		}
+
 	}
 
 }
@@ -591,14 +635,12 @@ class philipsHueCmd extends cmd {
 		$hue = philipsHue::getPhilipsHue();
 		switch ($eqLogic->getConfiguration('category')) {
 			case 'light':
-				$obj = $hue->getLights()[$eqLogic->getConfiguration('id')];
-				$command = new \Phue\Command\SetLightState($obj);
+				$command = new \Phue\Command\SetLightState($eqLogic->getConfiguration('id'));
 				$command->transitionTime($transistion_time);
 				$command->on(true);
 				break;
 			case 'group':
-				$obj = $hue->getGroups()[$eqLogic->getConfiguration('id')];
-				$command = new \Phue\Command\SetGroupState($obj);
+				$command = new \Phue\Command\SetGroupState($eqLogic->getConfiguration('id', 0));
 				$command->transitionTime($transistion_time);
 				$command->on(true);
 				break;
@@ -623,32 +665,19 @@ class philipsHueCmd extends cmd {
 				$command->saturation($_options['slider']);
 				break;
 			case 'color':
-				$obj->setOn(true);
 				$parameter = philipsHue::setHexCode2($_options['color']);
 				$command->xy($parameter['xy'][0], $parameter['xy'][1]);
 				break;
 			case 'alert_on':
-				if ($obj->getAlert() != 'none') {
-					return;
-				}
 				$command->alert('lselect');
 				break;
 			case 'alert_off':
-				if ($obj->getAlert() == 'none') {
-					return;
-				}
 				$command->alert('none');
 				break;
 			case 'rainbow_on':
-				if ($obj->getEffect() != 'none') {
-					return;
-				}
 				$command->effect('colorloop');
 				break;
 			case 'rainbow_off':
-				if ($obj->getEffect() == 'none') {
-					return;
-				}
 				$command->effect('none');
 				break;
 			case 'transition':
@@ -691,6 +720,13 @@ class philipsHueCmd extends cmd {
 				$hue->sendCommand(
 					new \Phue\Command\CreateSchedule('Jeedom programmation', $_options['title'], $command)
 				);
+				return;
+			default:
+				if (strpos($this->getLogicalId(), 'set_scene_') !== false) {
+					$hue->sendCommand(
+						(new \Phue\Command\SetGroupState(0))->scene($this->getConfiguration('id'))
+					);
+				}
 				return;
 		}
 		$hue->sendCommand($command);

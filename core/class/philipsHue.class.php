@@ -158,6 +158,16 @@ class philipsHue extends eqLogic {
 					}
 				}
 
+				$cmd = $eqLogic->getCmd(null, 'colorTemp_state');
+				if (is_object($cmd)) {
+					$value = $cmd->formatValue($obj->getColorTemp());
+					if ($value != $cmd->execCmd(null, 2)) {
+						$cmd->setCollectDate('');
+						$cmd->event($value);
+						$changed = true;
+					}
+				}
+
 				$cmd = $eqLogic->getCmd(null, 'color_state');
 				if (is_object($cmd)) {
 					$value = $cmd->formatValue(self::xyBriToRgb($obj->getXY()['x'], $obj->getXY()['y'], $obj->getBrightness()));
@@ -349,7 +359,7 @@ class philipsHue extends eqLogic {
 	/*     * *********************Methode d'instance************************* */
 
 	public function postSave() {
-		if ($this->getConfiguration('category') != 'group') {
+		if ($this->getConfiguration('category') != 'group' || $this->getConfiguration('id') != 0) {
 			$cmd = $this->getCmd(null, 'refresh');
 			if (!is_object($cmd)) {
 				$cmd = new philipsHueCmd();
@@ -384,7 +394,7 @@ class philipsHue extends eqLogic {
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();
 
-		if ($this->getConfiguration('category') != 'group') {
+		if ($this->getConfiguration('category') != 'group' || $this->getConfiguration('id') != 0) {
 			$cmd = $this->getCmd(null, 'state');
 			if (!is_object($cmd)) {
 				$cmd = new philipsHueCmd();
@@ -412,17 +422,19 @@ class philipsHue extends eqLogic {
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();
 
-		$cmd = $this->getCmd(null, 'luminosity_state');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('luminosity_state');
-			$cmd->setName(__('Etat Luminosité', __FILE__));
+		if ($this->getConfiguration('category') != 'group' || $this->getConfiguration('id') != 0) {
+			$cmd = $this->getCmd(null, 'luminosity_state');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setLogicalId('luminosity_state');
+				$cmd->setName(__('Etat Luminosité', __FILE__));
+			}
+			$cmd->setType('info');
+			$cmd->setSubType('numeric');
+			$cmd->setEventOnly(1);
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->save();
 		}
-		$cmd->setType('info');
-		$cmd->setSubType('numeric');
-		$cmd->setEventOnly(1);
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->save();
 
 		$cmd = $this->getCmd(null, 'saturation');
 		if (!is_object($cmd)) {
@@ -437,17 +449,19 @@ class philipsHue extends eqLogic {
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();
 
-		$cmd = $this->getCmd(null, 'saturation_state');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('saturation_state');
-			$cmd->setName(__('Etat Saturation', __FILE__));
+		if ($this->getConfiguration('category') != 'group' || $this->getConfiguration('id') != 0) {
+			$cmd = $this->getCmd(null, 'saturation_state');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setLogicalId('saturation_state');
+				$cmd->setName(__('Etat Saturation', __FILE__));
+			}
+			$cmd->setType('info');
+			$cmd->setSubType('numeric');
+			$cmd->setEventOnly(1);
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->save();
 		}
-		$cmd->setType('info');
-		$cmd->setSubType('numeric');
-		$cmd->setEventOnly(1);
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->save();
 
 		$cmd = $this->getCmd(null, 'hue');
 		if (!is_object($cmd)) {
@@ -463,17 +477,47 @@ class philipsHue extends eqLogic {
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();
 
-		$cmd = $this->getCmd(null, 'hue_state');
+		if ($this->getConfiguration('category') != 'group' || $this->getConfiguration('id') != 0) {
+			$cmd = $this->getCmd(null, 'hue_state');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setLogicalId('hue_state');
+				$cmd->setName(__('Etat Hue', __FILE__));
+			}
+			$cmd->setType('info');
+			$cmd->setSubType('numeric');
+			$cmd->setEventOnly(1);
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->save();
+		}
+
+		$cmd = $this->getCmd(null, 'colorTemp');
 		if (!is_object($cmd)) {
 			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('hue_state');
-			$cmd->setName(__('Etat Hue', __FILE__));
+			$cmd->setLogicalId('colorTemp');
+			$cmd->setIsVisible(1);
+			$cmd->setName(__('Température couleur', __FILE__));
 		}
-		$cmd->setType('info');
-		$cmd->setSubType('numeric');
-		$cmd->setEventOnly(1);
+		$cmd->setType('action');
+		$cmd->setSubType('slider');
+		$cmd->setConfiguration('minValue', '153');
+		$cmd->setConfiguration('maxValue', '500');
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();
+
+		if ($this->getConfiguration('category') != 'group' || $this->getConfiguration('id') != 0) {
+			$cmd = $this->getCmd(null, 'colorTemp_state');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setLogicalId('colorTemp_state');
+				$cmd->setName(__('Etat température couleur', __FILE__));
+			}
+			$cmd->setType('info');
+			$cmd->setSubType('numeric');
+			$cmd->setEventOnly(1);
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->save();
+		}
 
 		$cmd = $this->getCmd(null, 'color');
 		if (!is_object($cmd)) {
@@ -486,7 +530,7 @@ class philipsHue extends eqLogic {
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();
 
-		if ($this->getConfiguration('category') != 'group') {
+		if ($this->getConfiguration('category') != 'group' || $this->getConfiguration('id') != 0) {
 			$cmd = $this->getCmd(null, 'color_state');
 			if (!is_object($cmd)) {
 				$cmd = new philipsHueCmd();
@@ -711,6 +755,9 @@ class philipsHueCmd extends cmd {
 				break;
 			case 'hue':
 				$command->hue($_options['slider']);
+				break;
+			case 'colorTemp':
+				$command->colorTemp($_options['slider']);
 				break;
 			case 'color':
 				$parameter = philipsHue::setHexCode2($_options['color']);

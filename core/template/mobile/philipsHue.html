@@ -23,7 +23,7 @@
     </div>
 </center>
 <center>
-    <i class="fa fa-lightbulb-o"></i>
+    <i class="fa fa-eye-slash"></i>
     <span class="cmd cmd-widget" data-cmd_id="#luminosity_id#">
       <div class="slider full-width-slider" style="width: 96%;text-align: right;min-width : 100px;" style="background-color:#cmdColor# !important;">
         <input type="range" min="0" max="255" data-theme="a" value="#luminosity_state#" style="background-color:#cmdColor# !important;"/>
@@ -35,7 +35,7 @@
         });
     </script>
 </span>
-<i class="fa fa-sun-o"></i>
+<i class="fa fa-moon-o"></i>
 <span class="cmd cmd-widget" data-cmd_id="#saturation_id#">
   <div class="slider full-width-slider" style="width: 96%;text-align: right;min-width : 100px;" style="background-color:#cmdColor# !important;">
     <input type="range" min="0" max="255" data-theme="a" value="#saturation_state#" style="background-color:#cmdColor# !important;"/>
@@ -57,6 +57,19 @@
     $("body").undelegate(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#hue_id#] .slider");
     $("body").delegate(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#hue_id#] .slider",'slidestop', function (event, ui) {
         jeedom.cmd.execute({id: '#hue_id#', value: {slider: $(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#hue_id#] .slider input").value()}});
+    });
+</script>
+</span>
+
+<i class="fa fa-lightbulb-o"></i>
+<span class="cmd cmd-widget" data-cmd_id="#colorTemp_id#">
+  <div class="slider full-width-slider" style="width: 96%;text-align: right;min-width : 100px;" style="background-color:#cmdColor# !important;">
+    <input type="range" min="153" max="500" data-theme="a" value="#hue_state#" style="background-color:#cmdColor# !important;"/>
+</div>
+<script>
+    $("body").undelegate(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#colorTemp_id#] .slider");
+    $("body").delegate(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#colorTemp_id#] .slider",'slidestop', function (event, ui) {
+        jeedom.cmd.execute({id: '#colorTemp_id#', value: {slider: $(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#colorTemp_id#] .slider input").value()}});
     });
 </script>
 </span>

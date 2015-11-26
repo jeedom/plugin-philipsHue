@@ -7,7 +7,7 @@
 		<div class="col-xs-6">
 			<div>
 				<span class="cmd cmd-widget" data-cmd_id="#luminosity_id#">
-					<i class="fa fa-lightbulb-o" style="margin-right : 10px;width:20px;"></i>
+					<i class="fa fa-eye-slash" style="margin-right : 10px;width:15px;"></i>
 					<div class="slider" style="margin : 5px 10px 8px 10px;width: 80px;" value="#luminosity_state#"></div>
 					<script>
 						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#luminosity_id#] .slider").bootstrapSlider({
@@ -24,7 +24,7 @@
 			</div>
 			<div>
 				<span class="cmd cmd-widget" data-cmd_id="#saturation_id#">
-					<i class="fa fa-sun-o" style="margin-right : 10px;width:20px;"></i>
+					<i class="fa fa-moon-o" style="margin-right : 10px;width:15px;"></i>
 					<div class="slider" style="margin : 5px 10px 8px 10px;width: 80px;" value="#saturation_state#"></div>
 					<script>
 						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#saturation_id#] .slider").bootstrapSlider({
@@ -41,7 +41,7 @@
 			</div>
 			<div>
 				<span class="cmd cmd-widget" data-cmd_id="#hue_id#">
-					<i class="fa fa-bolt" style="margin-right : 10px;width:20px;"></i>
+					<i class="fa fa-bolt" style="margin-right : 10px;width:15px;"></i>
 					<div class="slider" style="margin : 5px 10px 8px 10px;width: 80px;" value="#hue_state#"></div>
 					<script>
 						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#hue_id#] .slider").bootstrapSlider({
@@ -49,8 +49,8 @@
 							max: 255,
 							value: ('#hue_state#' == '') ? 0 : parseInt('#hue_state#')
 						});
-						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#saturation_id#] .slider.slider-horizontal").css('z-index',1);
-						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#saturation_id#] .slider").on('slideStop', function (ev) {
+						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#hue_id#] .slider.slider-horizontal").css('z-index',1);
+						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#hue_id#] .slider").on('slideStop', function (ev) {
 							jeedom.cmd.execute({id: '#hue_id#', value: {slider: ev.value}});
 						});
 					</script>
@@ -58,6 +58,23 @@
 			</div>
 		</div>
 		<div class="col-xs-6">
+			<div>
+				<span class="cmd cmd-widget" data-cmd_id="#colorTemp_id#">
+					<i class="fa fa-lightbulb-o" style="margin-right : 10px;width:15px;"></i>
+					<div class="slider" style="margin : 5px 10px 8px 10px;width: 80px;" value="#colorTemp_state#"></div>
+					<script>
+						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#colorTemp_id#] .slider").bootstrapSlider({
+							min: 153,
+							max: 500,
+							value: ('#colorTemp_state#' == '') ? 0 : parseInt('#colorTemp_state#')
+						});
+						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#colorTemp_id#] .slider.slider-horizontal").css('z-index',1);
+						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#colorTemp_id#] .slider").on('slideStop', function (ev) {
+							jeedom.cmd.execute({id: '#colorTemp_id#', value: {slider: ev.value}});
+						});
+					</script>
+				</span>
+			</div>
 			<div class="cmd cmd-widget" data-cmd_id="#color_id#" style="width: 146px;height: 34px;">
 				<input class="action_colorpicker_change form-control cursor" type="color" style="display: inline;width: 90px;height:32px;">
 				<script>

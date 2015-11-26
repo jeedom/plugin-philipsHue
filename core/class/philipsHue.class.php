@@ -630,7 +630,7 @@ class philipsHue extends eqLogic {
 					continue;
 				}
 				$name = $scene->getName();
-				$name = trim(substr($name, 0, strpos($name, ' on ')));
+				$name = trim(substr($name, 0, -13));
 				if ($name == '') {
 					continue;
 				}
@@ -644,7 +644,11 @@ class philipsHue extends eqLogic {
 				$cmd->setSubType('other');
 				$cmd->setConfiguration('id', $scene->getId());
 				$cmd->setEqLogic_id($this->getId());
-				$cmd->save();
+				try {
+					$cmd->save();
+				} catch (Exception $e) {
+
+				}
 			}
 		}
 

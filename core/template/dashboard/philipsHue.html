@@ -1,92 +1,35 @@
-<div class="eqLogic-widget eqLogic noResize" style="width: 300px;background-color: #background_color#;padding : 0px; #style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="dashboard">
+<div class="eqLogic-widget eqLogic noResize" style="width: 200px;background-color: #background_color#;padding : 0px; #style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="dashboard">
 	<i class='fa fa-refresh pull-right cursor refresh' style="margin-top: 3px;margin-right: 3px;"></i>
 	<span class="cmd cmd-widget" data-cmd_id="#refresh_id#" style="display:none;"></span>
 	<span class="statusCmd" style="position : absolute;left : 5px; width : 30px;z-index: 1030;"></span>
 	<center><a href="#eqLink#" style="font-size : 1.5em;"> #name# </a></center>
-	<div class="row" style="margin-left :5px;">
-		<div class="col-xs-6">
-			<div>
-				<span class="cmd cmd-widget" data-cmd_id="#luminosity_id#">
-					<i class="fa fa-eye-slash" style="margin-right : 10px;width:15px;"></i>
-					<div class="slider" style="margin : 5px 10px 8px 10px;width: 80px;" value="#luminosity_state#"></div>
-					<script>
-						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#luminosity_id#] .slider").bootstrapSlider({
-							min: 0,
-							max: 255,
-							value: ('#luminosity_state#' == '') ? 0 : parseInt('#luminosity_state#')
-						});
-						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#luminosity_id#] .slider.slider-horizontal").css('z-index',1);
-						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#luminosity_id#] .slider").on('slideStop', function (ev) {
-							jeedom.cmd.execute({id: '#luminosity_id#', value: {slider: ev.value}});
-						});
-					</script>
-				</span>
-			</div>
-			<div>
-				<span class="cmd cmd-widget" data-cmd_id="#saturation_id#">
-					<i class="fa fa-moon-o" style="margin-right : 10px;width:15px;"></i>
-					<div class="slider" style="margin : 5px 10px 8px 10px;width: 80px;" value="#saturation_state#"></div>
-					<script>
-						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#saturation_id#] .slider").bootstrapSlider({
-							min: 0,
-							max: 255,
-							value: ('#saturation_state#' == '') ? 0 : parseInt('#saturation_state#')
-						});
-						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#saturation_id#] .slider.slider-horizontal").css('z-index',1);
-						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#saturation_id#] .slider").on('slideStop', function (ev) {
-							jeedom.cmd.execute({id: '#saturation_id#', value: {slider: ev.value}});
-						});
-					</script>
-				</span>
-			</div>
-			<div>
-				<span class="cmd cmd-widget" data-cmd_id="#hue_id#">
-					<i class="fa fa-bolt" style="margin-right : 10px;width:15px;"></i>
-					<div class="slider" style="margin : 5px 10px 8px 10px;width: 80px;" value="#hue_state#"></div>
-					<script>
-						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#hue_id#] .slider").bootstrapSlider({
-							min: 0,
-							max: 255,
-							value: ('#hue_state#' == '') ? 0 : parseInt('#hue_state#')
-						});
-						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#hue_id#] .slider.slider-horizontal").css('z-index',1);
-						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#hue_id#] .slider").on('slideStop', function (ev) {
-							jeedom.cmd.execute({id: '#hue_id#', value: {slider: ev.value}});
-						});
-					</script>
-				</span>
-			</div>
-		</div>
-		<div class="col-xs-6">
-			<div>
-				<span class="cmd cmd-widget" data-cmd_id="#colorTemp_id#">
-					<i class="fa fa-lightbulb-o" style="margin-right : 10px;width:15px;"></i>
-					<div class="slider" style="margin : 5px 10px 8px 10px;width: 80px;" value="#colorTemp_state#"></div>
-					<script>
-						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#colorTemp_id#] .slider").bootstrapSlider({
-							min: 153,
-							max: 500,
-							value: ('#colorTemp_state#' == '') ? 0 : parseInt('#colorTemp_state#')
-						});
-						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#colorTemp_id#] .slider.slider-horizontal").css('z-index',1);
-						$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#colorTemp_id#] .slider").on('slideStop', function (ev) {
-							jeedom.cmd.execute({id: '#colorTemp_id#', value: {slider: ev.value}});
-						});
-					</script>
-				</span>
-			</div>
-			<div class="cmd cmd-widget" data-cmd_id="#color_id#" style="width: 146px;height: 34px;">
-				<input class="action_colorpicker_change form-control cursor" type="color" style="display: inline;width: 90px;height:32px;">
-				<script>
-					$('.eqLogic[data-eqLogic_uid=#uid#] .action_colorpicker_change').value(('#color_state#' != '') ? '#color_state#'.substr(0,7) : '#000000');
-					$('.eqLogic[data-eqLogic_uid=#uid#] .action_colorpicker_change').on('change', function() {
-						jeedom.cmd.execute({id: '#color_id#', value: {color: $(this).value()}});
-					});
-				</script>
-			</div>
-		</div>
-	</div>
 	<center>
+		<div class="cmd cmd-widget" data-cmd_id="#color_id#" style="width: 146px;height: 34px;">
+			<input class="action_colorpicker_change form-control cursor" type="color" style="display: inline;width: 90px;height:32px;">
+			<script>
+				$('.eqLogic[data-eqLogic_uid=#uid#] .action_colorpicker_change').value(('#color_state#' != '') ? '#color_state#'.substr(0,7) : '#000000');
+				$('.eqLogic[data-eqLogic_uid=#uid#] .action_colorpicker_change').on('change', function() {
+					jeedom.cmd.execute({id: '#color_id#', value: {color: $(this).value()}});
+				});
+			</script>
+		</div>
+		<span class="cmd cmd-widget" data-cmd_id="#luminosity_id#" style="margin-top:10px;">
+			<i class="fa fa-eye-slash" style="margin-right : 10px;width:15px;"></i>
+			<div class="slider" style="margin : 5px 10px 8px 10px;width: 150px;" value="#luminosity_state#"></div>
+			<script>
+				$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#luminosity_id#] .slider").bootstrapSlider({
+					min: 0,
+					max: 255,
+					value: ('#luminosity_state#' == '') ? 0 : parseInt('#luminosity_state#')
+				});
+				$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#luminosity_id#] .slider.slider-horizontal").css('z-index',1);
+				$(".eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#luminosity_id#] .slider").on('slideStop', function (ev) {
+					jeedom.cmd.execute({id: '#luminosity_id#', value: {slider: ev.value}});
+				});
+			</script>
+		</span>
+	</center>
+	<center style="margin-top:10px;">
 		<a class="btn btn-sm btn-default cmd btnAction" style="background-color:#cmdColor# !important;" data-cmd_id="#on_id#">On</a>
 		<a class="btn btn-sm btn-default cmd btnAction" style="background-color:#cmdColor# !important;" data-cmd_id="#off_id#">Off</a>
 		<a class="btn btn-sm btn-default cmd btnAction" style="background-color:#cmdColor# !important;" data-cmd_id="#alert_on_id#">Alerte On</a>

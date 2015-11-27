@@ -29,14 +29,6 @@ try {
 		ajax::success();
 	}
 
-	if (init('action') == 'associateBridge') {
-		$bridge = philipsHue::associateBridge(init('id'));
-		$return['cmd'] = array();
-		$return['cmd'] = $bridge;
-
-		ajax::success($return);
-	}
-
 	throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
 	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {

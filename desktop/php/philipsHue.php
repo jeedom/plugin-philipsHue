@@ -15,7 +15,7 @@ sendVarToJS('eqType', 'philipsHue');
         <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
         <?php
 foreach ($eqLogics as $eqLogic) {
-	echo '<li class="cursor li_eqLogic" data-eqLogic_id="' . $eqLogic->getId() . '"><a>' . $eqLogic->getHumanName(true, true) . '</a></li>';
+	echo '<li class="cursor li_eqLogic" data-eqLogic_id="' . $eqLogic->getId() . '"><a>' . $eqLogic->getHumanName(true) . '</a></li>';
 }
 ?>
      </ul>
@@ -105,6 +105,12 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
           <label class="col-sm-2 control-label">{{Model}}</label>
           <div class="col-sm-2">
             <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="model" style="font-size : 1em"></span>
+          </div>
+        </div>
+         <div class="form-group">
+          <label class="col-sm-2 control-label">{{Non model}}</label>
+          <div class="col-sm-2">
+            <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="modelName" style="font-size : 1em"></span>
           </div>
         </div>
         <div class="form-group">

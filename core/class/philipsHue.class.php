@@ -182,7 +182,6 @@ class philipsHue extends eqLogic {
 					if ($value != $cmd->execCmd(null, 2)) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
-						$changed = true;
 					}
 				}
 
@@ -192,7 +191,6 @@ class philipsHue extends eqLogic {
 					if ($value != $cmd->execCmd(null, 2)) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
-						$changed = true;
 					}
 				}
 
@@ -202,7 +200,6 @@ class philipsHue extends eqLogic {
 					if ($value != $cmd->execCmd(null, 2)) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
-						$changed = true;
 					}
 				}
 
@@ -212,7 +209,6 @@ class philipsHue extends eqLogic {
 					if ($value != $cmd->execCmd(null, 2)) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
-						$changed = true;
 					}
 				}
 
@@ -222,17 +218,13 @@ class philipsHue extends eqLogic {
 					if ($value != $cmd->execCmd(null, 2)) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
-						$changed = true;
 					}
 				}
-
-				if ($changed) {
-					$mc = cache::byKey('philipsHueWidgetmobile' . $eqLogic->getId());
-					$mc->remove();
-					$mc = cache::byKey('philipsHueWidgetdashboard' . $eqLogic->getId());
-					$mc->remove();
-					$eqLogic->refreshWidget();
-				}
+				$mc = cache::byKey('philipsHueWidgetmobile' . $eqLogic->getId());
+				$mc->remove();
+				$mc = cache::byKey('philipsHueWidgetdashboard' . $eqLogic->getId());
+				$mc->remove();
+				$eqLogic->refreshWidget();
 			} catch (Exception $e) {
 				if ($_eqLogic_id != null) {
 					log::add('philipsHue', 'error', $e->getMessage());
@@ -246,7 +238,7 @@ class philipsHue extends eqLogic {
 		$hex_value = "";
 		if (isset($x) && isset($y) && isset($bri) && $y != 0) {
 			$z = 1.0 - $x - $y;
-			$Y = $bri / 255.0;
+			$Y = $bri / 255;
 			$X = ($Y / $y) * $x;
 			$Z = ($Y / $y) * $z;
 			$r = $X * 1.612 - $Y * 0.203 - $Z * 0.302;
@@ -262,28 +254,27 @@ class philipsHue extends eqLogic {
 				$b /= $maxValue;
 			}
 			$r = $r * 255;
-			if (
-				$r < 0) {
+			if ($r < 0) {
 				$r = 255;
+			}
+			$g = $g * 255;
+			if ($g < 0) {
+				$g = 255;
+			}
+			$b = $b * 255;
+			if ($b < 0) {
+				$b = 255;
 			}
 			$hex_value = dechex($r);
 			if (strlen($hex_value) < 2) {
 				$hex_value = "0" . $hex_value;
 			}
 			$hex_RGB .= $hex_value;
-			$g = $g * 255;
-			if ($g < 0) {
-				$g = 255;
-			}
 			$hex_value = dechex($g);
 			if (strlen($hex_value) < 2) {
 				$hex_value = "0" . $hex_value;
 			}
 			$hex_RGB .= $hex_value;
-			$b = $b * 255;
-			if ($b < 0) {
-				$b = 255;
-			}
 			$hex_value = dechex($b);
 			if (strlen($hex_value) < 2) {
 				$hex_value = "0" . $hex_value;
@@ -687,9 +678,6 @@ class philipsHueCmd extends cmd {
 			case 'on':
 
 				break;
-			case 'refresh':
-
-				break;
 			case 'off':
 				if ($eqLogic->getConfiguration('model') != "LWB004") {
 					$command->effect('none');
@@ -703,7 +691,7 @@ class philipsHueCmd extends cmd {
 			case 'color':
 				$parameter = philipsHue::setHexCode2($_options['color']);
 				$command->xy($parameter['x'], $parameter['y']);
-				//$command->brightness($parameter['bri']);
+				$command->brightness($parameter['bri'] * 255);
 				break;
 			case 'alert_on':
 				$command->alert('lselect');
@@ -728,6 +716,7 @@ class philipsHueCmd extends cmd {
 					$command->scene($this->getConfiguration('id'));
 					$hue->sendCommand($command);
 				}
+				philipsHue::cron15($eqLogic->getId());
 				return;
 		}
 		$hue->sendCommand($command);

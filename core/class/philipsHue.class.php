@@ -196,7 +196,12 @@ class philipsHue extends eqLogic {
 
 				$cmd = $eqLogic->getCmd(null, 'color_state');
 				if (is_object($cmd)) {
-					$value = $cmd->formatValue(self::xyBriToRgb($obj->getXY()['x'], $obj->getXY()['y'], $obj->getBrightness()));
+					$color = array(
+						'hue' => $obj->getHue(),
+						'sat' => $obj->getSaturation(),
+						'bri' => $obj->getBrightness(),
+					);
+					$value = $cmd->formatValue('#' . philipsHue::rgb2hex(philipsHue::hsb2rgb($color)));
 					if ($value != $cmd->execCmd(null, 2)) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
@@ -233,77 +238,105 @@ class philipsHue extends eqLogic {
 		}
 	}
 
-	public static function xyBriToRgb($x, $y, $bri) {
-		$hex_RGB = "";
-		$hex_value = "";
-		if (isset($x) && isset($y) && isset($bri) && $y != 0) {
-			$z = 1.0 - $x - $y;
-			$Y = $bri / 255;
-			$X = ($Y / $y) * $x;
-			$Z = ($Y / $y) * $z;
-			$r = $X * 1.612 - $Y * 0.203 - $Z * 0.302;
-			$g = -$X * 0.509 + $Y * 1.412 + $Z * 0.066;
-			$b = $X * 0.026 - $Y * 0.072 + $Z * 0.962;
-			$r = ($r <= 0.0031308) ? 12.92 * $r : (1.0 + 0.055) * pow($r, (1.0 / 2.4)) - 0.055;
-			$g = ($g <= 0.0031308) ? 12.92 * $g : (1.0 + 0.055) * pow($g, (1.0 / 2.4)) - 0.055;
-			$b = ($b <= 0.0031308) ? 12.92 * $b : (1.0 + 0.055) * pow($b, (1.0 / 2.4)) - 0.055;
-			$maxValue = max($r, $g, $b);
-			if ($maxValue > 0) {
-				$r /= $maxValue;
-				$g /= $maxValue;
-				$b /= $maxValue;
-			}
-			$r = $r * 255;
-			if ($r < 0) {
-				$r = 255;
-			}
-			$g = $g * 255;
-			if ($g < 0) {
-				$g = 255;
-			}
-			$b = $b * 255;
-			if ($b < 0) {
-				$b = 255;
-			}
-			$hex_value = dechex($r);
-			if (strlen($hex_value) < 2) {
-				$hex_value = "0" . $hex_value;
-			}
-			$hex_RGB .= $hex_value;
-			$hex_value = dechex($g);
-			if (strlen($hex_value) < 2) {
-				$hex_value = "0" . $hex_value;
-			}
-			$hex_RGB .= $hex_value;
-			$hex_value = dechex($b);
-			if (strlen($hex_value) < 2) {
-				$hex_value = "0" . $hex_value;
-			}
-			$hex_RGB .= $hex_value;
-			return "#" . $hex_RGB;
-		} else {
-			return '#FFFFFF';
-		}
+	/*****************************COLOR CONVERTION**************************************/
+	public function hex2rgb($sHex) {
+		$sHex = trim($sHex, '#');
+		list($mRed, $mGreen, $mBlue) = str_split($sHex, 2);
+		$hRgb = [
+			'red' => hexdec($mRed),
+			'green' => hexdec($mGreen),
+			'blue' => hexdec($mBlue),
+		];
+		return $hRgb;
 	}
 
-	public static function setHexCode2($sHex) {
-		$sHex = trim($sHex, '#');
-		if (strlen($sHex) != 6) {
-			return false;
+	public function rgb2hex($hRgb) {
+		$sResult = "";
+		foreach ([
+			'red',
+			'green',
+			'blue',
+		] as $sKey) {
+			$sResult .= str_pad(dechex($hRgb[$sKey]), 2, "0", STR_PAD_LEFT);
 		}
-		list($mRed, $mGreen, $mBlue) = str_split($sHex, 2);
-		$r = hexdec($mRed) / 255;
-		$g = hexdec($mGreen) / 255;
-		$b = hexdec($mBlue) / 255;
-		$rt = ($r > 0.04045) ? pow(($r + 0.055) / (1.0 + 0.055), 2.4) : ($r / 12.92);
-		$gt = ($g > 0.04045) ? pow(($g + 0.055) / (1.0 + 0.055), 2.4) : ($g / 12.92);
-		$bt = ($b > 0.04045) ? pow(($b + 0.055) / (1.0 + 0.055), 2.4) : ($b / 12.92);
-		$cie_x = $rt * 0.649926 + $gt * 0.103455 + $bt * 0.197109;
-		$cie_y = $rt * 0.234327 + $gt * 0.743075 + $bt * 0.022598;
-		$cie_z = $rt * 0.0000000 + $gt * 0.053077 + $bt * 1.035763;
-		$hue_x = $cie_x / ($cie_x + $cie_y + $cie_z);
-		$hue_y = $cie_y / ($cie_x + $cie_y + $cie_z);
-		return array('x' => $hue_x, 'y' => $hue_y, 'bri' => $cie_y);
+		return $sResult;
+	}
+
+	public function hsb2rgb($hHsb) {
+		$fHue = ($hHsb['hue'] / 65535) * 360;
+		$fSat = $hHsb['sat'] / 255;
+		$fBri = $hHsb['bri'] / 255;
+		$fC = (1.0 - abs(2 * $fBri - 1.0)) * $fSat;
+		$fX = $fC * (1.0 - abs(fmod(($fHue / 60.0), 2) - 1.0));
+		$fM = $fBri - ($fC / 2.0);
+		if ($fHue < 60) {
+			$fRed = $fC;
+			$fGreen = $fX;
+			$fBlue = 0;
+		} else if ($fHue < 120) {
+			$fRed = $fX;
+			$fGreen = $fC;
+			$fBlue = 0;
+		} else if ($fHue < 180) {
+			$fRed = 0;
+			$fGreen = $fC;
+			$fBlue = $fX;
+		} else if ($fHue < 240) {
+			$fRed = 0;
+			$fGreen = $fX;
+			$fBlue = $fC;
+		} else if ($fHue < 300) {
+			$fRed = $fX;
+			$fGreen = 0;
+			$fBlue = $fC;
+		} else {
+			$fRed = $fC;
+			$fGreen = 0;
+			$fBlue = $fX;
+		}
+		$fRed = ($fRed + $fM) * 255;
+		$fGreen = ($fGreen + $fM) * 255;
+		$fBlue = ($fBlue + $fM) * 255;
+		return [
+			'red' => floor($fRed),
+			'green' => floor($fGreen),
+			'blue' => floor($fBlue),
+		];
+	}
+
+	public function rgb2hsb($hRgb) {
+		$mRed = $hRgb['red'] / 255;
+		$mGreen = $hRgb['green'] / 255;
+		$mBlue = $hRgb['blue'] / 255;
+		$fMax = max($mRed, $mGreen, $mBlue);
+		$fMin = min($mRed, $mGreen, $mBlue);
+		$fBri = ($fMax + $fMin) / 2;
+		$fDiff = $fMax - $fMin;
+		$fHue = 0;
+		if (0 == $fDiff) {
+			$fHue = $fSat = 0;
+		} else {
+			$fSat = $fDiff / (1 - abs(2 * $fBri - 1));
+			switch ($fMax) {
+				case $mRed:
+					$fHue = 60 * fmod((($mGreen - $mBlue) / $fDiff), 6);
+					if ($mBlue > $mGreen) {
+						$fHue += 360;
+					}
+					break;
+				case $mGreen:
+					$fHue = 60 * (($mBlue - $mRed) / $fDiff + 2);
+					break;
+				case $mBlue:
+					$fHue = 60 * (($mRed - $mGreen) / $fDiff + 4);
+					break;
+			}
+		}
+		return [
+			'hue' => (int) (($fHue / 360) * 65535),
+			'sat' => (int) ($fSat * 255),
+			'bri' => (int) ($fBri * 255),
+		];
 	}
 
 	/*     * *********************Méthodes d'instance************************* */
@@ -689,9 +722,10 @@ class philipsHueCmd extends cmd {
 				$command->brightness($_options['slider']);
 				break;
 			case 'color':
-				$parameter = philipsHue::setHexCode2($_options['color']);
-				$command->xy($parameter['x'], $parameter['y']);
-				$command->brightness($parameter['bri'] * 255);
+				$parameter = philipsHue::rgb2hsb(philipsHue::hex2rgb($_options['color']));
+				$command->brightness($parameter['bri']);
+				$command->saturation($parameter['sat']);
+				$command->hue($parameter['hue']);
 				break;
 			case 'alert_on':
 				$command->alert('lselect');

@@ -30,18 +30,42 @@ if (!isConnect()) {
         <input type="text" class="configKey tooltips form-control" data-l1key="bridge_ip" />
       </div>
     </div>
+    <div class="form-group useShare">
+      <label class="col-lg-4 control-label">{{Groupe 1}}</label>
+      <div class="col-lg-2">
+        <input type="text" class="configKey tooltips form-control" data-l1key="group1" />
+      </div>
+      <label class="col-lg-2 control-label">{{Groupe 2}}</label>
+      <div class="col-lg-2">
+        <input type="text" class="configKey tooltips form-control" data-l1key="group2" />
+      </div>
+    </div>
+    <div class="form-group useShare">
+      <label class="col-lg-4 control-label">{{Groupe 3}}</label>
+      <div class="col-lg-2">
+        <input type="text" class="configKey tooltips form-control" data-l1key="group3" />
+      </div>
+      <label class="col-lg-2 control-label">{{Groupe 4}}</label>
+      <div class="col-lg-2">
+        <input type="text" class="configKey tooltips form-control" data-l1key="group4" />
+      </div>
+    </div>
+    <div class="form-group useShare">
+      <label class="col-lg-4 control-label">{{Groupe 5}}</label>
+      <div class="col-lg-2">
+        <input type="text" class="configKey tooltips form-control" data-l1key="group5" />
+      </div>
+      <label class="col-lg-2 control-label">{{Groupe 6}}</label>
+      <div class="col-lg-2">
+        <input type="text" class="configKey tooltips form-control" data-l1key="group6" />
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-   <label class="col-lg-4 control-label">{{Découverte}}</label>
-   <div class="col-lg-2">
-   <a class="btn btn-default" id="bt_syncPhilipsHue"><i class='fa fa-refresh'></i> {{Synchroniser}}</a>
-  </div>
-</div>
 </fieldset>
 </form>
 
 <script>
-  $('#bt_syncPhilipsHue').on('click', function () {
+  function philipsHue_postSaveConfiguration(){
     $.ajax({
       type: "POST",
       url: "plugins/philipsHue/core/ajax/philipsHue.ajax.php",
@@ -60,5 +84,5 @@ if (!isConnect()) {
      $('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'});
    }
  });
-  });
+  }
 </script>

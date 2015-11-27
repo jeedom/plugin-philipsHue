@@ -28,6 +28,47 @@ class philipsHue extends eqLogic {
 		return new \Phue\Client(config::byKey('bridge_ip', 'philipsHue'), 'newdeveloper');
 	}
 
+	public static function syncGroup() {
+		$hue = self::getPhilipsHue();
+		for ($i = 1; $i < 17; $i++) {
+			$group_config = config::byKey('group' . $i, 'philipsHue');
+			$group_id = '';
+			foreach ($hue->getGroups() as $groupId => $group) {
+				if ($group->getName() == 'Jeedom ' . $i) {
+					$group_id = $groupId;
+				}
+			}
+			if (trim($group_config) == '' || trim($group_config) == '-') {
+				if ($group_id != '') {
+					$hue->getGroups()[$group_id]->delete();
+				}
+				continue;
+			}
+			$lights = explode(',', $group_config);
+			foreach ($lights as $light) {
+				if (!is_numeric($light)) {
+					throw new Exception(__('Tous les ids de lampe pour les groupes doivent être de chiffre : ', __FILE__) . $group_config);
+
+				}
+			}
+			if ($group_id == '') {
+				$hue->sendCommand(
+					new \Phue\Command\CreateGroup('Jeedom ' . $i, $lights)
+				);
+				continue;
+			}
+			$group = $hue->getGroups()[$group_id];
+			$group->setLights($lights);
+		}
+	}
+
+	public static function deleteGroup() {
+		$hue = self::getPhilipsHue();
+		foreach ($hue->getGroups() as $group) {
+			$group->delete();
+		}
+	}
+
 	public static function syncBridge() {
 		if (config::byKey('bridge_ip', 'philipsHue') == '') {
 			throw new Exception(__('L\'adresse du bridge ne peut etre vide', __FILE__));
@@ -47,6 +88,9 @@ class philipsHue extends eqLogic {
 				throw new Exception(__('Veuillez appuyer sur le bouton du bridge pour autoriser la connexion', __FILE__));
 			}
 		}
+		self::syncGroup();
+		$lights_exist = array();
+		$groups_exist = array(0 => 0);
 		foreach ($hue->getLights() as $id => $light) {
 			$eqLogic = self::byLogicalId('light' . $id, 'philipsHue');
 			if (!is_object($eqLogic)) {
@@ -64,6 +108,7 @@ class philipsHue extends eqLogic {
 			$eqLogic->setConfiguration('type', $light->getType());
 			$eqLogic->setConfiguration('softwareVersion', $light->getSoftwareVersion());
 			$eqLogic->save();
+			$lights_exist[$id] = $id;
 		}
 		$eqLogic = self::byLogicalId('group0', 'philipsHue');
 		if (!is_object($eqLogic)) {
@@ -90,6 +135,18 @@ class philipsHue extends eqLogic {
 			$eqLogic->setConfiguration('category', 'group');
 			$eqLogic->setConfiguration('id', $id);
 			$eqLogic->save();
+			$groups_exist[$id] = $id;
+		}
+		foreach (self::byType('philipsHue') as $eqLogic) {
+			if ($eqLogic->getConfiguration('category') == 'light') {
+				if (!isset($lights_exist[$eqLogic->getConfiguration('id')])) {
+					$eqLogic->remove();
+				}
+			} else {
+				if (!isset($groups_exist[$eqLogic->getConfiguration('id')])) {
+					$eqLogic->remove();
+				}
+			}
 		}
 		self::cron15();
 	}
@@ -102,8 +159,8 @@ class philipsHue extends eqLogic {
 			if ($eqLogic->getIsEnable() == 0) {
 				continue;
 			}
-			if ($eqLogic->getConfiguration('category') == 'group') {
-				//continue;
+			if ($eqLogic->getConfiguration('category') == 'group' && $eqLogic->getConfiguration('id') == 0) {
+				continue;
 			}
 			try {
 				$changed = false;
@@ -281,7 +338,7 @@ class philipsHue extends eqLogic {
 			$vcolor = 'mcmdColor';
 		}
 		$parameters = $this->getDisplay('parameters');
-		$cmdColor = ($this->getPrimaryCategory() == '') ? '' : jeedom::getConfiguration('eqLogic:category:' . $this->getPrimaryCategory() . ':' . $vcolor);
+		$cmdColor = ($this->getPrimaryCategory() == '') ? jeedom::getConfiguration('eqLogic:category:default:' . $vcolor) : jeedom::getConfiguration('eqLogic:category:' . $this->getPrimaryCategory() . ':' . $vcolor);
 		if (is_array($parameters) && isset($parameters['background_cmd_color'])) {
 			$cmdColor = $parameters['background_cmd_color'];
 		}

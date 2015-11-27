@@ -95,6 +95,12 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
     <form class="form-horizontal">
       <fieldset>
         <legend>{{Informations}}</legend>
+         <div class="form-group">
+          <label class="col-sm-2 control-label">{{Catégorie}}</label>
+          <div class="col-sm-2">
+            <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="category" style="font-size : 1em"></span>
+          </div>
+        </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">{{Type}}</label>
           <div class="col-sm-2">

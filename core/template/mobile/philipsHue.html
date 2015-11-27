@@ -23,7 +23,6 @@
     </div>
 </center>
 <center>
-    <i class="fa fa-eye-slash"></i>
     <span class="cmd cmd-widget" data-cmd_id="#luminosity_id#">
       <div class="slider full-width-slider" style="width: 96%;text-align: right;min-width : 100px;" style="background-color:#cmdColor# !important;">
         <input type="range" min="0" max="255" data-theme="a" value="#luminosity_state#" style="background-color:#cmdColor# !important;"/>
@@ -49,7 +48,7 @@
   $('.eqLogic[data-eqLogic_id=#id#] .refresh').on('click', function () {
       jeedom.cmd.execute({id: '#refresh_id#'});
   });
-  if('#category#'!='group'){
+  if('#category#'!='group0'){
       if('#state#'==1){
         $('.eqLogic[data-eqLogic_uid=#uid#] .cmd[data-cmd_id=#on_id#]').hide();
     }else{

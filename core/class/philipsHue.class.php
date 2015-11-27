@@ -103,7 +103,7 @@ class philipsHue extends eqLogic {
 				continue;
 			}
 			if ($eqLogic->getConfiguration('category') == 'group') {
-				continue;
+				//continue;
 			}
 			try {
 				$changed = false;
@@ -274,7 +274,7 @@ class philipsHue extends eqLogic {
 		}
 		$mc = cache::byKey('philipsHueWidget' . $_version . $this->getId());
 		if ($mc->getValue() != '') {
-			//return preg_replace("/" . preg_quote(self::UIDDELIMITER) . "(.*?)" . preg_quote(self::UIDDELIMITER) . "/", self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER, $mc->getValue());
+			return preg_replace("/" . preg_quote(self::UIDDELIMITER) . "(.*?)" . preg_quote(self::UIDDELIMITER) . "/", self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER, $mc->getValue());
 		}
 		$vcolor = 'cmdColor';
 		if ($_version == 'mobile') {
@@ -297,7 +297,7 @@ class philipsHue extends eqLogic {
 			'#object_name#' => '',
 			'#version#' => $_version,
 			'#style#' => '',
-			'#category#' => $this->getConfiguration('category'),
+			'#category#' => $this->getConfiguration('category') . $this->getConfiguration('id'),
 			'#uid#' => 'philipsHue' . $this->getId() . self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER,
 		);
 
@@ -521,17 +521,6 @@ class philipsHue extends eqLogic {
 			}
 		}
 
-		/*$cmd = $this->getCmd(null, 'set_schedule');
-			if (!is_object($cmd)) {
-				$cmd = new philipsHueCmd();
-				$cmd->setLogicalId('set_schedule');
-				$cmd->setName(__('Progammation', __FILE__));
-			}
-			$cmd->setType('action');
-			$cmd->setSubType('message');
-			$cmd->setEqLogic_id($this->getId());
-		*/
-
 		$cmd = $this->getCmd(null, 'transition');
 		if (!is_object($cmd)) {
 			$cmd = new philipsHueCmd();
@@ -658,42 +647,6 @@ class philipsHueCmd extends cmd {
 				if (is_object($transition)) {
 					$transition->event($_options['slider']);
 				}
-				return;
-			case 'set_schedule':
-				//color|luminosity|saturation|alert|rainbow|transistion
-				$params = explode('|', $_options['message']);
-				if (isset($params[0]) && trim($params[0]) !== '') {
-					$parameter = philipsHue::setHexCode2($params[0]);
-					$command->xy($parameter['xy'][0], $parameter['xy'][1]);
-				}
-				if (isset($params[1]) && trim($params[1]) !== '') {
-					$command->brightness($params[1]);
-				}
-				if (isset($params[2]) && trim($params[2]) !== '') {
-					$command->saturation($params[2]);
-				}
-				if (isset($params[3]) && trim($params[3]) !== '') {
-					if ($params[3] == 1) {
-						$command->alert('lselect');
-					} else {
-						$command->alert('none');
-					}
-				}
-				if (isset($params[4]) && trim($params[4]) !== '') {
-					if ($params[3] == 1) {
-						$command->effect('colorloop');
-					} else {
-						$command->effect('none');
-					}
-				}
-				if (isset($params[5]) && trim($params[5]) !== '') {
-					$command->transitionTime($params[5]);
-				} else {
-					$command->transitionTime(0);
-				}
-				$hue->sendCommand(
-					new \Phue\Command\CreateSchedule('Jeedom programmation', $_options['title'], $command)
-				);
 				return;
 			default:
 				if (strpos($this->getLogicalId(), 'set_scene_') !== false) {

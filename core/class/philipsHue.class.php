@@ -652,8 +652,6 @@ class philipsHueCmd extends cmd {
 				if (strpos($this->getLogicalId(), 'set_scene_') !== false) {
 					$command = new \Phue\Command\SetGroupState(0);
 					$command->scene($this->getConfiguration('id'));
-					$command->transitionTime($transistion_time);
-					log::add('philipsHue', 'debug', print_r($command, true));
 					$hue->sendCommand($command);
 				}
 				return;

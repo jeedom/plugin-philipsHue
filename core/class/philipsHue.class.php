@@ -607,10 +607,12 @@ class philipsHue extends eqLogic {
 		$cmd->save();
 
 		if ($this->getConfiguration('id') == 0 && $this->getConfiguration('category') == 'group') {
+			$scenes_id = array();
 			foreach (self::getPhilipsHue()->getScenes() as $scene) {
 				if (!$scene->isActive()) {
 					continue;
 				}
+				$scenes_id[$scene->getId()] = $scene->getId();
 				$name = $scene->getName();
 				$name = trim(substr($name, 0, -13));
 				if ($name == '') {
@@ -630,6 +632,14 @@ class philipsHue extends eqLogic {
 					$cmd->save();
 				} catch (Exception $e) {
 
+				}
+			}
+			foreach ($this->getCmd('action') as $cmd) {
+				if (strpos($cmd->getLogicalId(), 'set_scene_') === false) {
+					continue;
+				}
+				if (!isset($scenes_id[$cmd->getConfiguration('id')])) {
+					$cmd->remove();
 				}
 			}
 		}

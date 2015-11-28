@@ -354,15 +354,39 @@ class philipsHue extends eqLogic {
 				$cmd = new philipsHueCmd();
 				$cmd->setLogicalId('luminosity_state');
 				$cmd->setName(__('Etat Luminosité', __FILE__));
+				$cmd->setIsVisible(0);
 			}
 			$cmd->setType('info');
 			$cmd->setSubType('numeric');
 			$cmd->setEventOnly(1);
-			$cmd->setIsVisible(0);
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->save();
 			$luminosity_id = $cmd->getId();
 		}
+
+		$cmd = $this->getCmd(null, 'on');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setLogicalId('on');
+			$cmd->setName(__('On', __FILE__));
+			$cmd->setIsVisible(0);
+		}
+		$cmd->setType('action');
+		$cmd->setSubType('other');
+		$cmd->setEqLogic_id($this->getId());
+		$cmd->save();
+
+		$cmd = $this->getCmd(null, 'off');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setLogicalId('off');
+			$cmd->setName(__('Off', __FILE__));
+			$cmd->setIsVisible(0);
+		}
+		$cmd->setType('action');
+		$cmd->setSubType('other');
+		$cmd->setEqLogic_id($this->getId());
+		$cmd->save();
 
 		$cmd = $this->getCmd(null, 'luminosity');
 		if (!is_object($cmd)) {
@@ -370,6 +394,9 @@ class philipsHue extends eqLogic {
 			$cmd->setLogicalId('luminosity');
 			$cmd->setIsVisible(1);
 			$cmd->setName(__('Luminosité', __FILE__));
+			$cmd->setTemplate('dashboard', 'light');
+			$cmd->setTemplate('mobile', 'light');
+			$cmd->setOrder(0);
 		}
 		$cmd->setType('action');
 		$cmd->setSubType('slider');
@@ -377,9 +404,6 @@ class philipsHue extends eqLogic {
 		$cmd->setConfiguration('maxValue', '255');
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->setValue($luminosity_id);
-		$cmd->setTemplate('dashboard', 'light');
-		$cmd->setTemplate('mobile', 'light');
-		$cmd->setOrder(0);
 		$cmd->save();
 
 		$color_id = null;
@@ -389,12 +413,11 @@ class philipsHue extends eqLogic {
 				$cmd = new philipsHueCmd();
 				$cmd->setLogicalId('color_state');
 				$cmd->setName(__('Etat Couleur', __FILE__));
+				$cmd->setIsVisible(0);
 			}
 			$cmd->setType('info');
 			$cmd->setSubType('string');
-			$cmd->setUnite('');
 			$cmd->setEventOnly(1);
-			$cmd->setIsVisible(0);
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->save();
 			$color_id = $cmd->getId();
@@ -405,11 +428,11 @@ class philipsHue extends eqLogic {
 			$cmd = new philipsHueCmd();
 			$cmd->setLogicalId('color');
 			$cmd->setName(__('Couleur', __FILE__));
+			$cmd->setOrder(1);
 		}
 		$cmd->setType('action');
 		$cmd->setSubType('color');
 		$cmd->setEqLogic_id($this->getId());
-		$cmd->setOrder(1);
 		$cmd->setValue($color_id);
 		$cmd->save();
 
@@ -420,11 +443,11 @@ class philipsHue extends eqLogic {
 				$cmd = new philipsHueCmd();
 				$cmd->setLogicalId('alert_state');
 				$cmd->setName(__('Etat Alerte', __FILE__));
+				$cmd->setIsVisible(0);
 			}
 			$cmd->setType('info');
 			$cmd->setSubType('binary');
 			$cmd->setEventOnly(1);
-			$cmd->setIsVisible(0);
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->save();
 			$alert_id = $cmd->getId();
@@ -435,12 +458,12 @@ class philipsHue extends eqLogic {
 			$cmd = new philipsHueCmd();
 			$cmd->setLogicalId('alert_on');
 			$cmd->setName(__('Alerte On', __FILE__));
+			$cmd->setIsVisible(0);
 		}
 		$cmd->setType('action');
 		$cmd->setSubType('other');
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->setValue($alert_id);
-		$cmd->setIsVisible(0);
 		$cmd->save();
 
 		$cmd = $this->getCmd(null, 'alert_off');
@@ -448,12 +471,12 @@ class philipsHue extends eqLogic {
 			$cmd = new philipsHueCmd();
 			$cmd->setLogicalId('alert_off');
 			$cmd->setName(__('Alerte Off', __FILE__));
+			$cmd->setIsVisible(0);
 		}
 		$cmd->setType('action');
 		$cmd->setSubType('other');
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->setValue($alert_id);
-		$cmd->setIsVisible(0);
 		$cmd->save();
 
 		if ($this->getConfiguration('model') != "LWB004") {
@@ -465,13 +488,12 @@ class philipsHue extends eqLogic {
 					$cmd->setLogicalId('rainbow_state');
 					$cmd->setIsVisible(1);
 					$cmd->setName(__('Etat Arc en ciel', __FILE__));
+					$cmd->setIsVisible(0);
 				}
 				$cmd->setType('info');
 				$cmd->setSubType('binary');
 				$cmd->setEventOnly(1);
-				$cmd->setIsVisible(0);
 				$cmd->setEqLogic_id($this->getId());
-				$cmd->setIsVisible(0);
 				$cmd->save();
 				$rainbow_id = $this->getId();
 			}
@@ -481,12 +503,12 @@ class philipsHue extends eqLogic {
 				$cmd = new philipsHueCmd();
 				$cmd->setLogicalId('rainbow_on');
 				$cmd->setName(__('Arc en ciel On', __FILE__));
+				$cmd->setIsVisible(0);
 			}
 			$cmd->setType('action');
 			$cmd->setSubType('other');
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->setValue($rainbow_id);
-			$cmd->setIsVisible(0);
 			$cmd->save();
 
 			$cmd = $this->getCmd(null, 'rainbow_off');
@@ -494,12 +516,12 @@ class philipsHue extends eqLogic {
 				$cmd = new philipsHueCmd();
 				$cmd->setLogicalId('rainbow_off');
 				$cmd->setName(__('Arc en ciel Off', __FILE__));
+				$cmd->setIsVisible(0);
 			}
 			$cmd->setType('action');
 			$cmd->setSubType('other');
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->setValue($rainbow_id);
-			$cmd->setIsVisible(0);
 			$cmd->save();
 
 		} else {
@@ -522,10 +544,10 @@ class philipsHue extends eqLogic {
 			$cmd = new philipsHueCmd();
 			$cmd->setLogicalId('transition');
 			$cmd->setName(__('Transition', __FILE__));
+			$cmd->setIsVisible(0);
 		}
 		$cmd->setType('action');
 		$cmd->setSubType('slider');
-		$cmd->setIsVisible(0);
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->setConfiguration('minValue', '0');
 		$cmd->setConfiguration('maxValue', '1800');
@@ -560,12 +582,12 @@ class philipsHue extends eqLogic {
 					$cmd = new philipsHueCmd();
 					$cmd->setLogicalId('set_scene_' . $scene->getId());
 					$cmd->setName(__('Scène ' . $name, __FILE__));
+					$cmd->setIsVisible(0);
 				}
 				$cmd->setType('action');
 				$cmd->setSubType('other');
 				$cmd->setConfiguration('id', $scene->getId());
 				$cmd->setEqLogic_id($this->getId());
-				$cmd->setIsVisible(0);
 				try {
 					$cmd->save();
 				} catch (Exception $e) {

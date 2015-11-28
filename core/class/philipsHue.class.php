@@ -167,7 +167,7 @@ class philipsHue extends eqLogic {
 			if ($eqLogic->getIsEnable() == 0) {
 				continue;
 			}
-			if ($eqLogic->getConfiguration('category') == 'group' && $eqLogic->getConfiguration('id') == 0) {
+			if ($eqLogic->getLogicalId() == 'group0') {
 				continue;
 			}
 			try {
@@ -348,7 +348,7 @@ class philipsHue extends eqLogic {
 
 	public function postSave() {
 		$luminosity_id = null;
-		if ($this->getConfiguration('category') != 'group' || $this->getConfiguration('id') != 0) {
+		if ($this->getLogicalId() != 'group0') {
 			$cmd = $this->getCmd(null, 'luminosity_state');
 			if (!is_object($cmd)) {
 				$cmd = new philipsHueCmd();
@@ -383,7 +383,7 @@ class philipsHue extends eqLogic {
 		$cmd->save();
 
 		$color_id = null;
-		if ($this->getConfiguration('category') != 'group' || $this->getConfiguration('id') != 0) {
+		if ($this->getLogicalId() != 'group0') {
 			$cmd = $this->getCmd(null, 'color_state');
 			if (!is_object($cmd)) {
 				$cmd = new philipsHueCmd();
@@ -414,7 +414,7 @@ class philipsHue extends eqLogic {
 		$cmd->save();
 
 		$alert_id = null;
-		if ($this->getConfiguration('category') != 'group') {
+		if ($this->getLogicalId() != 'group0') {
 			$cmd = $this->getCmd(null, 'alert_state');
 			if (!is_object($cmd)) {
 				$cmd = new philipsHueCmd();
@@ -543,7 +543,7 @@ class philipsHue extends eqLogic {
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();
 
-		if ($this->getConfiguration('id') == 0 && $this->getConfiguration('category') == 'group') {
+		if ($this->getLogicalId() == 'group0') {
 			$scenes_id = array();
 			foreach (self::getPhilipsHue()->getScenes() as $scene) {
 				if (!$scene->isActive()) {

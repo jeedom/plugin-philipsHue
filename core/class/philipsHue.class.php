@@ -22,10 +22,16 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 class philipsHue extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
+	private static $_hue = null;
+
 	/*     * ***********************Methode static*************************** */
 
 	public static function getPhilipsHue() {
-		return new \Phue\Client(config::byKey('bridge_ip', 'philipsHue'), 'newdeveloper');
+		if (self::$_hue !== null) {
+			return self::$_hue;
+		}
+		self::$_hue = new \Phue\Client(config::byKey('bridge_ip', 'philipsHue'), 'newdeveloper');
+		return self::$_hue;
 	}
 
 	public static function syncGroup() {
@@ -148,10 +154,12 @@ class philipsHue extends eqLogic {
 				}
 			}
 		}
-		self::cron15();
 	}
 
-	public static function cron15($_eqLogic_id = null) {
+	public static function pull($_eqLogic_id = null) {
+		$hue = philipsHue::getPhilipsHue();
+		$groups = $hue->getgroups();
+		$lights = $hue->getLights();
 		foreach (eqLogic::byType('philipsHue') as $eqLogic) {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
@@ -164,13 +172,12 @@ class philipsHue extends eqLogic {
 			}
 			try {
 				$changed = false;
-				$hue = philipsHue::getPhilipsHue();
 				switch ($eqLogic->getConfiguration('category')) {
 					case 'light':
-						$obj = $hue->getLights()[$eqLogic->getConfiguration('id')];
+						$obj = $lights[$eqLogic->getConfiguration('id')];
 						break;
 					case 'group':
-						$obj = $hue->getGroups()[$eqLogic->getConfiguration('id')];
+						$obj = $groups[$eqLogic->getConfiguration('id')];
 						break;
 					default:
 						return;
@@ -182,6 +189,7 @@ class philipsHue extends eqLogic {
 					if ($value != $cmd->execCmd(null, 2)) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
+						$changed = true;
 					}
 				}
 
@@ -191,6 +199,7 @@ class philipsHue extends eqLogic {
 					if ($value != $cmd->execCmd(null, 2)) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
+						$changed = true;
 					}
 				}
 
@@ -205,6 +214,7 @@ class philipsHue extends eqLogic {
 					if ($value != $cmd->execCmd(null, 2)) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
+						$changed = true;
 					}
 				}
 
@@ -214,6 +224,7 @@ class philipsHue extends eqLogic {
 					if ($value != $cmd->execCmd(null, 2)) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
+						$changed = true;
 					}
 				}
 
@@ -225,11 +236,13 @@ class philipsHue extends eqLogic {
 						$cmd->event($value);
 					}
 				}
-				$mc = cache::byKey('philipsHueWidgetmobile' . $eqLogic->getId());
-				$mc->remove();
-				$mc = cache::byKey('philipsHueWidgetdashboard' . $eqLogic->getId());
-				$mc->remove();
-				$eqLogic->refreshWidget();
+				if ($changed) {
+					$mc = cache::byKey('philipsHueWidgetmobile' . $eqLogic->getId());
+					$mc->remove();
+					$mc = cache::byKey('philipsHueWidgetdashboard' . $eqLogic->getId());
+					$mc->remove();
+					$eqLogic->refreshWidget();
+				}
 			} catch (Exception $e) {
 				if ($_eqLogic_id != null) {
 					log::add('philipsHue', 'error', $e->getMessage());
@@ -750,14 +763,11 @@ class philipsHueCmd extends cmd {
 					$command->scene($this->getConfiguration('id'));
 					$hue->sendCommand($command);
 				}
-				philipsHue::cron15($eqLogic->getId());
 				return;
 		}
 		$hue->sendCommand($command);
-		sleep(1);
-		philipsHue::cron15($eqLogic->getId());
-
-		/*     * **********************Getteur Setteur*************************** */
 	}
+
+	/*     * **********************Getteur Setteur*************************** */
 }
 ?>

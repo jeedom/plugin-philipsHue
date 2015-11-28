@@ -53,7 +53,7 @@ class philipsHue extends eqLogic {
 			$lights = explode(',', $group_config);
 			foreach ($lights as $light) {
 				if (!is_numeric($light)) {
-					throw new Exception(__('Tous les ids de lampe pour les groupes doivent être de chiffre : ', __FILE__) . $group_config);
+					throw new Exception(__('Tous les ids de lampe pour les groupes doivent être des chiffres : ', __FILE__) . $group_config);
 
 				}
 			}

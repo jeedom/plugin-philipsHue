@@ -360,6 +360,7 @@ class philipsHue extends eqLogic {
 			$cmd->setSubType('numeric');
 			$cmd->setEventOnly(1);
 			$cmd->setEqLogic_id($this->getId());
+			$cmd->setConfiguration('doNotRepeatEvent', 1);
 			$cmd->save();
 			$luminosity_id = $cmd->getId();
 		}
@@ -404,6 +405,7 @@ class philipsHue extends eqLogic {
 		$cmd->setConfiguration('maxValue', '255');
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->setValue($luminosity_id);
+		$cmd->setConfiguration('doNotRepeatEvent', 1);
 		$cmd->save();
 
 		$color_id = null;
@@ -419,6 +421,7 @@ class philipsHue extends eqLogic {
 			$cmd->setSubType('string');
 			$cmd->setEventOnly(1);
 			$cmd->setEqLogic_id($this->getId());
+			$cmd->setConfiguration('doNotRepeatEvent', 1);
 			$cmd->save();
 			$color_id = $cmd->getId();
 		}
@@ -449,6 +452,7 @@ class philipsHue extends eqLogic {
 			$cmd->setSubType('binary');
 			$cmd->setEventOnly(1);
 			$cmd->setEqLogic_id($this->getId());
+			$cmd->setConfiguration('doNotRepeatEvent', 1);
 			$cmd->save();
 			$alert_id = $cmd->getId();
 		}
@@ -494,6 +498,7 @@ class philipsHue extends eqLogic {
 				$cmd->setSubType('binary');
 				$cmd->setEventOnly(1);
 				$cmd->setEqLogic_id($this->getId());
+				$cmd->setConfiguration('doNotRepeatEvent', 1);
 				$cmd->save();
 				$rainbow_id = $this->getId();
 			}
@@ -563,6 +568,7 @@ class philipsHue extends eqLogic {
 		$cmd->setSubType('numeric');
 		$cmd->setIsVisible(0);
 		$cmd->setEqLogic_id($this->getId());
+		$cmd->setConfiguration('doNotRepeatEvent', 1);
 		$cmd->save();
 
 		if ($this->getLogicalId() == 'group0') {

@@ -1,17 +1,17 @@
 [
     {
         "name": "sqmk/phue",
-        "version": "v1.2.1",
-        "version_normalized": "1.2.1.0",
+        "version": "v1.3.0",
+        "version_normalized": "1.3.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sqmk/Phue.git",
-            "reference": "704c0f287e38c4e00a0d8367056a25671098a706"
+            "reference": "72f84116a81177a1dfadacd9a0be5ab8220baef1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sqmk/Phue/zipball/704c0f287e38c4e00a0d8367056a25671098a706",
-            "reference": "704c0f287e38c4e00a0d8367056a25671098a706",
+            "url": "https://api.github.com/repos/sqmk/Phue/zipball/72f84116a81177a1dfadacd9a0be5ab8220baef1",
+            "reference": "72f84116a81177a1dfadacd9a0be5ab8220baef1",
             "shasum": ""
         },
         "require": {
@@ -25,7 +25,7 @@
         "suggest": {
             "ext-curl": "Allows usage of cURL transport adapter"
         },
-        "time": "2015-11-22 02:36:24",
+        "time": "2015-11-26 16:24:32",
         "bin": [
             "bin/phue-create-user",
             "bin/phue-bridge-finder",

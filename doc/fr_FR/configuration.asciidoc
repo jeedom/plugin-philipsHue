@@ -15,7 +15,7 @@ La configuration des équipements openvpn est accessible à partir du menu plugi
 
 image::../images/philipshue2.PNG[]
 
-Voilà à quoi ressemble la page du plugin Openvpn (ici avec déjà 1 équipement) : 
+Voilà à quoi ressemble la page du plugin Openvpn (ici avec déjà 4 équipements) : 
 
 image::../images/philipshue3.PNG[]
 
@@ -47,6 +47,7 @@ En-dessous vous retrouvez la liste des commandes :
 
 * *Nom* : le nom affiché sur le dashboard,
 * *Configuration avancé* : permet d'afficher la fenetre de configuration avancée de la commande,
+* *Options* : vous permet d'afficher ou de masquer certaines commandes et/ou d'en historiser
 * *Tester* : permet de tester la commande
 
 == Le groupe 0 (Toute les lampes)

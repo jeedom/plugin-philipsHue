@@ -6,7 +6,7 @@
     <icon>jeedom-lumiere-on</icon>
     <licence>AGPL</licence>
     <author>Thomas Martinez</author>
-    <installation>Lors de la première synchronisation, vous devez appuyer sur le bouton "LINK" du bridge avant de cliquer sur "Synchroniser avec le bridge"</installation>
+    <installation>Lors de la première synchronisation, vous devez appuyer sur le bouton "LINK" du bridge avant de cliquer sur "Sauvegarder"</installation>
     <require>1.10</require>
     <version>0.9</version>
     <category>communication</category>

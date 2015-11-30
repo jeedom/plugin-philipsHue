@@ -309,7 +309,9 @@ class philipsHue extends eqLogic {
 		$mBlue = $hRgb['blue'] / 255;
 		$fMax = max($mRed, $mGreen, $mBlue);
 		$fMin = min($mRed, $mGreen, $mBlue);
+
 		$fBri = ($fMax + $fMin) / 2;
+		//$fBri = 0.30 * $mRed + 0.59 * $mGreen + 0.11 * $mBlue;
 		$fDiff = $fMax - $fMin;
 		$fHue = 0;
 		if (0 == $fDiff) {

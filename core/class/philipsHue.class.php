@@ -234,9 +234,11 @@ class philipsHue extends eqLogic {
 				continue;
 			}
 			try {
+				$isReachable = true;
 				switch ($eqLogic->getConfiguration('category')) {
 					case 'light':
 						$obj = $lights[$eqLogic->getConfiguration('id')];
+						$isReachable = $obj->isReachable();
 						break;
 					case 'group':
 						$obj = $groups[$eqLogic->getConfiguration('id')];
@@ -244,7 +246,7 @@ class philipsHue extends eqLogic {
 					default:
 						return;
 				}
-				if (!$obj->isOn()) {
+				if (!$isReachable || !$obj->isOn()) {
 					$luminosity = 0;
 					$color = '#000000';
 				} else {
@@ -277,7 +279,7 @@ class philipsHue extends eqLogic {
 
 				$cmd = $eqLogic->getCmd(null, 'alert_state');
 				if (is_object($cmd)) {
-					$value = ($obj->getAlert() == "none") ? 0 : 1;
+					$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;
 					if ($value != $cmd->execCmd(null, 2)) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
@@ -286,7 +288,7 @@ class philipsHue extends eqLogic {
 
 				$cmd = $eqLogic->getCmd(null, 'rainbow_state');
 				if (is_object($cmd)) {
-					$value = ($obj->getEffect() == "none") ? 0 : 1;
+					$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
 					if ($value != $cmd->execCmd(null, 2)) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);

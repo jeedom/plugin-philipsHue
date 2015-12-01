@@ -96,43 +96,50 @@ class philipsHue extends eqLogic {
 		}
 	}
 
+	public function createUser() {
+		if (config::byKey('bridge_ip', 'philipsHue') == '') {
+			throw new Exception(__('L\'adresse du bridge ne peut etre vide', __FILE__));
+		}
+		$hue = new \Phue\Client(config::byKey('bridge_ip', 'philipsHue'));
+		try {
+			$hue->sendCommand(new \Phue\Command\Ping);
+		} catch (\Phue\Transport\Exception\ConnectionException $e) {
+			throw new Exception(__('Impossible de joindre le bridge', __FILE__));
+		}
+		if (class_exists('event')) {
+			event::add('jeedom::alert', array(
+				'level' => 'warning',
+				'message' => __('Veuillez appuyer sur le bouton du bridge', __FILE__),
+			));
+		} else {
+			nodejs::pushUpdate('jeedom::alert', array(
+				'level' => 'warning',
+				'message' => __('Veuillez appuyer sur le bouton du bridge', __FILE__),
+			));
+		}
+		for ($i = 1; $i <= 30; ++$i) {
+			try {
+				$hue->sendCommand(
+					new \Phue\Command\CreateUser('newdeveloper')
+				);
+				break;
+			} catch (\Phue\Transport\Exception\LinkButtonException $e) {
+
+			} catch (Exception $e) {
+				throw new Exception(__('Impossible de creer l\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ', __FILE__) . $e->getMessage());
+			}
+			sleep(1);
+		}
+		if (!$hue->sendCommand(new \Phue\Command\IsAuthorized)) {
+			throw new Exception(__('Impossible de creer l\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ', __FILE__) . $e->getMessage());
+		}
+	}
+
 	public static function syncBridge() {
 		try {
 			$hue = self::getPhilipsHue();
 		} catch (Exception $e) {
-			if (config::byKey('bridge_ip', 'philipsHue') == '') {
-				throw new Exception(__('L\'adresse du bridge ne peut etre vide', __FILE__));
-			}
-			$client = new \Phue\Client(config::byKey('bridge_ip', 'philipsHue'));
-			try {
-				$client->sendCommand(new \Phue\Command\Ping);
-			} catch (\Phue\Transport\Exception\ConnectionException $e) {
-				throw new Exception(__('Impossible de joindre le bridge', __FILE__));
-			}
-			if (class_exists('event')) {
-				event::add('jeedom::alert', array(
-					'level' => 'warning',
-					'message' => __('Veuillez appuyer sur le bouton du bridge', __FILE__),
-				));
-			} else {
-				nodejs::pushUpdate('jeedom::alert', array(
-					'level' => 'warning',
-					'message' => __('Veuillez appuyer sur le bouton du bridge', __FILE__),
-				));
-			}
-			for ($i = 1; $i <= 30; ++$i) {
-				try {
-					$hue->sendCommand(
-						new \Phue\Command\CreateUser('newdeveloper')
-					);
-					break;
-				} catch (\Phue\Transport\Exception\LinkButtonException $e) {
-
-				} catch (Exception $e) {
-					throw new Exception(__('Impossible de creer l\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ', __FILE__) . $e->getMessage());
-				}
-				sleep(1);
-			}
+			self::createUser();
 		}
 		try {
 			$hue->sendCommand(new \Phue\Command\Ping);
@@ -140,31 +147,7 @@ class philipsHue extends eqLogic {
 			throw new Exception(__('Impossible de joindre le bridge', __FILE__));
 		}
 		if (!$hue->sendCommand(new \Phue\Command\IsAuthorized)) {
-			if (class_exists('event')) {
-				event::add('jeedom::alert', array(
-					'level' => 'warning',
-					'message' => __('Veuillez appuyer sur le bouton du bridge', __FILE__),
-				));
-			} else {
-				nodejs::pushUpdate('jeedom::alert', array(
-					'level' => 'warning',
-					'message' => __('Veuillez appuyer sur le bouton du bridge', __FILE__),
-				));
-			}
-
-			for ($i = 1; $i <= 30; ++$i) {
-				try {
-					$hue->sendCommand(
-						new \Phue\Command\CreateUser('newdeveloper')
-					);
-					break;
-				} catch (\Phue\Transport\Exception\LinkButtonException $e) {
-
-				} catch (Exception $e) {
-					throw new Exception(__('Impossible de creer l\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ', __FILE__) . $e->getMessage());
-				}
-				sleep(1);
-			}
+			self::createUser();
 		}
 		if (!$hue->sendCommand(new \Phue\Command\IsAuthorized)) {
 			throw new Exception(__('Impossible de creer l\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ', __FILE__) . $e->getMessage());

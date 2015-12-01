@@ -19,6 +19,11 @@
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
 function philipsHue_install() {
+	try {
+		philipsHue::getPhilipsHue();
+	} catch (Exception $e) {
+
+	}
 	$cron = cron::byClassAndFunction('philipsHue', 'pull');
 	if (!is_object($cron)) {
 		$cron = new cron();

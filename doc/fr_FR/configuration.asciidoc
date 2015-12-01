@@ -1,6 +1,6 @@
 == Configuration du plugin
 
-Après téléchargement du plugin, il vous faudra renseigner l'adresse IP de votre pont hue : 
+Après téléchargement du plugin, il vous faudra renseigner l'adresse IP de votre pont hue, si ce n'est pas déja fait par le système de découverte automatique : 
 
 image::../images/philipshue.PNG[]
 

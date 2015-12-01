@@ -26,9 +26,30 @@ class philipsHue extends eqLogic {
 
 	/*     * ***********************Methode static*************************** */
 
+	public static function findBridgeIp() {
+		$response = @file_get_contents('http://www.meethue.com/api/nupnp');
+		if ($response === false) {
+			return false;
+		}
+		$bridges = json_decode($response);
+		if (isset($bridges[0])) {
+			return $bridges[0]->internalipaddress;
+		}
+		return false;
+	}
+
 	public static function getPhilipsHue() {
 		if (self::$_hue !== null) {
 			return self::$_hue;
+		}
+		if (config::byKey('bridge_ip', 'philipsHue') == '' || config::byKey('bridge_ip', 'philipsHue') == '-') {
+			$ip = self::findBridgeIp();
+			if ($ip !== false) {
+				config::save('bridge_ip', $ip, 'philipsHue');
+			}
+			if (config::byKey('bridge_ip', 'philipsHue') == '' || config::byKey('bridge_ip', 'philipsHue') == '-') {
+				throw new Exception(__('L\'adresse du bridge ne peut etre vide', __FILE__));
+			}
 		}
 		self::$_hue = new \Phue\Client(config::byKey('bridge_ip', 'philipsHue'), 'newdeveloper');
 		return self::$_hue;
@@ -76,23 +97,77 @@ class philipsHue extends eqLogic {
 	}
 
 	public static function syncBridge() {
-		if (config::byKey('bridge_ip', 'philipsHue') == '') {
-			throw new Exception(__('L\'adresse du bridge ne peut etre vide', __FILE__));
+		try {
+			$hue = self::getPhilipsHue();
+		} catch (Exception $e) {
+			if (config::byKey('bridge_ip', 'philipsHue') == '') {
+				throw new Exception(__('L\'adresse du bridge ne peut etre vide', __FILE__));
+			}
+			$client = new \Phue\Client(config::byKey('bridge_ip', 'philipsHue'));
+			try {
+				$client->sendCommand(new \Phue\Command\Ping);
+			} catch (\Phue\Transport\Exception\ConnectionException $e) {
+				throw new Exception(__('Impossible de joindre le bridge', __FILE__));
+			}
+			if (class_exists('event')) {
+				event::add('jeedom::alert', array(
+					'level' => 'warning',
+					'message' => __('Veuillez appuyer sur le bouton du bridge', __FILE__),
+				));
+			} else {
+				nodejs::pushUpdate('jeedom::alert', array(
+					'level' => 'warning',
+					'message' => __('Veuillez appuyer sur le bouton du bridge', __FILE__),
+				));
+			}
+			for ($i = 1; $i <= 30; ++$i) {
+				try {
+					$hue->sendCommand(
+						new \Phue\Command\CreateUser('newdeveloper')
+					);
+					break;
+				} catch (\Phue\Transport\Exception\LinkButtonException $e) {
+
+				} catch (Exception $e) {
+					throw new Exception(__('Impossible de creer l\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ', __FILE__) . $e->getMessage());
+				}
+				sleep(1);
+			}
 		}
-		$hue = self::getPhilipsHue();
 		try {
 			$hue->sendCommand(new \Phue\Command\Ping);
 		} catch (\Phue\Transport\Exception\ConnectionException $e) {
 			throw new Exception(__('Impossible de joindre le bridge', __FILE__));
 		}
 		if (!$hue->sendCommand(new \Phue\Command\IsAuthorized)) {
-			try {
-				$hue->sendCommand(
-					new \Phue\Command\CreateUser('newdeveloper')
-				);
-			} catch (\Phue\Transport\Exception\LinkButtonException $e) {
-				throw new Exception(__('Veuillez appuyer sur le bouton du bridge pour autoriser la connexion', __FILE__));
+			if (class_exists('event')) {
+				event::add('jeedom::alert', array(
+					'level' => 'warning',
+					'message' => __('Veuillez appuyer sur le bouton du bridge', __FILE__),
+				));
+			} else {
+				nodejs::pushUpdate('jeedom::alert', array(
+					'level' => 'warning',
+					'message' => __('Veuillez appuyer sur le bouton du bridge', __FILE__),
+				));
 			}
+
+			for ($i = 1; $i <= 30; ++$i) {
+				try {
+					$hue->sendCommand(
+						new \Phue\Command\CreateUser('newdeveloper')
+					);
+					break;
+				} catch (\Phue\Transport\Exception\LinkButtonException $e) {
+
+				} catch (Exception $e) {
+					throw new Exception(__('Impossible de creer l\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ', __FILE__) . $e->getMessage());
+				}
+				sleep(1);
+			}
+		}
+		if (!$hue->sendCommand(new \Phue\Command\IsAuthorized)) {
+			throw new Exception(__('Impossible de creer l\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ', __FILE__) . $e->getMessage());
 		}
 		self::syncGroup();
 		$lights_exist = array();
@@ -157,7 +232,12 @@ class philipsHue extends eqLogic {
 	}
 
 	public static function pull($_eqLogic_id = null) {
-		$hue = philipsHue::getPhilipsHue();
+		try {
+			$hue = philipsHue::getPhilipsHue();
+		} catch (Exception $e) {
+			return;
+		}
+
 		$groups = $hue->getgroups();
 		$lights = $hue->getLights();
 		foreach (eqLogic::byType('philipsHue') as $eqLogic) {

@@ -51,7 +51,7 @@ class philipsHue extends eqLogic {
 				throw new Exception(__('L\'adresse du bridge ne peut etre vide', __FILE__));
 			}
 		}
-		self::$_hue = new \Phue\Client(config::byKey('bridge_ip', 'philipsHue'), 'newdeveloper');
+		self::$_hue = new \Phue\Client(config::byKey('bridge_ip', 'philipsHue'), config::byKey('bridge_username', 'philipsHue', 'newdeveloper'));
 		return self::$_hue;
 	}
 
@@ -119,9 +119,10 @@ class philipsHue extends eqLogic {
 		}
 		for ($i = 1; $i <= 30; ++$i) {
 			try {
-				$hue->sendCommand(
-					new \Phue\Command\CreateUser('newdeveloper')
+				$response = $client->sendCommand(
+					new \Phue\Command\CreateUser
 				);
+				config::save('bridge_username', $response->username, 'philipsHue');
 				break;
 			} catch (\Phue\Transport\Exception\LinkButtonException $e) {
 

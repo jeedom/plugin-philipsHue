@@ -150,6 +150,7 @@ class philipsHue extends eqLogic {
 		if (!$hue->sendCommand(new \Phue\Command\IsAuthorized)) {
 			self::createUser();
 		}
+		self::$_hue = null;
 		$hue = self::getPhilipsHue();
 		if (!$hue->sendCommand(new \Phue\Command\IsAuthorized)) {
 			throw new Exception(__('Impossible de creer l\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ', __FILE__) . $e->getMessage());

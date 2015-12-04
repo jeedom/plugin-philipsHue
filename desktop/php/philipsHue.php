@@ -25,7 +25,7 @@ foreach ($eqLogics as $eqLogic) {
    <legend>{{Mes Philips Hue}}
    </legend>
    <div class="eqLogicThumbnailContainer">
-   <?php
+     <?php
 foreach ($eqLogics as $eqLogic) {
 	$opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
 	echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
@@ -36,9 +36,9 @@ foreach ($eqLogics as $eqLogic) {
 	echo '</div>';
 }
 ?>
+   </div>
  </div>
-</div>
-<div class="col-lg-10 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
+ <div class="col-lg-10 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
   <div class="row">
     <div class="col-sm-6">
       <form class="form-horizontal">
@@ -82,52 +82,59 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
           <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Activer}}" data-l1key="isEnable" checked/>
           <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>
         </div>
-      </fieldset>
-    </form>
-  </div>
-  <div class="col-sm-6">
-    <form class="form-horizontal">
-      <fieldset>
-        <legend>{{Informations}}</legend>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">{{Catégorie}}</label>
-          <div class="col-sm-2">
-            <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="category" style="font-size : 1em"></span>
-          </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">{{Type}}</label>
+        <label class="col-sm-4 control-label">{{Toujours allumé}}</label>
           <div class="col-sm-2">
-            <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="type" style="font-size : 1em"></span>
-          </div>
+           <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-l1key="configuration" data-l2key="alwaysOn"/>
+         </div>
+       </div>
+     </fieldset>
+   </form>
+ </div>
+ <div class="col-sm-6">
+  <form class="form-horizontal">
+    <fieldset>
+      <legend>{{Informations}}</legend>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{{Catégorie}}</label>
+        <div class="col-sm-2">
+          <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="category" style="font-size : 1em"></span>
         </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">{{ID}}</label>
-          <div class="col-sm-2">
-            <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="id" style="font-size : 1em"></span>
-          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{{Type}}</label>
+        <div class="col-sm-2">
+          <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="type" style="font-size : 1em"></span>
         </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">{{Model}}</label>
-          <div class="col-sm-2">
-            <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="model" style="font-size : 1em"></span>
-          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{{ID}}</label>
+        <div class="col-sm-2">
+          <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="id" style="font-size : 1em"></span>
         </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">{{Non model}}</label>
-          <div class="col-sm-2">
-            <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="modelName" style="font-size : 1em"></span>
-          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{{Model}}</label>
+        <div class="col-sm-2">
+          <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="model" style="font-size : 1em"></span>
         </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">{{Version du logiciel}}</label>
-          <div class="col-sm-2">
-            <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="softwareVersion" style="font-size : 1em"></span>
-          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{{Non model}}</label>
+        <div class="col-sm-2">
+          <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="modelName" style="font-size : 1em"></span>
         </div>
-      </fieldset>
-    </form>
-  </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{{Version du logiciel}}</label>
+        <div class="col-sm-2">
+          <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="softwareVersion" style="font-size : 1em"></span>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
 </div>
 
 <legend>Commandes</legend>

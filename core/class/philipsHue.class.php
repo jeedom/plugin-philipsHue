@@ -741,12 +741,12 @@ class philipsHueCmd extends cmd {
 					$command->alert('none');
 					$command->on(false);
 				} else {
-					$command->brightness($_options['slider']);
 					$state = $eqLogic->getCmd(null, 'luminosity_state');
 					if (is_object($state) && $state->execCmd(null, 2) == 0) {
 						$command->saturation(0);
 						$command->hue(0);
 					}
+					$command->brightness($_options['slider']);
 				}
 				break;
 			case 'color':

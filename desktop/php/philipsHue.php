@@ -10,8 +10,6 @@ sendVarToJS('eqType', 'philipsHue');
   <div class="col-lg-2 col-md-3 col-sm-4">
     <div class="bs-sidebar">
       <ul id="ul_eqLogic" class="nav nav-list bs-sidenav">
-        <a class="btn btn-default eqLogicAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter un équipement}}</a>
-        <a class="btn btn-default eqLogicAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" id="bt_manageGroups"><i class="fa fa-bulb"></i> {{Gestion des groupes}}</a>
         <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
         <?php
 foreach ($eqLogics as $eqLogic) {

@@ -707,6 +707,9 @@ class philipsHueCmd extends cmd {
 				$transition->event(0);
 			}
 		}
+		if ($transistion_time == 0) {
+			$transistion_time = 1;
+		}
 		$hue = philipsHue::getPhilipsHue();
 		switch ($eqLogic->getConfiguration('category')) {
 			case 'light':

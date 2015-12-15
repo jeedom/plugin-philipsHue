@@ -11,5 +11,6 @@
     <version>0.9</version>
     <category>communication</category>
     <include type="php">philipsHue.inc</include>
+    <hasOwnDeamon>1</hasOwnDeamon>
 </info>
 

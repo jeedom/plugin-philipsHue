@@ -46,21 +46,26 @@ class philipsHue extends eqLogic {
 		}
 		$cron = cron::byClassAndFunction('philipsHue', 'pull');
 		if (!is_object($cron)) {
-			throw new Exception(__('Tache cron introuvable', __FILE__));
+			throw new Exception(__('Tâche cron introuvable', __FILE__));
 		}
-		$cron->setEnable(1);
-		$cron->save();
 		$cron->run();
 	}
 
 	public static function deamon_stop() {
 		$cron = cron::byClassAndFunction('philipsHue', 'pull');
 		if (!is_object($cron)) {
-			throw new Exception(__('Tache cron introuvable', __FILE__));
+			throw new Exception(__('Tâche cron introuvable', __FILE__));
 		}
-		$cron->setEnable(0);
-		$cron->save();
 		$cron->halt();
+	}
+
+	public static function deamon_changeAutoMode($_mode) {
+		$cron = cron::byClassAndFunction('philipsHue', 'pull');
+		if (!is_object($cron)) {
+			throw new Exception(__('Tâche cron introuvable', __FILE__));
+		}
+		$cron->setEnable($_mode);
+		$cron->save();
 	}
 
 	public static function findBridgeIp() {

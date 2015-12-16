@@ -3,7 +3,3 @@
 Plugin pour commander les lampes Philips Hue.
 
 include::configuration.asciidoc[]
-
-'''
-== FAQ
-include::faq.asciidoc[]

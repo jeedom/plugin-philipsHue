@@ -301,9 +301,12 @@ class philipsHue extends eqLogic {
 					$color = array(
 						'hue' => $obj->getHue(),
 						'sat' => $obj->getSaturation(),
-						'bri' => $obj->getBrightness(),
+						'bri' => $luminosity,
 					);
 					$color = '#' . philipsHue::rgb2hex(philipsHue::hsb2rgb($color));
+					if ($color == '#000000') {
+						$luminosity = 0;
+					}
 				}
 
 				$cmd = $eqLogic->getCmd(null, 'luminosity_state');

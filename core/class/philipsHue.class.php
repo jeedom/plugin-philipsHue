@@ -718,17 +718,15 @@ class philipsHueCmd extends cmd {
 		switch ($eqLogic->getConfiguration('category')) {
 			case 'light':
 				$command = new \Phue\Command\SetLightState($eqLogic->getConfiguration('id'));
-				$command->transitionTime($transistion_time);
-				$command->on(true);
 				break;
 			case 'group':
 				$command = new \Phue\Command\SetGroupState($eqLogic->getConfiguration('id', 0));
-				$command->transitionTime($transistion_time);
-				$command->on(true);
 				break;
 			default:
 				return;
 		}
+		$command->transitionTime($transistion_time);
+		$command->on(true);
 		switch ($this->getLogicalId()) {
 			case 'on':
 
@@ -748,11 +746,7 @@ class philipsHueCmd extends cmd {
 					$command->alert('none');
 					$command->on(false);
 				} else {
-					$state = $eqLogic->getCmd(null, 'luminosity_state');
-					if (is_object($state) && $state->execCmd(null, 2) == 0) {
-						$command->saturation(0);
-						$command->hue(0);
-					}
+					$luminosity_state = $eqLogic->getCmd(null, 'luminosity_state');
 					$command->brightness($_options['slider']);
 				}
 				break;

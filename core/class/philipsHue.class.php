@@ -760,7 +760,7 @@ class philipsHueCmd extends cmd {
 				} else {
 					$parameter = philipsHue::setHexCode2($_options['color']);
 					$command->xy($parameter['x'], $parameter['y']);
-					$command->brightness($parameter['bri'] * 255);
+					//$command->brightness($parameter['bri'] * 255);
 				}
 				break;
 			case 'alert_on':

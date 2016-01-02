@@ -519,7 +519,7 @@ class philipsHue extends eqLogic {
 		$cmd->save();
 
 		$alert_id = null;
-		if ($this->getLogicalId() != 'group0') {
+		if ($this->getConfiguration('category') != 'group') {
 			$cmd = $this->getCmd(null, 'alert_state');
 			if (!is_object($cmd)) {
 				$cmd = new philipsHueCmd();
@@ -533,6 +533,11 @@ class philipsHue extends eqLogic {
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->save();
 			$alert_id = $cmd->getId();
+		} else {
+			$cmd = $this->getCmd(null, 'alert_state');
+			if (is_object($cmd)) {
+				$cmd->remove();
+			}
 		}
 
 		$cmd = $this->getCmd(null, 'alert_on');
@@ -650,9 +655,6 @@ class philipsHue extends eqLogic {
 		if ($this->getLogicalId() == 'group0') {
 			$scenes_id = array();
 			foreach (self::getPhilipsHue()->getScenes() as $scene) {
-				if (!$scene->isActive()) {
-					continue;
-				}
 				$scenes_id[$scene->getId()] = $scene->getId();
 				$name = $scene->getName();
 				$name = trim(substr($name, 0, -13));

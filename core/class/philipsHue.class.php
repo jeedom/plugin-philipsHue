@@ -657,7 +657,6 @@ class philipsHue extends eqLogic {
 			foreach (self::getPhilipsHue()->getScenes() as $scene) {
 				$scenes_id[$scene->getId()] = $scene->getId();
 				$name = $scene->getName();
-				$name = trim(substr($name, 0, -13));
 				if ($name == '') {
 					continue;
 				}

@@ -11,11 +11,11 @@ Après chaque modification pensez bien à sauvegarder. Lors de la sauvegarde Jee
 
 == Configuration des équipements
 
-La configuration des équipements openvpn est accessible à partir du menu plugin : 
+La configuration des équipements Philips Hue est accessible à partir du menu plugin : 
 
 image::../images/philipshue2.PNG[]
 
-Voilà à quoi ressemble la page du plugin Openvpn (ici avec déjà 4 équipements) : 
+Voilà à quoi ressemble la page du plugin Philips Hue (ici avec déjà 4 équipements) : 
 
 image::../images/philipshue3.PNG[]
 
@@ -31,7 +31,7 @@ image::../images/philipshue4.PNG[]
 
 Vous retrouvez ici toute la configuration de votre équipement : 
 
-* *Nom de l'équipement Openvpn* : nom de votre équipement Openvpn,
+* *Nom de l'équipement Hue* : nom de votre équipement Hue,
 * *Objet parent* : indique l'objet parent auquel appartient l'équipement,
 * *Catégorie* : les catégories de l'équipement (il peut appartenir à plusieurs catégories),
 * *Activer* : permet de rendre votre équipement actif,

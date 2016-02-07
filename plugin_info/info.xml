@@ -7,8 +7,7 @@
     <licence>AGPL</licence>
     <author>Thomas Martinez</author>
     <installation>Lors de la première synchronisation, vous devez appuyer sur le bouton "LINK" du bridge avant de cliquer sur "Sauvegarder"</installation>
-    <require>1.10</require>
-    <version>0.9</version>
+    <require>2.0</require>
     <category>communication</category>
     <include type="php">philipsHue.inc</include>
     <hasOwnDeamon>1</hasOwnDeamon>

@@ -648,6 +648,7 @@ class philipsHue extends eqLogic {
 		}
 		$cmd->setType('info');
 		$cmd->setSubType('numeric');
+		$cmd->setEventOnly(1);
 		$cmd->setIsVisible(0);
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();

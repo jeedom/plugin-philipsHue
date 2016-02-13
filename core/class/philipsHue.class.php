@@ -307,7 +307,7 @@ class philipsHue extends eqLogic {
 				$cmd = $eqLogic->getCmd(null, 'luminosity_state');
 				if (is_object($cmd)) {
 					$value = $cmd->formatValue($luminosity);
-					if ($value != $cmd->execCmd(null, 2)) {
+					if ($value != $cmd->execCmd()) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
 					}
@@ -316,7 +316,7 @@ class philipsHue extends eqLogic {
 				$cmd = $eqLogic->getCmd(null, 'color_state');
 				if (is_object($cmd)) {
 					$value = $cmd->formatValue($color);
-					if ($value != $cmd->execCmd(null, 2)) {
+					if ($value != $cmd->execCmd()) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
 					}
@@ -325,7 +325,7 @@ class philipsHue extends eqLogic {
 				$cmd = $eqLogic->getCmd(null, 'alert_state');
 				if (is_object($cmd)) {
 					$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;
-					if ($value != $cmd->execCmd(null, 2)) {
+					if ($value != $cmd->execCmd()) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
 					}
@@ -334,7 +334,7 @@ class philipsHue extends eqLogic {
 				$cmd = $eqLogic->getCmd(null, 'rainbow_state');
 				if (is_object($cmd)) {
 					$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
-					if ($value != $cmd->execCmd(null, 2)) {
+					if ($value != $cmd->execCmd()) {
 						$cmd->setCollectDate('');
 						$cmd->event($value);
 					}

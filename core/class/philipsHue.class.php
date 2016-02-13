@@ -440,7 +440,6 @@ class philipsHue extends eqLogic {
 			}
 			$cmd->setType('info');
 			$cmd->setSubType('numeric');
-			$cmd->setEventOnly(1);
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->save();
 			$luminosity_id = $cmd->getId();
@@ -499,7 +498,6 @@ class philipsHue extends eqLogic {
 			}
 			$cmd->setType('info');
 			$cmd->setSubType('string');
-			$cmd->setEventOnly(1);
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->save();
 			$color_id = $cmd->getId();
@@ -529,7 +527,6 @@ class philipsHue extends eqLogic {
 			}
 			$cmd->setType('info');
 			$cmd->setSubType('binary');
-			$cmd->setEventOnly(1);
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->save();
 			$alert_id = $cmd->getId();
@@ -579,7 +576,6 @@ class philipsHue extends eqLogic {
 				}
 				$cmd->setType('info');
 				$cmd->setSubType('binary');
-				$cmd->setEventOnly(1);
 				$cmd->setEqLogic_id($this->getId());
 				$cmd->save();
 				$rainbow_id = $this->getId();
@@ -648,7 +644,6 @@ class philipsHue extends eqLogic {
 		}
 		$cmd->setType('info');
 		$cmd->setSubType('numeric');
-		$cmd->setEventOnly(1);
 		$cmd->setIsVisible(0);
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();

@@ -441,6 +441,7 @@ class philipsHue extends eqLogic {
 			$cmd->setType('info');
 			$cmd->setSubType('numeric');
 			$cmd->setEqLogic_id($this->getId());
+			$cmd->setDisplay('generic_type', 'LIGHT_STATE');
 			$cmd->save();
 			$luminosity_id = $cmd->getId();
 		}
@@ -454,6 +455,7 @@ class philipsHue extends eqLogic {
 		}
 		$cmd->setType('action');
 		$cmd->setSubType('other');
+		$cmd->setDisplay('generic_type', 'LIGHT_ON');
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();
 
@@ -466,6 +468,7 @@ class philipsHue extends eqLogic {
 		}
 		$cmd->setType('action');
 		$cmd->setSubType('other');
+		$cmd->setDisplay('generic_type', 'LIGHT_OFF');
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->save();
 
@@ -484,6 +487,7 @@ class philipsHue extends eqLogic {
 		$cmd->setConfiguration('minValue', '0');
 		$cmd->setConfiguration('maxValue', '255');
 		$cmd->setEqLogic_id($this->getId());
+		$cmd->setDisplay('generic_type', 'LIGHT_SLIDER');
 		$cmd->setValue($luminosity_id);
 		$cmd->save();
 
@@ -498,6 +502,7 @@ class philipsHue extends eqLogic {
 			}
 			$cmd->setType('info');
 			$cmd->setSubType('string');
+			$cmd->setDisplay('generic_type', 'LIGHT_COLOR');
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->save();
 			$color_id = $cmd->getId();
@@ -512,6 +517,7 @@ class philipsHue extends eqLogic {
 		}
 		$cmd->setType('action');
 		$cmd->setSubType('color');
+		$cmd->setDisplay('generic_type', 'LIGHT_SET_COLOR');
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->setValue($color_id);
 		$cmd->save();
@@ -528,6 +534,7 @@ class philipsHue extends eqLogic {
 			$cmd->setType('info');
 			$cmd->setSubType('binary');
 			$cmd->setEqLogic_id($this->getId());
+			$cmd->setDisplay('generic_type', 'LIGHT_MODE');
 			$cmd->save();
 			$alert_id = $cmd->getId();
 		} else {
@@ -546,6 +553,7 @@ class philipsHue extends eqLogic {
 		}
 		$cmd->setType('action');
 		$cmd->setSubType('other');
+		$cmd->setDisplay('generic_type', 'LIGHT_MODE');
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->setValue($alert_id);
 		$cmd->save();
@@ -591,6 +599,7 @@ class philipsHue extends eqLogic {
 			$cmd->setType('action');
 			$cmd->setSubType('other');
 			$cmd->setEqLogic_id($this->getId());
+			$cmd->setDisplay('generic_type', 'LIGHT_MODE');
 			$cmd->setValue($rainbow_id);
 			$cmd->save();
 
@@ -604,6 +613,7 @@ class philipsHue extends eqLogic {
 			$cmd->setType('action');
 			$cmd->setSubType('other');
 			$cmd->setEqLogic_id($this->getId());
+			$cmd->setDisplay('generic_type', 'LIGHT_MODE');
 			$cmd->setValue($rainbow_id);
 			$cmd->save();
 

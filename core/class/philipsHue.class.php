@@ -534,7 +534,6 @@ class philipsHue extends eqLogic {
 			$cmd->setType('info');
 			$cmd->setSubType('binary');
 			$cmd->setEqLogic_id($this->getId());
-			$cmd->setDisplay('generic_type', 'LIGHT_MODE');
 			$cmd->save();
 			$alert_id = $cmd->getId();
 		} else {

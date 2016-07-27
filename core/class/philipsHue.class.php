@@ -528,13 +528,13 @@ class philipsHue extends eqLogic {
 			if (!is_object($cmd)) {
 				$cmd = new philipsHueCmd();
 				$cmd->setLogicalId('alert_state');
-				$cmd->setDisplay('generic_type', 'DONT');
 				$cmd->setName(__('Etat Alerte', __FILE__));
 				$cmd->setIsVisible(0);
 			}
 			$cmd->setType('info');
 			$cmd->setSubType('binary');
 			$cmd->setEqLogic_id($this->getId());
+			$cmd->setDisplay('generic_type', 'DONT');
 			$cmd->save();
 			$alert_id = $cmd->getId();
 		} else {

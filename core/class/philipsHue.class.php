@@ -528,6 +528,7 @@ class philipsHue extends eqLogic {
 			if (!is_object($cmd)) {
 				$cmd = new philipsHueCmd();
 				$cmd->setLogicalId('alert_state');
+				$cmd->setDisplay('generic_type', 'DONT');
 				$cmd->setName(__('Etat Alerte', __FILE__));
 				$cmd->setIsVisible(0);
 			}
@@ -567,6 +568,7 @@ class philipsHue extends eqLogic {
 		$cmd->setType('action');
 		$cmd->setSubType('other');
 		$cmd->setEqLogic_id($this->getId());
+		$cmd->setDisplay('generic_type', 'LIGHT_MODE');
 		$cmd->setValue($alert_id);
 		$cmd->save();
 
@@ -583,6 +585,7 @@ class philipsHue extends eqLogic {
 				}
 				$cmd->setType('info');
 				$cmd->setSubType('binary');
+				$cmd->setDisplay('generic_type', 'DONT');
 				$cmd->setEqLogic_id($this->getId());
 				$cmd->save();
 				$rainbow_id = $this->getId();
@@ -643,6 +646,7 @@ class philipsHue extends eqLogic {
 		$cmd->setEqLogic_id($this->getId());
 		$cmd->setConfiguration('minValue', '0');
 		$cmd->setConfiguration('maxValue', '1800');
+		$cmd->setDisplay('generic_type', 'DONT');
 		$cmd->save();
 
 		$cmd = $this->getCmd(null, 'transition_state');
@@ -655,6 +659,7 @@ class philipsHue extends eqLogic {
 		$cmd->setSubType('numeric');
 		$cmd->setIsVisible(0);
 		$cmd->setEqLogic_id($this->getId());
+		$cmd->setDisplay('generic_type', 'DONT');
 		$cmd->save();
 
 		if ($this->getLogicalId() == 'group0') {

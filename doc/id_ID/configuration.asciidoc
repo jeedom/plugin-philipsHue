@@ -1,0 +1,63 @@
+== Configuration du plugin
+
+Après téléchargement du plugin, il vous faudra renseigner l'adresse IP de votre pont hue, si ce n'est pas déja fait par le système de découverte automatique : 
+
+image::../images/philipshue.PNG[]
+
+Vous pourrez aussi ici creer des groupes de lampe pour cela en face d'un groupe il vous faut mettre les id des lampes séparé par des virgules. Ex dans Groupe 1 si vous voulez faire un groupe avec les lampes 1 et 3, il vous faut mettre "1,3". Pour vider un groupe mettez dedans "-".
+
+[IMPORTANT]
+Après chaque modification pensez bien à sauvegarder. Lors de la sauvegarde Jeedom va automatiquement se synchroniser avec le pont et creer/supprimer/modifier les groupes de lampe 
+
+== Configuration des équipements
+
+La configuration des équipements Philips Hue est accessible à partir du menu plugin : 
+
+image::../images/philipshue2.PNG[]
+
+Voilà à quoi ressemble la page du plugin Philips Hue (ici avec déjà 4 équipements) : 
+
+image::../images/philipshue3.PNG[]
+
+[TIP]
+Comme à beaucoup d'endroits sur Jeedom, placer la souris tout à gauche permet de faire apparaître un menu d'accès rapide (vous pouvez, à partir de votre profil, le laisser toujours visible).
+
+[NOTE]
+Vous aurez toujours un équipement "Toutes les lampes" qui correspond en faite au groupe 0 qui existe tout le temps
+
+Une fois que vous cliquez sur l'un d'eux, vous obtenez : 
+
+image::../images/philipshue4.PNG[]
+
+Vous retrouvez ici toute la configuration de votre équipement : 
+
+* *Nom de l'équipement Hue* : nom de votre équipement Hue,
+* *Objet parent* : indique l'objet parent auquel appartient l'équipement,
+* *Catégorie* : les catégories de l'équipement (il peut appartenir à plusieurs catégories),
+* *Activer* : permet de rendre votre équipement actif,
+* *Visible* : rend votre équipement visible sur le dashboard,
+
+[TIP]
+A droite vous avez des informations sur l'éclairage en question, vous retrouvez par exemple l'id de l'éclairage (utilisé pour la définition des groupes).
+
+[NOTE]
+Pour les groupes il y a nettement moins d'informations, c'est tout à fait normal
+
+En-dessous vous retrouvez la liste des commandes : 
+
+* *Nom* : le nom affiché sur le dashboard,
+* *Configuration avancé* : permet d'afficher la fenetre de configuration avancée de la commande,
+* *Options* : vous permet d'afficher ou de masquer certaines commandes et/ou d'en historiser
+* *Tester* : permet de tester la commande
+
+== Le groupe 0 (Toute les lampes)
+
+Le groupe 0 est un peu particulier car il ne peut être supprimé ou modifié, il pilote forcement toute les lampes et c'est aussi lui qui porte les scénes.
+
+En effet vous pouvez faire des "scenes" sur les Philips Hue. Celle-ci doivent absolument être faite à partir de l'application mobile (impossible de les faire dans Jeedom). Et suite à l'ajout d'une scene vous devez absolument synchroniser Jeedom avec le bon (en resauvegardant simple la configuration du plugin)
+
+== Tansition
+
+Commande un peu particulier qui doit être utilisée dans un scénario, elle permet de dire la transistion entre l'état actuel et la prochaine commande doit durée X secondes.
+
+Par exemple le matin vous pouvez vouloir simuler le levé du soleil en 3 minutes. Dans votre scénario vous avez donc juste à appeller la commande transition et en parametre mettre 180, ensuite appeller la commande couleur vers la couleur voulu.

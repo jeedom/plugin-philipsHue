@@ -4,37 +4,61 @@
         "Lors de la première synchronisation, vous devez appuyer sur le bouton \"LINK\" du bridge avant de cliquer sur \"Synchroniser avec le bridge\"": "Lors de la première synchronisation, vous devez appuyer sur le bouton \"LINK\" du bridge avant de cliquer sur \"Synchroniser avec le bridge\""
     },
     "plugins/philipsHue/desktop/php/philipsHue.php": {
-        "Ajouter un équipement": "Ajouter un équipement",
+        "Ajouter un équipement": "Aggiungi dispositivo",
         "Gestion des groupes": "Gestion des groupes",
         "Rechercher": "Cerca",
         "Mes Philips Hue": "Mes Philips Hue",
-        "Général": "Generale",
+        "Général": "Principale",
         "Nom de l'équipement philipsHue": "Nom de l'équipement philipsHue",
-        "Objet parent": "Objet parent",
+        "Objet parent": "Oggetto padre",
         "Aucun": "Nessuno",
         "Catégorie": "Categoria",
-        "Activer": "Attiva",
+        "Activer": "Attivare",
         "Visible": "Visibile",
-        "Adresse IP": "Adresse IP",
+        "Adresse IP": "Indirizzo IP",
         "Synchroniser avec le Bridge": "Synchroniser avec le Bridge",
         "Device": "Device",
         " Ajouter une commande philipsHue": "Ajouter une commande philipsHue",
         "Nom": "Nome",
-        "Type": "Type",
-        "Parametre(s)": "Parametre(s)",
+        "Type": "Tipo",
+        "Parametre(s)": "Parametro(i)",
         "Supprimer": "Elimina",
-        "Sauvegarder": "Salva"
+        "Sauvegarder": "Salva",
+        "Nom de l'équipement Philips Hue": "Nom de l'équipement Philips Hue",
+        "Informations": "Informazioni",
+        "Model": "Model",
+        "Version du logiciel": "Version du logiciel",
+        "Action": "Azione"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "Gestion des groupes",
-        "Parametres (JSON)": "Parametres (JSON)",
-        "Tester": "Tester"
+        "Parametres (JSON)": "Parametri (JSON)",
+        "Tester": "Prova",
+        "Nom": "Nome"
     },
-    "plugins/philipsHue/desktop/modal/manage.groups.php": {
-        "Ajouter un groupe": "Ajouter un groupe",
-        "ID GROUPE": "ID GROUPE",
-        "NOM": "NOM",
-        "LAMPES": "LAMPES",
-        "ACTION": "ACTION"
+    "plugins/philipsHue/core/class/philipsHue.class.php": {
+        "On": "On",
+        "Off": "Off",
+        "Etat On Off": "Stato On Off",
+        "Luminosité": "Luminosité",
+        "Etat Luminosité": "Etat Luminosité",
+        "Saturation": "Saturation",
+        "Etat Saturation": "Etat Saturation",
+        "Couleur": "Colore",
+        "Etat Couleur": "Etat Couleur",
+        "Alerte On": "Alerte On",
+        "Alerte Off": "Alerte Off",
+        "Etat Alerte": "Etat Alerte",
+        "Arc en ciel On": "Arc en ciel On",
+        "Arc en ciel Off": "Arc en ciel Off",
+        "Etat Arc en ciel": "Etat Arc en ciel",
+        "Rafraîchir": "Aggiorna"
+    },
+    "plugins/philipsHue/plugin_info/configuration.php": {
+        "IP du bridge": "IP du bridge",
+        "Synchronisation réussie": "Sincronizzazione avvenuta con successo",
+        "Découverte": "Découverte",
+        "Rechercher les équipements Sonos": "Rechercher les équipements Sonos",
+        "Synchroniser": "Sincronizza"
     }
 }

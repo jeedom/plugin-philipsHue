@@ -23,18 +23,42 @@
         "Type": "Typ",
         "Parametre(s)": "Parameter()",
         "Supprimer": "Löschen",
-        "Sauvegarder": "Speichern"
+        "Sauvegarder": "Speichern",
+        "Nom de l'équipement Philips Hue": "Nom de l'équipement Philips Hue",
+        "Informations": "Information",
+        "Model": "Model",
+        "Version du logiciel": "Version du logiciel",
+        "Action": "Aktion"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "Verwalten von Gruppen",
         "Parametres (JSON)": "Parameter (JSON)",
-        "Tester": "Test"
+        "Tester": "Test",
+        "Nom": "Name"
     },
-    "plugins/philipsHue/desktop/modal/manage.groups.php": {
-        "Ajouter un groupe": "Gruppe hinzufügen",
-        "ID GROUPE": "Gruppen ID",
-        "NOM": "Name",
-        "LAMPES": "LAMPEN",
-        "ACTION": "AKTION"
+    "plugins/philipsHue/core/class/philipsHue.class.php": {
+        "On": "An",
+        "Off": "Aus",
+        "Etat On Off": "An Aus Status",
+        "Luminosité": "Helligkeit",
+        "Etat Luminosité": "zustand Helligkeit",
+        "Saturation": "Farbsättigung",
+        "Etat Saturation": "zustand Farbsättigung",
+        "Couleur": "Farbe",
+        "Etat Couleur": "Farbzustand",
+        "Alerte On": "Alarm an",
+        "Alerte Off": "Alarm aus",
+        "Etat Alerte": "zustand Alarm",
+        "Arc en ciel On": "Regenbogen an",
+        "Arc en ciel Off": "Regenbogen aus",
+        "Etat Arc en ciel": "zustand Regenbogen",
+        "Rafraîchir": "Aktualisieren"
+    },
+    "plugins/philipsHue/plugin_info/configuration.php": {
+        "IP du bridge": "IP du bridge",
+        "Synchronisation réussie": "erfolgreiche Synchronisation",
+        "Découverte": "Entdeckung",
+        "Rechercher les équipements Sonos": "Suche nach Sonos Geräte",
+        "Synchroniser": "Synchronisieren"
     }
 }

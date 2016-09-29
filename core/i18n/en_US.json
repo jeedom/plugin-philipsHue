@@ -7,15 +7,15 @@
         "Ajouter un équipement": "Add device",
         "Gestion des groupes": "Groups management",
         "Rechercher": "Search",
-        "Mes Philips Hue": "Mes Philips Hue",
+        "Mes Philips Hue": "My Philips Hue",
         "Général": "Main",
         "Nom de l'équipement philipsHue": "Name of Philips Hue device",
         "Objet parent": "Parent object",
         "Aucun": "None",
         "Catégorie": "Category",
-        "Activer": "Enabled",
+        "Activer": "Activate",
         "Visible": "Visible",
-        "Adresse IP": "IP Address",
+        "Adresse IP": "IP address",
         "Synchroniser avec le Bridge": "Synchronize with Bridge",
         "Device": "Device",
         " Ajouter une commande philipsHue": "Add Philips Hue command",
@@ -23,18 +23,42 @@
         "Type": "Type",
         "Parametre(s)": "Parameter(s)",
         "Supprimer": "Delete",
-        "Sauvegarder": "Save"
+        "Sauvegarder": "Save",
+        "Nom de l'équipement Philips Hue": "Nom de l'équipement Philips Hue",
+        "Informations": "Information",
+        "Model": "Model",
+        "Version du logiciel": "Version du logiciel",
+        "Action": "Action"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "Groups management",
         "Parametres (JSON)": "Parameters (JSON)",
-        "Tester": "Test"
+        "Tester": "Test",
+        "Nom": "Name"
     },
-    "plugins/philipsHue/desktop/modal/manage.groups.php": {
-        "Ajouter un groupe": "Add a group",
-        "ID GROUPE": "GROUP ID",
-        "NOM": "NAME",
-        "LAMPES": "LIGHTS",
-        "ACTION": "ACTION"
+    "plugins/philipsHue/core/class/philipsHue.class.php": {
+        "On": "On",
+        "Off": "Off",
+        "Etat On Off": "On Off State",
+        "Luminosité": "Light",
+        "Etat Luminosité": "Brightness status",
+        "Saturation": "Saturation",
+        "Etat Saturation": "Saturation status",
+        "Couleur": "Color",
+        "Etat Couleur": "State Color",
+        "Alerte On": "Alert On",
+        "Alerte Off": "Alert Off",
+        "Etat Alerte": "Alert status",
+        "Arc en ciel On": "Rainbow On",
+        "Arc en ciel Off": "Rainbow Off",
+        "Etat Arc en ciel": "Rainbow status",
+        "Rafraîchir": "Refresh"
+    },
+    "plugins/philipsHue/plugin_info/configuration.php": {
+        "IP du bridge": "IP du bridge",
+        "Synchronisation réussie": "Synchronisation successful",
+        "Découverte": "Discovery",
+        "Rechercher les équipements Sonos": "Search Sonos devices",
+        "Synchroniser": "Synchronize"
     }
 }

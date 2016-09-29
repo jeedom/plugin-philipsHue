@@ -23,18 +23,42 @@
         "Type": "Jenis",
         "Parametre(s)": "Parametre(s)",
         "Supprimer": "Menghapus",
-        "Sauvegarder": "Menyimpan"
+        "Sauvegarder": "Menyimpan",
+        "Nom de l'équipement Philips Hue": "Nom de l'équipement Philips Hue",
+        "Informations": "Informasi",
+        "Model": "Model",
+        "Version du logiciel": "Version du logiciel",
+        "Action": "Tindakan"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "Gestion des groupes",
         "Parametres (JSON)": "Parametres (JSON)",
-        "Tester": "Coba"
+        "Tester": "Coba",
+        "Nom": "Nama"
     },
-    "plugins/philipsHue/desktop/modal/manage.groups.php": {
-        "Ajouter un groupe": "Ajouter un groupe",
-        "ID GROUPE": "ID GROUPE",
-        "NOM": "NOM",
-        "LAMPES": "LAMPES",
-        "ACTION": "ACTION"
+    "plugins/philipsHue/core/class/philipsHue.class.php": {
+        "On": "On",
+        "Off": "Off",
+        "Etat On Off": "Etat On Off",
+        "Luminosité": "Kecerahan",
+        "Etat Luminosité": "Etat Luminosité",
+        "Saturation": "Saturation",
+        "Etat Saturation": "Etat Saturation",
+        "Couleur": "Warna",
+        "Etat Couleur": "Etat Couleur",
+        "Alerte On": "Alerte On",
+        "Alerte Off": "Alerte Off",
+        "Etat Alerte": "Etat Alerte",
+        "Arc en ciel On": "Arc en ciel On",
+        "Arc en ciel Off": "Arc en ciel Off",
+        "Etat Arc en ciel": "Etat Arc en ciel",
+        "Rafraîchir": "Rafraîchir"
+    },
+    "plugins/philipsHue/plugin_info/configuration.php": {
+        "IP du bridge": "IP du bridge",
+        "Synchronisation réussie": "Sinkronisasi berhasil",
+        "Découverte": "Découverte",
+        "Rechercher les équipements Sonos": "Rechercher les équipements Sonos",
+        "Synchroniser": "Menyinkronkan"
     }
 }

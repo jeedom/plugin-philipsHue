@@ -23,18 +23,42 @@
         "Type": "Тип",
         "Parametre(s)": "Параметр (ы)",
         "Supprimer": "Удалить",
-        "Sauvegarder": "Сохранить"
+        "Sauvegarder": "Сохранить",
+        "Nom de l'équipement Philips Hue": "Nom de l'équipement Philips Hue",
+        "Informations": "Информация",
+        "Model": "Модель",
+        "Version du logiciel": "Version du logiciel",
+        "Action": "Действие"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "Управление Группами",
         "Parametres (JSON)": "Параметры (JSON)",
-        "Tester": "Тест"
+        "Tester": "Тест",
+        "Nom": "Имя"
     },
-    "plugins/philipsHue/desktop/modal/manage.groups.php": {
-        "Ajouter un groupe": "Добавить Группу",
-        "ID GROUPE": "ID Группы",
-        "NOM": "ИМЯ",
-        "LAMPES": "ЛАМПЫ",
-        "ACTION": "ДЕЙСТВИЕ"
+    "plugins/philipsHue/core/class/philipsHue.class.php": {
+        "On": "Включить",
+        "Off": "Выключить",
+        "Etat On Off": "Состояние Вкл Выкл",
+        "Luminosité": "Яркость",
+        "Etat Luminosité": "Состояние яркости",
+        "Saturation": "Насыщенность",
+        "Etat Saturation": "Состояние насыщенности",
+        "Couleur": "Цвет",
+        "Etat Couleur": "Etat Couleur",
+        "Alerte On": "Предупреждения Вкл.",
+        "Alerte Off": "Предупреждения Выкл.",
+        "Etat Alerte": "Состояние предупреждений",
+        "Arc en ciel On": "Радуга Вкл.",
+        "Arc en ciel Off": "Радуга Выкл.",
+        "Etat Arc en ciel": "Состояние Радуги",
+        "Rafraîchir": "Обновить"
+    },
+    "plugins/philipsHue/plugin_info/configuration.php": {
+        "IP du bridge": "IP du bridge",
+        "Synchronisation réussie": "Успешная синхронизация",
+        "Découverte": "Открытие",
+        "Rechercher les équipements Sonos": "Поиск оборудование Sonos ",
+        "Synchroniser": "Синхронизировать"
     }
 }

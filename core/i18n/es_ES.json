@@ -1,40 +1,64 @@
 {
     "plugins/philipsHue/plugin_info/info.xml": {
         "Plugin pour commander les lampes Philips Hue": "Plugin para controlar las lámparas Philips Hue",
-        "Lors de la première synchronisation, vous devez appuyer sur le bouton \"LINK\" du bridge avant de cliquer sur \"Synchroniser avec le bridge\"": "Lors de la première synchronisation, vous devez appuyer sur le bouton \"LINK\" du bridge avant de cliquer sur \"Synchroniser avec le bridge\""
+        "Lors de la première synchronisation, vous devez appuyer sur le bouton \"LINK\" du bridge avant de cliquer sur \"Synchroniser avec le bridge\"": "En el momento de la primera sincronización, debe darle al botón \" LINK \" del Puente de Red antes de hacer clic en \" Sincronizar con el Puente de Red\""
     },
     "plugins/philipsHue/desktop/php/philipsHue.php": {
         "Ajouter un équipement": "Añadir un dispositivo",
-        "Gestion des groupes": "Gestion des groupes",
+        "Gestion des groupes": "Gestión de grupos",
         "Rechercher": "Buscar",
-        "Mes Philips Hue": "Mes Philips Hue",
-        "Général": "General",
-        "Nom de l'équipement philipsHue": "Nom de l'équipement philipsHue",
+        "Mes Philips Hue": "Mis Philips Hue",
+        "Général": "Principal",
+        "Nom de l'équipement philipsHue": "Nombre del equipamiento philipsHue",
         "Objet parent": "Objeto padre",
-        "Aucun": "Ninguno",
+        "Aucun": "Ningún",
         "Catégorie": "Categoría",
         "Activer": "Activar",
         "Visible": "Visible",
         "Adresse IP": "Dirección IP",
-        "Synchroniser avec le Bridge": "Synchroniser avec le Bridge",
+        "Synchroniser avec le Bridge": "Sincronizar con el Bridge",
         "Device": "Device",
-        " Ajouter une commande philipsHue": "Ajouter une commande philipsHue",
+        " Ajouter une commande philipsHue": "Añadir una orden philipsHue",
         "Nom": "Nombre",
         "Type": "Tipo",
         "Parametre(s)": "Parámetro(s)",
         "Supprimer": "Borrar",
-        "Sauvegarder": "Guardar"
+        "Sauvegarder": "Guardar",
+        "Nom de l'équipement Philips Hue": "Nombre del disñositivo Philips Hue",
+        "Informations": "Informaciones",
+        "Model": "Modelo",
+        "Version du logiciel": "Versión de software",
+        "Action": "Acción"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
-        "Gestion des groupes": "Gestion des groupes",
-        "Parametres (JSON)": "Parametres (JSON)",
-        "Tester": "Probar"
+        "Gestion des groupes": "Gestión de grupos",
+        "Parametres (JSON)": "Parámetros (JSON)",
+        "Tester": "Probar",
+        "Nom": "Nombre"
     },
-    "plugins/philipsHue/desktop/modal/manage.groups.php": {
-        "Ajouter un groupe": "Ajouter un groupe",
-        "ID GROUPE": "ID GROUPE",
-        "NOM": "NOM",
-        "LAMPES": "LAMPES",
-        "ACTION": "ACCIÓN"
+    "plugins/philipsHue/core/class/philipsHue.class.php": {
+        "On": "On",
+        "Off": "Off",
+        "Etat On Off": "Estado On Off",
+        "Luminosité": "Luminosidad",
+        "Etat Luminosité": "Estado de luminosidad",
+        "Saturation": "Saturación",
+        "Etat Saturation": "Estado de saturación",
+        "Couleur": "Color",
+        "Etat Couleur": "Estado Color",
+        "Alerte On": "Advertencia On",
+        "Alerte Off": "Advertencia Off",
+        "Etat Alerte": "Estado de advertencia",
+        "Arc en ciel On": "Arco Iris On",
+        "Arc en ciel Off": "Arcl Iris Off",
+        "Etat Arc en ciel": "Estado de arco iris",
+        "Rafraîchir": "Refrescar"
+    },
+    "plugins/philipsHue/plugin_info/configuration.php": {
+        "IP du bridge": "IP del puente (bridge)",
+        "Synchronisation réussie": "Sincronizado con éxito",
+        "Découverte": "Descubrimiento",
+        "Rechercher les équipements Sonos": "Buscar los dispositivos Sonos",
+        "Synchroniser": "Sincronizar"
     }
 }

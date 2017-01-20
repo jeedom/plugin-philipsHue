@@ -265,7 +265,6 @@ class philipsHue extends eqLogic {
 		} catch (Exception $e) {
 			return;
 		}
-
 		$groups = $hue->getgroups();
 		$lights = $hue->getLights();
 		foreach (eqLogic::byType('philipsHue') as $eqLogic) {
@@ -278,7 +277,6 @@ class philipsHue extends eqLogic {
 			try {
 				$isReachable = true;
 				switch ($eqLogic->getConfiguration('category')) {
-					$isReachable = 1;
 					case 'light':
 						$obj = $lights[$eqLogic->getConfiguration('id')];
 						if ($eqLogic->getConfiguration('alwaysOn', 0) == 0) {

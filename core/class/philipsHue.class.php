@@ -81,19 +81,18 @@ class philipsHue extends eqLogic {
 	}
 
 	public static function getPhilipsHue() {
-		if (self::$_hue !== null) {
-			return self::$_hue;
-		}
-		if (config::byKey('bridge_ip', 'philipsHue') == '' || config::byKey('bridge_ip', 'philipsHue') == '-') {
-			$ip = self::findBridgeIp();
-			if ($ip !== false) {
-				config::save('bridge_ip', $ip, 'philipsHue');
-			}
+		if (!self::$_hue !== null) {
 			if (config::byKey('bridge_ip', 'philipsHue') == '' || config::byKey('bridge_ip', 'philipsHue') == '-') {
-				throw new Exception(__('L\'adresse du bridge ne peut etre vide', __FILE__));
+				$ip = self::findBridgeIp();
+				if ($ip !== false) {
+					config::save('bridge_ip', $ip, 'philipsHue');
+				}
+				if (config::byKey('bridge_ip', 'philipsHue') == '' || config::byKey('bridge_ip', 'philipsHue') == '-') {
+					throw new Exception(__('L\'adresse du bridge ne peut etre vide', __FILE__));
+				}
 			}
+			self::$_hue = new \Phue\Client(config::byKey('bridge_ip', 'philipsHue'), config::byKey('bridge_username', 'philipsHue', 'newdeveloper'));
 		}
-		self::$_hue = new \Phue\Client(config::byKey('bridge_ip', 'philipsHue'), config::byKey('bridge_username', 'philipsHue', 'newdeveloper'));
 		return self::$_hue;
 	}
 
@@ -212,7 +211,7 @@ class philipsHue extends eqLogic {
 			}
 			$eqLogic->setConfiguration('category', 'light');
 			$eqLogic->setConfiguration('id', $id);
-			$eqLogic->setConfiguration('model', $light->getModelId());
+			$eqLogic->setConfiguration('device', $light->getModelId());
 			$eqLogic->setConfiguration('modelName', $light->getModel()->getName());
 			$eqLogic->setConfiguration('type', $light->getType());
 			$eqLogic->setConfiguration('softwareVersion', $light->getSoftwareVersion());
@@ -225,6 +224,7 @@ class philipsHue extends eqLogic {
 			$eqLogic->setLogicalId('group0');
 			$eqLogic->setName(__('Toute les lampes', __FILE__));
 			$eqLogic->setEqType_name('philipsHue');
+			$eqLogic->setConfiguration('device', 'GROUP0');
 			$eqLogic->setIsVisible(1);
 			$eqLogic->setIsEnable(1);
 		}
@@ -241,6 +241,7 @@ class philipsHue extends eqLogic {
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
 			}
+			$eqLogic->setConfiguration('device', 'GROUP');
 			$eqLogic->setConfiguration('category', 'group');
 			$eqLogic->setConfiguration('id', $id);
 			$eqLogic->save();

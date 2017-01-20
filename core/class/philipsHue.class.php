@@ -314,6 +314,27 @@ class philipsHue extends eqLogic {
 		}
 	}
 
+	public static function devicesParameters($_device = '') {
+		$return = array();
+		foreach (ls(dirname(__FILE__) . '/../config/devices/', '*.json') as $file) {
+			try {
+				$content = file_get_contents(dirname(__FILE__) . '/../config/devices/' . $file);
+				if (is_json($content)) {
+					$return += json_decode($content, true);
+				}
+			} catch (Exception $e) {
+
+			}
+		}
+		if (isset($_device) && $_device != '') {
+			if (isset($return[$_device])) {
+				return $return[$_device];
+			}
+			return array();
+		}
+		return $return;
+	}
+
 	/*     * *********************Méthodes d'instance************************* */
 
 	public function preInsert() {
@@ -323,238 +344,9 @@ class philipsHue extends eqLogic {
 	/*     * *********************Methode d'instance************************* */
 
 	public function postSave() {
-		$luminosity_id = null;
-		if ($this->getLogicalId() != 'group0') {
-			$cmd = $this->getCmd(null, 'luminosity_state');
-			if (!is_object($cmd)) {
-				$cmd = new philipsHueCmd();
-				$cmd->setLogicalId('luminosity_state');
-				$cmd->setName(__('Etat Luminosité', __FILE__));
-				$cmd->setIsVisible(0);
-			}
-			$cmd->setType('info');
-			$cmd->setSubType('numeric');
-			$cmd->setEqLogic_id($this->getId());
-			$cmd->setDisplay('generic_type', 'LIGHT_STATE');
-			$cmd->save();
-			$luminosity_id = $cmd->getId();
+		if ($this->getConfiguration('applyDevice') != $this->getConfiguration('device')) {
+			$this->applyModuleConfiguration();
 		}
-
-		$cmd = $this->getCmd(null, 'on');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('on');
-			$cmd->setName(__('On', __FILE__));
-			$cmd->setIsVisible(0);
-		}
-		$cmd->setType('action');
-		$cmd->setSubType('other');
-		$cmd->setDisplay('generic_type', 'LIGHT_ON');
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->save();
-
-		$cmd = $this->getCmd(null, 'off');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('off');
-			$cmd->setName(__('Off', __FILE__));
-			$cmd->setIsVisible(0);
-		}
-		$cmd->setType('action');
-		$cmd->setSubType('other');
-		$cmd->setDisplay('generic_type', 'LIGHT_OFF');
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->save();
-
-		$cmd = $this->getCmd(null, 'luminosity');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('luminosity');
-			$cmd->setIsVisible(1);
-			$cmd->setName(__('Luminosité', __FILE__));
-			$cmd->setTemplate('dashboard', 'light');
-			$cmd->setTemplate('mobile', 'light');
-			$cmd->setOrder(0);
-		}
-		$cmd->setType('action');
-		$cmd->setSubType('slider');
-		$cmd->setConfiguration('minValue', '0');
-		$cmd->setConfiguration('maxValue', '255');
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->setDisplay('generic_type', 'LIGHT_SLIDER');
-		$cmd->setValue($luminosity_id);
-		$cmd->save();
-
-		$color_id = null;
-		if ($this->getLogicalId() != 'group0') {
-			$cmd = $this->getCmd(null, 'color_state');
-			if (!is_object($cmd)) {
-				$cmd = new philipsHueCmd();
-				$cmd->setLogicalId('color_state');
-				$cmd->setName(__('Etat Couleur', __FILE__));
-				$cmd->setIsVisible(0);
-			}
-			$cmd->setType('info');
-			$cmd->setSubType('string');
-			$cmd->setDisplay('generic_type', 'LIGHT_COLOR');
-			$cmd->setEqLogic_id($this->getId());
-			$cmd->save();
-			$color_id = $cmd->getId();
-		}
-
-		$cmd = $this->getCmd(null, 'color');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('color');
-			$cmd->setName(__('Couleur', __FILE__));
-			$cmd->setOrder(1);
-		}
-		$cmd->setType('action');
-		$cmd->setSubType('color');
-		$cmd->setDisplay('generic_type', 'LIGHT_SET_COLOR');
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->setValue($color_id);
-		$cmd->save();
-
-		$alert_id = null;
-		if ($this->getConfiguration('category') != 'group') {
-			$cmd = $this->getCmd(null, 'alert_state');
-			if (!is_object($cmd)) {
-				$cmd = new philipsHueCmd();
-				$cmd->setLogicalId('alert_state');
-				$cmd->setName(__('Etat Alerte', __FILE__));
-				$cmd->setIsVisible(0);
-			}
-			$cmd->setType('info');
-			$cmd->setSubType('binary');
-			$cmd->setEqLogic_id($this->getId());
-			$cmd->setDisplay('generic_type', 'DONT');
-			$cmd->save();
-			$alert_id = $cmd->getId();
-		} else {
-			$cmd = $this->getCmd(null, 'alert_state');
-			if (is_object($cmd)) {
-				$cmd->remove();
-			}
-		}
-
-		$cmd = $this->getCmd(null, 'alert_on');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('alert_on');
-			$cmd->setName(__('Alerte On', __FILE__));
-			$cmd->setIsVisible(0);
-		}
-		$cmd->setType('action');
-		$cmd->setSubType('other');
-		$cmd->setDisplay('generic_type', 'LIGHT_MODE');
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->setValue($alert_id);
-		$cmd->save();
-
-		$cmd = $this->getCmd(null, 'alert_off');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('alert_off');
-			$cmd->setName(__('Alerte Off', __FILE__));
-			$cmd->setIsVisible(0);
-		}
-		$cmd->setType('action');
-		$cmd->setSubType('other');
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->setDisplay('generic_type', 'LIGHT_MODE');
-		$cmd->setValue($alert_id);
-		$cmd->save();
-
-		if ($this->getConfiguration('model') != "LWB004") {
-			$rainbow_id = null;
-			if ($this->getConfiguration('category') != 'group') {
-				$cmd = $this->getCmd(null, 'rainbow_state');
-				if (!is_object($cmd)) {
-					$cmd = new philipsHueCmd();
-					$cmd->setLogicalId('rainbow_state');
-					$cmd->setIsVisible(1);
-					$cmd->setName(__('Etat Arc en ciel', __FILE__));
-					$cmd->setIsVisible(0);
-				}
-				$cmd->setType('info');
-				$cmd->setSubType('binary');
-				$cmd->setDisplay('generic_type', 'DONT');
-				$cmd->setEqLogic_id($this->getId());
-				$cmd->save();
-				$rainbow_id = $this->getId();
-			}
-
-			$cmd = $this->getCmd(null, 'rainbow_on');
-			if (!is_object($cmd)) {
-				$cmd = new philipsHueCmd();
-				$cmd->setLogicalId('rainbow_on');
-				$cmd->setName(__('Arc en ciel On', __FILE__));
-				$cmd->setIsVisible(0);
-			}
-			$cmd->setType('action');
-			$cmd->setSubType('other');
-			$cmd->setEqLogic_id($this->getId());
-			$cmd->setDisplay('generic_type', 'LIGHT_MODE');
-			$cmd->setValue($rainbow_id);
-			$cmd->save();
-
-			$cmd = $this->getCmd(null, 'rainbow_off');
-			if (!is_object($cmd)) {
-				$cmd = new philipsHueCmd();
-				$cmd->setLogicalId('rainbow_off');
-				$cmd->setName(__('Arc en ciel Off', __FILE__));
-				$cmd->setIsVisible(0);
-			}
-			$cmd->setType('action');
-			$cmd->setSubType('other');
-			$cmd->setEqLogic_id($this->getId());
-			$cmd->setDisplay('generic_type', 'LIGHT_MODE');
-			$cmd->setValue($rainbow_id);
-			$cmd->save();
-
-		} else {
-			$cmd = $this->getCmd(null, 'rainbow_on');
-			if (is_object($cmd)) {
-				$cmd->remove();
-			}
-			$cmd = $this->getCmd(null, 'rainbow_off');
-			if (is_object($cmd)) {
-				$cmd->remove();
-			}
-			$cmd = $this->getCmd(null, 'rainbow_state');
-			if (is_object($cmd)) {
-				$cmd->remove();
-			}
-		}
-
-		$cmd = $this->getCmd(null, 'transition');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('transition');
-			$cmd->setName(__('Transition', __FILE__));
-			$cmd->setIsVisible(0);
-		}
-		$cmd->setType('action');
-		$cmd->setSubType('slider');
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->setConfiguration('minValue', '0');
-		$cmd->setConfiguration('maxValue', '1800');
-		$cmd->setDisplay('generic_type', 'DONT');
-		$cmd->save();
-
-		$cmd = $this->getCmd(null, 'transition_state');
-		if (!is_object($cmd)) {
-			$cmd = new philipsHueCmd();
-			$cmd->setLogicalId('transition_state');
-			$cmd->setName(__('Transition status', __FILE__));
-		}
-		$cmd->setType('info');
-		$cmd->setSubType('numeric');
-		$cmd->setIsVisible(0);
-		$cmd->setEqLogic_id($this->getId());
-		$cmd->setDisplay('generic_type', 'DONT');
-		$cmd->save();
 
 		if ($this->getLogicalId() == 'group0') {
 			$scenes_id = array();
@@ -590,7 +382,93 @@ class philipsHue extends eqLogic {
 				}
 			}
 		}
+	}
 
+	public function applyModuleConfiguration() {
+		$this->setConfiguration('applyDevice', $this->getConfiguration('device'));
+		$this->save();
+		if ($this->getConfiguration('device') == '') {
+			return true;
+		}
+		$device_type = explode('::', $this->getConfiguration('device'));
+		$packettype = $device_type[0];
+		$subtype = $device_type[1];
+		$device = self::devicesParameters($packettype);
+		if (!is_array($device)) {
+			return true;
+		}
+		if (isset($device['configuration'])) {
+			foreach ($device['configuration'] as $key => $value) {
+				$this->setConfiguration($key, $value);
+			}
+		}
+		if (isset($device['category'])) {
+			foreach ($device['category'] as $key => $value) {
+				$this->setCategory($key, $value);
+			}
+		}
+		$cmd_order = 0;
+		$link_cmds = array();
+		$link_actions = array();
+		foreach ($device['commands'] as $command) {
+			$cmd = null;
+			foreach ($this->getCmd() as $liste_cmd) {
+				if (isset($command['logicalId']) && $liste_cmd->getLogicalId() == $command['logicalId']) {
+					$cmd = $liste_cmd;
+					break;
+				}
+			}
+			try {
+				if ($cmd == null || !is_object($cmd)) {
+					$cmd = new philipsHueCmd();
+					$cmd->setOrder($cmd_order);
+					$cmd->setEqLogic_id($this->getId());
+				} else {
+					$command['name'] = $cmd->getName();
+					if (isset($command['display'])) {
+						unset($command['display']);
+					}
+				}
+				utils::a2o($cmd, $command);
+				$cmd->save();
+				if (isset($command['value'])) {
+					$link_cmds[$cmd->getId()] = $command['value'];
+				}
+				if (isset($command['configuration']) && isset($command['configuration']['updateCmdId'])) {
+					$link_actions[$cmd->getId()] = $command['configuration']['updateCmdId'];
+				}
+				$cmd_order++;
+			} catch (Exception $exc) {
+
+			}
+		}
+		if (count($link_cmds) > 0) {
+			foreach ($this->getCmd() as $eqLogic_cmd) {
+				foreach ($link_cmds as $cmd_id => $link_cmd) {
+					if ($link_cmd == $eqLogic_cmd->getName()) {
+						$cmd = cmd::byId($cmd_id);
+						if (is_object($cmd)) {
+							$cmd->setValue($eqLogic_cmd->getId());
+							$cmd->save();
+						}
+					}
+				}
+			}
+		}
+		if (count($link_actions) > 0) {
+			foreach ($this->getCmd() as $eqLogic_cmd) {
+				foreach ($link_actions as $cmd_id => $link_action) {
+					if ($link_action == $eqLogic_cmd->getName()) {
+						$cmd = cmd::byId($cmd_id);
+						if (is_object($cmd)) {
+							$cmd->setConfiguration('updateCmdId', $eqLogic_cmd->getId());
+							$cmd->save();
+						}
+					}
+				}
+			}
+		}
+		$this->save();
 	}
 
 }

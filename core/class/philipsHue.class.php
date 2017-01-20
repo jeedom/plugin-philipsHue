@@ -272,15 +272,13 @@ class philipsHue extends eqLogic {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
 			}
-			if ($eqLogic->getIsEnable() == 0) {
-				continue;
-			}
-			if ($eqLogic->getLogicalId() == 'group0') {
+			if ($eqLogic->getIsEnable() == 0 || $eqLogic->getLogicalId() == 'group0') {
 				continue;
 			}
 			try {
 				$isReachable = true;
 				switch ($eqLogic->getConfiguration('category')) {
+					$isReachable = 1;
 					case 'light':
 						$obj = $lights[$eqLogic->getConfiguration('id')];
 						if ($eqLogic->getConfiguration('alwaysOn', 0) == 0) {
@@ -291,54 +289,25 @@ class philipsHue extends eqLogic {
 						$obj = $groups[$eqLogic->getConfiguration('id')];
 						break;
 					default:
-						return;
+						continue;
 				}
 				if (!$isReachable || !$obj->isOn()) {
 					$luminosity = 0;
 					$color = '#000000';
 				} else {
+					$rgb = $obj->getRGB()
+					$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
 					$luminosity = $obj->getBrightness();
-					$color = self::xyBriToRgb($obj->getXY()['x'], $obj->getXY()['y'], $luminosity);
 					if ($color == '#000000') {
 						$luminosity = 0;
 					}
 				}
-
-				$cmd = $eqLogic->getCmd(null, 'luminosity_state');
-				if (is_object($cmd)) {
-					$value = $cmd->formatValue($luminosity);
-					if ($value != $cmd->execCmd()) {
-						$cmd->setCollectDate('');
-						$cmd->event($value);
-					}
-				}
-
-				$cmd = $eqLogic->getCmd(null, 'color_state');
-				if (is_object($cmd)) {
-					$value = $cmd->formatValue($color);
-					if ($value != $cmd->execCmd()) {
-						$cmd->setCollectDate('');
-						$cmd->event($value);
-					}
-				}
-
-				$cmd = $eqLogic->getCmd(null, 'alert_state');
-				if (is_object($cmd)) {
-					$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;
-					if ($value != $cmd->execCmd()) {
-						$cmd->setCollectDate('');
-						$cmd->event($value);
-					}
-				}
-
-				$cmd = $eqLogic->getCmd(null, 'rainbow_state');
-				if (is_object($cmd)) {
-					$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
-					if ($value != $cmd->execCmd()) {
-						$cmd->setCollectDate('');
-						$cmd->event($value);
-					}
-				}
+				$eqLogic->checkAndUpdateCmd('luminosity_state', $luminosity);
+				$eqLogic->checkAndUpdateCmd('color_state', $color);
+				$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;
+				$eqLogic->checkAndUpdateCmd('alert_state', $value);
+				$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
+				$eqLogic->checkAndUpdateCmd('rainbow_state', $value);
 			} catch (Exception $e) {
 				if ($_eqLogic_id != null) {
 					log::add('philipsHue', 'error', $e->getMessage());
@@ -348,6 +317,8 @@ class philipsHue extends eqLogic {
 	}
 
 	/*****************************COLOR CONVERTION**************************************/
+
+
 	public static function xyBriToRgb($x, $y, $bri) {
 		$hex_RGB = "";
 		$hex_value = "";
@@ -399,25 +370,6 @@ class philipsHue extends eqLogic {
 		} else {
 			return '#FFFFFF';
 		}
-	}
-	public static function setHexCode2($sHex) {
-		$sHex = trim($sHex, '#');
-		if (strlen($sHex) != 6) {
-			return false;
-		}
-		list($mRed, $mGreen, $mBlue) = str_split($sHex, 2);
-		$r = hexdec($mRed) / 255;
-		$g = hexdec($mGreen) / 255;
-		$b = hexdec($mBlue) / 255;
-		$rt = ($r > 0.04045) ? pow(($r + 0.055) / (1.0 + 0.055), 2.4) : ($r / 12.92);
-		$gt = ($g > 0.04045) ? pow(($g + 0.055) / (1.0 + 0.055), 2.4) : ($g / 12.92);
-		$bt = ($b > 0.04045) ? pow(($b + 0.055) / (1.0 + 0.055), 2.4) : ($b / 12.92);
-		$cie_x = $rt * 0.649926 + $gt * 0.103455 + $bt * 0.197109;
-		$cie_y = $rt * 0.234327 + $gt * 0.743075 + $bt * 0.022598;
-		$cie_z = $rt * 0.0000000 + $gt * 0.053077 + $bt * 1.035763;
-		$hue_x = $cie_x / ($cie_x + $cie_y + $cie_z);
-		$hue_y = $cie_y / ($cie_x + $cie_y + $cie_z);
-		return array('x' => $hue_x, 'y' => $hue_y, 'bri' => $cie_y);
 	}
 
 	/*     * *********************Méthodes d'instance************************* */
@@ -769,9 +721,8 @@ class philipsHueCmd extends cmd {
 					$command->alert('none');
 					$command->on(false);
 				} else {
-					$parameter = philipsHue::setHexCode2($_options['color']);
-					$command->xy($parameter['x'], $parameter['y']);
-					//$command->brightness($parameter['bri'] * 255);
+					list($r, $g, $b) = str_split($_options['color'], 2);
+					$command->setRGB(hexdec($r) / 255, hexdec($g) / 255, hexdec($b) / 255);
 				}
 				break;
 			case 'alert_on':

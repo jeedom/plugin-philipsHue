@@ -11,6 +11,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
   <div class="col-lg-2 col-md-3 col-sm-4">
     <div class="bs-sidebar">
       <ul id="ul_eqLogic" class="nav nav-list bs-sidenav">
+        <a class="btn btn-default eqLogicAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter}}</a>
         <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
         <?php
 foreach ($eqLogics as $eqLogic) {
@@ -20,10 +21,25 @@ foreach ($eqLogics as $eqLogic) {
      </ul>
    </div>
  </div>
-<div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
-   <legend><i class="fa fa-table"></i> {{Mes Philips Hue}}</legend>
+ <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
+   <legend><i class="fa fa-cog"></i>  {{Gestion}}</legend>
    <div class="eqLogicThumbnailContainer">
-     <?php
+    <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
+     <center>
+      <i class="fa fa-plus-circle" style="font-size : 6em;color:#94ca02;"></i>
+    </center>
+    <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#94ca02"><center>Ajouter</center></span>
+  </div>
+  <div class="cursor eqLogicAction" data-action="gotoPluginConf" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
+    <center>
+      <i class="fa fa-wrench" style="font-size : 6em;color:#767676;"></i>
+    </center>
+    <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Configuration}}</center></span>
+  </div>
+</div>
+<legend><i class="fa fa-table"></i> {{Mes Philips Hue}}</legend>
+<div class="eqLogicThumbnailContainer">
+ <?php
 foreach ($eqLogics as $eqLogic) {
 	echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
 	echo '<img src="' . $plugin->getPathImgIcon() . '" height="105" width="95" />';
@@ -32,9 +48,9 @@ foreach ($eqLogics as $eqLogic) {
 	echo '</div>';
 }
 ?>
-   </div>
- </div>
- <div class="col-lg-10 col-md-9 col-sm-8 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
+</div>
+</div>
+<div class="col-lg-10 col-md-9 col-sm-8 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
   <a class="btn btn-success eqLogicAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
   <a class="btn btn-danger eqLogicAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
   <a class="btn btn-default eqLogicAction pull-right" data-action="configure"><i class="fa fa-cogs"></i> {{Configuration avancée}}</a>
@@ -52,7 +68,7 @@ foreach ($eqLogics as $eqLogic) {
         <div class="col-sm-6">
           <form class="form-horizontal">
             <fieldset>
-              <legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i> {{Général}}<i class='fa fa-cogs eqLogicAction pull-right cursor expertModeVisible' data-action='configure'></i></legend>
+              <legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i> {{Général}}</legend>
               <div class="form-group">
                 <label class="col-lg-4 control-label">{{Nom de l'équipement Philips Hue}}</label>
                 <div class="col-lg-6">
@@ -86,66 +102,65 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
              </div>
            </div>
            <div class="form-group">
-             <label class="col-md-4 control-label"></label>
-             <div class="col-md-8">
+             <label class="col-lg-4 control-label"></label>
+             <div class="col-lg-8">
               <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
               <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-4 control-label">{{Toujours allumé}}</label>
-          <div class="col-sm-2">
-            <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="alwaysOn" /></label>
+          <div class="form-group">
+            <label class="col-lg-4 control-label">{{Toujours allumé}}</label>
+            <div class="col-lg-2">
+              <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="alwaysOn" /></label>
+            </div>
           </div>
-        </div>
-      </fieldset>
-    </form>
+        </fieldset>
+      </form>
+    </div>
+    <div class="col-sm-6">
+      <legend>{{Informations}}</legend>
+      <form class="form-horizontal">
+        <fieldset>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">{{Catégorie}}</label>
+            <div class="col-lg-2">
+              <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="category" style="font-size : 1em"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">{{Type}}</label>
+            <div class="col-lg-2">
+              <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="type" style="font-size : 1em"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">{{ID}}</label>
+            <div class="col-lg-2">
+              <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="id" style="font-size : 1em"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">{{Model}}</label>
+            <div class="col-lg-2">
+              <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="model" style="font-size : 1em"></span>
+            </div>
+          </div>
+          <div class="form-group">
+          <label class="col-lg-3 control-label">{{Non model}}</label>
+            <div class="col-lg-2">
+              <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="modelName" style="font-size : 1em"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">{{Version du logiciel}}</label>
+            <div class="col-lg-2">
+              <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="softwareVersion" style="font-size : 1em"></span>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
   </div>
-  <div class="col-sm-6">
-    <form class="form-horizontal">
-      <fieldset>
-        <legend>{{Informations}}</legend>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">{{Catégorie}}</label>
-          <div class="col-sm-2">
-            <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="category" style="font-size : 1em"></span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">{{Type}}</label>
-          <div class="col-sm-2">
-            <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="type" style="font-size : 1em"></span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">{{ID}}</label>
-          <div class="col-sm-2">
-            <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="id" style="font-size : 1em"></span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">{{Model}}</label>
-          <div class="col-sm-2">
-            <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="model" style="font-size : 1em"></span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">{{Non model}}</label>
-          <div class="col-sm-2">
-            <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="modelName" style="font-size : 1em"></span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">{{Version du logiciel}}</label>
-          <div class="col-sm-2">
-            <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="softwareVersion" style="font-size : 1em"></span>
-          </div>
-        </div>
-      </fieldset>
-    </form>
-  </div>
-</div>
 </div>
 <div role="tabpanel" class="tab-pane" id="commandtab">
   <legend>Commandes</legend>

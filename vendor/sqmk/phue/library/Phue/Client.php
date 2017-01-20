@@ -6,7 +6,6 @@
  * @copyright Copyright (c) 2012 Michael K. Squires
  * @license   http://github.com/sqmk/Phue/wiki/License
  */
-
 namespace Phue;
 
 use Phue\Command\CommandInterface;
@@ -51,8 +50,10 @@ class Client
     /**
      * Construct a Phue Client
      *
-     * @param string $host     Host address
-     * @param string $username Username
+     * @param string $host
+     *            Host address
+     * @param string $username
+     *            Username
      */
     public function __construct($host, $username = null)
     {
@@ -73,7 +74,8 @@ class Client
     /**
      * Set host
      *
-     * @param string $host Host
+     * @param string $host
+     *            Host
      *
      * @return self This object
      */
@@ -97,7 +99,8 @@ class Client
     /**
      * Set username
      *
-     * @param string $username Username
+     * @param string $username
+     *            Username
      *
      * @return self This object
      */
@@ -115,9 +118,7 @@ class Client
      */
     public function getBridge()
     {
-        return $this->sendCommand(
-            new GetBridge
-        );
+        return $this->sendCommand(new GetBridge());
     }
 
     /**
@@ -127,9 +128,7 @@ class Client
      */
     public function getUsers()
     {
-        return $this->sendCommand(
-            new GetUsers
-        );
+        return $this->sendCommand(new GetUsers());
     }
 
     /**
@@ -139,9 +138,7 @@ class Client
      */
     public function getLights()
     {
-        return $this->sendCommand(
-            new GetLights
-        );
+        return $this->sendCommand(new GetLights());
     }
 
     /**
@@ -151,9 +148,7 @@ class Client
      */
     public function getGroups()
     {
-        return $this->sendCommand(
-            new GetGroups
-        );
+        return $this->sendCommand(new GetGroups());
     }
 
     /**
@@ -163,9 +158,7 @@ class Client
      */
     public function getSchedules()
     {
-        return $this->sendCommand(
-            new GetSchedules
-        );
+        return $this->sendCommand(new GetSchedules());
     }
 
     /**
@@ -175,9 +168,7 @@ class Client
      */
     public function getScenes()
     {
-        return $this->sendCommand(
-            new GetScenes
-        );
+        return $this->sendCommand(new GetScenes());
     }
 
     /**
@@ -187,9 +178,7 @@ class Client
      */
     public function getSensors()
     {
-        return $this->sendCommand(
-            new GetSensors
-        );
+        return $this->sendCommand(new GetSensors());
     }
 
     /**
@@ -199,9 +188,7 @@ class Client
      */
     public function getRules()
     {
-        return $this->sendCommand(
-            new GetRules
-        );
+        return $this->sendCommand(new GetRules());
     }
 
     /**
@@ -211,9 +198,7 @@ class Client
      */
     public function getTimezones()
     {
-        return $this->sendCommand(
-            new GetTimezones
-        );
+        return $this->sendCommand(new GetTimezones());
     }
 
     /**
@@ -234,7 +219,8 @@ class Client
     /**
      * Set transport
      *
-     * @param TransportInterface $transport Transport
+     * @param TransportInterface $transport
+     *            Transport
      *
      * @return self This object
      */
@@ -248,7 +234,8 @@ class Client
     /**
      * Send command to server
      *
-     * @param CommandInterface $command Phue command
+     * @param CommandInterface $command
+     *            Phue command
      *
      * @return mixed Command result
      */

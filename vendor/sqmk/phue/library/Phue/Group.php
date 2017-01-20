@@ -6,19 +6,20 @@
  * @copyright Copyright (c) 2012 Michael K. Squires
  * @license   http://github.com/sqmk/Phue/wiki/License
  */
-
 namespace Phue;
 
 use Phue\Command\DeleteGroup;
 use Phue\Command\SetLightState;
 use Phue\Command\SetGroupAttributes;
 use Phue\Command\SetGroupState;
+use Phue\Helper\ColorConversion;
 
 /**
  * Group object
  */
-class Group
+class Group implements LightInterface
 {
+
     /**
      * Id
      *
@@ -43,15 +44,18 @@ class Group
     /**
      * Construct a Phue Group object
      *
-     * @param int       $id         Id
-     * @param \stdClass $attributes Group attributes
-     * @param Client    $client     Phue client
+     * @param int $id
+     *            Id
+     * @param \stdClass $attributes
+     *            Group attributes
+     * @param Client $client
+     *            Phue client
      */
     public function __construct($id, \stdClass $attributes, Client $client)
     {
-        $this->id         = (int) $id;
+        $this->id = (int) $id;
         $this->attributes = $attributes;
-        $this->client     = $client;
+        $this->client = $client;
     }
 
     /**
@@ -93,9 +97,9 @@ class Group
      */
     public function setName($name)
     {
-        $this->client->sendCommand(
-            (new SetGroupAttributes($this))->name((string) $name)
-        );
+        $x = new SetGroupAttributes($this);
+        $y = $x->name((string) $name);
+        $this->client->sendCommand($y);
 
         $this->attributes->name = (string) $name;
 
@@ -115,21 +119,22 @@ class Group
     /**
      * Set lights
      *
-     * @param array $lights Light ids or Light objects
+     * @param array $lights
+     *            Light ids or Light objects
      *
      * @return self This object
      */
     public function setLights(array $lights)
     {
-        $lightIds = [];
+        $lightIds = array();
 
         foreach ($lights as $light) {
             $lightIds[] = (string) $light;
         }
 
-        $this->client->sendCommand(
-            (new SetGroupAttributes($this))->lights($lightIds)
-        );
+        $x = new SetGroupAttributes($this);
+        $y = $x->lights($lightIds);
+        $this->client->sendCommand($y);
 
         $this->attributes->lights = $lightIds;
 
@@ -149,20 +154,48 @@ class Group
     /**
      * Set group lights on/off
      *
-     * @param bool $flag True for on, false for off
+     * @param bool $flag
+     *            True for on, false for off
      *
      * @return self This object
      */
     public function setOn($flag = true)
     {
-        $this->client->sendCommand(
-            (new SetGroupState($this))->on((bool) $flag)
-        );
+        $x = new SetGroupState($this);
+        $y = $x->on((bool) $flag);
+        $this->client->sendCommand($y);
 
         $this->attributes->action->on = (bool) $flag;
 
         return $this;
     }
+
+    /**
+     * Get alert
+     *
+     * @return string Alert mode
+     */
+    public function getAlert()
+    {
+        return $this->attributes->action->alert;
+    }
+    /**
+     * Set light alert
+     *
+     * @param string $mode
+     *            Alert mode
+     *
+     * @return self This object
+     */
+    public function setAlert($mode = SetLightState::ALERT_LONG_SELECT)
+    {
+        $x = new SetGroupState($this);
+        $y = $x->alert($mode);
+        $this->client->sendCommand($y);
+        $this->attributes->action->alert = $mode;
+        return $this;
+    }
+
 
     /**
      * Get brightness
@@ -177,15 +210,16 @@ class Group
     /**
      * Set brightness
      *
-     * @param int $level Brightness level
+     * @param int $level
+     *            Brightness level
      *
      * @return self This object
      */
     public function setBrightness($level = SetLightState::BRIGHTNESS_MAX)
     {
-        $this->client->sendCommand(
-            (new SetGroupState($this))->brightness((int) $level)
-        );
+        $x = new SetGroupState($this);
+        $y = $x->brightness((int) $level);
+        $this->client->sendCommand($y);
 
         $this->attributes->action->bri = (int) $level;
 
@@ -205,18 +239,19 @@ class Group
     /**
      * Set hue
      *
-     * @param int $value Group value
+     * @param int $value
+     *            Group value
      *
      * @return self This object
      */
     public function setHue($value)
     {
-        $this->client->sendCommand(
-            (new SetGroupState($this))->hue((int) $value)
-        );
+        $x = new SetGroupState($this);
+        $y = $x->hue((int) $value);
+        $this->client->sendCommand($y);
 
         // Change both hue and color mode state
-        $this->attributes->action->hue       = (int) $value;
+        $this->attributes->action->hue = (int) $value;
         $this->attributes->action->colormode = 'hs';
 
         return $this;
@@ -235,18 +270,19 @@ class Group
     /**
      * Set saturation
      *
-     * @param int $value Saturation value
+     * @param int $value
+     *            Saturation value
      *
      * @return self This object
      */
     public function setSaturation($value)
     {
-        $this->client->sendCommand(
-            (new SetGroupState($this))->saturation((int) $value)
-        );
+        $x = new SetGroupState($this);
+        $y = $x->saturation((int) $value);
+        $this->client->sendCommand($y);
 
         // Change both saturation and color mode state
-        $this->attributes->action->sat       = (int) $value;
+        $this->attributes->action->sat = (int) $value;
         $this->attributes->action->colormode = 'hs';
 
         return $this;
@@ -259,28 +295,78 @@ class Group
      */
     public function getXY()
     {
-        return [
+        // return [
+        // 'x' => $this->attributes->action->xy[0],
+        // 'y' => $this->attributes->action->xy[1],
+        // ];
+        return array(
             'x' => $this->attributes->action->xy[0],
-            'y' => $this->attributes->action->xy[1],
-        ];
+            'y' => $this->attributes->action->xy[1]
+        );
     }
 
     /**
      * Set XY
      *
-     * @param float $x X value
-     * @param float $y Y value
+     * @param float $x
+     *            X value
+     * @param float $y
+     *            Y value
      *
      * @return self This object
      */
     public function setXY($x, $y)
     {
-        $this->client->sendCommand(
-            (new SetGroupState($this))->xy((float) $x, (float) $y)
-        );
+        $_x = new SetGroupState($this);
+        $_y = $_x->xy((float) $x, (float) $y);
+        $this->client->sendCommand($_y);
 
         // Change both internal xy and colormode state
-        $this->attributes->action->xy        = [$x, $y];
+        $this->attributes->action->xy = array(
+            $x,
+            $y
+        );
+        $this->attributes->action->colormode = 'xy';
+
+        return $this;
+    }
+
+    /**
+     * Get calculated RGB
+     *
+     * @return array red, green, blue key/value
+     */
+    public function getRGB()
+    {
+        $xy  = $this->getXY();
+        $bri = $this->getBrightness();
+        $rgb = ColorConversion::convertXYToRGB($xy['x'], $xy['y'], $bri);
+
+        return $rgb;
+    }
+
+    /**
+     * Set XY and brightness calculated from RGB
+     *
+     * @param int $red   Red value
+     * @param int $green Green value
+     * @param int $blue  Blue value
+     *
+     * @return self This object
+     */
+    public function setRGB($red, $green, $blue)
+    {
+        $x = new SetGroupState($this);
+        $y = $x->rgb((int) $red, (int) $green, (int) $blue);
+        $this->client->sendCommand($y);
+
+        // Change internal xy, brightness and colormode state
+        $xy = ColorConversion::convertRGBToXY($red, $green, $blue);
+        $this->attributes->action->xy = array(
+            $xy['x'],
+            $xy['y']
+        );
+        $this->attributes->action->bri = $xy['bri'];
         $this->attributes->action->colormode = 'xy';
 
         return $this;
@@ -299,18 +385,19 @@ class Group
     /**
      * Set Color temperature
      *
-     * @param int $value Color temperature value
+     * @param int $value
+     *            Color temperature value
      *
      * @return self This object
      */
     public function setColorTemp($value)
     {
-        $this->client->sendCommand(
-            (new SetGroupState($this))->colorTemp((int) $value)
-        );
+        $x = new SetGroupState($this);
+        $y = $x->colorTemp((int) $value);
+        $this->client->sendCommand($y);
 
         // Change both internal color temp and colormode state
-        $this->attributes->action->ct        = (int) $value;
+        $this->attributes->action->ct = (int) $value;
         $this->attributes->action->colormode = 'ct';
 
         return $this;
@@ -329,15 +416,16 @@ class Group
     /**
      * Set effect
      *
-     * @param string $mode Effect mode
+     * @param string $mode
+     *            Effect mode
      *
      * @return self This object
      */
     public function setEffect($mode = SetLightState::EFFECT_NONE)
     {
-        $this->client->sendCommand(
-            (new SetGroupState($this))->effect($mode)
-        );
+        $x = new SetGroupState($this);
+        $y = $x->effect($mode);
+        $this->client->sendCommand($y);
 
         $this->attributes->action->effect = $mode;
 
@@ -357,15 +445,16 @@ class Group
     /**
      * Set scene on group
      *
-     * @param mixed $scene Scene id or Scene object
+     * @param mixed $scene
+     *            Scene id or Scene object
      *
      * @return self This object
      */
     public function setScene($scene)
     {
-        $this->client->sendCommand(
-            (new SetGroupState($this))->scene((string) $scene)
-        );
+        $x = new SetGroupState($this);
+        $y = $x->scene((string) $scene);
+        $this->client->sendCommand($y);
 
         return $this;
     }
@@ -375,9 +464,7 @@ class Group
      */
     public function delete()
     {
-        $this->client->sendCommand(
-            (new DeleteGroup($this))
-        );
+        $this->client->sendCommand((new DeleteGroup($this)));
     }
 
     /**

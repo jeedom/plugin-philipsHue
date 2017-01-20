@@ -1,7 +1,8 @@
-# Phue - Philips Hue client for PHP
+# Phue - Philips Hue client
 
 [![Latest Stable Version](https://poser.pugx.org/sqmk/Phue/version)](https://packagist.org/packages/sqmk/Phue)
 [![Build Status](https://api.travis-ci.org/sqmk/Phue.svg?branch=master)](https://travis-ci.org/sqmk/Phue)
+
 
 ## Introduction
 
@@ -20,11 +21,11 @@ The client has the ability to make full use of the Hue's API, including:
 * Managing software updates to the bridge and lights
 * Getting portal configuration
 
-Interested in API docs? You can check out the auto-generated documentation at [GitApiDoc](http://gitapidoc.com/api/sqmk/Phue/)
+Interested in API docs? You can check out the [Philips API documentation](http://www.developers.meethue.com/philips-hue-api)
 
 ## Requirements
 
-* PHP 5.4+
+* PHP 5.3+
 * cURL extension (optional)
 
 ## Installation
@@ -77,7 +78,8 @@ In the above example, you'll notice that to send a command, you instantiate a co
 
 ```php
 try {
-	(new \Phue\Command\Ping)->send($client);
+	$ping = new \Phue\Command\Ping;
+	$ping->send($client);
 } catch (\Phue\Transport\Exception\ConnectionException $e) {
 	echo 'There was a problem accessing the bridge';
 }
@@ -140,7 +142,8 @@ You can also retrieve a single light. You can either dereference from the list o
 
 ```php
 // Retrieve light of id 3 from convenience method
-$light = $client->getLights()[3];
+$lights = $client->getLights();
+$light = $lights[3];
 
 echo $light->getName(), "\n";
 
@@ -158,7 +161,8 @@ Now that you can retrieve ```\Phue\Light``` objects, you can start manipulating 
 
 ```php
 // Get a specific light
-$light = $client->getLights()[3];
+$lights = $client->getLights(); 
+$light = $lights[3];
 
 // Retrieving light properties:
 echo $light->getId(), "\n",
@@ -173,6 +177,9 @@ echo $light->getId(), "\n",
      $light->getSaturation(), "\n",
      $light->getXY()['x'], "\n",
      $light->getXY()['y'], "\n",
+     $light->getRGB()['red'], "\n",
+     $light->getRGB()['green'], "\n",
+     $light->getRGB()['blue'], "\n",
      $light->getEffect(), "\n",
      $light->getColorTemp(), "\n",
      $light->getColorMode(), "\n";
@@ -199,6 +206,9 @@ $light->setSaturation(255);
 // Changes color mode to 'xy'
 $light->setXY(0.25, 0.5);
 
+// Set rgb (0 to 255 each), is converted to XY and brightness
+$light->setRGB(30, 100, 50);
+
 // Set color temp (153 min, 500 max), changes color mode to 'ct'
 $light->setColorTemp(300);
 
@@ -210,7 +220,8 @@ Each *set* method above issues a single request to the bridge. In order to updat
 
 ```php
 // Retrieve light
-$light = $client->getLights()[3];
+$lights = $client->getLights(); 
+$light = $lights[3];
 
 // Setting the brightness, hue, and saturation at the same time
 $command = new \Phue\Command\SetLightState($light);
@@ -234,28 +245,30 @@ $client->sendCommand(
 
 The bridge API allows you to create, update, and delete groups. Groups are useful for controlling multiple lights at the same time.
 
-Creating a group is easy. All you need is a name, and a list of lights (ids, or ```\Phue\Light``` obejcts) that you want to associate with the group:
+Creating a group is easy. All you need is a name, and a list of lights (ids, or ```\Phue\Light``` objects) that you want to associate with the group:
 
 ```php
 // Create group with list of ids, and get group
 $groupId = $client->sendCommand(
-	new \Phue\Command\CreateGroup('Office Lights', [1, 2])
+	new \Phue\Command\CreateGroup('Office Lights', array(1, 2))
 );
 
-$group = $client->getGroups()[$groupId];
+$groups = $client->getGroups(); 
+$group = $groups[$groupId];
 
 // Create group with list of lights, and get group
 $groupId2 = $client->sendCommand(
 	new \Phue\Command\CreateGroup(
 		'Office Lights #2',
-		[
+		array(
 			$client->getLights()[1],
 			$client->getLights()[2],
-		]
+		)
 	)
 );
 
-$group = $client->getGroups()[$groupId2];
+$groups = $client->getGroups(); 
+$group = $groups[$groupId2];
 ```
 
 There are multiple ways of retrieving groups. Each way returns either an array or single instance of ```Phue\Group``` objects:
@@ -272,13 +285,14 @@ $groups = $client->sendCommand(
 	new \Phue\Command\GetGroups
 );
 
-foreach ($client->getGroups() as $groupId => $group) {
+foreach ($groups as $groupId => $group) {
 	echo $group->getId(), ' - ',
 	     $group->getName(), "\n";
 }
 
 // Convenient way of retrieving a single group by id
-$group = $client->getGroups()[1];
+$groups = $client->getGroups(); 
+$group = $groups[1];
 
 echo $group->getId(), ' - ',
      $group->getName(), "\n";
@@ -296,7 +310,8 @@ Most of the methods available on ```\Phue\Light``` objects are also available on
 
 ```php
 // Get a specific group
-$group = $client->getGroups()[1];
+$groups = $client->getGroups(); 
+$group = $groups[1];
 
 // Retrieving group properties:
 echo $group->getId(), "\n",
@@ -308,6 +323,9 @@ echo $group->getId(), "\n",
      $group->getSaturation(), "\n",
      $group->getXY()['x'], "\n",
      $group->getXY()['y'], "\n",
+     $group->getRGB()['red'], "\n",
+     $group->getRGB()['green'], "\n",
+     $group->getRGB()['blue'], "\n",
      $group->getColorTemp(), "\n",
      $group->getColorMode(), "\n",
      $group->getEffect(), "\n";
@@ -316,10 +334,11 @@ echo $group->getId(), "\n",
 $group->setName('Office');
 
 // Setting lights
-$group->setLights([
-    $client->getLights()[1],
-    $client->getLights()[2]
-]);
+$lights = $client->getLights(); 
+$group->setLights(array(
+    $lights[1],
+    $lights[2]
+));
 
 // Setting on/off state (true|false)
 $group->setOn(true);
@@ -337,6 +356,9 @@ $group->setSaturation(255);
 // Changes color mode to 'xy'
 $group->setXY(0.25, 0.5);
 
+// Set rgb (0 to 255 each), is converted to XY and brightness
+$group->setRGB(30, 100, 50);
+
 // Set color temp (153 min, 500 max), changes color mode to 'ct'
 $group->setColorTemp(300);
 
@@ -348,7 +370,8 @@ Just like the bulbs, each *set* method on the ```\Phue\Group``` object will send
 
 ```php
 // Retrieve group
-$group = $client->getGroups()[1];
+$groups = $client->getGroups(); 
+$group = $groups[1];
 
 // Setting the brightness, color temp, and transition at the same time
 $command = new \Phue\Command\SetGroupState($group);
@@ -366,12 +389,13 @@ Deleting a group is also simple. You can either delete from the ```\Phue\Group``
 
 ```php
 // Retrieve group and delete
-$group = $client->getGroups()[1];
+$groups = $client->getGroups(); 
+$group = $groups[1];
 $group->delete();
 
 // Send command
 $client->sendCommand(
-	new \Phue\Command\DeleteGroup(2)
+	new \Phue\Command\DeleteGroup(1)
 );
 ```
 
@@ -413,18 +437,20 @@ $scheduleCommand->description('Dims all lights in house to 30');
 $client->sendCommand($scheduleCommand);
 
 // Show list of schedules
+$command = $schedule->getCommand();
 foreach ($client->getSchedules() as $scheduleId => $schedule) {
 	echo $schedule->getId(), "\n",
 	     $schedule->getName(), "\n",
 	     $schedule->getDescription(), "\n",
 	     $schedule->getTime(), "\n",
-	     $schedule->getCommand()['address'], "\n",
-	     $schedule->getCommand()['method'], "\n",
-	     json_encode($schedule->getCommand()['body']), "\n";
+	     $command['address'], "\n",
+	     $command['method'], "\n",
+	     json_encode($command['body']), "\n";
 }
 
 // Delete a given schedule
-$schedule = $client->getSchedules()[2];
+$schedules = $client->getSchedules(); 
+$schedule = $schedules[2];
 $schedule->delete();
 ```
 

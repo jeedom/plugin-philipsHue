@@ -6,7 +6,6 @@
  * @copyright Copyright (c) 2012 Michael K. Squires
  * @license   http://github.com/sqmk/Phue/wiki/License
  */
-
 namespace Phue;
 
 use Phue\Command\DeleteUser;
@@ -40,15 +39,18 @@ class User
     /**
      * Construct a User object
      *
-     * @param string    $username   Username
-     * @param \stdClass $attributes User attributes
-     * @param Client    $client     Phue client
+     * @param string $username
+     *            Username
+     * @param \stdClass $attributes
+     *            User attributes
+     * @param Client $client
+     *            Phue client
      */
     public function __construct($username, \stdClass $attributes, Client $client)
     {
-        $this->username   = (string) $username;
+        $this->username = (string) $username;
         $this->attributes = $attributes;
-        $this->client     = $client;
+        $this->client = $client;
     }
 
     /**
@@ -96,9 +98,7 @@ class User
      */
     public function delete()
     {
-        $this->client->sendCommand(
-            (new DeleteUser($this))
-        );
+        $this->client->sendCommand((new DeleteUser($this)));
     }
 
     /**

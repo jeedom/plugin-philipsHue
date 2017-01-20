@@ -280,9 +280,7 @@ class philipsHue extends eqLogic {
 				switch ($eqLogic->getConfiguration('category')) {
 					case 'light':
 						$obj = $lights[$eqLogic->getConfiguration('id')];
-						if ($eqLogic->getConfiguration('alwaysOn', 0) == 0) {
-							$isReachable = $obj->isReachable();
-						}
+						$isReachable = ($eqLogic->getConfiguration('alwaysOn', 0) == 0) ? $obj->isReachable() : true;
 						break;
 					case 'group':
 						$obj = $groups[$eqLogic->getConfiguration('id')];
@@ -348,7 +346,6 @@ class philipsHue extends eqLogic {
 		if ($this->getConfiguration('applyDevice') != $this->getConfiguration('device')) {
 			$this->applyModuleConfiguration();
 		}
-
 		if ($this->getLogicalId() == 'group0') {
 			$scenes_id = array();
 			foreach (self::getPhilipsHue()->getScenes() as $scene) {
@@ -486,7 +483,6 @@ class philipsHueCmd extends cmd {
 			return;
 		}
 		$eqLogic = $this->getEqLogic();
-
 		$transition = $eqLogic->getCmd(null, 'transition_state');
 		$transistion_time = 0;
 		if (is_object($transition)) {
@@ -495,9 +491,7 @@ class philipsHueCmd extends cmd {
 				$transition->event(0);
 			}
 		}
-		if ($transistion_time == 0) {
-			$transistion_time = 1;
-		}
+		$transistion_time = ($transistion_time == 0) ? 1 : $transistion_time;
 		$hue = philipsHue::getPhilipsHue();
 		switch ($eqLogic->getConfiguration('category')) {
 			case 'light':

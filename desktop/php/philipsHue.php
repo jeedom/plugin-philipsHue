@@ -121,6 +121,20 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
       <legend>{{Informations}}</legend>
       <form class="form-horizontal">
         <fieldset>
+         <div class="form-group">
+          <label class="col-sm-2 control-label">{{Modèle}}</label>
+          <div class="col-sm-8">
+            <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="device">
+              <option value="">Aucun</option>
+              <?php
+$groups = array();
+foreach (philipsHue::devicesParameters() as $key => $info) {
+	echo '<option value="' . $key . '">[' . $key . '] ' . $info['name'] . '</option>';
+}
+?>
+       </select>
+     </div>
+   </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">{{Catégorie}}</label>
             <div class="col-lg-2">
@@ -137,12 +151,6 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
             <label class="col-lg-3 control-label">{{ID}}</label>
             <div class="col-lg-2">
               <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="id" style="font-size : 1em"></span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">{{Model}}</label>
-            <div class="col-lg-2">
-              <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="model" style="font-size : 1em"></span>
             </div>
           </div>
           <div class="form-group">

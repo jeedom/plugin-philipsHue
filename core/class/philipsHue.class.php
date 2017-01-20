@@ -293,7 +293,7 @@ class philipsHue extends eqLogic {
 					$luminosity = 0;
 					$color = '#000000';
 				} else {
-					$rgb = $obj->getRGB()
+					$rgb = $obj->getRGB();
 					$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
 					$luminosity = $obj->getBrightness();
 					if ($color == '#000000') {
@@ -315,7 +315,6 @@ class philipsHue extends eqLogic {
 	}
 
 	/*****************************COLOR CONVERTION**************************************/
-
 
 	public static function xyBriToRgb($x, $y, $bri) {
 		$hex_RGB = "";

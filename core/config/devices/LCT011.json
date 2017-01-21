@@ -135,7 +135,7 @@
                 },
                 "template":{
                     "dashboard" : "btnAlert",
-                    "mobile" : "btnAlert"
+                    "mobile" : "alert"
                 },
                 "value" : "Etat Alerte",
                 "isVisible": 0,
@@ -151,7 +151,7 @@
                 },
                 "template":{
                     "dashboard" : "btnAlert",
-                    "mobile" : "btnAlert"
+                    "mobile" : "alert"
                 },
                 "value" : "Etat Alerte",
                 "isVisible": 0,
@@ -167,7 +167,7 @@
                 },
                 "template":{
                     "dashboard" : "btnCircle",
-                    "mobile" : "btnCircle"
+                    "mobile" : "circle"
                 },
                 "value" : "Etat Couleur",
                 "isVisible": 0,
@@ -183,7 +183,7 @@
                 },
                 "template":{
                     "dashboard" : "btnCircle",
-                    "mobile" : "btnCircle"
+                    "mobile" : "circle"
                 },
                 "value" : "Etat Arc en ciel",
                 "isVisible": 0,

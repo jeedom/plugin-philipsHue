@@ -81,11 +81,11 @@
                 },
                 "template":{
                     "dashboard" : "btnAlert",
-                    "mobile" : "btnAlert"
+                    "mobile" : "alert"
                 },
                 "template":{
                     "dashboard" : "btnCircle",
-                    "mobile" : "btnCircle"
+                    "mobile" : "circle"
                 },
                 "value" : "Etat Alerte",
                 "isVisible": 0,
@@ -101,11 +101,11 @@
                 },
                 "template":{
                     "dashboard" : "btnAlert",
-                    "mobile" : "btnAlert"
+                    "mobile" : "alert"
                 },
                 "template":{
                     "dashboard" : "btnCircle",
-                    "mobile" : "btnCircle"
+                    "mobile" : "circle"
                 },
                 "value" : "Etat Alerte",
                 "isVisible": 0,

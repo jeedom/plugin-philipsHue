@@ -345,6 +345,22 @@ class philipsHue extends eqLogic {
 							if ($key == 'temperature') {
 								$value = $value / 100;
 							}
+							if ($key == 'buttonevent') {
+								switch ($value) {
+									case 34:
+										$value = 1;
+										break;
+									case 16:
+										$value = 2;
+										break;
+									case 17:
+										$value = 3;
+										break;
+									case 18:
+										$value = 4;
+										break;
+								}
+							}
 							$eqLogic->checkAndUpdateCmd($key, $value);
 						}
 					}
@@ -372,7 +388,6 @@ class philipsHue extends eqLogic {
 						$eqLogic->checkAndUpdateCmd('rainbow_state', $value);
 					}
 				} else if ($eqLogic->getConfiguration('category') == 'light') {
-					echo $eqLogic->getName();
 					$obj = $lights[$eqLogic->getConfiguration('id')];
 					$isReachable = ($eqLogic->getConfiguration('alwaysOn', 0) == 0) ? $obj->isReachable() : true;
 					if (!$isReachable || !$obj->isOn()) {
@@ -380,14 +395,12 @@ class philipsHue extends eqLogic {
 						$color = '#000000';
 					} else {
 						$rgb = $obj->getRGB();
-						print_r($rgb);
 						$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
 						$luminosity = $obj->getBrightness();
 						if ($color == '#000000') {
 							$luminosity = 0;
 						}
 					}
-					echo "\n============================\n";
 					$eqLogic->checkAndUpdateCmd('luminosity_state', $luminosity);
 					$eqLogic->checkAndUpdateCmd('color_state', $color);
 					$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;

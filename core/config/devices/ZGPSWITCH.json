@@ -8,7 +8,10 @@
 				"subtype": "numeric",
 				"isVisible": 0,
 				"isHistorized": 0,
-				"logicalId": "buttonevent"
+				"logicalId": "buttonevent",
+				"configuration" : {
+					"repeatEventManagement" : "always"
+				}
 			}
 		]
 	}

@@ -452,29 +452,25 @@ class philipsHue extends eqLogic {
 		$groups = self::getPhilipsHue()->getgroups();
 		$lights = self::getPhilipsHue()->getlights();
 		$scene_cmd = $this->getCmd('action', 'scene');
-		if ($scene_cmd != null) {
+		if ($scene_cmd != null && $this->getConfiguration('category') == 'group') {
 			$scene_str = '';
 			foreach (self::getPhilipsHue()->getScenes() as $scene) {
 				$name = $scene->getName();
 				if ($name == '') {
 					continue;
 				}
-				if ($this->getConfiguration('category') == 'group') {
-					if (!isset($groups[$this->getConfiguration('id')])) {
-						continue;
+				if (!isset($groups[$this->getConfiguration('id')])) {
+					continue;
+				}
+				$find = false;
+				$lights_ids = $groups[$this->getConfiguration('id')]->getLightIds();
+				foreach ($scene->getLightIds() as $value) {
+					if (in_array($value, $lights_ids)) {
+						$find = true;
+						break;
 					}
-					$find = false;
-					$lights_ids = $groups[$this->getConfiguration('id')]->getLightIds();
-					foreach ($scene->getLightIds() as $value) {
-						if (in_array($value, $lights_ids)) {
-							$find = true;
-							break;
-						}
-					}
-					if (!$find) {
-						continue;
-					}
-				} else {
+				}
+				if (!$find) {
 					continue;
 				}
 				$scene_str .= $scene->getId() . '|' . $name . ';';

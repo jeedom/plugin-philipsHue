@@ -445,8 +445,6 @@ class philipsHue extends eqLogic {
 		}
 	}
 
-	/*     * *********************Methode d'instance************************* */
-
 	public function postSave() {
 		if ($this->getConfiguration('applyDevice') != $this->getConfiguration('device')) {
 			$this->applyModuleConfiguration();
@@ -569,6 +567,13 @@ class philipsHue extends eqLogic {
 			}
 		}
 		$this->save();
+	}
+
+	public function getImgFilePath() {
+		if (file_exists(dirname(__FILE__) . '/../../core/config/devices/' . $this->getConfiguration('device') . '.png')) {
+			return $this->getConfiguration('device') . '.png';
+		}
+		return false;
 	}
 
 }

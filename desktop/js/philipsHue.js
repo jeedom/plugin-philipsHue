@@ -16,6 +16,35 @@
  */
 
 
+ $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').on('change', function () {
+
+   $.ajax({
+    type: "POST", 
+    url: "plugins/philipsHue/core/ajax/philipsHue.ajax.php", 
+    data: {
+        action: "getImageModel",
+        model: $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').value(),
+    },
+    dataType: 'json',
+    global: false,
+    error: function (request, status, error) {
+        handleAjaxError(request, status, error);
+    },
+    success: function (data) { 
+        if (data.state != 'ok') {
+            $('#div_alert').showAlert({message: data.result, level: 'danger'});
+            return;
+        }
+        if(data.result != false){
+            $('#img_device').attr("src",'plugins/philipsHue/core/config/devices/'+data.result);
+        }else{
+            $('#img_device').attr("src",'plugins/philipsHue/plugin_info/philipsHue_icon.png');
+        }
+    }
+});
+
+});
+
  $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 
  function addCmdToTable(_cmd) {

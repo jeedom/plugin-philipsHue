@@ -29,6 +29,13 @@ try {
 		ajax::success();
 	}
 
+	if (init('action') == 'getImageModel') {
+		if (file_exists(dirname(__FILE__) . '/../../core/config/devices/' . init('model') . '.png')) {
+			ajax::success(init('model') . '.png');
+		}
+		ajax::success(false);
+	}
+
 	throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
 	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {

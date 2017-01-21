@@ -42,7 +42,11 @@ foreach ($eqLogics as $eqLogic) {
  <?php
 foreach ($eqLogics as $eqLogic) {
 	echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
-	echo '<img src="' . $plugin->getPathImgIcon() . '" height="105" width="95" />';
+	if ($eqLogic->getImgFilePath() !== false) {
+		echo '<img class="lazy" src="plugins/philipsHue/core/config/devices/' . $eqLogic->getImgFilePath() . '" height="105" width="95" />';
+	} else {
+		echo '<img src="' . $plugin->getPathImgIcon() . '" height="105" width="95" />';
+	}
 	echo "<br>";
 	echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
 	echo '</div>';
@@ -132,43 +136,46 @@ foreach (philipsHue::devicesParameters() as $key => $info) {
 	echo '<option value="' . $key . '">[' . $key . '] ' . $info['name'] . '</option>';
 }
 ?>
-       </select>
-     </div>
-   </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">{{Catégorie}}</label>
-            <div class="col-lg-2">
-              <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="category" style="font-size : 1em"></span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">{{Type}}</label>
-            <div class="col-lg-2">
-              <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="type" style="font-size : 1em"></span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">{{ID}}</label>
-            <div class="col-lg-2">
-              <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="id" style="font-size : 1em"></span>
-            </div>
-          </div>
-          <div class="form-group">
-          <label class="col-lg-3 control-label">{{Non model}}</label>
-            <div class="col-lg-2">
-              <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="modelName" style="font-size : 1em"></span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">{{Version du logiciel}}</label>
-            <div class="col-lg-2">
-              <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="softwareVersion" style="font-size : 1em"></span>
-            </div>
-          </div>
-        </fieldset>
-      </form>
-    </div>
-  </div>
+           </select>
+         </div>
+       </div>
+       <div class="form-group">
+        <label class="col-lg-3 control-label">{{Catégorie}}</label>
+        <div class="col-lg-2">
+          <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="category" style="font-size : 1em"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">{{Type}}</label>
+        <div class="col-lg-2">
+          <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="type" style="font-size : 1em"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">{{ID}}</label>
+        <div class="col-lg-2">
+          <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="id" style="font-size : 1em"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">{{Non model}}</label>
+        <div class="col-lg-2">
+          <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="modelName" style="font-size : 1em"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">{{Version du logiciel}}</label>
+        <div class="col-lg-2">
+          <span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="softwareVersion" style="font-size : 1em"></span>
+        </div>
+      </div>
+      <center>
+      <img src="<?php echo $plugin->getPathImgIcon() ?>" data-original=".jpg" id="img_device" class="img-responsive" style="max-height : 250px;"  onerror="this.src='<?php echo $plugin->getPathImgIcon() ?>'"/>
+      </center>
+    </fieldset>
+  </form>
+</div>
+</div>
 </div>
 <div role="tabpanel" class="tab-pane" id="commandtab">
   <legend>Commandes</legend>

@@ -80,8 +80,8 @@
                     "generic_type": "LIGHT_MODE"
                 },
                 "template":{
-                    "dashboard" : "alert",
-                    "mobile" : "alert"
+                    "dashboard" : "btnAlert",
+                    "mobile" : "btnAlert"
                 },
                 "value" : "Etat Alerte",
                 "isVisible": 0,
@@ -96,8 +96,8 @@
                     "generic_type": "LIGHT_MODE"
                 },
                 "template":{
-                    "dashboard" : "alert",
-                    "mobile" : "alert"
+                    "dashboard" : "btnAlert",
+                    "mobile" : "btnAlert"
                 },
                 "value" : "Etat Alerte",
                 "isVisible": 0,

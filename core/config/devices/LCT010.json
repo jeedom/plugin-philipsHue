@@ -122,8 +122,8 @@
                     "generic_type": "DONT"
                 },
                 "template":{
-                    "dashboard" : "alert",
-                    "mobile" : "alert"
+                    "dashboard" : "btnAlert",
+                    "mobile" : "btnAlert"
                 },
                 "value" : "Etat Couleur",
                 "isVisible": 0,
@@ -138,8 +138,8 @@
                     "generic_type": "LIGHT_MODE"
                 },
                 "template":{
-                    "dashboard" : "alert",
-                    "mobile" : "alert"
+                    "dashboard" : "btnAlert",
+                    "mobile" : "btnAlert"
                 },
                 "value" : "Etat Alerte",
                 "isVisible": 0,
@@ -177,6 +177,10 @@
                 "display": {
                     "generic_type": "LIGHT_MODE"
                 },
+                "template":{
+                    "dashboard" : "btnCircle",
+                    "mobile" : "btnCircle"
+                },
                 "value" : "Etat Arc en ciel",
                 "isVisible": 0,
                 "isHistorized": 0,
@@ -188,6 +192,10 @@
                 "subtype": "other",
                 "display": {
                     "generic_type": "LIGHT_MODE"
+                },
+                "template":{
+                    "dashboard" : "btnCircle",
+                    "mobile" : "btnCircle"
                 },
                 "value" : "Etat Arc en ciel",
                 "isVisible": 0,

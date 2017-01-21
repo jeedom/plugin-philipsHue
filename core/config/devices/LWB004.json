@@ -80,8 +80,12 @@
                     "generic_type": "LIGHT_MODE"
                 },
                 "template":{
-                    "dashboard" : "alert",
-                    "mobile" : "alert"
+                    "dashboard" : "btnAlert",
+                    "mobile" : "btnAlert"
+                },
+                "template":{
+                    "dashboard" : "btnCircle",
+                    "mobile" : "btnCircle"
                 },
                 "value" : "Etat Alerte",
                 "isVisible": 0,
@@ -96,8 +100,12 @@
                     "generic_type": "LIGHT_MODE"
                 },
                 "template":{
-                    "dashboard" : "alert",
-                    "mobile" : "alert"
+                    "dashboard" : "btnAlert",
+                    "mobile" : "btnAlert"
+                },
+                "template":{
+                    "dashboard" : "btnCircle",
+                    "mobile" : "btnCircle"
                 },
                 "value" : "Etat Alerte",
                 "isVisible": 0,

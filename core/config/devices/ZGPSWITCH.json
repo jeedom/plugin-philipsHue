@@ -1,0 +1,15 @@
+{
+	"ZGPSWITCH": {
+		"name": "Hue tap switch",
+		"commands": [
+			{
+				"name": "Bouton",
+				"type": "info",
+				"subtype": "numeric",
+				"isVisible": 0,
+				"isHistorized": 0,
+				"logicalId": "buttonevent"
+			}
+		]
+	}
+}

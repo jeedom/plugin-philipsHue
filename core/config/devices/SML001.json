@@ -1,0 +1,48 @@
+{
+	"SML001": {
+		"name": "Hue Motion sensor",
+		"commands": [
+			{
+				"name": "Lumininosité",
+				"type": "info",
+				"subtype": "numeric",
+				"isVisible": 1,
+				"isHistorized": 1,
+				"logicalId": "lightlevel"
+			},
+			{
+				"name": "Nuit",
+				"type": "info",
+				"subtype": "binary",
+				"isVisible": 1,
+				"isHistorized": 0,
+				"logicalId": "dark"
+			},
+			{
+				"name": "Jour",
+				"type": "info",
+				"subtype": "binary",
+				"isVisible": 1,
+				"isHistorized": 0,
+				"logicalId": "daylight"
+			},
+			{
+				"name": "Température",
+				"type": "info",
+				"subtype": "numeric",
+				
+				"isVisible": 1,
+				"isHistorized": 1,
+				"logicalId": "temperature"
+			},
+			{
+				"name": "Présence",
+				"type": "info",
+				"subtype": "binary",
+				"isVisible": 1,
+				"isHistorized": 1,
+				"logicalId": "temperature"
+			}
+		]
+	}
+}

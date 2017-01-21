@@ -61,29 +61,6 @@
                 "logicalId": "luminosity"
             },
             {
-                "name": "Etat Couleur",
-                "type": "info",
-                "subtype": "string",
-                "display": {
-                    "generic_type": "LIGHT_COLOR"
-                },
-                "isVisible": 0,
-                "isHistorized": 0,
-                "logicalId": "color_state"
-            },
-            {
-                "name": "Couleur",
-                "type": "action",
-                "subtype": "color",
-                "display": {
-                    "generic_type": "LIGHT_SET_COLOR"
-                },
-                "value" : "Etat Couleur",
-                "isVisible": 1,
-                "isHistorized": 0,
-                "logicalId": "color"
-            },
-            {
                 "name": "Etat Alerte",
                 "type": "info",
                 "subtype": "binary",

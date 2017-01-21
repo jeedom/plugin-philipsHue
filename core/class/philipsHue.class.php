@@ -407,6 +407,7 @@ class philipsHue extends eqLogic {
 					$eqLogic->checkAndUpdateCmd('alert_state', $value);
 					$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
 					$eqLogic->checkAndUpdateCmd('rainbow_state', $value);
+					$eqLogic->checkAndUpdateCmd('color_temp_state', $obj->getColorTemp());
 				}
 			} catch (Exception $e) {
 				if ($_eqLogic_id != null) {
@@ -626,9 +627,11 @@ class philipsHueCmd extends cmd {
 					$command->alert('none');
 					$command->on(false);
 				} else {
-					$luminosity_state = $eqLogic->getCmd(null, 'luminosity_state');
 					$command->brightness($_options['slider']);
 				}
+				break;
+			case 'color_temp':
+				$command->colorTemp((int) $_options['slider']);
 				break;
 			case 'color':
 				if ($_options['color'] == '#000000') {

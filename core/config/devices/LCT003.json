@@ -82,6 +82,37 @@
                 "isVisible": 1,
                 "isHistorized": 0,
                 "logicalId": "color"
+            }, 
+            {
+                "name": "Etat Couleur temp",
+                "type": "info",
+                "subtype": "numeric",
+                "display": {
+                    "generic_type": "DONT"
+                },
+                "configuration" :{
+                    "minValue" : 153,
+                    "maxValue" : 500
+                },
+                "isVisible": 0,
+                "isHistorized": 0,
+                "logicalId": "color_temp_state"
+            },
+            {
+                "name": "Couleur temp",
+                "type": "action",
+                "subtype": "slider",
+                "display": {
+                    "generic_type": "DONT"
+                },
+                "configuration" :{
+                    "minValue" : 153,
+                    "maxValue" : 500
+                },
+                "value" : "Etat Couleur temp",
+                "isVisible": 1,
+                "isHistorized": 0,
+                "logicalId": "color_temp"
             },
             {
                 "name": "Etat Alerte",
@@ -173,7 +204,7 @@
                 "display": {
                     "generic_type": "DONT"
                 },
-                 "configuration" :{
+                "configuration" :{
                     "minValue" : 0,
                     "maxValue" : 1800
                 },
@@ -183,5 +214,5 @@
                 "logicalId": "transition"
             }
         ]
-    }
+}
 }

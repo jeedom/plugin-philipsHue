@@ -173,7 +173,7 @@
                 "display": {
                     "generic_type": "DONT"
                 },
-                 "configuration" :{
+                "configuration" :{
                     "minValue" : 0,
                     "maxValue" : 1800
                 },
@@ -183,5 +183,5 @@
                 "logicalId": "transition"
             }
         ]
-    }
+}
 }

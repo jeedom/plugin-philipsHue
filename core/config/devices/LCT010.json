@@ -121,6 +121,10 @@
                 "display": {
                     "generic_type": "DONT"
                 },
+                "template":{
+                    "dashboard" : "alert",
+                    "mobile" : "alert"
+                },
                 "value" : "Etat Couleur",
                 "isVisible": 0,
                 "isHistorized": 0,
@@ -132,6 +136,10 @@
                 "subtype": "other",
                 "display": {
                     "generic_type": "LIGHT_MODE"
+                },
+                "template":{
+                    "dashboard" : "alert",
+                    "mobile" : "alert"
                 },
                 "value" : "Etat Alerte",
                 "isVisible": 0,

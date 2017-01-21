@@ -204,7 +204,12 @@ class philipsHue extends eqLogic {
 		self::syncGroup();
 		$lights_exist = array();
 		$groups_exist = array(0 => 0);
+		$sensors_exist = array();
 		foreach ($hue->getLights() as $id => $light) {
+			if (count(self::devicesParameters($light->getModelId())) == 0) {
+				log::add('philipsHue', 'debug', 'No configuration found for light : ' . print_r($light, true));
+				continue;
+			}
 			$eqLogic = self::byLogicalId('light' . $id, 'philipsHue');
 			if (!is_object($eqLogic)) {
 				$eqLogic = new self();
@@ -243,7 +248,7 @@ class philipsHue extends eqLogic {
 				$eqLogic->setLogicalId('group' . $id);
 				$eqLogic->setName($group->getName());
 				$eqLogic->setEqType_name('philipsHue');
-				$eqLogic->setIsVisible(1);
+				$eqLogic->setIsVisible(0);
 				$eqLogic->setIsEnable(1);
 			}
 			$eqLogic->setConfiguration('device', 'GROUP');
@@ -252,18 +257,61 @@ class philipsHue extends eqLogic {
 			$eqLogic->save();
 			$groups_exist[$id] = $id;
 		}
+		foreach (self::sanitizeSensors($hue->getSensors()) as $id => $sensor) {
+			$sensor = array_values($sensor)[0];
+			if (count(self::devicesParameters($sensor->getModelId())) == 0) {
+				log::add('philipsHue', 'debug', 'No configuration found for sensor : ' . print_r($sensor, true));
+				continue;
+			}
+			$eqLogic = self::byLogicalId('sensor' . $id, 'philipsHue');
+			if (!is_object($eqLogic)) {
+				$eqLogic = new self();
+				$eqLogic->setLogicalId('sensor' . $id);
+				$eqLogic->setName($sensor->getName());
+				$eqLogic->setEqType_name('philipsHue');
+				$eqLogic->setIsVisible(1);
+				$eqLogic->setIsEnable(1);
+			}
+			$eqLogic->setConfiguration('category', 'sensor');
+			$eqLogic->setConfiguration('id', $id);
+			$eqLogic->setConfiguration('device', $sensor->getModelId());
+			$eqLogic->setConfiguration('modelName', $sensor->getModel()->getName());
+			$eqLogic->setConfiguration('softwareVersion', $sensor->getSoftwareVersion());
+			$eqLogic->save();
+			$sensors_exist[$id] = $id;
+		}
+
 		foreach (self::byType('philipsHue') as $eqLogic) {
 			if ($eqLogic->getConfiguration('category') == 'light') {
 				if (!isset($lights_exist[$eqLogic->getConfiguration('id')])) {
 					$eqLogic->remove();
 				}
-			} else {
+			} else if ($eqLogic->getConfiguration('category') == 'group') {
 				if (!isset($groups_exist[$eqLogic->getConfiguration('id')])) {
+					$eqLogic->remove();
+				}
+			} else if ($eqLogic->getConfiguration('category') == 'sensor') {
+				if (!isset($sensors_exist[$eqLogic->getConfiguration('id')])) {
 					$eqLogic->remove();
 				}
 			}
 		}
 		self::deamon_start();
+	}
+
+	public static function sanitizeSensors($_sensors) {
+		$return = array();
+		foreach ($_sensors as $id => $sensor) {
+			$unique_id = explode('-', $sensor->getUniqueId())[0];
+			if ($unique_id == '') {
+				$unique_id = $id;
+			}
+			if (!isset($return[$unique_id])) {
+				$return[$unique_id] = array();
+			}
+			$return[$unique_id][$id] = $sensor;
+		}
+		return $return;
 	}
 
 	public static function pull($_eqLogic_id = null) {
@@ -277,6 +325,7 @@ class philipsHue extends eqLogic {
 		}
 		$groups = $hue->getgroups();
 		$lights = $hue->getLights();
+		$sensors = self::sanitizeSensors($hue->getSensors());
 		foreach (self::$_eqLogics as $eqLogic) {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
@@ -284,36 +333,68 @@ class philipsHue extends eqLogic {
 			if ($eqLogic->getIsEnable() == 0 || $eqLogic->getLogicalId() == 'group0') {
 				continue;
 			}
+			$isReachable = true;
 			try {
-				$isReachable = true;
-				switch ($eqLogic->getConfiguration('category')) {
-					case 'light':
-						$obj = $lights[$eqLogic->getConfiguration('id')];
-						$isReachable = ($eqLogic->getConfiguration('alwaysOn', 0) == 0) ? $obj->isReachable() : true;
-						break;
-					case 'group':
-						$obj = $groups[$eqLogic->getConfiguration('id')];
-						break;
-					default:
-						continue;
-				}
-				if (!$isReachable || !$obj->isOn()) {
-					$luminosity = 0;
-					$color = '#000000';
-				} else {
-					$rgb = $obj->getRGB();
-					$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
-					$luminosity = $obj->getBrightness();
-					if ($color == '#000000') {
-						$luminosity = 0;
+				if ($eqLogic->getConfiguration('category') == 'sensor') {
+					$sensor = $sensors[$eqLogic->getConfiguration('id')];
+					foreach ($sensor as $id => $obj) {
+						foreach ($obj->getState() as $key => $value) {
+							if ($key == 'lastupdated') {
+								continue;
+							}
+							if ($key == 'temperature') {
+								$value = $value / 100;
+							}
+							$eqLogic->checkAndUpdateCmd($key, $value);
+						}
 					}
+				} else if ($eqLogic->getConfiguration('category') == 'group') {
+					$obj = $groups[$eqLogic->getConfiguration('id')];
+					if (!$isReachable || !$obj->isOn()) {
+						$luminosity = 0;
+						$color = '#000000';
+					} else {
+						$luminosity = $obj->getBrightness();
+						if ($eqLogic->getConfiguration('id') != 0) {
+							$rgb = $obj->getRGB();
+							$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
+							if ($color == '#000000') {
+								$luminosity = 0;
+							}
+						}
+					}
+					$eqLogic->checkAndUpdateCmd('luminosity_state', $luminosity);
+					if ($eqLogic->getConfiguration('id') != 0) {
+						$eqLogic->checkAndUpdateCmd('color_state', $color);
+						$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;
+						$eqLogic->checkAndUpdateCmd('alert_state', $value);
+						$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
+						$eqLogic->checkAndUpdateCmd('rainbow_state', $value);
+					}
+				} else if ($eqLogic->getConfiguration('category') == 'light') {
+					echo $eqLogic->getName();
+					$obj = $lights[$eqLogic->getConfiguration('id')];
+					$isReachable = ($eqLogic->getConfiguration('alwaysOn', 0) == 0) ? $obj->isReachable() : true;
+					if (!$isReachable || !$obj->isOn()) {
+						$luminosity = 0;
+						$color = '#000000';
+					} else {
+						$rgb = $obj->getRGB();
+						print_r($rgb);
+						$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
+						$luminosity = $obj->getBrightness();
+						if ($color == '#000000') {
+							$luminosity = 0;
+						}
+					}
+					echo "\n============================\n";
+					$eqLogic->checkAndUpdateCmd('luminosity_state', $luminosity);
+					$eqLogic->checkAndUpdateCmd('color_state', $color);
+					$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;
+					$eqLogic->checkAndUpdateCmd('alert_state', $value);
+					$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
+					$eqLogic->checkAndUpdateCmd('rainbow_state', $value);
 				}
-				$eqLogic->checkAndUpdateCmd('luminosity_state', $luminosity);
-				$eqLogic->checkAndUpdateCmd('color_state', $color);
-				$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;
-				$eqLogic->checkAndUpdateCmd('alert_state', $value);
-				$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
-				$eqLogic->checkAndUpdateCmd('rainbow_state', $value);
 			} catch (Exception $e) {
 				if ($_eqLogic_id != null) {
 					log::add('philipsHue', 'error', $e->getMessage());
@@ -346,7 +427,9 @@ class philipsHue extends eqLogic {
 	/*     * *********************Méthodes d'instance************************* */
 
 	public function preInsert() {
-		$this->setCategory('light', 1);
+		if ($this->getConfiguration('category') != 'sensor') {
+			$this->setCategory('light', 1);
+		}
 	}
 
 	/*     * *********************Methode d'instance************************* */
@@ -397,10 +480,7 @@ class philipsHue extends eqLogic {
 		if ($this->getConfiguration('device') == '') {
 			return true;
 		}
-		$device_type = explode('::', $this->getConfiguration('device'));
-		$packettype = $device_type[0];
-		$subtype = $device_type[1];
-		$device = self::devicesParameters($packettype);
+		$device = self::devicesParameters($this->getConfiguration('device'));
 		if (!is_array($device)) {
 			return true;
 		}
@@ -545,8 +625,8 @@ class philipsHueCmd extends cmd {
 					$command->alert('none');
 					$command->on(false);
 				} else {
-					list($r, $g, $b) = str_split($_options['color'], 2);
-					$command->rgb(hexdec($r) / 255, hexdec($g) / 255, hexdec($b) / 255);
+					list($r, $g, $b) = str_split(str_replace('#', '', $_options['color']), 2);
+					$command->rgb(hexdec($r), hexdec($g), hexdec($b));
 				}
 				break;
 			case 'alert_on':

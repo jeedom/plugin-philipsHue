@@ -9,7 +9,6 @@
                 "display": {
                     "generic_type": "LIGHT_ON"
                 },
-                "value" : "Etat Luminosité",
                 "isVisible": 0,
                 "isHistorized": 0,
                 "logicalId": "on"
@@ -21,7 +20,6 @@
                 "display": {
                     "generic_type": "LIGHT_OFF"
                 },
-                "value" : "Etat Luminosité",
                 "isVisible": 0,
                 "isHistorized": 0,
                 "logicalId": "off"
@@ -41,7 +39,6 @@
                     "dashboard" : "light",
                     "mobile" : "light"
                 },
-                "value" : "Etat Luminosité",
                 "isVisible": 1,
                 "isHistorized": 0,
                 "logicalId": "luminosity"
@@ -53,7 +50,6 @@
                 "display": {
                     "generic_type": "LIGHT_SET_COLOR"
                 },
-                "value" : "Etat Couleur",
                 "isVisible": 1,
                 "isHistorized": 0,
                 "logicalId": "color"
@@ -65,7 +61,6 @@
                 "display": {
                     "generic_type": "LIGHT_MODE"
                 },
-                "value" : "Etat Alerte",
                 "isVisible": 0,
                 "isHistorized": 0,
                 "logicalId": "alert_on"
@@ -77,7 +72,6 @@
                 "display": {
                     "generic_type": "LIGHT_MODE"
                 },
-                "value" : "Etat Alerte",
                 "isVisible": 0,
                 "isHistorized": 0,
                 "logicalId": "alert_off"
@@ -89,7 +83,6 @@
                 "display": {
                     "generic_type": "LIGHT_MODE"
                 },
-                "value" : "Etat Arc en ciel",
                 "isVisible": 0,
                 "isHistorized": 0,
                 "logicalId": "rainbow_on"
@@ -101,7 +94,6 @@
                 "display": {
                     "generic_type": "LIGHT_MODE"
                 },
-                "value" : "Etat Arc en ciel",
                 "isVisible": 0,
                 "isHistorized": 0,
                 "logicalId": "rainbow_off"
@@ -113,7 +105,6 @@
                 "display": {
                     "generic_type": "DONT"
                 },
-                "value" : "Etat Couleur",
                 "isVisible": 0,
                 "isHistorized": 0,
                 "logicalId": "transition_state"

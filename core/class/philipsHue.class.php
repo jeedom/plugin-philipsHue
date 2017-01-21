@@ -23,6 +23,7 @@ class philipsHue extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
 	private static $_hue = null;
+	private static $_eqLogics = null;
 
 	/*     * ***********************Methode static*************************** */
 
@@ -66,6 +67,10 @@ class philipsHue extends eqLogic {
 		}
 		$cron->setEnable($_mode);
 		$cron->save();
+	}
+
+	public static function cronDaily() {
+		self::deamon_start();
 	}
 
 	public static function findBridgeIp() {
@@ -258,6 +263,7 @@ class philipsHue extends eqLogic {
 				}
 			}
 		}
+		self::deamon_start();
 	}
 
 	public static function pull($_eqLogic_id = null) {
@@ -266,9 +272,12 @@ class philipsHue extends eqLogic {
 		} catch (Exception $e) {
 			return;
 		}
+		if (self::$_eqLogics == null) {
+			self::$_eqLogics = self::byType('philipsHue');
+		}
 		$groups = $hue->getgroups();
 		$lights = $hue->getLights();
-		foreach (eqLogic::byType('philipsHue') as $eqLogic) {
+		foreach (self::$_eqLogics as $eqLogic) {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
 			}

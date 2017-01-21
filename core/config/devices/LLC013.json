@@ -90,7 +90,6 @@
                 "display": {
                     "generic_type": "DONT"
                 },
-                "value" : "Etat Couleur",
                 "isVisible": 0,
                 "isHistorized": 0,
                 "logicalId": "alert_state"
@@ -106,7 +105,6 @@
                     "dashboard" : "btnAlert",
                     "mobile" : "alert"
                 },
-                "value" : "Etat Alerte",
                 "isVisible": 0,
                 "isHistorized": 0,
                 "logicalId": "alert_on"
@@ -134,7 +132,6 @@
                 "display": {
                     "generic_type": "DONT"
                 },
-                "value" : "Etat Couleur",
                 "isVisible": 0,
                 "isHistorized": 0,
                 "logicalId": "rainbow_state"

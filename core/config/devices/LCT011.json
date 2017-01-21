@@ -121,7 +121,6 @@
                 "display": {
                     "generic_type": "DONT"
                 },
-                "value" : "Etat Couleur",
                 "isVisible": 0,
                 "isHistorized": 0,
                 "logicalId": "alert_state"
@@ -169,7 +168,6 @@
                     "dashboard" : "btnCircle",
                     "mobile" : "circle"
                 },
-                "value" : "Etat Couleur",
                 "isVisible": 0,
                 "isHistorized": 0,
                 "logicalId": "rainbow_state"

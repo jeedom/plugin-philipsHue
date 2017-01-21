@@ -472,7 +472,6 @@ class philipsHue extends eqLogic {
 						}
 					}
 					if (!$find) {
-						print_r($scene);
 						continue;
 					}
 				} else {

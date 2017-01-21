@@ -449,39 +449,39 @@ class philipsHue extends eqLogic {
 		if ($this->getConfiguration('applyDevice') != $this->getConfiguration('device')) {
 			$this->applyModuleConfiguration();
 		}
-		if ($this->getLogicalId() == 'group0') {
-			$scenes_id = array();
+		$groups = self::getPhilipsHue()->getgroups();
+		$lights = self::getPhilipsHue()->getlights();
+		$scene_cmd = $this->getCmd('action', 'scene');
+		if ($scene_cmd != null) {
+			$scene_str = '';
 			foreach (self::getPhilipsHue()->getScenes() as $scene) {
-				$scenes_id[$scene->getId()] = $scene->getId();
 				$name = $scene->getName();
 				if ($name == '') {
 					continue;
 				}
-				$cmd = $this->getCmd(null, 'set_scene_' . $scene->getId());
-				if (!is_object($cmd)) {
-					$cmd = new philipsHueCmd();
-					$cmd->setLogicalId('set_scene_' . $scene->getId());
-					$cmd->setName(__('Scène ' . $name, __FILE__));
-					$cmd->setIsVisible(0);
-				}
-				$cmd->setType('action');
-				$cmd->setSubType('other');
-				$cmd->setConfiguration('id', $scene->getId());
-				$cmd->setEqLogic_id($this->getId());
-				try {
-					$cmd->save();
-				} catch (Exception $e) {
-
-				}
-			}
-			foreach ($this->getCmd('action') as $cmd) {
-				if (strpos($cmd->getLogicalId(), 'set_scene_') === false) {
+				if ($this->getConfiguration('category') == 'group') {
+					if (!isset($groups[$this->getConfiguration('id')])) {
+						continue;
+					}
+					$find = false;
+					$lights_ids = $groups[$this->getConfiguration('id')]->getLightIds();
+					foreach ($scene->getLightIds() as $value) {
+						if (in_array($value, $lights_ids)) {
+							$find = true;
+							break;
+						}
+					}
+					if (!$find) {
+						print_r($scene);
+						continue;
+					}
+				} else {
 					continue;
 				}
-				if (!isset($scenes_id[$cmd->getConfiguration('id')])) {
-					$cmd->remove();
-				}
+				$scene_str .= $scene->getId() . '|' . $name . ';';
 			}
+			$scene_cmd->setConfiguration('listValue', trim($scene_str, ';'));
+			$scene_cmd->save();
 		}
 	}
 
@@ -664,13 +664,9 @@ class philipsHueCmd extends cmd {
 					$transition->event($_options['slider']);
 				}
 				return;
-			default:
-				if (strpos($this->getLogicalId(), 'set_scene_') !== false) {
-					$command = new \Phue\Command\SetGroupState(0);
-					$command->scene($this->getConfiguration('id'));
-					$hue->sendCommand($command);
-				}
-				return;
+			case 'scene':
+				$command->scene($_options['select']);
+				break;
 		}
 		$hue->sendCommand($command);
 	}

@@ -154,6 +154,17 @@
                 "isVisible": 0,
                 "isHistorized": 0,
                 "logicalId": "transition"
+            },
+            {
+                "name": "Scene",
+                "type": "action",
+                "subtype": "select",
+                "display": {
+                    "generic_type": "DONT"
+                },
+                "isVisible": 1,
+                "isHistorized": 0,
+                "logicalId": "scene"
             }
         ]
     }

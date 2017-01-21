@@ -537,7 +537,7 @@ class philipsHueCmd extends cmd {
 					$command->on(false);
 				} else {
 					list($r, $g, $b) = str_split($_options['color'], 2);
-					$command->setRGB(hexdec($r) / 255, hexdec($g) / 255, hexdec($b) / 255);
+					$command->rgb(hexdec($r) / 255, hexdec($g) / 255, hexdec($b) / 255);
 				}
 				break;
 			case 'alert_on':

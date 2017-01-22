@@ -338,10 +338,9 @@ class philipsHue extends eqLogic {
 				if ($eqLogic->getConfiguration('category') == 'sensor') {
 					$sensor = $sensors[$eqLogic->getConfiguration('id')];
 					foreach ($sensor as $id => $obj) {
-						$states = $obj->getState();
 						$lastupdate = 0;
-						if (isset($states->lastupdated)) {
-							$lastupdate = strtotime($states->lastupdated) + 3600;
+						if (isset($obj->getState()->lastupdated)) {
+							$lastupdate = strtotime($obj->getState()->lastupdated) + 3600;
 						}
 						foreach ($obj->getState() as $key => $value) {
 							if ($key == 'lastupdated') {
@@ -367,6 +366,13 @@ class philipsHue extends eqLogic {
 								}
 							}
 							$eqLogic->checkAndUpdateCmd($key, $value, date('Y-m-d H:i:s', $lastupdate));
+						}
+						foreach ($obj->getConfig() as $key => $value) {
+							if ($key == 'battery') {
+								$eqLogic->batteryStatus($value);
+								continue;
+							}
+							$eqLogic->checkAndUpdateCmd($key, $value);
 						}
 					}
 				} else if ($eqLogic->getConfiguration('category') == 'group') {
@@ -591,6 +597,24 @@ class philipsHueCmd extends cmd {
 			return;
 		}
 		$eqLogic = $this->getEqLogic();
+		$hue = philipsHue::getPhilipsHue();
+		if ($eqLogic->getConfiguration('category') == 'sensor') {
+			$sensors = philipsHue::sanitizeSensors($hue->getSensors());
+			if (!isset($sensors[$eqLogic->getConfiguration('id')])) {
+				return;
+			}
+			$sensor = $sensors[$eqLogic->getConfiguration('id')];
+			foreach ($sensor as $mine) {
+				foreach ($this->getConfiguration('toUpdate') as $value) {
+					if ($value['type'] == 'config') {
+						$command = new \Phue\Command\UpdateSensorConfig($mine);
+						$command = $command->configAttribute($value['key'], (boolean) $value['value']);
+						$hue->sendCommand($command);
+					}
+				}
+			}
+			return;
+		}
 		$transition = $eqLogic->getCmd(null, 'transition_state');
 		$transistion_time = 0;
 		if (is_object($transition)) {
@@ -600,7 +624,7 @@ class philipsHueCmd extends cmd {
 			}
 		}
 		$transistion_time = ($transistion_time == 0) ? 1 : $transistion_time;
-		$hue = philipsHue::getPhilipsHue();
+
 		switch ($eqLogic->getConfiguration('category')) {
 			case 'light':
 				$command = new \Phue\Command\SetLightState($eqLogic->getConfiguration('id'));

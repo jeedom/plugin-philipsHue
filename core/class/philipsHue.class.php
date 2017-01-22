@@ -366,7 +366,7 @@ class philipsHue extends eqLogic {
 										break;
 								}
 							}
-							$eqLogic->checkAndUpdateCmd($key, $value, $lastupdate);
+							$eqLogic->checkAndUpdateCmd($key, $value, date('Y-m-d H:i:s', $lastupdate));
 						}
 					}
 				} else if ($eqLogic->getConfiguration('category') == 'group') {

@@ -338,6 +338,11 @@ class philipsHue extends eqLogic {
 				if ($eqLogic->getConfiguration('category') == 'sensor') {
 					$sensor = $sensors[$eqLogic->getConfiguration('id')];
 					foreach ($sensor as $id => $obj) {
+						$states = $obj->getState();
+						$lastupdate = 0;
+						if (isset($states->lastupdated)) {
+							$lastupdate = strtotime($states->lastupdated) + 3600;
+						}
 						foreach ($obj->getState() as $key => $value) {
 							if ($key == 'lastupdated') {
 								continue;
@@ -361,7 +366,7 @@ class philipsHue extends eqLogic {
 										break;
 								}
 							}
-							$eqLogic->checkAndUpdateCmd($key, $value);
+							$eqLogic->checkAndUpdateCmd($key, $value, $lastupdate);
 						}
 					}
 				} else if ($eqLogic->getConfiguration('category') == 'group') {

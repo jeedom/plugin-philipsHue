@@ -380,7 +380,7 @@ class Light implements LightInterface {
 	 * @return int Color temperature value
 	 */
 	public function getColorTemp() {
-		return $this->attributes->state->ct;
+		return @$this->attributes->state->ct;
 	}
 
 	/**

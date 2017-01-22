@@ -8,7 +8,10 @@
 				"subtype": "numeric",
 				"isVisible": 1,
 				"isHistorized": 1,
-				"logicalId": "lightlevel"
+				"logicalId": "lightlevel",
+				"configuration" : {
+					"onType" : "ZLLLightLevel"
+				}
 			},
 			{
 				"name": "Nuit",
@@ -16,7 +19,10 @@
 				"subtype": "binary",
 				"isVisible": 1,
 				"isHistorized": 0,
-				"logicalId": "dark"
+				"logicalId": "dark",
+				"configuration" : {
+					"onType" : "ZLLLightLevel"
+				}
 			},
 			{
 				"name": "Jour",
@@ -24,7 +30,10 @@
 				"subtype": "binary",
 				"isVisible": 1,
 				"isHistorized": 0,
-				"logicalId": "daylight"
+				"logicalId": "daylight",
+				"configuration" : {
+					"onType" : "ZLLLightLevel"
+				}
 			},
 			{
 				"name": "Température",
@@ -33,7 +42,10 @@
 				"unite" : "°C",
 				"isVisible": 1,
 				"isHistorized": 1,
-				"logicalId": "temperature"
+				"logicalId": "temperature",
+				"configuration" : {
+					"onType" : "ZLLTemperature"
+				}
 			},
 			{
 				"name": "Présence",
@@ -41,7 +53,10 @@
 				"subtype": "binary",
 				"isVisible": 1,
 				"isHistorized": 1,
-				"logicalId": "presence"
+				"logicalId": "presence",
+				"configuration" : {
+					"onType" : "ZLLPresence"
+				}
 			},
 			{
 				"name": "Etat",
@@ -49,7 +64,10 @@
 				"subtype": "binary",
 				"isVisible": 0,
 				"isHistorized": 0,
-				"logicalId": "on"
+				"logicalId": "on",
+				"configuration" : {
+					"onType" : "ZLLPresence"
+				}
 			},
 			{
 				"name": "Activer",
@@ -64,7 +82,7 @@
 					"mobile" : "circle"
 				},
 				"configuration" : {
-					"toUpdate" : [{"type" : "config","key" : "on","value":1}]
+					"toUpdate" : [{"type" : "config","key" : "on","value":1,"onType" : "ZLLPresence","valueType" : "boolean"}]
 				}
 			},
 			{
@@ -80,7 +98,7 @@
 					"mobile" : "circle"
 				},
 				"configuration" : {
-					"toUpdate" : [{"type" : "config","key" : "on","value":0}]
+					"toUpdate" : [{"type" : "config","key" : "on","value":0,"onType" : "ZLLPresence","valueType" : "boolean"}]
 				}
 			}
 		]

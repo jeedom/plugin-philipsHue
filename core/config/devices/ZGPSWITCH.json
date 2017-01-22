@@ -10,7 +10,8 @@
 				"isHistorized": 0,
 				"logicalId": "buttonevent",
 				"configuration" : {
-					"repeatEventManagement" : "always"
+					"repeatEventManagement" : "always",
+					"onType" : "ZGPSwitch"
 				}
 			},
 			{
@@ -19,7 +20,10 @@
 				"subtype": "binary",
 				"isVisible": 0,
 				"isHistorized": 0,
-				"logicalId": "on"
+				"logicalId": "on",
+				"configuration" : {
+					"onType" : "ZGPSwitch"
+				}
 			},
 			{
 				"name": "Activer",
@@ -34,7 +38,7 @@
 					"mobile" : "circle"
 				},
 				"configuration" : {
-					"toUpdate" : [{"type" : "config","key" : "on","value":1}]
+					"toUpdate" : [{"type" : "config","key" : "on","value":1,"onType" : "ZGPSwitch","valueType" : "boolean"}]
 				}
 			},
 			{
@@ -50,7 +54,7 @@
 					"mobile" : "circle"
 				},
 				"configuration" : {
-					"toUpdate" : [{"type" : "config","key" : "on","value":0}]
+					"toUpdate" : [{"type" : "config","key" : "on","value":0,"onType" : "ZGPSwitch","valueType" : "boolean"}]
 				}
 			}
 		]

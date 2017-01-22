@@ -346,6 +346,13 @@ class philipsHue extends eqLogic {
 							if ($key == 'lastupdated') {
 								continue;
 							}
+							$cmd = $eqLogic->getCmd('info', $key);
+							if (!is_object($cmd)) {
+								continue;
+							}
+							if ($cmd->getConfiguration('onType') != '' && $cmd->getConfiguration('onType') != $obj->getType()) {
+								continue;
+							}
 							if ($key == 'temperature') {
 								$value = $value / 100;
 							}
@@ -372,7 +379,14 @@ class philipsHue extends eqLogic {
 								$eqLogic->batteryStatus($value);
 								continue;
 							}
-							$eqLogic->checkAndUpdateCmd($key, $value);
+							$cmd = $eqLogic->getCmd('info', $key);
+							if (!is_object($cmd)) {
+								continue;
+							}
+							if ($cmd->getConfiguration('onType') != '' && $cmd->getConfiguration('onType') != $obj->getType()) {
+								continue;
+							}
+							$eqLogic->checkAndUpdateCmd($cmd, $value);
 						}
 					}
 				} else if ($eqLogic->getConfiguration('category') == 'group') {
@@ -606,9 +620,23 @@ class philipsHueCmd extends cmd {
 			$sensor = $sensors[$eqLogic->getConfiguration('id')];
 			foreach ($sensor as $mine) {
 				foreach ($this->getConfiguration('toUpdate') as $value) {
+					if (isset($value['onType']) && $value['onType'] != $mine->getType()) {
+						continue;
+					}
+					$toSet = $value['value'];
+					if (isset($value['valueType'])) {
+						switch ($value['valueType']) {
+							case 'boolean':
+								$toSet = (boolean) $value['value'];
+								break;
+							case 'int':
+								$toSet = (int) $value['value'];
+								break;
+						}
+					}
 					if ($value['type'] == 'config') {
 						$command = new \Phue\Command\UpdateSensorConfig($mine);
-						$command = $command->configAttribute($value['key'], (boolean) $value['value']);
+						$command = $command->configAttribute($value['key'], $toSet);
 						$hue->sendCommand($command);
 					}
 				}

@@ -53,6 +53,9 @@ function philipsHue_update() {
 	$cron->save();
 	$cron->stop();
 	foreach (philipsHue::byType('philipsHue') as $philipsHue) {
+		if ($philipsHue->getConfiguration('device') == '') {
+			$philipsHue->setConfiguration('device', $philipsHue->getConfiguration('model'));
+		}
 		$philipsHue->save();
 	}
 }

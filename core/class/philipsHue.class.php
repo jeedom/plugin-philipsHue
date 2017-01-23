@@ -101,47 +101,6 @@ class philipsHue extends eqLogic {
 		return self::$_hue;
 	}
 
-	public static function syncGroup() {
-		$hue = self::getPhilipsHue();
-		for ($i = 1; $i < 17; $i++) {
-			$group_config = config::byKey('group' . $i, 'philipsHue');
-			$group_id = '';
-			foreach ($hue->getGroups() as $groupId => $group) {
-				if ($group->getName() == 'Jeedom ' . $i) {
-					$group_id = $groupId;
-				}
-			}
-			if (trim($group_config) == '' || trim($group_config) == '-') {
-				if ($group_id != '') {
-					$hue->getGroups()[$group_id]->delete();
-				}
-				continue;
-			}
-			$lights = explode(',', $group_config);
-			foreach ($lights as $light) {
-				if (!is_numeric($light)) {
-					throw new Exception(__('Tous les ids de lampe pour les groupes doivent être des chiffres : ', __FILE__) . $group_config);
-
-				}
-			}
-			if ($group_id == '') {
-				$hue->sendCommand(
-					new \Phue\Command\CreateGroup('Jeedom ' . $i, $lights)
-				);
-				continue;
-			}
-			$group = $hue->getGroups()[$group_id];
-			$group->setLights($lights);
-		}
-	}
-
-	public static function deleteGroup() {
-		$hue = self::getPhilipsHue();
-		foreach ($hue->getGroups() as $group) {
-			$group->delete();
-		}
-	}
-
 	public function createUser() {
 		if (config::byKey('bridge_ip', 'philipsHue') == '') {
 			throw new Exception(__('L\'adresse du bridge ne peut etre vide', __FILE__));
@@ -201,7 +160,6 @@ class philipsHue extends eqLogic {
 		if (!$hue->sendCommand(new \Phue\Command\IsAuthorized)) {
 			throw new Exception(__('Impossible de creer l\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ', __FILE__) . $e->getMessage());
 		}
-		self::syncGroup();
 		$lights_exist = array();
 		$groups_exist = array(0 => 0);
 		$sensors_exist = array();
@@ -478,7 +436,7 @@ class philipsHue extends eqLogic {
 		$groups = self::getPhilipsHue()->getgroups();
 		$lights = self::getPhilipsHue()->getlights();
 		$scene_cmd = $this->getCmd('action', 'scene');
-		if ($scene_cmd != null && $this->getConfiguration('category') == 'group') {
+		if ($this->getConfiguration('category') == 'group') {
 			$scene_str = '';
 			foreach (self::getPhilipsHue()->getScenes() as $scene) {
 				$name = $scene->getName();
@@ -501,8 +459,30 @@ class philipsHue extends eqLogic {
 				}
 				$scene_str .= $scene->getId() . '|' . $name . ';';
 			}
-			$scene_cmd->setConfiguration('listValue', trim($scene_str, ';'));
-			$scene_cmd->save();
+			if ($scene_str != '') {
+				$scene_cmd = $this->getCmd('action', 'scene');
+				if (!is_object($scene_cmd)) {
+					$scene_cmd = new philipsHueCmd();
+					$scene_cmd->setName('Scene');
+					$scene_cmd->setType('action');
+					$scene_cmd->setSubtype('select');
+					$scene_cmd->setEqLogic_id($this->getId());
+					$scene_cmd->setIsVisible(1);
+					$scene_cmd->setLogicalId('scene');
+				}
+				$scene_cmd->setConfiguration('listValue', trim($scene_str, ';'));
+				$scene_cmd->save();
+			} else {
+				$scene_cmd = $this->getCmd('action', 'scene');
+				if (is_object($scene_cmd)) {
+					$scene_cmd->remove();
+				}
+			}
+		} else {
+			$scene_cmd = $this->getCmd('action', 'scene');
+			if (is_object($scene_cmd)) {
+				$scene_cmd->remove();
+			}
 		}
 	}
 

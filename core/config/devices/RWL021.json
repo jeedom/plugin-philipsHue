@@ -1,0 +1,62 @@
+{
+	"RWL021": {
+		"name": "Hue dimmer",
+		"commands": [
+			{
+				"name": "Bouton",
+				"type": "info",
+				"subtype": "numeric",
+				"isVisible": 0,
+				"isHistorized": 0,
+				"logicalId": "buttonevent",
+				"configuration" : {
+					"repeatEventManagement" : "always",
+					"onType" : "ZGPSwitch"
+				}
+			},
+			{
+				"name": "Etat",
+				"type": "info",
+				"subtype": "binary",
+				"isVisible": 0,
+				"isHistorized": 0,
+				"logicalId": "on",
+				"configuration" : {
+					"onType" : "ZGPSwitch"
+				}
+			},
+			{
+				"name": "Activer",
+				"type": "action",
+				"subtype": "other",
+				"value" : "Etat",
+				"isVisible": 0,
+				"isHistorized": 0,
+				"logicalId": "enable",
+				"template":{
+					"dashboard" : "btnCircle",
+					"mobile" : "circle"
+				},
+				"configuration" : {
+					"toUpdate" : [{"type" : "config","key" : "on","value":1,"onType" : "ZGPSwitch","valueType" : "boolean"}]
+				}
+			},
+			{
+				"name": "Désactiver",
+				"type": "action",
+				"subtype": "other",
+				"value" : "Etat",
+				"isVisible": 0,
+				"isHistorized": 0,
+				"logicalId": "disable",
+				"template":{
+					"dashboard" : "btnCircle",
+					"mobile" : "circle"
+				},
+				"configuration" : {
+					"toUpdate" : [{"type" : "config","key" : "on","value":0,"onType" : "ZGPSwitch","valueType" : "boolean"}]
+				}
+			}
+		]
+	}
+}

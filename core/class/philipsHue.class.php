@@ -347,32 +347,16 @@ class philipsHue extends eqLogic {
 							$eqLogic->checkAndUpdateCmd($cmd, $value);
 						}
 					}
-				} else if ($eqLogic->getConfiguration('category') == 'group') {
-					$obj = $groups[$eqLogic->getConfiguration('id')];
-					if (!$isReachable || !$obj->isOn()) {
-						$luminosity = 0;
-						$color = '#000000';
-					} else {
-						$luminosity = $obj->getBrightness();
-						if ($eqLogic->getConfiguration('id') != 0) {
-							$rgb = $obj->getRGB();
-							$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
-							if ($color == '#000000') {
-								$luminosity = 0;
-							}
-						}
+				} else {
+					switch ($eqLogic->getConfiguration('category')) {
+						case 'light':
+							$obj = $lights[$eqLogic->getConfiguration('id')];
+							$isReachable = ($eqLogic->getConfiguration('alwaysOn', 0) == 0) ? $obj->isReachable() : true;
+							break;
+						case 'group':
+							$obj = $groups[$eqLogic->getConfiguration('id')];
+							break;
 					}
-					$eqLogic->checkAndUpdateCmd('luminosity_state', $luminosity);
-					if ($eqLogic->getConfiguration('id') != 0) {
-						$eqLogic->checkAndUpdateCmd('color_state', $color);
-						$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;
-						$eqLogic->checkAndUpdateCmd('alert_state', $value);
-						$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
-						$eqLogic->checkAndUpdateCmd('rainbow_state', $value);
-					}
-				} else if ($eqLogic->getConfiguration('category') == 'light') {
-					$obj = $lights[$eqLogic->getConfiguration('id')];
-					$isReachable = ($eqLogic->getConfiguration('alwaysOn', 0) == 0) ? $obj->isReachable() : true;
 					if (!$isReachable || !$obj->isOn()) {
 						$luminosity = 0;
 						$color = '#000000';
@@ -384,13 +368,28 @@ class philipsHue extends eqLogic {
 							$luminosity = 0;
 						}
 					}
-					$eqLogic->checkAndUpdateCmd('luminosity_state', $luminosity);
-					$eqLogic->checkAndUpdateCmd('color_state', $color);
-					$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;
-					$eqLogic->checkAndUpdateCmd('alert_state', $value);
-					$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
-					$eqLogic->checkAndUpdateCmd('rainbow_state', $value);
-					$eqLogic->checkAndUpdateCmd('color_temp_state', $obj->getColorTemp());
+					$cmd = $eqLogic->getCmd('info', 'luminosity_state');
+					if (is_object($cmd)) {
+						$eqLogic->checkAndUpdateCmd($cmd, $luminosity);
+					}
+					$cmd = $eqLogic->getCmd('info', 'color_state');
+					if (is_object($cmd)) {
+						$eqLogic->checkAndUpdateCmd($cmd, $color);
+					}
+					$cmd = $eqLogic->getCmd('info', 'alert_state');
+					if (is_object($cmd)) {
+						$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;
+						$eqLogic->checkAndUpdateCmd($cmd, $value);
+					}
+					$cmd = $eqLogic->getCmd('info', 'rainbow_state');
+					if (is_object($cmd)) {
+						$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
+						$eqLogic->checkAndUpdateCmd($cmd, $value);
+					}
+					$cmd = $eqLogic->getCmd('info', 'color_temp_state');
+					if (is_object($cmd)) {
+						$eqLogic->checkAndUpdateCmd($cmd, $obj->getColorTemp());
+					}
 				}
 			} catch (Exception $e) {
 				if ($_eqLogic_id != null) {

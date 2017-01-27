@@ -280,8 +280,8 @@ class Group implements LightInterface {
 		// 'y' => $this->attributes->action->xy[1],
 		// ];
 		return array(
-			'x' => $this->attributes->action->xy[0],
-			'y' => $this->attributes->action->xy[1],
+			'x' => @$this->attributes->action->xy[0],
+			'y' => @$this->attributes->action->xy[1],
 		);
 	}
 

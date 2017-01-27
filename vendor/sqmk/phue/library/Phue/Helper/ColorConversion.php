@@ -67,10 +67,13 @@ class ColorConversion {
 	 *
 	 * @return array red, green, blue key/value
 	 */
-	public static function convertXYToRGB($x, $y, $bri = 255) {
-		// Calculate XYZ
+	public static function convertXYToRGB($x, $y = null, $bri = 255) {
+		if ($y === null) {
+			return array('red' => 0, 'green' => 0, 'blue' => 0);
+		}
 		$z = 1.0 - $x - $y;
 		$xyz['y'] = $bri / 255;
+
 		$xyz['x'] = ($xyz['y'] / $y) * $x;
 		$xyz['z'] = ($xyz['y'] / $y) * $z;
 

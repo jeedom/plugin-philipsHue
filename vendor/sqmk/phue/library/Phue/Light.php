@@ -305,8 +305,8 @@ class Light implements LightInterface {
 	 */
 	public function getXY() {
 		return array(
-			'x' => $this->attributes->state->xy[0],
-			'y' => $this->attributes->state->xy[1],
+			'x' => @$this->attributes->state->xy[0],
+			'y' => @$this->attributes->state->xy[1],
 		);
 	}
 

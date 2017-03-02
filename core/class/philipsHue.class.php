@@ -495,78 +495,7 @@ class philipsHue extends eqLogic {
 		if (!is_array($device)) {
 			return true;
 		}
-		if (isset($device['configuration'])) {
-			foreach ($device['configuration'] as $key => $value) {
-				$this->setConfiguration($key, $value);
-			}
-		}
-		if (isset($device['category'])) {
-			foreach ($device['category'] as $key => $value) {
-				$this->setCategory($key, $value);
-			}
-		}
-		$cmd_order = 0;
-		$link_cmds = array();
-		$link_actions = array();
-		foreach ($device['commands'] as $command) {
-			$cmd = null;
-			foreach ($this->getCmd() as $liste_cmd) {
-				if (isset($command['logicalId']) && $liste_cmd->getLogicalId() == $command['logicalId']) {
-					$cmd = $liste_cmd;
-					break;
-				}
-			}
-			try {
-				if ($cmd == null || !is_object($cmd)) {
-					$cmd = new philipsHueCmd();
-					$cmd->setOrder($cmd_order);
-					$cmd->setEqLogic_id($this->getId());
-				} else {
-					$command['name'] = $cmd->getName();
-					if (isset($command['display'])) {
-						unset($command['display']);
-					}
-				}
-				utils::a2o($cmd, $command);
-				$cmd->save();
-				if (isset($command['value'])) {
-					$link_cmds[$cmd->getId()] = $command['value'];
-				}
-				if (isset($command['configuration']) && isset($command['configuration']['updateCmdId'])) {
-					$link_actions[$cmd->getId()] = $command['configuration']['updateCmdId'];
-				}
-				$cmd_order++;
-			} catch (Exception $exc) {
-
-			}
-		}
-		if (count($link_cmds) > 0) {
-			foreach ($this->getCmd() as $eqLogic_cmd) {
-				foreach ($link_cmds as $cmd_id => $link_cmd) {
-					if ($link_cmd == $eqLogic_cmd->getName()) {
-						$cmd = cmd::byId($cmd_id);
-						if (is_object($cmd)) {
-							$cmd->setValue($eqLogic_cmd->getId());
-							$cmd->save();
-						}
-					}
-				}
-			}
-		}
-		if (count($link_actions) > 0) {
-			foreach ($this->getCmd() as $eqLogic_cmd) {
-				foreach ($link_actions as $cmd_id => $link_action) {
-					if ($link_action == $eqLogic_cmd->getName()) {
-						$cmd = cmd::byId($cmd_id);
-						if (is_object($cmd)) {
-							$cmd->setConfiguration('updateCmdId', $eqLogic_cmd->getId());
-							$cmd->save();
-						}
-					}
-				}
-			}
-		}
-		$this->save();
+		$this->import($device);
 	}
 
 	public function getImgFilePath() {

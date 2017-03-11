@@ -359,15 +359,16 @@ class philipsHue extends eqLogic {
 							break;
 					}
 					if (!$isReachable || !$obj->isOn()) {
-						echo "je passe";
 						$luminosity = 0;
 						$color = '#000000';
 					} else {
-						$rgb = $obj->getRGB();
-						$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
 						$luminosity = $obj->getBrightness();
-						if ($color == '#000000' && is_object($eqLogic->getCmd('info', 'color_state'))) {
-							$luminosity = 0;
+						if (is_object($eqLogic->getCmd('info', 'color_state'))) {
+							$rgb = $obj->getRGB();
+							$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
+							if ($color == '#000000') {
+								$luminosity = 0;
+							}
 						}
 					}
 					$cmd = $eqLogic->getCmd('info', 'luminosity_state');

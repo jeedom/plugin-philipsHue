@@ -284,6 +284,7 @@ class philipsHue extends eqLogic {
 		$groups = $hue->getgroups();
 		$lights = $hue->getLights();
 		$sensors = self::sanitizeSensors($hue->getSensors());
+
 		foreach (self::$_eqLogics as $eqLogic) {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
@@ -358,13 +359,14 @@ class philipsHue extends eqLogic {
 							break;
 					}
 					if (!$isReachable || !$obj->isOn()) {
+						echo "je passe";
 						$luminosity = 0;
 						$color = '#000000';
 					} else {
 						$rgb = $obj->getRGB();
 						$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
 						$luminosity = $obj->getBrightness();
-						if ($color == '#000000') {
+						if ($color == '#000000' && is_object($eqLogic->getCmd('info', 'color_state'))) {
 							$luminosity = 0;
 						}
 					}

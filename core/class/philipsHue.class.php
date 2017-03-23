@@ -509,7 +509,11 @@ class philipsHue extends eqLogic {
 	}
 
 	public function getImage() {
-		return 'plugins/philipsHue/core/config/devices/' . $this->getConfiguration('device') . '.png';
+		$imgpath = $this->getImgFilePath();
+		if ($imgpath === false) {
+			return 'plugins/philipsHue/plugin_info/philipsHue_icon.png';
+		}
+		return 'plugins/philipsHue/core/config/devices/' . $imgpath;
 	}
 
 }

@@ -124,7 +124,7 @@
                 "logicalId": "transition_state"
             },
             {
-                "name": "Arc en ciel On",
+                "name": "Transition",
                 "type": "action",
                 "subtype": "slider",
                 "display": {

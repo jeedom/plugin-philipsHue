@@ -465,7 +465,7 @@ class philipsHue extends eqLogic {
 				$scene_cmd = $this->getCmd('action', 'scene');
 				if (!is_object($scene_cmd)) {
 					$scene_cmd = new philipsHueCmd();
-					$scene_cmd->setName('Scene');
+					$scene_cmd->setName(__('Scene', __FILE__));
 					$scene_cmd->setType('action');
 					$scene_cmd->setSubtype('select');
 					$scene_cmd->setEqLogic_id($this->getId());
@@ -486,6 +486,20 @@ class philipsHue extends eqLogic {
 				$scene_cmd->remove();
 			}
 		}
+		$animation = $this->getCmd('action', 'animation');
+		if (!is_object($animation)) {
+			$animation = new philipsHueCmd();
+			$animation->setName(__('Animation', __FILE__));
+			$animation->setType('action');
+			$animation->setSubtype('message');
+			$animation->setEqLogic_id($this->getId());
+			$animation->setIsVisible(0);
+			$animation->setLogicalId('animation');
+		}
+		$animation->setDisplay('title_possibility_list', json_encode(array('sunset', 'sunrise')));
+		$animation->setDisplay('message_placeholder', __('Options', __FILE__));
+		$animation->setDisplay('title_placeholder', __('Nom de l\'animation', __FILE__));
+		$animation->save();
 	}
 
 	public function applyModuleConfiguration() {
@@ -514,6 +528,25 @@ class philipsHue extends eqLogic {
 			return 'plugins/philipsHue/plugin_info/philipsHue_icon.png';
 		}
 		return 'plugins/philipsHue/core/config/devices/' . $imgpath;
+	}
+
+	public function animation($_animation, $_options) {
+		if (count(system::ps('core/php/jeeHueAnimation.php id=' . $this->getId())) > 0) {
+			return true;
+		}
+		$cmd = 'php ' . dirname(__FILE__) . '/../../core/php/jeeHueAnimation.php id=' . $this->getId();
+		$cmd .= ' animation=' . $_animation;
+		$cmd .= ' ' . $_options;
+		$cmd .= ' >> ' . log::getPathToLog('philipsHue_animation') . ' 2>&1 &';
+
+		shell_exec($cmd);
+	}
+
+	public function stopAnimation() {
+		if (count(system::ps('core/php/jeeHueAnimation.php id=' . $this->getId())) > 0) {
+			system::kill('core/php/jeeHueAnimation.php id=' . $this->getId(), false);
+		}
+		return true;
 	}
 
 }
@@ -584,6 +617,9 @@ class philipsHueCmd extends cmd {
 		}
 		$command->transitionTime($transistion_time);
 		$command->on(true);
+		if ($this->getLogicalId() != 'animation') {
+			$eqLogic->stopAnimation();
+		}
 		switch ($this->getLogicalId()) {
 			case 'on':
 
@@ -640,6 +676,10 @@ class philipsHueCmd extends cmd {
 				return;
 			case 'scene':
 				$command->scene($_options['select']);
+				break;
+			case 'animation':
+				$eqLogic->animation($_options['title'], $_options['message']);
+				return;
 				break;
 		}
 		$hue->sendCommand($command);

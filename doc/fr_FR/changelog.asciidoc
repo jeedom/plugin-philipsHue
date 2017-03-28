@@ -1,5 +1,9 @@
 == CHangelog
 
+=== 28/03/2017
+
+- Ajout d'animation (levé et couché de soleil), attention toute les lampes ne sont pas forcement compatible
+
 === 21/21/2017
 
 - Support du hue motion

@@ -52,18 +52,22 @@ try {
 	switch (init('animation')) {
 		case 'sunset':
 			$scenario = array(
-				array('hue' => 12750, 'sat' => 0, 'bri' => 254, 'transition' => 0, 'sleep' => 0),
-				array('hue' => 12750, 'sat' => 254, 'bri' => 254, 'transition' => 1800, 'sleep' => 420),
-				array('hue' => 65280, 'sat' => 254, 'bri' => 128, 'transition' => 1800, 'sleep' => 240),
-				array('hue' => 46920, 'sat' => 254, 'bri' => 0, 'transition' => 1800, 'sleep' => 60),
+				array('hue' => 38375, 'sat' => 0, 'bri' => 254, 'transition' => 0, 'sleep' => 0),
+				array('hue' => 15191, 'sat' => 0, 'bri' => 200, 'transition' => intval(init('duration', 720) * 0.2), 'sleep' => intval(init('duration', 720) * 0.2)),
+				array('hue' => 13390, 'sat' => 0, 'bri' => 150, 'transition' => intval(init('duration', 720) * 0.2), 'sleep' => intval(init('duration', 720) * 0.2)),
+				array('hue' => 9980, 'sat' => 0, 'bri' => 100, 'transition' => intval(init('duration', 720) * 0.2), 'sleep' => intval(init('duration', 720) * 0.2)),
+				array('hue' => 9977, 'sat' => 0, 'bri' => 50, 'transition' => intval(init('duration', 720) * 0.2), 'sleep' => intval(init('duration', 720) * 0.2)),
+				array('hue' => 9977, 'sat' => 0, 'bri' => 1, 'transition' => intval(init('duration', 720) * 0.2), 'sleep' => intval(init('duration', 720) * 0.2)),
 			);
 			break;
 		case 'sunrise':
 			$scenario = array(
-				array('hue' => 46920, 'sat' => 254, 'bri' => 0, 'transition' => 0, 'sleep' => 0),
-				array('hue' => 65280, 'sat' => 254, 'bri' => 128, 'transition' => 1800, 'sleep' => 60),
-				array('hue' => 12750, 'sat' => 254, 'bri' => 254, 'transition' => 1800, 'sleep' => 240),
-				array('hue' => 12750, 'sat' => 0, 'bri' => 254, 'transition' => 1800, 'sleep' => 420),
+				array('hue' => 9977, 'sat' => 0, 'bri' => 1, 'transition' => 0, 'sleep' => 0),
+				array('hue' => 9977, 'sat' => 0, 'bri' => 50, 'transition' => intval(init('duration', 720) * 0.2), 'sleep' => intval(init('duration', 720) * 0.2)),
+				array('hue' => 9980, 'sat' => 0, 'bri' => 100, 'transition' => intval(init('duration', 720) * 0.2), 'sleep' => intval(init('duration', 720) * 0.2)),
+				array('hue' => 13390, 'sat' => 0, 'bri' => 150, 'transition' => intval(init('duration', 720) * 0.2), 'sleep' => intval(init('duration', 720) * 0.2)),
+				array('hue' => 15191, 'sat' => 0, 'bri' => 200, 'transition' => intval(init('duration', 720) * 0.2), 'sleep' => intval(init('duration', 720) * 0.2)),
+				array('hue' => 38375, 'sat' => 0, 'bri' => 254, 'transition' => intval(init('duration', 720) * 0.2), 'sleep' => intval(init('duration', 720) * 0.2)),
 			);
 			break;
 		default:

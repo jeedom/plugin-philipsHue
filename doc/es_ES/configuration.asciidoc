@@ -61,3 +61,12 @@ En effet vous pouvez faire des "scenes" sur les Philips Hue. Celle-ci doivent ab
 Commande un peu particulier qui doit être utilisée dans un scénario, elle permet de dire la transistion entre l'état actuel et la prochaine commande doit durée X secondes.
 
 Par exemple le matin vous pouvez vouloir simuler le levé du soleil en 3 minutes. Dans votre scénario vous avez donc juste à appeller la commande transition et en parametre mettre 180, ensuite appeller la commande couleur vers la couleur voulu.
+
+== Animation
+
+Les animations sont des enchainements de transition, actuellement il existe : 
+
+* sunrise : pour simuler un levé de soleil. Il peut prendre en parametre : 
+** duration : pour definir la durée, par defaut 720s, ex pour 5min il faut mettre : duration=300
+* sunrise : pour simuler un couché de soleil. Il peut prendre en parametre : 
+** duration : pour definir la durée, par defaut 720s, ex pour 5min il faut mettre : duration=300

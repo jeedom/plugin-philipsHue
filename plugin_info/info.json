@@ -7,6 +7,5 @@
 	"installation" : "Lors de la première synchronisation, vous devez appuyer sur le bouton \"LINK\" du bridge avant de cliquer sur \"Sauvegarder\"",
 	"require" : "3.0",
 	"category" : "communication",
-	"hasOwnDeamon" : 1,
-	"include" : {"type" : "php" , "file" : "philipsHue.inc" }
+	"hasOwnDeamon" : 1
 }

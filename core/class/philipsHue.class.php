@@ -359,6 +359,9 @@ class philipsHue extends eqLogic {
 							$obj = $groups[$eqLogic->getConfiguration('id')];
 							break;
 					}
+					if ($obj === null) {
+						continue;
+					}
 					if (!$isReachable || !$obj->isOn()) {
 						$luminosity = 0;
 						$color = '#000000';

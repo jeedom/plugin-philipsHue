@@ -1,7 +1,7 @@
 {
     "plugins/philipsHue/plugin_info/info.xml": {
         "Plugin pour commander les lampes Philips Hue": "Plugin to control Philips Hue lights",
-        "Lors de la première synchronisation, vous devez appuyer sur le bouton \"LINK\" du bridge avant de cliquer sur \"Synchroniser avec le bridge\"": "During the first synchronization, you must press the \"LINK\" of the bridge before clicking button \"Synchronize with bridge\""
+        "Lors de la première synchronisation, vous devez appuyer sur le bouton \"LINK\" du bridge avant de cliquer sur \"Synchroniser avec le bridge\"": "During the first synchronization, you must press the \"LINK\" button of the bridge before clicking on the button \"Synchronize with bridge\""
     },
     "plugins/philipsHue/desktop/php/philipsHue.php": {
         "Ajouter un équipement": "Add device",
@@ -24,10 +24,10 @@
         "Parametre(s)": "Parameter(s)",
         "Supprimer": "Delete",
         "Sauvegarder": "Save",
-        "Nom de l'équipement Philips Hue": "Nom de l'équipement Philips Hue",
+        "Nom de l'équipement Philips Hue": "Name of Philips Hue device",
         "Informations": "Information",
         "Model": "Model",
-        "Version du logiciel": "Version du logiciel",
+        "Version du logiciel": "Software version",
         "Action": "Action"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
@@ -55,7 +55,7 @@
         "Rafraîchir": "Refresh"
     },
     "plugins/philipsHue/plugin_info/configuration.php": {
-        "IP du bridge": "IP du bridge",
+        "IP du bridge": "Bridge IP",
         "Synchronisation réussie": "Synchronisation successful",
         "Découverte": "Discovery",
         "Rechercher les équipements Sonos": "Search Sonos devices",

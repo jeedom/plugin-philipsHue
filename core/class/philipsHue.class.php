@@ -404,6 +404,7 @@ class philipsHue extends eqLogic {
 				}
 			}
 		}
+		gc_collect_cycles();
 	}
 
 	public static function devicesParameters($_device = '') {

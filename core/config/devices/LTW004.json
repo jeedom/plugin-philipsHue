@@ -2,7 +2,8 @@
     "LTW004": {
         "name": "Hue A19 White Ambiance",
         "configuration" :{
-            "gammut" : "2200K-6500K"
+            "gammut" : "2200K-6500K",
+            "alwaysOn" : 1
         },
         "commands": [
             {

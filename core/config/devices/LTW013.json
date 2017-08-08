@@ -2,7 +2,8 @@
     "LTW013": {
         "name": "Hue GU-10 White Ambiance",
         "configuration" :{
-            "gammut" : "2200K-6500K"
+            "gammut" : "2200K-6500K",
+            "alwaysOn" : 1
         },
         "commands": [
             {

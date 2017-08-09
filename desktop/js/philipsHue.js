@@ -17,7 +17,10 @@
 
 
  $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').on('change', function () {
-
+    if($('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').value() == ''){
+       $('#img_device').attr("src",'plugins/philipsHue/plugin_info/philipsHue_icon.png');
+       return;
+   }
    $.ajax({
     type: "POST", 
     url: "plugins/philipsHue/core/ajax/philipsHue.ajax.php", 

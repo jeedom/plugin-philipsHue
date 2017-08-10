@@ -62,27 +62,35 @@
                 "logicalId": "luminosity"
             },
             {
-                "name": "Etat Couleur",
+                "name": "Etat Couleur temp",
                 "type": "info",
-                "subtype": "string",
+                "subtype": "numeric",
                 "display": {
-                    "generic_type": "LIGHT_COLOR"
+                    "generic_type": "DONT"
+                },
+                "configuration" :{
+                    "minValue" : 153,
+                    "maxValue" : 500
                 },
                 "isVisible": 0,
                 "isHistorized": 0,
-                "logicalId": "color_state"
+                "logicalId": "color_temp_state"
             },
             {
-                "name": "Couleur",
+                "name": "Couleur temp",
                 "type": "action",
-                "subtype": "color",
+                "subtype": "slider",
                 "display": {
-                    "generic_type": "LIGHT_SET_COLOR"
+                    "generic_type": "DONT"
                 },
-                "value" : "Etat Couleur",
+                "configuration" :{
+                    "minValue" : 153,
+                    "maxValue" : 500
+                },
+                "value" : "Etat Couleur temp",
                 "isVisible": 1,
                 "isHistorized": 0,
-                "logicalId": "color"
+                "logicalId": "color_temp"
             },
             {
                 "name": "Etat Alerte",

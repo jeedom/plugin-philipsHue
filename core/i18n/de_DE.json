@@ -24,10 +24,10 @@
         "Parametre(s)": "Parameter()",
         "Supprimer": "Löschen",
         "Sauvegarder": "Speichern",
-        "Nom de l'équipement Philips Hue": "Nom de l'équipement Philips Hue",
+        "Nom de l'équipement Philips Hue": " PhilipsHue Gerätename",
         "Informations": "Information",
         "Model": "Model",
-        "Version du logiciel": "Version du logiciel",
+        "Version du logiciel": "Softwareversion",
         "Action": "Aktion"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
@@ -55,7 +55,7 @@
         "Rafraîchir": "Aktualisieren"
     },
     "plugins/philipsHue/plugin_info/configuration.php": {
-        "IP du bridge": "IP du bridge",
+        "IP du bridge": " IP der Brücke",
         "Synchronisation réussie": "erfolgreiche Synchronisation",
         "Découverte": "Entdeckung",
         "Rechercher les équipements Sonos": "Suche nach Sonos Geräte",

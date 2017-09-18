@@ -1,4 +1,4 @@
-= philipsHue
+= PhilipsHue
 
 Plugin pour commander les lampes Philips Hue.
 

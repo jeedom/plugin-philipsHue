@@ -40,5 +40,5 @@ Les animations sont des enchainements de transition, actuellement il existe :
 
 * sunrise : pour simuler un levé de soleil. Il peut prendre en parametre : 
 ** duration : pour definir la durée, par defaut 720s, ex pour 5min il faut mettre : duration=300
-* sunrise : pour simuler un couché de soleil. Il peut prendre en parametre : 
+* sunset : pour simuler un couché de soleil. Il peut prendre en parametre : 
 ** duration : pour definir la durée, par defaut 720s, ex pour 5min il faut mettre : duration=300

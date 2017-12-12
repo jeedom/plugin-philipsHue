@@ -38,6 +38,7 @@ foreach ($eqLogics as $eqLogic) {
   </div>
 </div>
 <legend><i class="fa fa-table"></i> {{Mes Philips Hue}}</legend>
+<input class="form-control" placeholder="{{Rechercher}}" style="margin-bottom:4px;" id="in_searchEqlogic" />
 <div class="eqLogicThumbnailContainer">
  <?php
 foreach ($eqLogics as $eqLogic) {
@@ -48,7 +49,7 @@ foreach ($eqLogics as $eqLogic) {
 		echo '<img src="' . $plugin->getPathImgIcon() . '" height="105" width="95" />';
 	}
 	echo "<br>";
-	echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
+	echo '<span class="name" style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
 	echo '</div>';
 }
 ?>

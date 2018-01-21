@@ -8,6 +8,6 @@
 	"require" : "3.0",
 	"category" : "communication",
 	"hasOwnDeamon" : 1,
-	"changelog" : "https://jeedom.github.io/plugin-philipsHue/#language#/changelog.asciidoc",
+	"changelog" : "https://jeedom.github.io/plugin-philipsHue/#language#/changelog",
 	"documentation" : "https://jeedom.github.io/plugin-philipsHue/#language#/"
 }

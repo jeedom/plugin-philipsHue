@@ -98,34 +98,4 @@ Quelle est la fréquence de rafraîchissement ?
 
 :   Le systeme recupère les informations toutes les 2s.
 
-CHangelog 
-=========
-
-20/11/2017 
-----------
-
--   Ajout du modèle LCT015
-
-28/03/2017 
-----------
-
--   Ajout d’animation (levé et couché de soleil), attention toute les
-    lampes ne sont pas forcement compatible
-
-21/01/2017 
-----------
-
--   Support du hue motion
-
--   Support du hue tap
-
--   Correction des scènes
-
--   Correction du décalage des couleurs
-
--   Ajout des images des modules
-
--   Support de plus de modules
-
--   Ajout de la gestion de la température des couleurs
 

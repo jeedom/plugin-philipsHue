@@ -1,9 +1,0 @@
-== FAQ
-
-J'ai l'impression qu'il y a un décalage sur certaine couleur entre ce que je demande et la couleur de l'ampoule.::
-Il semble que la grille de couleur des ampoules aient un offset, nous cherchons comment corriger
-
-'''
-
-Quelle est la fréquence de rafraîchissement ?::
-Le systeme recupère les informations toutes les 2s.

@@ -1,6 +1,15 @@
 Changelog 
 =========
 
+21/01/2018 
+----------
+
+- 	Passage sur le nouveau système de doc
+-   Ajout du modèle MWB001
+-   Ajout du modèle ltw010
+-   Ajout du modèle OSRAM
+-   Ajout du modèle TRADFRI bulb GU10 W 400lm
+
 20/11/2017 
 ----------
 

@@ -15,13 +15,13 @@
         "Catégorie": "Kategori",
         "Activer": "Mengaktifkan",
         "Visible": "Terlihat",
-        "Adresse IP": "Adresse IP",
+        "Adresse IP": "IP Address",
         "Synchroniser avec le Bridge": "Synchroniser avec le Bridge",
         "Device": "Device",
         " Ajouter une commande philipsHue": "Ajouter une commande philipsHue",
         "Nom": "Nama",
         "Type": "Jenis",
-        "Parametre(s)": "Parametre(s)",
+        "Parametre(s)": "Parameter (s)",
         "Supprimer": "Menghapus",
         "Sauvegarder": "Menyimpan",
         "Nom de l'équipement Philips Hue": "Nom de l'équipement Philips Hue",
@@ -52,7 +52,7 @@
         "Arc en ciel On": "Arc en ciel On",
         "Arc en ciel Off": "Arc en ciel Off",
         "Etat Arc en ciel": "Etat Arc en ciel",
-        "Rafraîchir": "Rafraîchir"
+        "Rafraîchir": "dingin"
     },
     "plugins/philipsHue/plugin_info/configuration.php": {
         "IP du bridge": "IP du bridge",

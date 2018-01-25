@@ -15,7 +15,7 @@ Configuration des équipements
 > Vous aurez toujours un équipement "Toutes les lampes" qui correspond
 > en faite au groupe 0 qui existe tout le temps
 
-Vous retrouvez ici toute la configuration de votre équipement :
+Hier finden sie die ganze Konfiguration Ihrer Geräte:
 
 -   **Nom de l’équipement Hue** : nom de votre équipement Hue,
 

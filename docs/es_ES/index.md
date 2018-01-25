@@ -15,11 +15,11 @@ Configuration des équipements
 > Vous aurez toujours un équipement "Toutes les lampes" qui correspond
 > en faite au groupe 0 qui existe tout le temps
 
-Vous retrouvez ici toute la configuration de votre équipement :
+Aquí encontrará toda la configuración de su dispositivo:
 
 -   **Nom de l’équipement Hue** : nom de votre équipement Hue,
 
--   **Objet parent** : indique l’objet parent auquel appartient
+-   **Objeto padre** : especifica el objeto padre al que pertenece
     l’équipement,
 
 -   **Catégorie** : les catégories de l’équipement (il peut appartenir à

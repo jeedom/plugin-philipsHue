@@ -1,0 +1,64 @@
+{
+    "plugins/philipsHue/plugin_info/info.xml": {
+        "Plugin pour commander les lampes Philips Hue": "Phlipps Hue lambalarını komuta etmek için eklenti",
+        "Lors de la première synchronisation, vous devez appuyer sur le bouton \"LINK\" du bridge avant de cliquer sur \"Synchroniser avec le bridge\"": "Birinci senkronizasyon esnasında, \"Köprü ile senkronize et\" butonuna tıklamadan köprünün \"LINK\" butonuna tıklayın."
+    },
+    "plugins/philipsHue/desktop/php/philipsHue.php": {
+        "Ajouter un équipement": "Ekipman ekle",
+        "Gestion des groupes": "Grupların yönetimi",
+        "Rechercher": "Arayın",
+        "Mes Philips Hue": "Philips Hue'\\lerim",
+        "Général": "Genel",
+        "Nom de l'équipement philipsHue": "PhlipsHue cihazının ismi",
+        "Objet parent": "Üst nesne",
+        "Aucun": "Hiçbir",
+        "Catégorie": "Kategori",
+        "Activer": "Etkinleştirmek",
+        "Visible": "Görülebilir",
+        "Adresse IP": "IP adresi",
+        "Synchroniser avec le Bridge": "Köprü ile senkronize et",
+        "Device": "Cihaz",
+        " Ajouter une commande philipsHue": "philipsHue durumu komutası ekleyin",
+        "Nom": "İsim",
+        "Type": "Ceşit",
+        "Parametre(s)": "Parametre(ler)",
+        "Supprimer": "Sil",
+        "Sauvegarder": "Kaydet",
+        "Nom de l'équipement Philips Hue": "Philips Hue cihazının ismi",
+        "Informations": "Bilgiler",
+        "Model": "Model",
+        "Version du logiciel": "Programın versyonu",
+        "Action": "Etki"
+    },
+    "plugins/philipsHue/desktop/js/philipsHue.js": {
+        "Gestion des groupes": "Grupların yönetimi",
+        "Parametres (JSON)": "Parametreler (JSON)",
+        "Tester": "Dene",
+        "Nom": "İsim"
+    },
+    "plugins/philipsHue/core/class/philipsHue.class.php": {
+        "On": "on",
+        "Off": "Off",
+        "Etat On Off": " Durum Açık Kapalı",
+        "Luminosité": "Işıklık",
+        "Etat Luminosité": "Işık durumu",
+        "Saturation": "Doyma",
+        "Etat Saturation": "Doyma durumu",
+        "Couleur": "Renk",
+        "Etat Couleur": "Renk durum",
+        "Alerte On": "Uyarı On",
+        "Alerte Off": "Uyarı Off",
+        "Etat Alerte": "Uyarı durumu",
+        "Arc en ciel On": "Gök kuşağı On",
+        "Arc en ciel Off": "Gök kuşağı Off",
+        "Etat Arc en ciel": "Gök kuşağı durumu",
+        "Rafraîchir": "Yenile"
+    },
+    "plugins/philipsHue/plugin_info/configuration.php": {
+        "IP du bridge": "Köprünün IPsi",
+        "Synchronisation réussie": "Sekronizasyon başarılı",
+        "Découverte": "Tanışma",
+        "Rechercher les équipements Sonos": "Ses sistemi cihazlarını arayın",
+        "Synchroniser": "Senkeronize et"
+    }
+}

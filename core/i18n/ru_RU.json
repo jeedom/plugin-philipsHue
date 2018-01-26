@@ -7,7 +7,7 @@
         "Ajouter un équipement": "Добавить оборудование",
         "Gestion des groupes": "Управление Группами",
         "Rechercher": "Искать",
-        "Mes Philips Hue": "Mes Philips Hue",
+        "Mes Philips Hue": "Мой Philips Hue",
         "Général": "Главная",
         "Nom de l'équipement philipsHue": "Название оборудования Philips Hue",
         "Objet parent": "Родительский объект",
@@ -24,10 +24,10 @@
         "Parametre(s)": "Параметр (ы)",
         "Supprimer": "Удалить",
         "Sauvegarder": "Сохранить",
-        "Nom de l'équipement Philips Hue": "Nom de l'équipement Philips Hue",
+        "Nom de l'équipement Philips Hue": "Название Philips Hue оборудование",
         "Informations": "Информация",
         "Model": "Модель",
-        "Version du logiciel": "Version du logiciel",
+        "Version du logiciel": "Версия программного обеспечения",
         "Action": "Действие"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
@@ -45,7 +45,7 @@
         "Saturation": "Насыщенность",
         "Etat Saturation": "Состояние насыщенности",
         "Couleur": "Цвет",
-        "Etat Couleur": "Etat Couleur",
+        "Etat Couleur": "Состояние Цвет",
         "Alerte On": "Предупреждения Вкл.",
         "Alerte Off": "Предупреждения Выкл.",
         "Etat Alerte": "Состояние предупреждений",
@@ -55,7 +55,7 @@
         "Rafraîchir": "Обновить"
     },
     "plugins/philipsHue/plugin_info/configuration.php": {
-        "IP du bridge": "IP du bridge",
+        "IP du bridge": "IP мост",
         "Synchronisation réussie": "Успешная синхронизация",
         "Découverte": "Открытие",
         "Rechercher les équipements Sonos": "Поиск оборудование Sonos ",

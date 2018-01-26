@@ -1,0 +1,64 @@
+{
+    "plugins/philipsHue/plugin_info/info.xml": {
+        "Plugin pour commander les lampes Philips Hue": "Plugin para controlar as lâmpadas Philips Hue",
+        "Lors de la première synchronisation, vous devez appuyer sur le bouton \"LINK\" du bridge avant de cliquer sur \"Synchroniser avec le bridge\"": "Durante a primeira sincronização, você deve pressionar o \"elo\" da ponte antes de clicar em ponte Sync' botão \""
+    },
+    "plugins/philipsHue/desktop/php/philipsHue.php": {
+        "Ajouter un équipement": "a adição de equipamentos",
+        "Gestion des groupes": "Gerenciando grupos",
+        "Rechercher": "Pesquisar",
+        "Mes Philips Hue": "Meu Philips Hue",
+        "Général": "Geral",
+        "Nom de l'équipement philipsHue": "Nome do dispositivo philipsHue",
+        "Objet parent": "objeto pai",
+        "Aucun": "Nemhum",
+        "Catégorie": "categoria",
+        "Activer": "Ativar",
+        "Visible": "Visível",
+        "Adresse IP": "Endereço IP",
+        "Synchroniser avec le Bridge": "Sincronizar com ponte",
+        "Device": "dispositivo",
+        " Ajouter une commande philipsHue": "Adicionar o controle philipsHue",
+        "Nom": "Nome",
+        "Type": "tipo",
+        "Parametre(s)": "Parâmetro (s)",
+        "Supprimer": "remover",
+        "Sauvegarder": "Salvar",
+        "Nom de l'équipement Philips Hue": "Nome equipamentos Philips Hue",
+        "Informations": "informação",
+        "Model": "modelo",
+        "Version du logiciel": "Versão de software",
+        "Action": "ação"
+    },
+    "plugins/philipsHue/desktop/js/philipsHue.js": {
+        "Gestion des groupes": "Gerenciando grupos",
+        "Parametres (JSON)": "Parâmetros (JSON)",
+        "Tester": "teste",
+        "Nom": "Nome"
+    },
+    "plugins/philipsHue/core/class/philipsHue.class.php": {
+        "On": "um",
+        "Off": "fora",
+        "Etat On Off": "Estado On Off",
+        "Luminosité": "brilho",
+        "Etat Luminosité": "Estado Brilho",
+        "Saturation": "saturação",
+        "Etat Saturation": "Estado Saturação",
+        "Couleur": "cor",
+        "Etat Couleur": "Cor Estado",
+        "Alerte On": "Alertamos",
+        "Alerte Off": "off alerta",
+        "Etat Alerte": "Alerta de status",
+        "Arc en ciel On": "Rainbow é",
+        "Arc en ciel Off": "off-íris",
+        "Etat Arc en ciel": "Estado do arco no céu",
+        "Rafraîchir": "legal"
+    },
+    "plugins/philipsHue/plugin_info/configuration.php": {
+        "IP du bridge": "ponte IP",
+        "Synchronisation réussie": "sincronização bem-sucedida",
+        "Découverte": "descoberta",
+        "Rechercher les équipements Sonos": "Busca de equipamento Sonos",
+        "Synchroniser": "sincronizar"
+    }
+}

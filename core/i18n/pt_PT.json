@@ -28,13 +28,26 @@
         "Informations": "informação",
         "Model": "modelo",
         "Version du logiciel": "Versão de software",
-        "Action": "ação"
+        "Action": "ação",
+        "Ajouter": "adicionar",
+        "Gestion": "gestão",
+        "Configuration": "configuração",
+        "Configuration avancée": "configuração avançada",
+        "Equipement": "equipamento",
+        "Commandes": "comandos",
+        "Toujours allumé": "Toujours allumé",
+        "Modèle": "modelo",
+        "ID": "ID",
+        "Non model": "Non model",
+        "Options": "opções"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "Gerenciando grupos",
         "Parametres (JSON)": "Parâmetros (JSON)",
         "Tester": "teste",
-        "Nom": "Nome"
+        "Nom": "Nome",
+        "Afficher": "display",
+        "Historiser": "historicizar"
     },
     "plugins/philipsHue/core/class/philipsHue.class.php": {
         "On": "um",
@@ -52,7 +65,12 @@
         "Arc en ciel On": "Rainbow é",
         "Arc en ciel Off": "off-íris",
         "Etat Arc en ciel": "Estado do arco no céu",
-        "Rafraîchir": "legal"
+        "Rafraîchir": "legal",
+        "Options": "opções",
+        "Nom de l'animation": "Nom de l'animation",
+        "Animation": "Animation",
+        "Scene": "Scene",
+        "Impossible de joindre le bridge": "Impossible de joindre le bridge"
     },
     "plugins/philipsHue/plugin_info/configuration.php": {
         "IP du bridge": "ponte IP",
@@ -60,5 +78,11 @@
         "Découverte": "descoberta",
         "Rechercher les équipements Sonos": "Busca de equipamento Sonos",
         "Synchroniser": "sincronizar"
+    },
+    "plugins/philipsHue/core/php/jeeHueAnimation.php": {
+        "[philipsHue/jeeAnimation] Lancement de l'animation sur": "[philipsHue/jeeAnimation] Lancement de l'animation sur",
+        " avec comme options ": "avec comme options",
+        "Lancement de ": "Lancement de",
+        "Fin de l'animation": "Fin de l'animation"
     }
 }

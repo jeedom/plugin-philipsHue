@@ -28,13 +28,26 @@
         "Informations": "情報",
         "Model": "モデル",
         "Version du logiciel": "ソフトウェアバージョン",
-        "Action": "アクション"
+        "Action": "アクション",
+        "Ajouter": "加えます",
+        "Gestion": "管理",
+        "Configuration": "コンフィギュレーション",
+        "Configuration avancée": "高度な設定",
+        "Equipement": "設備",
+        "Commandes": "コマンド",
+        "Toujours allumé": "Toujours allumé",
+        "Modèle": "モデル",
+        "ID": "ID",
+        "Non model": "Non model",
+        "Options": "オプション"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "グループの管理",
         "Parametres (JSON)": "パラメータ（JSON）",
         "Tester": "テスト",
-        "Nom": "表題"
+        "Nom": "表題",
+        "Afficher": "ディスプレイ",
+        "Historiser": "historicize"
     },
     "plugins/philipsHue/core/class/philipsHue.class.php": {
         "On": "一つ",
@@ -52,7 +65,12 @@
         "Arc en ciel On": "レインボーは、",
         "Arc en ciel Off": "レインボーオフ",
         "Etat Arc en ciel": "空に弧州",
-        "Rafraîchir": "クール"
+        "Rafraîchir": "クール",
+        "Options": "オプション",
+        "Nom de l'animation": "Nom de l'animation",
+        "Animation": "Animation",
+        "Scene": "Scene",
+        "Impossible de joindre le bridge": "Impossible de joindre le bridge"
     },
     "plugins/philipsHue/plugin_info/configuration.php": {
         "IP du bridge": "IPブリッジ",
@@ -60,5 +78,11 @@
         "Découverte": "発見",
         "Rechercher les équipements Sonos": "Sonosの機器を検索します",
         "Synchroniser": "同期"
+    },
+    "plugins/philipsHue/core/php/jeeHueAnimation.php": {
+        "[philipsHue/jeeAnimation] Lancement de l'animation sur": "[philipsHue/jeeAnimation] Lancement de l'animation sur",
+        " avec comme options ": "avec comme options",
+        "Lancement de ": "Lancement de",
+        "Fin de l'animation": "Fin de l'animation"
     }
 }

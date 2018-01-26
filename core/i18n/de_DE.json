@@ -28,13 +28,26 @@
         "Informations": "Information",
         "Model": "Model",
         "Version du logiciel": "Softwareversion",
-        "Action": "Aktion"
+        "Action": "Aktion",
+        "Ajouter": "Ajouter",
+        "Gestion": "Gestion",
+        "Configuration": "Configuration",
+        "Configuration avancée": "Configuration avancée",
+        "Equipement": "Equipement",
+        "Commandes": "Commandes",
+        "Toujours allumé": "Toujours allumé",
+        "Modèle": "Modèle",
+        "ID": "ID",
+        "Non model": "Non model",
+        "Options": "Options"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "Verwalten von Gruppen",
         "Parametres (JSON)": "Parameter (JSON)",
         "Tester": "Test",
-        "Nom": "Name"
+        "Nom": "Name",
+        "Afficher": "Afficher",
+        "Historiser": "Historiser"
     },
     "plugins/philipsHue/core/class/philipsHue.class.php": {
         "On": "An",
@@ -52,7 +65,12 @@
         "Arc en ciel On": "Regenbogen an",
         "Arc en ciel Off": "Regenbogen aus",
         "Etat Arc en ciel": "zustand Regenbogen",
-        "Rafraîchir": "Aktualisieren"
+        "Rafraîchir": "Aktualisieren",
+        "Options": "Options",
+        "Nom de l'animation": "Nom de l'animation",
+        "Animation": "Animation",
+        "Scene": "Scene",
+        "Impossible de joindre le bridge": "Impossible de joindre le bridge"
     },
     "plugins/philipsHue/plugin_info/configuration.php": {
         "IP du bridge": " IP der Brücke",
@@ -60,5 +78,11 @@
         "Découverte": "Entdeckung",
         "Rechercher les équipements Sonos": "Suche nach Sonos Geräte",
         "Synchroniser": "Synchronisieren"
+    },
+    "plugins/philipsHue/core/php/jeeHueAnimation.php": {
+        "[philipsHue/jeeAnimation] Lancement de l'animation sur": "[philipsHue/jeeAnimation] Lancement de l'animation sur",
+        " avec comme options ": "avec comme options",
+        "Lancement de ": "Lancement de",
+        "Fin de l'animation": "Fin de l'animation"
     }
 }

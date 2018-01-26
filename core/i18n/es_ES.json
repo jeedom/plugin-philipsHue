@@ -28,13 +28,26 @@
         "Informations": "Informaciones",
         "Model": "Modelo",
         "Version du logiciel": "Versión de software",
-        "Action": "Acción"
+        "Action": "Acción",
+        "Ajouter": "Añadir",
+        "Gestion": "Administración",
+        "Configuration": "Configuración",
+        "Configuration avancée": "Configuración avanzada",
+        "Equipement": "Dispositivos",
+        "Commandes": "Comandos",
+        "Toujours allumé": "Toujours allumé",
+        "Modèle": "Modelo",
+        "ID": "ID",
+        "Non model": "Non model",
+        "Options": "Opciones"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "Gestión de grupos",
         "Parametres (JSON)": "Parámetros (JSON)",
         "Tester": "Probar",
-        "Nom": "Nombre"
+        "Nom": "Nombre",
+        "Afficher": "Mostrar",
+        "Historiser": "Historizar"
     },
     "plugins/philipsHue/core/class/philipsHue.class.php": {
         "On": "On",
@@ -52,7 +65,12 @@
         "Arc en ciel On": "Arco Iris On",
         "Arc en ciel Off": "Arcl Iris Off",
         "Etat Arc en ciel": "Estado de arco iris",
-        "Rafraîchir": "Refrescar"
+        "Rafraîchir": "Refrescar",
+        "Options": "Opciones",
+        "Nom de l'animation": "Nom de l'animation",
+        "Animation": "Animation",
+        "Scene": "Scene",
+        "Impossible de joindre le bridge": "Impossible de joindre le bridge"
     },
     "plugins/philipsHue/plugin_info/configuration.php": {
         "IP du bridge": "IP del puente (bridge)",
@@ -60,5 +78,11 @@
         "Découverte": "Descubrimiento",
         "Rechercher les équipements Sonos": "Buscar los dispositivos Sonos",
         "Synchroniser": "Sincronizar"
+    },
+    "plugins/philipsHue/core/php/jeeHueAnimation.php": {
+        "[philipsHue/jeeAnimation] Lancement de l'animation sur": "[philipsHue/jeeAnimation] Lancement de l'animation sur",
+        " avec comme options ": "avec comme options",
+        "Lancement de ": "Ejecutando",
+        "Fin de l'animation": "Fin de l'animation"
     }
 }

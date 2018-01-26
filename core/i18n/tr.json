@@ -28,13 +28,26 @@
         "Informations": "Bilgiler",
         "Model": "Model",
         "Version du logiciel": "Programın versyonu",
-        "Action": "Etki"
+        "Action": "Etki",
+        "Ajouter": "Ekle",
+        "Gestion": "Yönetim",
+        "Configuration": "Ayarlar",
+        "Configuration avancée": "Gelişmiş ayarlar",
+        "Equipement": "Cihaz",
+        "Commandes": "Komutalar",
+        "Toujours allumé": "Toujours allumé",
+        "Modèle": "Model",
+        "ID": "ID",
+        "Non model": "Non model",
+        "Options": "Opsiyonlar"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "Grupların yönetimi",
         "Parametres (JSON)": "Parametreler (JSON)",
         "Tester": "Dene",
-        "Nom": "İsim"
+        "Nom": "İsim",
+        "Afficher": "Göster",
+        "Historiser": "Tarihe göre sırala"
     },
     "plugins/philipsHue/core/class/philipsHue.class.php": {
         "On": "on",
@@ -52,7 +65,12 @@
         "Arc en ciel On": "Gök kuşağı On",
         "Arc en ciel Off": "Gök kuşağı Off",
         "Etat Arc en ciel": "Gök kuşağı durumu",
-        "Rafraîchir": "Yenile"
+        "Rafraîchir": "Yenile",
+        "Options": "Opsiyonlar",
+        "Nom de l'animation": "Nom de l'animation",
+        "Animation": "Animation",
+        "Scene": "Scene",
+        "Impossible de joindre le bridge": "Impossible de joindre le bridge"
     },
     "plugins/philipsHue/plugin_info/configuration.php": {
         "IP du bridge": "Köprünün IPsi",
@@ -60,5 +78,11 @@
         "Découverte": "Tanışma",
         "Rechercher les équipements Sonos": "Ses sistemi cihazlarını arayın",
         "Synchroniser": "Senkeronize et"
+    },
+    "plugins/philipsHue/core/php/jeeHueAnimation.php": {
+        "[philipsHue/jeeAnimation] Lancement de l'animation sur": "[philipsHue/jeeAnimation] Lancement de l'animation sur",
+        " avec comme options ": "avec comme options",
+        "Lancement de ": "Başlatılma",
+        "Fin de l'animation": "Fin de l'animation"
     }
 }

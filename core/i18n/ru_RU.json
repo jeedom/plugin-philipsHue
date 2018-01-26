@@ -28,13 +28,26 @@
         "Informations": "Информация",
         "Model": "Модель",
         "Version du logiciel": "Версия программного обеспечения",
-        "Action": "Действие"
+        "Action": "Действие",
+        "Ajouter": "Добавить",
+        "Gestion": "Управление",
+        "Configuration": "Конфигурация",
+        "Configuration avancée": "Расширенные настройки",
+        "Equipement": "Оборудование",
+        "Commandes": "Команды",
+        "Toujours allumé": "Toujours allumé",
+        "Modèle": "Модель",
+        "ID": "Идентификатор",
+        "Non model": "Non model",
+        "Options": "Опции"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "Управление Группами",
         "Parametres (JSON)": "Параметры (JSON)",
         "Tester": "Тест",
-        "Nom": "Имя"
+        "Nom": "Имя",
+        "Afficher": "Отобразить",
+        "Historiser": "История"
     },
     "plugins/philipsHue/core/class/philipsHue.class.php": {
         "On": "Включить",
@@ -52,7 +65,12 @@
         "Arc en ciel On": "Радуга Вкл.",
         "Arc en ciel Off": "Радуга Выкл.",
         "Etat Arc en ciel": "Состояние Радуги",
-        "Rafraîchir": "Обновить"
+        "Rafraîchir": "Обновить",
+        "Options": "Опции",
+        "Nom de l'animation": "Nom de l'animation",
+        "Animation": "Animation",
+        "Scene": "Scene",
+        "Impossible de joindre le bridge": "Impossible de joindre le bridge"
     },
     "plugins/philipsHue/plugin_info/configuration.php": {
         "IP du bridge": "IP мост",
@@ -60,5 +78,11 @@
         "Découverte": "Открытие",
         "Rechercher les équipements Sonos": "Поиск оборудование Sonos ",
         "Synchroniser": "Синхронизировать"
+    },
+    "plugins/philipsHue/core/php/jeeHueAnimation.php": {
+        "[philipsHue/jeeAnimation] Lancement de l'animation sur": "[philipsHue/jeeAnimation] Lancement de l'animation sur",
+        " avec comme options ": "avec comme options",
+        "Lancement de ": "Запустить",
+        "Fin de l'animation": "Fin de l'animation"
     }
 }

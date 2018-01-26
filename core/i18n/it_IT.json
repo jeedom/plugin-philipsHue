@@ -28,13 +28,26 @@
         "Informations": "Informazioni",
         "Model": "modello",
         "Version du logiciel": "Versione Software",
-        "Action": "Azione"
+        "Action": "Azione",
+        "Ajouter": "Aggiungi",
+        "Gestion": "Gestione",
+        "Configuration": "Configurazione",
+        "Configuration avancée": "Configurazione avanzata",
+        "Equipement": "Dispositivo",
+        "Commandes": "Comandi",
+        "Toujours allumé": "Toujours allumé",
+        "Modèle": "Modello",
+        "ID": "ID",
+        "Non model": "Non model",
+        "Options": "Opzioni"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "Gestione dei gruppi",
         "Parametres (JSON)": "Parametri (JSON)",
         "Tester": "Prova",
-        "Nom": "Nome"
+        "Nom": "Nome",
+        "Afficher": "Mostra",
+        "Historiser": "Storicizza"
     },
     "plugins/philipsHue/core/class/philipsHue.class.php": {
         "On": "On",
@@ -52,7 +65,12 @@
         "Arc en ciel On": "rainbow è",
         "Arc en ciel Off": "fuori Arcobaleno",
         "Etat Arc en ciel": "Arc Stato nel cielo",
-        "Rafraîchir": "Aggiorna"
+        "Rafraîchir": "Aggiorna",
+        "Options": "Opzioni",
+        "Nom de l'animation": "Nom de l'animation",
+        "Animation": "Animation",
+        "Scene": "Scene",
+        "Impossible de joindre le bridge": "Impossible de joindre le bridge"
     },
     "plugins/philipsHue/plugin_info/configuration.php": {
         "IP du bridge": "ponte IP",
@@ -60,5 +78,11 @@
         "Découverte": "scoperta",
         "Rechercher les équipements Sonos": "Ricerca di attrezzature Sonos",
         "Synchroniser": "Sincronizza"
+    },
+    "plugins/philipsHue/core/php/jeeHueAnimation.php": {
+        "[philipsHue/jeeAnimation] Lancement de l'animation sur": "[philipsHue/jeeAnimation] Lancement de l'animation sur",
+        " avec comme options ": "avec comme options",
+        "Lancement de ": "Avvio",
+        "Fin de l'animation": "Fin de l'animation"
     }
 }

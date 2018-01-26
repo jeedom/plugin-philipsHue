@@ -28,13 +28,26 @@
         "Informations": "Information",
         "Model": "Model",
         "Version du logiciel": "Software version",
-        "Action": "Action"
+        "Action": "Action",
+        "Ajouter": "Ajouter",
+        "Gestion": "Gestion",
+        "Configuration": "Configuration",
+        "Configuration avancée": "Configuration avancée",
+        "Equipement": "Equipement",
+        "Commandes": "Commandes",
+        "Toujours allumé": "Toujours allumé",
+        "Modèle": "Modèle",
+        "ID": "ID",
+        "Non model": "Non model",
+        "Options": "Options"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "Groups management",
         "Parametres (JSON)": "Parameters (JSON)",
         "Tester": "Test",
-        "Nom": "Name"
+        "Nom": "Name",
+        "Afficher": "Afficher",
+        "Historiser": "Historiser"
     },
     "plugins/philipsHue/core/class/philipsHue.class.php": {
         "On": "On",
@@ -52,7 +65,12 @@
         "Arc en ciel On": "Rainbow On",
         "Arc en ciel Off": "Rainbow Off",
         "Etat Arc en ciel": "Rainbow status",
-        "Rafraîchir": "Refresh"
+        "Rafraîchir": "Refresh",
+        "Options": "Options",
+        "Nom de l'animation": "Nom de l'animation",
+        "Animation": "Animation",
+        "Scene": "Scene",
+        "Impossible de joindre le bridge": "Impossible de joindre le bridge"
     },
     "plugins/philipsHue/plugin_info/configuration.php": {
         "IP du bridge": "Bridge IP",
@@ -60,5 +78,11 @@
         "Découverte": "Discovery",
         "Rechercher les équipements Sonos": "Search Sonos devices",
         "Synchroniser": "Synchronize"
+    },
+    "plugins/philipsHue/core/php/jeeHueAnimation.php": {
+        "[philipsHue/jeeAnimation] Lancement de l'animation sur": "[philipsHue/jeeAnimation] Lancement de l'animation sur",
+        " avec comme options ": "avec comme options",
+        "Lancement de ": "Lancement de",
+        "Fin de l'animation": "Fin de l'animation"
     }
 }

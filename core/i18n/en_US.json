@@ -29,14 +29,14 @@
         "Model": "Model",
         "Version du logiciel": "Software version",
         "Action": "Action",
-        "Ajouter": "Ajouter",
-        "Gestion": "Gestion",
+        "Ajouter": "Add",
+        "Gestion": "Management",
         "Configuration": "Configuration",
-        "Configuration avancée": "Configuration avancée",
-        "Equipement": "Equipement",
-        "Commandes": "Commandes",
+        "Configuration avancée": "Advanced configuration",
+        "Equipement": "Device",
+        "Commandes": "Commands",
         "Toujours allumé": "Toujours allumé",
-        "Modèle": "Modèle",
+        "Modèle": "Model",
         "ID": "ID",
         "Non model": "Non model",
         "Options": "Options"
@@ -46,8 +46,8 @@
         "Parametres (JSON)": "Parameters (JSON)",
         "Tester": "Test",
         "Nom": "Name",
-        "Afficher": "Afficher",
-        "Historiser": "Historiser"
+        "Afficher": "Display",
+        "Historiser": "Historize"
     },
     "plugins/philipsHue/core/class/philipsHue.class.php": {
         "On": "On",
@@ -82,7 +82,7 @@
     "plugins/philipsHue/core/php/jeeHueAnimation.php": {
         "[philipsHue/jeeAnimation] Lancement de l'animation sur": "[philipsHue/jeeAnimation] Lancement de l'animation sur",
         " avec comme options ": "avec comme options",
-        "Lancement de ": "Lancement de",
+        "Lancement de ": "Launching",
         "Fin de l'animation": "Fin de l'animation"
     }
 }

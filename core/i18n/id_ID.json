@@ -29,25 +29,25 @@
         "Model": "Model",
         "Version du logiciel": "software Versi",
         "Action": "Tindakan",
-        "Ajouter": "Ajouter",
-        "Gestion": "Gestion",
-        "Configuration": "Configuration",
-        "Configuration avancée": "Configuration avancée",
-        "Equipement": "Equipement",
-        "Commandes": "Commandes",
+        "Ajouter": "Tambahan",
+        "Gestion": "Manajemen",
+        "Configuration": "konfigurasi",
+        "Configuration avancée": "konfigurasi lanjutan",
+        "Equipement": "Peralatan",
+        "Commandes": "Perintah",
         "Toujours allumé": "Toujours allumé",
-        "Modèle": "Modèle",
+        "Modèle": "Model",
         "ID": "ID",
         "Non model": "Non model",
-        "Options": "Options"
+        "Options": "Pilihan"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "mengelola Grup",
         "Parametres (JSON)": "Parameter (JSON)",
         "Tester": "Coba",
         "Nom": "Nama",
-        "Afficher": "Afficher",
-        "Historiser": "Historiser"
+        "Afficher": "Memenitikan",
+        "Historiser": "Historicize"
     },
     "plugins/philipsHue/core/class/philipsHue.class.php": {
         "On": "satu",
@@ -66,7 +66,7 @@
         "Arc en ciel Off": "off Rainbow",
         "Etat Arc en ciel": "Arc Negara di langit",
         "Rafraîchir": "dingin",
-        "Options": "Options",
+        "Options": "Pilihan",
         "Nom de l'animation": "Nom de l'animation",
         "Animation": "Animation",
         "Scene": "Scene",
@@ -82,7 +82,7 @@
     "plugins/philipsHue/core/php/jeeHueAnimation.php": {
         "[philipsHue/jeeAnimation] Lancement de l'animation sur": "[philipsHue/jeeAnimation] Lancement de l'animation sur",
         " avec comme options ": "avec comme options",
-        "Lancement de ": "Lancement de",
+        "Lancement de ": "Peluncuran",
         "Fin de l'animation": "Fin de l'animation"
     }
 }

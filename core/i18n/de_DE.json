@@ -29,25 +29,25 @@
         "Model": "Model",
         "Version du logiciel": "Softwareversion",
         "Action": "Aktion",
-        "Ajouter": "Ajouter",
-        "Gestion": "Gestion",
-        "Configuration": "Configuration",
-        "Configuration avancée": "Configuration avancée",
-        "Equipement": "Equipement",
-        "Commandes": "Commandes",
+        "Ajouter": "Hinzufügen",
+        "Gestion": "Verwaltung",
+        "Configuration": "Konfiguration",
+        "Configuration avancée": "Erweiterte Konfiguration",
+        "Equipement": "Gerät",
+        "Commandes": "Befehle",
         "Toujours allumé": "Toujours allumé",
-        "Modèle": "Modèle",
+        "Modèle": "Model",
         "ID": "ID",
         "Non model": "Non model",
-        "Options": "Options"
+        "Options": "Optionen"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
         "Gestion des groupes": "Verwalten von Gruppen",
         "Parametres (JSON)": "Parameter (JSON)",
         "Tester": "Test",
         "Nom": "Name",
-        "Afficher": "Afficher",
-        "Historiser": "Historiser"
+        "Afficher": "anzeigen",
+        "Historiser": "Chronik"
     },
     "plugins/philipsHue/core/class/philipsHue.class.php": {
         "On": "An",
@@ -66,7 +66,7 @@
         "Arc en ciel Off": "Regenbogen aus",
         "Etat Arc en ciel": "zustand Regenbogen",
         "Rafraîchir": "Aktualisieren",
-        "Options": "Options",
+        "Options": "Optionen",
         "Nom de l'animation": "Nom de l'animation",
         "Animation": "Animation",
         "Scene": "Scene",
@@ -82,7 +82,7 @@
     "plugins/philipsHue/core/php/jeeHueAnimation.php": {
         "[philipsHue/jeeAnimation] Lancement de l'animation sur": "[philipsHue/jeeAnimation] Lancement de l'animation sur",
         " avec comme options ": "avec comme options",
-        "Lancement de ": "Lancement de",
+        "Lancement de ": "Start",
         "Fin de l'animation": "Fin de l'animation"
     }
 }

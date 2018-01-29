@@ -24,9 +24,9 @@ You can find here the full configuration of your device :
 -   **Catégorie** : les catégories de l’équipement (il peut appartenir à
     plusieurs catégories),
 
--   ** Enable **: to make your equipment active,
+-   **Enable**: to make your equipment active,
 
--   ** Visible **: makes your equipment visible on the dashboard,
+-   **Visible**: makes your equipment visible on the dashboard,
 
 En-dessous vous retrouvez la liste des commandes :
 

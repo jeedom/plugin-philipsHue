@@ -35,10 +35,10 @@
         "Configuration avancée": "Erweiterte Konfiguration",
         "Equipement": "Gerät",
         "Commandes": "Befehle",
-        "Toujours allumé": "Toujours allumé",
+        "Toujours allumé": "Alles an",
         "Modèle": "Model",
         "ID": "ID",
-        "Non model": "Non model",
+        "Non model": "Kein Modell",
         "Options": "Optionen"
     },
     "plugins/philipsHue/desktop/js/philipsHue.js": {
@@ -67,10 +67,10 @@
         "Etat Arc en ciel": "zustand Regenbogen",
         "Rafraîchir": "Aktualisieren",
         "Options": "Optionen",
-        "Nom de l'animation": "Nom de l'animation",
+        "Nom de l'animation": "Animations Name",
         "Animation": "Animation",
-        "Scene": "Scene",
-        "Impossible de joindre le bridge": "Impossible de joindre le bridge"
+        "Scene": "Szene",
+        "Impossible de joindre le bridge": "Bridge konnte nicht verbunden werden"
     },
     "plugins/philipsHue/plugin_info/configuration.php": {
         "IP du bridge": " IP der Brücke",
@@ -80,9 +80,9 @@
         "Synchroniser": "Synchronisieren"
     },
     "plugins/philipsHue/core/php/jeeHueAnimation.php": {
-        "[philipsHue/jeeAnimation] Lancement de l'animation sur": "[philipsHue/jeeAnimation] Lancement de l'animation sur",
-        " avec comme options ": "avec comme options",
+        "[philipsHue/jeeAnimation] Lancement de l'animation sur": "Start der Animation auf",
+        " avec comme options ": "Mit der gleichen Option",
         "Lancement de ": "Start",
-        "Fin de l'animation": "Fin de l'animation"
+        "Fin de l'animation": "Ende der Animation"
     }
 }

@@ -1,3 +1,7 @@
+-	TRADFRI bulb GU10 WS 400lm
+-	TRADFRI bulb E27 opal 1000lm
+
+
 21/01/2018 
 ===
 

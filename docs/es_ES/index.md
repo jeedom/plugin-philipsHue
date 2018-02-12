@@ -7,7 +7,7 @@ Après téléchargement du plugin, il vous faudra renseigner l’adresse IP
 de votre pont hue, si ce n’est pas déja fait par le système de
 découverte automatique.
 
-Configuration des équipements 
+Configuración del dispositivo
 =============================
 
 > **Note**
@@ -22,7 +22,7 @@ Aquí encontrará toda la configuración de su dispositivo:
 -   **Objeto padre** : especifica el objeto padre al que pertenece
     equipos,
 
--   **Catégorie** : les catégories de l’équipement (il peut appartenir à
+-   ** ** Categoría: categorías de equipos (que pueden pertenecer a
     plusieurs catégories),
 
 -   ** ** Activar: para que su equipo activo,

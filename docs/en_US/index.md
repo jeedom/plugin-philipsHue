@@ -6,7 +6,7 @@ Après téléchargement du plugin, il vous faudra renseigner l’adresse IP
 de votre pont hue, si ce n’est pas déja fait par le système de
 découverte automatique.
 
-Configuration des équipements 
+Equipment configuration
 =============================
 
 > **Note**
@@ -21,7 +21,7 @@ You can find here the full configuration of your device :
 -   **Parent Object** : means the parent object the equipment depend
     equipment,
 
--   **Catégorie** : les catégories de l’équipement (il peut appartenir à
+-   **Category**: categories of equipment (it may belong to
     plusieurs catégories),
 
 -   **Enable**: to make your equipment active,

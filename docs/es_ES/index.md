@@ -1,6 +1,6 @@
 Plugin pour commander les lampes Philips Hue.
 
-Configuration du plugin 
+configuración del plugin
 =======================
 
 Après téléchargement du plugin, il vous faudra renseigner l’adresse IP
@@ -20,14 +20,14 @@ Aquí encontrará toda la configuración de su dispositivo:
 -   **Nom de l’équipement Hue** : nom de votre équipement Hue,
 
 -   **Objeto padre** : especifica el objeto padre al que pertenece
-    l’équipement,
+    equipos,
 
 -   **Catégorie** : les catégories de l’équipement (il peut appartenir à
     plusieurs catégories),
 
--   **Activer** : permet de rendre votre équipement actif,
+-   ** ** Activar: para que su equipo activo,
 
--   **Visible** : rend votre équipement visible sur le dashboard,
+-   ** ** visible hace que su equipo visible en el salpicadero,
 
 En-dessous vous retrouvez la liste des commandes :
 
@@ -84,7 +84,7 @@ existe :
     -   duration : pour definir la durée, par defaut 720s, ex pour 5min
         il faut mettre : duration=300
 
-FAQ 
+Preguntas frecuentes
 ===
 
 J’ai l’impression qu’il y a un décalage sur certaine couleur entre ce que je demande et la couleur de l’ampoule.
@@ -92,7 +92,7 @@ J’ai l’impression qu’il y a un décalage sur certaine couleur entre ce que
 :   Il semble que la grille de couleur des ampoules aient un offset,
     nous cherchons comment corriger
 
-<!-- -->
+<! - ->
 
 Quelle est la fréquence de rafraîchissement ?
 

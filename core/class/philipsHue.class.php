@@ -626,8 +626,7 @@ class philipsHueCmd extends cmd {
 		}
 		switch ($this->getLogicalId()) {
 			case 'on':
-				$command->brightness(100);
-				$command->rgb(255, 255, 255);
+
 				break;
 			case 'off':
 				if ($eqLogic->getConfiguration('model') != "LWB004") {

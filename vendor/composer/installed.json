@@ -1,31 +1,31 @@
 [
     {
         "name": "sqmk/phue",
-        "version": "v1.6.1",
-        "version_normalized": "1.6.1.0",
+        "version": "v1.7.0",
+        "version_normalized": "1.7.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sqmk/Phue.git",
-            "reference": "e668f9b8bef04a73fd50178c83f15d0b87de9a66"
+            "reference": "78c7e94578d0fefe5378075bd52c23aff35a4ad3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sqmk/Phue/zipball/e668f9b8bef04a73fd50178c83f15d0b87de9a66",
-            "reference": "e668f9b8bef04a73fd50178c83f15d0b87de9a66",
+            "url": "https://api.github.com/repos/sqmk/Phue/zipball/78c7e94578d0fefe5378075bd52c23aff35a4ad3",
+            "reference": "78c7e94578d0fefe5378075bd52c23aff35a4ad3",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.0"
+            "php": ">=5.6.0"
         },
         "require-dev": {
-            "mockery/mockery": "0.8.0",
-            "phpunit/phpunit": "3.7.25",
-            "squizlabs/php_codesniffer": "1.4.6"
+            "mockery/mockery": "1.0.0",
+            "phpunit/phpunit": "5.7.25",
+            "squizlabs/php_codesniffer": "3.1.1"
         },
         "suggest": {
             "ext-curl": "Allows usage of cURL transport adapter"
         },
-        "time": "2016-11-16 19:50:27",
+        "time": "2017-12-01T21:56:14+00:00",
         "bin": [
             "bin/phue-create-user",
             "bin/phue-bridge-finder",

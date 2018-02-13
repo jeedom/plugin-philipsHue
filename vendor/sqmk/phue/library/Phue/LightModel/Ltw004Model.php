@@ -9,18 +9,18 @@
 namespace Phue\LightModel;
 
 /**
- * Hue bulb A19
+ * Hue A19 White Ambiance
  */
-class Lct001Model extends AbstractLightModel
+class Ltw004Model extends AbstractLightModel
 {
 
     /**
      * Model id
      */
-    const MODEL_ID = 'LCT001';
+    const MODEL_ID = 'LTW004';
 
     /**
      * Model name
      */
-    const MODEL_NAME = 'Hue bulb A19 (gamut B)';
+    const MODEL_NAME = 'Hue A19 White Ambiance';
 }

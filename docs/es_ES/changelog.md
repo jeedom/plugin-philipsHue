@@ -1,3 +1,6 @@
+
+-   TRADFRI E27 couleur 600lm
+
 # 23/02/2018
 
 -   TRADFRI bulb E27 W opal 1000lm

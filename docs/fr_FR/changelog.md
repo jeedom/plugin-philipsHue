@@ -1,4 +1,5 @@
 
+-	TRADFRI E27 WS opal 980lm
 -	TRADFRI E27 couleur 600lm
 
 # 23/02/2018

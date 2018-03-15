@@ -1,4 +1,6 @@
 
+-   FLOALT panel WS 30x90
+-   TRADFRI bulb E14 WS opal 400lm
 -   TRADFRI E27 WS opal 980lm
 -   TRADFRI E27 couleur 600lm
 

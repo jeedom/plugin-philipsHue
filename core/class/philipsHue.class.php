@@ -285,7 +285,7 @@ class philipsHue extends eqLogic {
 		$groups = $hue->getgroups();
 		$lights = $hue->getLights();
 		$sensors = self::sanitizeSensors($hue->getSensors());
-
+		$timezone = config::byKey('timezone', 'core', 'Europe/Brussels');
 		foreach (self::$_eqLogics as $eqLogic) {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
@@ -299,8 +299,10 @@ class philipsHue extends eqLogic {
 					$sensor = $sensors[$eqLogic->getConfiguration('id')];
 					foreach ($sensor as $id => $obj) {
 						$lastupdate = 0;
+						$datetime = new \DateTime();
 						if (isset($obj->getState()->lastupdated)) {
-							$lastupdate = strtotime($obj->getState()->lastupdated) + 3600;
+							$datetime = new \DateTime($obj->getState()->lastupdated, new \DateTimeZone("UTC"));
+							$datetime->setTimezone(new \DateTimezone($timezone));
 						}
 						foreach ($obj->getState() as $key => $value) {
 							if ($key == 'lastupdated') {
@@ -332,7 +334,7 @@ class philipsHue extends eqLogic {
 										break;
 								}
 							}
-							$eqLogic->checkAndUpdateCmd($key, $value, date('Y-m-d H:i:s', $lastupdate));
+							$eqLogic->checkAndUpdateCmd($key, $value, $datetime->format('Y-m-d H:i:s'));
 						}
 						foreach ($obj->getConfig() as $key => $value) {
 							if ($key == 'battery') {

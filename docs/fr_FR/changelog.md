@@ -32,15 +32,9 @@
 # 21/01/2017 
 
 -   Support du hue motion
-
 -   Support du hue tap
-
 -   Correction des scènes
-
 -   Correction du décalage des couleurs
-
 -   Ajout des images des modules
-
 -   Support de plus de modules
-
 -   Ajout de la gestion de la température des couleurs

@@ -1,4 +1,6 @@
+# 14/04/2018
 
+-   Correction d'un bug sur l'heure des valeurs des capteurs
 -   FLOALT panel WS 30x90
 -   TRADFRI bulb E14 WS opal 400lm
 -	TRADFRI E27 WS opal 980lm
@@ -10,8 +12,7 @@
 -	TRADFRI bulb GU10 WS 400lm
 -	TRADFRI bulb E27 opal 1000lm
 
-
-# 21/01/2018 
+# 21/01/2018
 
 - 	Passage sur le nouveau système de doc
 -   Ajout du modèle MWB001
@@ -31,15 +32,9 @@
 # 21/01/2017 
 
 -   Support du hue motion
-
 -   Support du hue tap
-
 -   Correction des scènes
-
 -   Correction du décalage des couleurs
-
 -   Ajout des images des modules
-
 -   Support de plus de modules
-
 -   Ajout de la gestion de la température des couleurs

@@ -1,6 +1,6 @@
 {
-    "LTW001": {
-        "name": "Hue A19 White Ambiance",
+    "LTC001": {
+        "name": "Hue ambiance ceiling",
         "configuration" :{
             "gammut" : "2200K-6500K",
             "alwaysOn" : 1

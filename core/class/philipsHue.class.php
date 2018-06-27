@@ -300,7 +300,7 @@ class philipsHue extends eqLogic {
 					foreach ($sensor as $id => $obj) {
 						$lastupdate = 0;
 						$datetime = new \DateTime();
-						if (isset($obj->getState()->lastupdated)) {
+						if (isset($obj->getState()->lastupdated) && $obj->getState()->lastupdated !== "none") {
 							$datetime = new \DateTime($obj->getState()->lastupdated, new \DateTimeZone("UTC"));
 							$datetime->setTimezone(new \DateTimezone($timezone));
 						}

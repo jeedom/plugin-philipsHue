@@ -1,3 +1,7 @@
+# 27/06/2018
+
+- Correction de bugs (merci @mixman68)
+
 # 31/05/2018
 
 -   LTC001 (Hue ambiance ceiling)

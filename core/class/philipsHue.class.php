@@ -298,6 +298,9 @@ class philipsHue extends eqLogic {
 				if ($eqLogic->getConfiguration('category') == 'sensor') {
 					$sensor = $sensors[$eqLogic->getConfiguration('id')];
 					foreach ($sensor as $id => $obj) {
+						if ($obj == null) {
+							continue;
+						}
 						$lastupdate = 0;
 						$datetime = new \DateTime();
 						if (isset($obj->getState()->lastupdated) && $obj->getState()->lastupdated !== "none") {

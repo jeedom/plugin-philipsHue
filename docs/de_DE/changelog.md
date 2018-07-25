@@ -1,3 +1,10 @@
+
+- Ajout LPT003
+
+# 09/07/2018
+
+- Ajout du living white plug
+
 # 27/06/2018
 
 - Correction de bugs (merci @mixman68)

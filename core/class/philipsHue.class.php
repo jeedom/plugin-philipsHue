@@ -631,7 +631,7 @@ class philipsHueCmd extends cmd {
 		}
 		switch ($this->getLogicalId()) {
 			case 'on':
-				$command->brightness(100);
+				$command->brightness(255);
 				$command->rgb(255, 255, 255);
 				break;
 			case 'off':

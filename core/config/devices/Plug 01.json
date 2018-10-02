@@ -1,0 +1,45 @@
+{
+    "Plug 01": {
+        "name": "On/Off plug - OSRAM",
+        "configuration" :{
+            "gammut" : "-"
+        },
+        "commands": [
+            {
+                "name": "Etat",
+                "type": "info",
+                "subtype": "binary",
+                "display": {
+                    "generic_type": "LIGHT_STATE"
+                },
+                "isVisible": 0,
+                "isHistorized": 0,
+                "logicalId": "luminosity_state"
+            },
+            {
+                "name": "On",
+                "type": "action",
+                "subtype": "other",
+                "display": {
+                    "generic_type": "LIGHT_ON"
+                },
+                "value" : "Etat",
+                "isVisible": 0,
+                "isHistorized": 0,
+                "logicalId": "on"
+            },
+            {
+                "name": "Off",
+                "type": "action",
+                "subtype": "other",
+                "display": {
+                    "generic_type": "LIGHT_OFF"
+                },
+                "value" : "Etat",
+                "isVisible": 0,
+                "isHistorized": 0,
+                "logicalId": "off"
+            }
+        ]
+}
+}

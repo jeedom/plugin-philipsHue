@@ -375,7 +375,7 @@ class philipsHue extends eqLogic {
 						if (is_object($eqLogic->getCmd('info', 'color_state'))) {
 							$rgb = $obj->getRGB();
 							$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
-							if ($color == '#000000') {
+							if (!is_nan($rgb['red']) && !is_nan($rgb['green']) && !is_nan($rgb['blue']) && $color == '#000000') {
 								$luminosity = 0;
 							}
 						}

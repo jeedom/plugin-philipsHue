@@ -1,4 +1,6 @@
+# 12/10/2018
 
+- Correction d'un bug sur le statut des pieces (allumé/éteinte) si il n'y a pas de lampe de couleur dans celle-ci
 - Ajout RB 145
 - Ajout LPT003
 

@@ -1,3 +1,7 @@
+# 16/10/2018
+
+- Correction d'un bug sur l'invertion de presence pour le motion sensor (pour ceux déjà créé il faudra cocher la cache d'inversion sur la ligne de la commande Présence)
+
 # 12/10/2018
 
 - Correction d'un bug sur le statut des pieces (allumé/éteinte) si il n'y a pas de lampe de couleur dans celle-ci

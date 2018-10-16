@@ -57,6 +57,9 @@
 				"isVisible": 1,
 				"isHistorized": 1,
 				"logicalId": "presence",
+				"display": {
+					"invertBinary": "1"
+				},
 				"configuration" : {
 					"onType" : "ZLLPresence"
 				}

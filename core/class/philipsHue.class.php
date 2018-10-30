@@ -318,6 +318,7 @@ class philipsHue extends eqLogic {
 							if ($cmd->getConfiguration('onType') != '' && $cmd->getConfiguration('onType') != $obj->getType()) {
 								continue;
 							}
+							$value = null;
 							if ($key == 'temperature') {
 								$value = $value / 100;
 							}
@@ -337,7 +338,9 @@ class philipsHue extends eqLogic {
 										break;
 								}
 							}
-							$eqLogic->checkAndUpdateCmd($key, $value, $datetime->format('Y-m-d H:i:s'));
+							if ($value !== null) {
+								$eqLogic->checkAndUpdateCmd($key, $value, $datetime->format('Y-m-d H:i:s'));
+							}
 						}
 						foreach ($obj->getConfig() as $key => $value) {
 							if ($key == 'battery') {

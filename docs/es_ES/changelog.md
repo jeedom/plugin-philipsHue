@@ -1,3 +1,5 @@
+- Correction d'un bug sur l'état des bouton lors du redemarrage du pont 
+
 # 16/10/2018
 
 - Correction d'un bug sur l'invertion de presence pour le motion sensor (pour ceux déjà créé il faudra cocher la cache d'inversion sur la ligne de la commande Présence)

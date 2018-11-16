@@ -550,7 +550,6 @@ class philipsHue extends eqLogic {
 		$cmd .= ' animation=' . $_animation;
 		$cmd .= ' ' . $_options;
 		$cmd .= ' >> ' . log::getPathToLog('philipsHue_animation') . ' 2>&1 &';
-
 		shell_exec($cmd);
 	}
 
@@ -558,6 +557,7 @@ class philipsHue extends eqLogic {
 		if (count(system::ps('core/php/jeeHueAnimation.php id=' . $this->getId())) > 0) {
 			system::kill('core/php/jeeHueAnimation.php id=' . $this->getId(), false);
 		}
+		$this->setCache('current_animate', 0);
 		return true;
 	}
 
@@ -629,7 +629,7 @@ class philipsHueCmd extends cmd {
 		}
 		$command->transitionTime($transistion_time);
 		$command->on(true);
-		if ($this->getLogicalId() != 'animation') {
+		if ($this->getLogicalId() != 'animation' && $eqLogic->getCache('current_animate', 0) == 1) {
 			$eqLogic->stopAnimation();
 		}
 		switch ($this->getLogicalId()) {

@@ -47,6 +47,7 @@ if ($philipsHue->getEqType_name() != 'philipsHue') {
 	log::add('philipsHue', 'error', __('[philipsHue/jeeAnimation] Cet équipement n\'est pas de type philipsHue : ', __FILE__) . $philipsHue->getEqType_name());
 	die();
 }
+$philipsHue->setCache('current_animate', 1);
 log::add('philipsHue', 'debug', __('[philipsHue/jeeAnimation] Lancement de l\'animation sur', __FILE__) . $philipsHue->getEqType_name() . __(' avec comme options ', __FILE__) . print_r($_GET, true));
 try {
 	switch (init('animation')) {
@@ -84,7 +85,9 @@ try {
 		$hue->sendCommand($command);
 		sleep($action['sleep']);
 	}
+	$philipsHue->setCache('current_animate', 0);
 	log::add('philipsHue', 'debug', __('Fin de l\'animation', __FILE__));
 } catch (Exception $e) {
+	$philipsHue->setCache('current_animate', 0);
 	log::add('philipsHue', 'error', '[philipsHue/jeeAnimation] ' . $e->getMessage());
 }

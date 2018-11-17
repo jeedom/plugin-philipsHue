@@ -1,4 +1,5 @@
 - Correction d'un bug sur l'état des bouton lors du redemarrage du pont 
+- Ajout Hue lightstrip outdoor
 
 # 16/10/2018
 

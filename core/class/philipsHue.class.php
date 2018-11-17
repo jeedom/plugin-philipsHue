@@ -551,6 +551,7 @@ class philipsHue extends eqLogic {
 		$cmd .= ' ' . $_options;
 		$cmd .= ' >> ' . log::getPathToLog('philipsHue_animation') . ' 2>&1 &';
 		shell_exec($cmd);
+		$this->setCache('current_animate', 1);
 	}
 
 	public function stopAnimation() {
@@ -634,8 +635,8 @@ class philipsHueCmd extends cmd {
 		}
 		switch ($this->getLogicalId()) {
 			case 'on':
-				$command->brightness(255);
-				$command->rgb(255, 255, 255);
+				//$command->brightness(255);
+				//$command->rgb(255, 255, 255);
 				break;
 			case 'off':
 				if ($eqLogic->getConfiguration('model') != "LWB004") {

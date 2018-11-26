@@ -2,7 +2,7 @@
     "RB 145": {
         "name": "Innr E14 Ampoule LED connectée Blanc",
         "configuration" :{
-            "gammut" : "2200K-6500K",
+            "gammut" : "2200K-6500K"
         },
         "commands": [
             {

@@ -298,7 +298,7 @@ class philipsHue extends eqLogic {
 				if ($eqLogic->getConfiguration('category') == 'sensor') {
 					$sensor = $sensors[$eqLogic->getConfiguration('id')];
 					foreach ($sensor as $id => $obj) {
-						if ($obj == null) {
+						if ($obj == null || !is_object($obj)) {
 							continue;
 						}
 						$lastupdate = 0;
@@ -361,13 +361,16 @@ class philipsHue extends eqLogic {
 					switch ($eqLogic->getConfiguration('category')) {
 						case 'light':
 							$obj = $lights[$eqLogic->getConfiguration('id')];
+							if ($obj == null || !is_object($obj)) {
+								continue;
+							}
 							$isReachable = ($eqLogic->getConfiguration('alwaysOn', 0) == 0) ? $obj->isReachable() : true;
 							break;
 						case 'group':
 							$obj = $groups[$eqLogic->getConfiguration('id')];
 							break;
 					}
-					if ($obj === null) {
+					if ($obj === null || !is_object($obj)) {
 						continue;
 					}
 					if (!$isReachable || !$obj->isOn()) {

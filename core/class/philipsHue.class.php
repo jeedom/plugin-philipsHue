@@ -422,7 +422,7 @@ class philipsHue extends eqLogic {
 		foreach (ls(dirname(__FILE__) . '/../config/devices/', '*.json') as $file) {
 			try {
 				$content = file_get_contents(dirname(__FILE__) . '/../config/devices/' . $file);
-				$return += is_json($content, true);
+				$return += is_json($content, array());
 			} catch (Exception $e) {
 
 			}

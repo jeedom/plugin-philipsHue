@@ -695,7 +695,6 @@ class philipsHueCmd extends cmd {
 			case 'animation':
 				$eqLogic->animation($_options['title'], $_options['message']);
 				return;
-				break;
 		}
 		$hue->sendCommand($command);
 	}

@@ -1,3 +1,9 @@
+# 16/01/2018
+
+- Ajout de configuration de lumière génerique couleur et non couleurs
+- Support de Niko 4 boutons
+- Correction de bug
+
 # 15/01/2018
 
 - Mise à jour de la doc

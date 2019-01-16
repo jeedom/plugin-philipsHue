@@ -1,4 +1,7 @@
-- Correction d'un bug sur l'état des bouton lors du redemarrage du pont 
+# 15/01/2018
+
+- Mise à jour de la doc
+- Correction d'un bug sur l'état des bouton lors du redemarrage du pont
 - Ajout Hue lightstrip outdoor
 
 # 16/10/2018
@@ -45,16 +48,16 @@
 -   Ajout du modèle OSRAM
 -   Ajout du modèle TRADFRI bulb GU10 W 400lm
 
-# 20/11/2017 
+# 20/11/2017
 
 -   Ajout du modèle LCT015
 
-# 28/03/2017 
+# 28/03/2017
 
 -   Ajout d’animation (levé et couché de soleil), attention toute les
     lampes ne sont pas forcement compatible
 
-# 21/01/2017 
+# 21/01/2017
 
 -   Support du hue motion
 -   Support du hue tap

@@ -1,13 +1,13 @@
 Plugin pour commander les lampes Philips Hue.
 
-configuración del plugin
+Configuration du plugin
 =======================
 
 Après téléchargement du plugin, il vous faudra renseigner l’adresse IP
 de votre pont hue, si ce n’est pas déja fait par le système de
 découverte automatique.
 
-Configuración del dispositivo
+Configuration des équipements
 =============================
 
 > **Note**
@@ -41,7 +41,7 @@ En-dessous vous retrouvez la liste des commandes :
 
 -   **Tester** : permet de tester la commande
 
-Le groupe 0 (Toute les lampes) 
+Le groupe 0 (Toute les lampes)
 ==============================
 
 Le groupe 0 est un peu particulier car il ne peut être supprimé ou
@@ -54,7 +54,7 @@ doivent absolument être faite à partir de l’application mobile
 vous devez absolument synchroniser Jeedom avec le bon (en resauvegardant
 simple la configuration du plugin)
 
-Tansition 
+Tansition
 =========
 
 Commande un peu particulier qui doit être utilisée dans un scénario,
@@ -66,7 +66,7 @@ minutes. Dans votre scénario vous avez donc juste à appeller la commande
 transition et en parametre mettre 180, ensuite appeller la commande
 couleur vers la couleur voulu.
 
-Animation 
+Animation
 =========
 
 Les animations sont des enchainements de transition, actuellement il
@@ -84,18 +84,20 @@ existe :
     -   duration : pour definir la durée, par defaut 720s, ex pour 5min
         il faut mettre : duration=300
 
-Preguntas frecuentes
+FAQ
 ===
 
-J’ai l’impression qu’il y a un décalage sur certaine couleur entre ce que je demande et la couleur de l’ampoule.
+> **J’ai l’impression qu’il y a un décalage sur certaine couleur entre ce que je demande et la couleur de l’ampoule.**
+>
+> Il semble que la grille de couleur des ampoules aient un offset,nous cherchons comment corriger
 
-:   Il semble que la grille de couleur des ampoules aient un offset,
-    nous cherchons comment corriger
+> **Quelle est la fréquence de rafraîchissement ?**
+>
+> Le systeme recupère les informations toutes les 2s.
 
-<! - ->
-
-Quelle est la fréquence de rafraîchissement ?
-
-:   Le systeme recupère les informations toutes les 2s.
-
-
+> **Mon équipement (lampe/interrupteur....) n'est pas reconnu par le plugin, comment faire ?**
+>
+> Il faut :
+> - nous d'écrire l'équipement que vous voulez qu'on ajoute avec photo et possibilités de celui-ci
+​> - nous envoyer le log en debug de la synchronisation avec le pont
+> Le tout en nous contactant par une demande de support

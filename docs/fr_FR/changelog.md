@@ -1,3 +1,7 @@
+# 17/01/2019
+
+- Ajout de la lampe LTC016
+
 # 16/01/2019
 
 - Ajout de configuration de lumière génerique couleur et non couleurs

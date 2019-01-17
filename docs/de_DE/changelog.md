@@ -1,4 +1,10 @@
-# 15/01/2018
+# 16/01/2019
+
+- Ajout de configuration de lumière génerique couleur et non couleurs
+- Support de Niko 4 boutons
+- Correction de bug
+
+# 15/01/2019
 
 - Aktualisierung des Dokuments
 - Correction d'un bug sur l'état des bouton lors du redemarrage du pont

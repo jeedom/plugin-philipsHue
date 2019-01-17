@@ -1,6 +1,6 @@
 {
-  "default_color": {
-    "name": "Mumière génerique non couleur",
+  "default_nocolor": {
+    "name": "Lumière génerique non couleur",
     "configuration" :{
       "gammut" : "A"
     },

@@ -1,6 +1,6 @@
 Plugin pour commander les lampes Philips Hue.
 
-Configuration du plugin
+Plugin configuration
 =======================
 
 Après téléchargement du plugin, il vous faudra renseigner l’adresse IP
@@ -29,7 +29,7 @@ You can find here the full configuration of your device :
 
 -   **Visible**: makes your equipment visible on the dashboard,
 
-En-dessous vous retrouvez la liste des commandes :
+Below you will find the list of commands:
 
 -   **Nom** : le nom affiché sur le dashboard,
 
@@ -39,7 +39,7 @@ En-dessous vous retrouvez la liste des commandes :
 -   **Options** : vous permet d’afficher ou de masquer certaines
     commandes et/ou d’en historiser
 
--   **Tester** : permet de tester la commande
+-   **Test**: allows to test the command
 
 Le groupe 0 (Toute les lampes)
 ==============================

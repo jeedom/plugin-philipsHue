@@ -399,10 +399,12 @@ class philipsHue extends eqLogic {
 						$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;
 						$eqLogic->checkAndUpdateCmd($cmd, $value);
 					}
-					$cmd = $eqLogic->getCmd('info', 'rainbow_state');
-					if (is_object($cmd)) {
-						$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
-						$eqLogic->checkAndUpdateCmd($cmd, $value);
+					if($eqLogic->getConfiguration('category') != 'group'){
+						$cmd = $eqLogic->getCmd('info', 'rainbow_state');
+						if (is_object($cmd)) {
+							$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
+							$eqLogic->checkAndUpdateCmd($cmd, $value);
+						}
 					}
 					$cmd = $eqLogic->getCmd('info', 'color_temp_state');
 					if (is_object($cmd)) {

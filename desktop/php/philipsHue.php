@@ -11,23 +11,20 @@ $eqLogics = eqLogic::byType($plugin->getId());
 	<div class="col-xs-12 eqLogicThumbnailDisplay">
 		<legend><i class="fas fa-cog"></i>  {{Gestion}}</legend>
 		<div class="eqLogicThumbnailContainer">
-			<div class="cursor eqLogicAction logoPrimary" data-action="add" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
-				<center>
-					<i class="fas fa-plus-circle" style="font-size : 6em;color:#94ca02;"></i>
-				</center>
-				<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#94ca02"><center>{{Ajouter}}</center></span>
+			<div class="cursor eqLogicAction logoPrimary" data-action="add">
+				<i class="fas fa-plus-circle"></i>
+				<br/>
+				<span>{{Ajouter}}</span>
 			</div>
-			<div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf" >
-				<center>
-					<i class="fas fa-wrench" style="font-size : 6em;color:#767676;"></i>
-				</center>
-				<span ><center>{{Configuration}}</center></span>
+			<div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
+				<i class="fas fa-wrench"></i>
+				<br/>
+				<span>{{Configuration}}</span>
 			</div>
-			<div class="cursor" id="bt_syncEqLogic" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
-				<center>
-					<i class="fas fa-sync-alt" style="font-size : 6em;color:#767676;"></i>
-				</center>
-				<span style="font-size : 1.1em;position:relative; top : 23px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Synchroniser}}</center></span>
+			<div class="cursor logoSecondary" id="bt_syncEqLogic">
+				<i class="fas fa-sync-alt"></i>
+				<br/>
+				<span>{{Synchroniser}}</span>
 			</div>
 		</div>
 		<legend><i class="fas fa-table"></i> {{Mes Philips Hue}}</legend>
@@ -35,13 +32,14 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		<div class="eqLogicThumbnailContainer">
 			<?php
 			foreach ($eqLogics as $eqLogic) {
-				echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
+				$opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
+				echo '<div class="eqLogicDisplayCard cursor '.$opacity.'" data-eqLogic_id="' . $eqLogic->getId() . '">';
 				if ($eqLogic->getImgFilePath() !== false) {
 					echo '<img class="lazy" src="plugins/philipsHue/core/config/devices/' . $eqLogic->getImgFilePath() . '"/>';
 				} else {
 					echo '<img src="' . $plugin->getPathImgIcon() . '"/>';
 				}
-				echo "<br>";
+				echo '<br/>';
 				echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
 				echo '</div>';
 			}

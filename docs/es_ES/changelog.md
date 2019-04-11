@@ -1,4 +1,4 @@
-# 17/01/2019
+# 01/17/2019
 
 - Ajout de la lampe LTC016
 - Ajout d'un bouton de synchronisation sur la page de gestion des équipements

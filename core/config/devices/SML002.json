@@ -1,0 +1,112 @@
+{
+	"SML002": {
+		"name": "Hue Motion sensor outdoor",
+		"configuration": {
+			"battery_type": "2x AAA (LR03)"
+		},
+		"commands": [
+			{
+				"name": "Lumininosité",
+				"type": "info",
+				"subtype": "numeric",
+				"isVisible": 1,
+				"isHistorized": 1,
+				"logicalId": "lightlevel",
+				"configuration" : {
+					"onType" : "ZLLLightLevel"
+				}
+			},
+			{
+				"name": "Nuit",
+				"type": "info",
+				"subtype": "binary",
+				"isVisible": 1,
+				"isHistorized": 0,
+				"logicalId": "dark",
+				"configuration" : {
+					"onType" : "ZLLLightLevel"
+				}
+			},
+			{
+				"name": "Jour",
+				"type": "info",
+				"subtype": "binary",
+				"isVisible": 1,
+				"isHistorized": 0,
+				"logicalId": "daylight",
+				"configuration" : {
+					"onType" : "ZLLLightLevel"
+				}
+			},
+			{
+				"name": "Température",
+				"type": "info",
+				"subtype": "numeric",
+				"unite" : "°C",
+				"isVisible": 1,
+				"isHistorized": 1,
+				"logicalId": "temperature",
+				"configuration" : {
+					"onType" : "ZLLTemperature"
+				}
+			},
+			{
+				"name": "Présence",
+				"type": "info",
+				"subtype": "binary",
+				"isVisible": 1,
+				"isHistorized": 1,
+				"logicalId": "presence",
+				"display": {
+					"invertBinary": "1"
+				},
+				"configuration" : {
+					"onType" : "ZLLPresence"
+				}
+			},
+			{
+				"name": "Etat",
+				"type": "info",
+				"subtype": "binary",
+				"isVisible": 0,
+				"isHistorized": 0,
+				"logicalId": "on",
+				"configuration" : {
+					"onType" : "ZLLPresence"
+				}
+			},
+			{
+				"name": "Activer",
+				"type": "action",
+				"subtype": "other",
+				"value" : "Etat",
+				"isVisible": 1,
+				"isHistorized": 0,
+				"logicalId": "enable",
+				"template":{
+					"dashboard" : "btnCircle",
+					"mobile" : "circle"
+				},
+				"configuration" : {
+					"toUpdate" : [{"type" : "config","key" : "on","value":1,"onType" : "ZLLPresence","valueType" : "boolean"}]
+				}
+			},
+			{
+				"name": "Désactiver",
+				"type": "action",
+				"subtype": "other",
+				"value" : "Etat",
+				"isVisible": 1,
+				"isHistorized": 0,
+				"logicalId": "disable",
+				"template":{
+					"dashboard" : "btnCircle",
+					"mobile" : "circle"
+				},
+				"configuration" : {
+					"toUpdate" : [{"type" : "config","key" : "on","value":0,"onType" : "ZLLPresence","valueType" : "boolean"}]
+				}
+			}
+		]
+	}
+}

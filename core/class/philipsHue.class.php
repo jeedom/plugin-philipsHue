@@ -501,20 +501,28 @@ class philipsHue extends eqLogic {
 				$scene_cmd->remove();
 			}
 		}
+		
 		$animation = $this->getCmd('action', 'animation');
-		if (!is_object($animation)) {
-			$animation = new philipsHueCmd();
-			$animation->setName(__('Animation', __FILE__));
-			$animation->setType('action');
-			$animation->setSubtype('message');
-			$animation->setEqLogic_id($this->getId());
-			$animation->setIsVisible(0);
-			$animation->setLogicalId('animation');
+		if($this->getConfiguration('animation',1) == 0){
+			if (is_object($animation)) {
+				$animation->remove();
+			}
+		}else{
+			if (!is_object($animation)) {
+				$animation = new philipsHueCmd();
+				$animation->setName(__('Animation', __FILE__));
+				$animation->setType('action');
+				$animation->setSubtype('message');
+				$animation->setEqLogic_id($this->getId());
+				$animation->setIsVisible(0);
+				$animation->setLogicalId('animation');
+			}
+			$animation->setDisplay('title_possibility_list', json_encode(array('sunset', 'sunrise')));
+			$animation->setDisplay('message_placeholder', __('Options', __FILE__));
+			$animation->setDisplay('title_placeholder', __('Nom de l\'animation', __FILE__));
+			$animation->save();
 		}
-		$animation->setDisplay('title_possibility_list', json_encode(array('sunset', 'sunrise')));
-		$animation->setDisplay('message_placeholder', __('Options', __FILE__));
-		$animation->setDisplay('title_placeholder', __('Nom de l\'animation', __FILE__));
-		$animation->save();
+		
 	}
 	
 	public function applyModuleConfiguration() {

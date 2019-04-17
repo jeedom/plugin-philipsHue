@@ -2,7 +2,8 @@
 	"SML002": {
 		"name": "Hue Motion sensor outdoor",
 		"configuration": {
-			"battery_type": "2x AAA (LR03)"
+			"battery_type": "2x AAA (LR03)",
+			"animation" : 0,
 		},
 		"commands": [
 			{

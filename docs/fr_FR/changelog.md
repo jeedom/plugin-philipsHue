@@ -1,3 +1,8 @@
+# 20/04/2019
+
+- Support du SML002
+- Support du retour d'état des prise OSRAM SMART (attention necessite une réinclusion)
+
 # 17/01/2019
 
 - Ajout de la lampe LTC016

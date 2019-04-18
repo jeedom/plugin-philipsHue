@@ -1,6 +1,6 @@
 {
-  "TRADFRI bulb E14 WS opal 400lm": {
-    "name": "TRADFRI bulb E14 WS opal 400lm",
+  "TRADFRI bulb E14 W op/ch 400lm": {
+    "name": "TRADFRI bulb E14 W op/ch 400lm",
     "configuration" :{
       "gammut" : "-"
     },

@@ -1,4 +1,9 @@
-# 01/17/2019
+# 20/04/2019
+
+- Support du SML002
+- Support du retour d'état des prise OSRAM SMART (attention necessite une réinclusion)
+
+# 17/01/2019
 
 - Ajout de la lampe LTC016
 - Ajout d'un bouton de synchronisation sur la page de gestion des équipements

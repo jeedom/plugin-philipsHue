@@ -1,3 +1,8 @@
+# 24/04/2019
+
+- Ajout d'un bouton pour supprimer une commande
+- Correction des configuration pour les ampoules ikea (attention il faut les supprimer de jeedom et refaire une synchronisation)
+
 # 20/04/2019
 
 - Support du SML002

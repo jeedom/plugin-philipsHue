@@ -171,7 +171,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				</div>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="commandtab">
-				<legend>Commandes</legend>
 				<table id="table_cmd" class="table table-bordered table-condensed">
 					<thead>
 						<tr>

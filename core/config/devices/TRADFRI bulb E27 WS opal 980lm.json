@@ -2,20 +2,21 @@
 	"TRADFRI bulb E27 WS opal 980lm" : {
 		"name":"TRADFRI bulb E27 WS opal 980lm",
 		"configuration" :{
-            "gammut" : "-"
-        },
+			"gammut" : "-"
+		},
 		"commands":[
 			{
 				"name": "Etat Luminosité",
-                "type": "info",
-                "subtype": "numeric",
-                "display": {
-                    "generic_type": "LIGHT_STATE"
-                },
-                "isVisible": 0,
-                "isHistorized": 0,
-                "logicalId": "luminosity_state"
-			},{
+				"type": "info",
+				"subtype": "numeric",
+				"display": {
+					"generic_type": "LIGHT_STATE"
+				},
+				"isVisible": 0,
+				"isHistorized": 0,
+				"logicalId": "luminosity_state"
+			},
+			{
 				"name":"Luminosité",
 				"type":"action",
 				"subType":"slider",
@@ -27,14 +28,15 @@
 					"maxValue":"254"
 				},
 				"template":{
-                    "dashboard" : "light",
-                    "mobile" : "light"
-                },
+					"dashboard" : "light",
+					"mobile" : "light"
+				},
 				"value":"Etat Luminosité",
 				"isVisible":"1",
 				"isHistorized":"0",
 				"logicalId": "luminosity"
-			},{
+			},
+			{
 				"name":"Etat température de couleur",
 				"type":"info",
 				"subType":"numeric",
@@ -49,7 +51,8 @@
 				"isVisible":"0",
 				"isHistorized":"0",
 				"logicalId": "color_temp_state"
-			},{
+			},
+			{
 				"name":"On",
 				"type":"action",
 				"subType":"other",
@@ -60,7 +63,8 @@
 				"isVisible":"0",
 				"isHistorized":"0",
 				"logicalId": "on"
-			},{
+			},
+			{
 				"name":"Off",
 				"type":"action",
 				"subType":"other",
@@ -71,7 +75,8 @@
 				"isVisible":"0",
 				"isHistorized":"0",
 				"logicalId": "off"
-			},{
+			},
+			{
 				"name":"Froid",
 				"type":"action",
 				"subType":"other",
@@ -82,7 +87,8 @@
 				"isVisible":"1",
 				"isHistorized":"0",
 				"logicalId": "cold"
-			},{
+			},
+			{
 				"name":"Normal",
 				"type":"action",
 				"subType":"other",
@@ -93,7 +99,8 @@
 				"isVisible":"1",
 				"isHistorized":"0",
 				"logicalId": "normal"
-			},{
+			},
+			{
 				"name":"Chaud",
 				"type":"action",
 				"subType":"other",
@@ -104,7 +111,7 @@
 				"isVisible":"1",
 				"isHistorized":"0",
 				"logicalId": "warm"
-			}		
+			}
 		]
 	}
 }

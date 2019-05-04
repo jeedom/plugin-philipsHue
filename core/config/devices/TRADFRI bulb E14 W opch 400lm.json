@@ -1,8 +1,8 @@
 {
-  "TRADFRI bulb E27 CWS opal 600lm": {
-    "name": "TRADFRI bulb E27 CWS opal 600lm",
+  "TRADFRI bulb E14 W op/ch 400lm": {
+    "name": "TRADFRI bulb E14 W op/ch 400lm",
     "configuration" :{
-      "gammut" : "B"
+      "gammut" : "-"
     },
     "commands": [
       {
@@ -59,29 +59,6 @@
         "isVisible": 1,
         "isHistorized": 0,
         "logicalId": "luminosity"
-      },
-      {
-        "name": "Etat Couleur",
-        "type": "info",
-        "subtype": "string",
-        "display": {
-          "generic_type": "LIGHT_COLOR"
-        },
-        "isVisible": 0,
-        "isHistorized": 0,
-        "logicalId": "color_state"
-      },
-      {
-        "name": "Couleur",
-        "type": "action",
-        "subtype": "color",
-        "display": {
-          "generic_type": "LIGHT_SET_COLOR"
-        },
-        "value" : "Etat Couleur",
-        "isVisible": 1,
-        "isHistorized": 0,
-        "logicalId": "color"
       },
       {
         "name": "Transition status",

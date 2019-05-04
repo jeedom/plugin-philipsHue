@@ -1,14 +1,12 @@
 Plugin pour commander les lampes Philips Hue.
 
-configuración del plugin
-=======================
+# Configuration du plugin
 
 Après téléchargement du plugin, il vous faudra renseigner l’adresse IP
 de votre pont hue, si ce n’est pas déja fait par le système de
 découverte automatique.
 
-Configuración del dispositivo
-=============================
+# Configuración de los dispositivos
 
 > **Note**
 >
@@ -23,7 +21,7 @@ Aquí encontrará toda la configuración de su dispositivo:
     equipos,
 
 -   ** ** Categoría: categorías de equipos (que pueden pertenecer a
-    plusieurs catégories),
+    varias categorías),
 
 -   ** ** Activar: para que su equipo activo,
 
@@ -41,8 +39,7 @@ En-dessous vous retrouvez la liste des commandes :
 
 -   **Tester** : permet de tester la commande
 
-Le groupe 0 (Toute les lampes) 
-==============================
+# Le groupe 0 (Toute les lampes)
 
 Le groupe 0 est un peu particulier car il ne peut être supprimé ou
 modifié, il pilote forcement toute les lampes et c’est aussi lui qui
@@ -54,8 +51,7 @@ doivent absolument être faite à partir de l’application mobile
 vous devez absolument synchroniser Jeedom avec le bon (en resauvegardant
 simple la configuration du plugin)
 
-Tansition 
-=========
+# Transición
 
 Commande un peu particulier qui doit être utilisée dans un scénario,
 elle permet de dire la transistion entre l’état actuel et la prochaine
@@ -66,36 +62,52 @@ minutes. Dans votre scénario vous avez donc juste à appeller la commande
 transition et en parametre mettre 180, ensuite appeller la commande
 couleur vers la couleur voulu.
 
-Animation 
-=========
+# Animación
 
 Les animations sont des enchainements de transition, actuellement il
 existe :
 
 -   sunrise : pour simuler un levé de soleil. Il peut prendre en
-    parametre :
+    parámetro : 
 
-    -   duration : pour definir la durée, par defaut 720s, ex pour 5min
-        il faut mettre : duration=300
+    -   duración : para establecer la duración, 720s por defecto, por ejemplo 5min
+        Tiene que poner: duración=300
 
 -   sunset : pour simuler un couché de soleil. Il peut prendre en
-    parametre :
+    parámetro : 
 
-    -   duration : pour definir la durée, par defaut 720s, ex pour 5min
-        il faut mettre : duration=300
+    -   duración : para establecer la duración, 720s por defecto, por ejemplo 5min
+        Tiene que poner: duración=300
 
-Preguntas frecuentes
-===
+# Botón de control remoto
 
-J’ai l’impression qu’il y a un décalage sur certaine couleur entre ce que je demande et la couleur de l’ampoule.
+Voici la liste des code pour les boutons :
 
-:   Il semble que la grille de couleur des ampoules aient un offset,
-    nous cherchons comment corriger
+- 1002 pour le bouton On
+- 2002 pour le bouton augmenter
+- 3002 pour le bouton réduire
+- 4002 pour le bouton off
 
-<! - ->
+La même chose avec XXX0 pour la touche appuyée, XXX1 pour la touche maintenue et XXX2 pour la touche relachée.
 
-Quelle est la fréquence de rafraîchissement ?
+Voici les séquence pour le bouton On par exemple :
 
-:   Le systeme recupère les informations toutes les 2s.
+- Appui court : Lors de l'appui on passe sur 1000 et quand on relâche on passe sur 1002
+- Appui Long : Lors de l'appui on passe sur 1000, durant l'appui on passe sur 1001, quand on relâche on passe sur 1002
 
+# FAQ
 
+> **J’ai l’impression qu’il y a un décalage sur certaine couleur entre ce que je demande et la couleur de l’ampoule.**
+>
+> Il semble que la grille de couleur des ampoules aient un offset,nous cherchons comment corriger
+
+> **Quelle est la fréquence de rafraîchissement ?**
+>
+> Le systeme recupère les informations toutes les 2s.
+
+> **Mon équipement (lampe/interrupteur....) n'est pas reconnu par le plugin, comment faire ?**
+>
+> Il faut :
+> - nous d'écrire l'équipement que vous voulez qu'on ajoute avec photo et possibilités de celui-ci
+​> - nous envoyer le log en debug de la synchronisation avec le pont
+> Le tout en nous contactant par une demande de support

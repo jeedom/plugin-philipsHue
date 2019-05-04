@@ -1,4 +1,28 @@
-- Correction d'un bug sur l'état des bouton lors du redemarrage du pont 
+# 24/04/2019
+
+- Ajout d'un bouton pour supprimer une commande
+- Correction des configuration pour les ampoules ikea (attention il faut les supprimer de jeedom et refaire une synchronisation)
+
+# 20/04/2019
+
+- Support du SML002
+- Support du retour d'état des prise OSRAM SMART (attention necessite une réinclusion)
+
+# 17/01/2019
+
+- Ajout de la lampe LTC016
+- Ajout d'un bouton de synchronisation sur la page de gestion des équipements
+
+# 16/01/2019
+
+- Ajout de configuration de lumière génerique couleur et non couleurs
+- Support de Niko 4 boutons
+- Correction de bug
+
+# 15/01/2019
+
+- Mise à jour de la doc
+- Correction d'un bug sur l'état des bouton lors du redemarrage du pont
 - Ajout Hue lightstrip outdoor
 
 # 16/10/2018
@@ -45,16 +69,16 @@
 -   Ajout du modèle OSRAM
 -   Ajout du modèle TRADFRI bulb GU10 W 400lm
 
-# 20/11/2017 
+# 20/11/2017
 
 -   Ajout du modèle LCT015
 
-# 28/03/2017 
+# 28/03/2017
 
 -   Ajout d’animation (levé et couché de soleil), attention toute les
     lampes ne sont pas forcement compatible
 
-# 21/01/2017 
+# 21/01/2017
 
 -   Support du hue motion
 -   Support du hue tap

@@ -1,3 +1,6 @@
+
+- Support Feller EDIZIOdue colore
+
 # 24/04/2019
 
 - Ajout d'un bouton pour supprimer une commande

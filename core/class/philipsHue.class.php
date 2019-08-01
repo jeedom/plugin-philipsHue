@@ -166,14 +166,15 @@ class philipsHue extends eqLogic {
 		$sensors_exist = array();
 		foreach ($hue->getLights() as $id => $light) {
 			$modelId = $light->getModelId();
+			log::add('philipsHue', 'debug', 'Found light model : '.$modelId);
 			if (count(self::devicesParameters($light->getModelId())) == 0) {
 				$modelId = 'default_nocolor';
-				log::add('philipsHue', 'debug', 'No configuration found for light : ' . $light->getModelId() . ' => ' . json_encode($sensor));
+				log::add('philipsHue', 'debug', 'No configuration found for light : ' . $light->getModelId() . ' => ' . json_encode(utils::o2a($sensor)));
 				if(!in_array($light->getColorMode(),array('hs','ct','xy'))){
 					$modelId = 'default_color';
 				}
+				log::add('philipsHue', 'debug', 'Use generic configuration : '.$modelId);
 			}
-			log::add('philipsHue', 'debug', 'Found light model : '.$modelId);
 			$eqLogic = self::byLogicalId('light' . $id, 'philipsHue');
 			if (!is_object($eqLogic)) {
 				$eqLogic = new self();
@@ -223,11 +224,11 @@ class philipsHue extends eqLogic {
 		}
 		foreach (self::sanitizeSensors($hue->getSensors()) as $id => $sensor) {
 			$sensor = array_values($sensor)[0];
+			log::add('philipsHue', 'debug', 'Found sensor model : '.$sensor->getModelId());
 			if (count(self::devicesParameters($sensor->getModelId())) == 0) {
-				log::add('philipsHue', 'debug', 'No configuration found for sensor : ' . $sensor->getModelId() . ' => ' . json_encode($sensor));
+				log::add('philipsHue', 'debug', 'No configuration found for sensor : ' . $sensor->getModelId() . ' => ' . json_encode(utils::o2a($sensor)));
 				continue;
 			}
-			log::add('philipsHue', 'debug', 'Found sensor model : '.$sensor->getModelId());
 			$eqLogic = self::byLogicalId('sensor' . $id, 'philipsHue');
 			if (!is_object($eqLogic)) {
 				$eqLogic = new self();

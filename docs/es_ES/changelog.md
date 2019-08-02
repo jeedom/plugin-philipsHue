@@ -1,5 +1,7 @@
+# 01/08/2019
 
 - Support Feller EDIZIOdue colore
+- Amélioration des logs de synchronisation
 
 # 24/04/2019
 
@@ -24,7 +26,7 @@
 
 # 15/01/2019
 
-- Actualización de la documentación
+- Mise à jour de la doc
 - Correction d'un bug sur l'état des bouton lors du redemarrage du pont
 - Ajout Hue lightstrip outdoor
 

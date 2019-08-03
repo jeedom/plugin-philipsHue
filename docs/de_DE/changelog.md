@@ -26,7 +26,7 @@
 
 # 15/01/2019
 
-- Mise à jour de la doc
+- Aktualisierung des Dokuments
 - Correction d'un bug sur l'état des bouton lors du redemarrage du pont
 - Ajout Hue lightstrip outdoor
 

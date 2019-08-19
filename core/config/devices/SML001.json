@@ -75,38 +75,6 @@
 				"configuration" : {
 					"onType" : "ZLLPresence"
 				}
-			},
-			{
-				"name": "Activer",
-				"type": "action",
-				"subtype": "other",
-				"value" : "Etat",
-				"isVisible": 1,
-				"isHistorized": 0,
-				"logicalId": "enable",
-				"template":{
-					"dashboard" : "btnCircle",
-					"mobile" : "circle"
-				},
-				"configuration" : {
-					"toUpdate" : [{"type" : "config","key" : "on","value":1,"onType" : "ZLLPresence","valueType" : "boolean"}]
-				}
-			},
-			{
-				"name": "Désactiver",
-				"type": "action",
-				"subtype": "other",
-				"value" : "Etat",
-				"isVisible": 1,
-				"isHistorized": 0,
-				"logicalId": "disable",
-				"template":{
-					"dashboard" : "btnCircle",
-					"mobile" : "circle"
-				},
-				"configuration" : {
-					"toUpdate" : [{"type" : "config","key" : "on","value":0,"onType" : "ZLLPresence","valueType" : "boolean"}]
-				}
 			}
 		]
 	}

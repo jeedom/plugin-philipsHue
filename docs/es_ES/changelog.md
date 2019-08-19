@@ -1,5 +1,7 @@
+# 01/08/2019
 
 - Support Feller EDIZIOdue colore
+- Amélioration des logs de synchronisation
 
 # 24/04/2019
 

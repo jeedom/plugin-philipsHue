@@ -169,7 +169,7 @@ class philipsHue extends eqLogic {
 			log::add('philipsHue', 'debug', 'Found light model : '.$modelId);
 			if (count(self::devicesParameters($light->getModelId())) == 0) {
 				$modelId = 'default_nocolor';
-				log::add('philipsHue', 'debug', 'No configuration found for light : ' . $light->getModelId() . ' => ' . json_encode(utils::o2a($sensor)));
+				log::add('philipsHue', 'debug', 'No configuration found for light : ' . $light->getModelId() . ' => ' . json_encode(utils::o2a($light)));
 				if(!in_array($light->getColorMode(),array('hs','ct','xy'))){
 					$modelId = 'default_color';
 				}

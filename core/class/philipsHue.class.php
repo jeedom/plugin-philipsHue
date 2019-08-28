@@ -362,7 +362,7 @@ class philipsHue extends eqLogic {
 						case 'light':
 						$obj = $lights[$eqLogic->getConfiguration('id')];
 						if ($obj == null || !is_object($obj)) {
-							continue;
+							break;
 						}
 						$isReachable = ($eqLogic->getConfiguration('alwaysOn', 0) == 0) ? $obj->isReachable() : true;
 						break;

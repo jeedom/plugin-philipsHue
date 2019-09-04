@@ -174,7 +174,7 @@ class philipsHue extends eqLogic {
 			log::add('philipsHue', 'debug', 'Found light model : '.$modelId);
 			if (count(self::devicesParameters($light->getModelId())) == 0) {
 				$modelId = 'default_nocolor';
-				log::add('philipsHue', 'debug', 'No configuration found for light : ' . $light->getModelId() . ' => ' . json_encode(utils::o2a($sensor)));
+				log::add('philipsHue', 'debug', 'No configuration found for light : ' . $light->getModelId() . ' => ' . json_encode(utils::o2a($light)));
 				if(!in_array($light->getColorMode(),array('hs','ct','xy'))){
 					$modelId = 'default_color';
 				}
@@ -370,7 +370,7 @@ class philipsHue extends eqLogic {
 						case 'light':
 						$obj = $lights[$eqLogic->getConfiguration('id')];
 						if ($obj == null || !is_object($obj)) {
-							continue;
+							break;
 						}
 						$isReachable = ($eqLogic->getConfiguration('alwaysOn', 0) == 0) ? $obj->isReachable() : true;
 						break;

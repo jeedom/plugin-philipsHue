@@ -71,7 +71,12 @@ class philipsHue extends eqLogic {
 	}
 	
 	public static function cronDaily() {
-		self::deamon_start();
+		try {
+			$plugin = plugin::byId(__CLASS__);
+			$plugin::deamon_start(true);
+		} catch (\Exception $e) {
+			
+		}
 	}
 	
 	public static function findBridgeIp() {

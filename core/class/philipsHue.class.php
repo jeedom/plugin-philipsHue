@@ -293,7 +293,7 @@ class philipsHue extends eqLogic {
 		$lights = $hue->getLights();
 		$sensors = self::sanitizeSensors($hue->getSensors());
 		$timezone = config::byKey('timezone', 'core', 'Europe/Brussels');
-		foreach (self::$_eqLogics as $eqLogic) {
+		foreach (self::$_eqLogics as &$eqLogic) {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
 			}

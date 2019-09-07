@@ -362,7 +362,7 @@ class philipsHue extends eqLogic {
 							if ($cmd->getConfiguration('onType') != '' && $cmd->getConfiguration('onType') != $obj->getType()) {
 								continue;
 							}
-							$eqLogic->checkAndUpdateCmd($cmd, $value);
+							$eqLogic->checkAndUpdateCmd($cmd, $value,false);
 						}
 					}
 				} else {
@@ -396,31 +396,31 @@ class philipsHue extends eqLogic {
 					}
 					$cmd = $eqLogic->getCmd('info', 'luminosity_state');
 					if (is_object($cmd)) {
-						$eqLogic->checkAndUpdateCmd($cmd, $luminosity);
+						$eqLogic->checkAndUpdateCmd($cmd, $luminosity,false);
 					}
 					$cmd = $eqLogic->getCmd('info', 'state');
 					if (is_object($cmd)) {
-						$eqLogic->checkAndUpdateCmd($cmd, $obj->isOn());
+						$eqLogic->checkAndUpdateCmd($cmd, $obj->isOn(),false);
 					}
 					$cmd = $eqLogic->getCmd('info', 'color_state');
 					if (is_object($cmd)) {
-						$eqLogic->checkAndUpdateCmd($cmd, $color);
+						$eqLogic->checkAndUpdateCmd($cmd, $color,false);
 					}
 					$cmd = $eqLogic->getCmd('info', 'alert_state');
 					if (is_object($cmd)) {
 						$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;
-						$eqLogic->checkAndUpdateCmd($cmd, $value);
+						$eqLogic->checkAndUpdateCmd($cmd, $value,false);
 					}
 					if($eqLogic->getConfiguration('category') != 'group'){
 						$cmd = $eqLogic->getCmd('info', 'rainbow_state');
 						if (is_object($cmd)) {
 							$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
-							$eqLogic->checkAndUpdateCmd($cmd, $value);
+							$eqLogic->checkAndUpdateCmd($cmd, $value,false);
 						}
 					}
 					$cmd = $eqLogic->getCmd('info', 'color_temp_state');
 					if (is_object($cmd)) {
-						$eqLogic->checkAndUpdateCmd($cmd, $obj->getColorTemp());
+						$eqLogic->checkAndUpdateCmd($cmd, $obj->getColorTemp(),false);
 					}
 				}
 			} catch (Exception $e) {

@@ -662,10 +662,10 @@ class philipsHueCmd extends cmd {
 			//$command->rgb(255, 255, 255);
 			break;
 			case 'off':
-			if ($eqLogic->getConfiguration('model') != "LWB004") {
-				$command->effect('none');
-			}
-			$command->alert('none');
+			//if ($eqLogic->getConfiguration('model') != "LWB004") {
+			//$command->effect('none');
+			//}
+			//$command->alert('none');
 			$command->on(false);
 			break;
 			case 'luminosity':

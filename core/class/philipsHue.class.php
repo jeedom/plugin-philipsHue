@@ -188,10 +188,10 @@ class philipsHue extends eqLogic {
 				$eqLogic->setEqType_name('philipsHue');
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
+				$eqLogic->setConfiguration('device', $modelId);
 			}
 			$eqLogic->setConfiguration('category', 'light');
 			$eqLogic->setConfiguration('id', $id);
-			$eqLogic->setConfiguration('device', $modelId);
 			$eqLogic->setConfiguration('modelName', $light->getModel()->getName());
 			$eqLogic->setConfiguration('type', $light->getType());
 			$eqLogic->setConfiguration('softwareVersion', $light->getSoftwareVersion());
@@ -242,10 +242,10 @@ class philipsHue extends eqLogic {
 				$eqLogic->setEqType_name('philipsHue');
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
+				$eqLogic->setConfiguration('device', $sensor->getModelId());
 			}
 			$eqLogic->setConfiguration('category', 'sensor');
 			$eqLogic->setConfiguration('id', $id);
-			$eqLogic->setConfiguration('device', $sensor->getModelId());
 			$eqLogic->setConfiguration('modelName', $sensor->getModel()->getName());
 			$eqLogic->setConfiguration('softwareVersion', $sensor->getSoftwareVersion());
 			$eqLogic->save();

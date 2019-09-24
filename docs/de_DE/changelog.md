@@ -1,3 +1,8 @@
+# 23/09/2019
+
+- Fehlerbehebungen
+- Optimisations
+
 # 01/08/2019
 
 - Support Feller EDIZIOdue colore

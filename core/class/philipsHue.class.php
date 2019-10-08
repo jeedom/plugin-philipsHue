@@ -289,7 +289,7 @@ class philipsHue extends eqLogic {
 		try {
 			$hue = philipsHue::getPhilipsHue();
 		} catch (Exception $e) {
-			return
+			return;
 		}
 		try {
 			$hue = philipsHue::getPhilipsHue();

@@ -659,7 +659,9 @@ class philipsHueCmd extends cmd {
 			default:
 			return;
 		}
-		$command->transitionTime($transistion_time);
+		if ($this->getLogicalId() != 'off'){
+			$command->transitionTime($transistion_time);
+		}
 		$command->on(true);
 		if ($this->getLogicalId() != 'animation' && $eqLogic->getCache('current_animate', 0) == 1) {
 			$eqLogic->stopAnimation();

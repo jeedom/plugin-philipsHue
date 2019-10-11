@@ -1,3 +1,7 @@
+# 10/10/2019
+
+- Correction de la remise à 0 de l'état de la lampe lorsqu'on la rallume
+
 # 23/09/2019
 
 - Corrección de errores

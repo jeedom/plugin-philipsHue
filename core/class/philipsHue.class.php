@@ -294,11 +294,19 @@ class philipsHue extends eqLogic {
 		} catch (Exception $e) {
 			return;
 		}
+		try {
+			$hue = philipsHue::getPhilipsHue();
+			$groups = $hue->getgroups();
+			$lights = $hue->getLights();
+		} catch (Exception $e) {
+			sleep(5);
+			$hue = philipsHue::getPhilipsHue();
+			$groups = $hue->getgroups();
+			$lights = $hue->getLights();
+		}
 		if (self::$_eqLogics == null) {
 			self::$_eqLogics = self::byType('philipsHue');
 		}
-		$groups = $hue->getgroups();
-		$lights = $hue->getLights();
 		$sensors = self::sanitizeSensors($hue->getSensors());
 		$timezone = config::byKey('timezone', 'core', 'Europe/Brussels');
 		foreach (self::$_eqLogics as &$eqLogic) {
@@ -654,7 +662,9 @@ class philipsHueCmd extends cmd {
 			default:
 			return;
 		}
-		$command->transitionTime($transistion_time);
+		if ($this->getLogicalId() != 'off'){
+			$command->transitionTime($transistion_time);
+		}
 		$command->on(true);
 		if ($this->getLogicalId() != 'animation' && $eqLogic->getCache('current_animate', 0) == 1) {
 			$eqLogic->stopAnimation();

@@ -295,12 +295,10 @@ class philipsHue extends eqLogic {
 			return;
 		}
 		try {
-			$hue = philipsHue::getPhilipsHue();
 			$groups = $hue->getgroups();
 			$lights = $hue->getLights();
 		} catch (Exception $e) {
 			sleep(5);
-			$hue = philipsHue::getPhilipsHue();
 			$groups = $hue->getgroups();
 			$lights = $hue->getLights();
 		}

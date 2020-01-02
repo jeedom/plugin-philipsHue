@@ -172,7 +172,8 @@ class philipsHue extends eqLogic {
 		$lights_exist = array();
 		$groups_exist = array(0 => 0);
 		$sensors_exist = array();
-		foreach ($hue->getLights() as $id => $light) {
+		$lights = $hue->getLights();
+		foreach ($lights as $id => $light) {
 			$modelId = $light->getModelId();
 			log::add('philipsHue', 'debug', 'Found light model : '.$modelId);
 			if (count(self::devicesParameters($light->getModelId())) == 0) {
@@ -230,7 +231,8 @@ class philipsHue extends eqLogic {
 			$eqLogic->save();
 			$groups_exist[$id] = $id;
 		}
-		foreach (self::sanitizeSensors($hue->getSensors()) as $id => $sensor) {
+		$sensors = self::sanitizeSensors($hue->getSensors());
+		foreach ($sensors as $id => $sensor) {
 			$sensor = array_values($sensor)[0];
 			log::add('philipsHue', 'debug', 'Found sensor model : '.$sensor->getModelId());
 			if (count(self::devicesParameters($sensor->getModelId())) == 0) {

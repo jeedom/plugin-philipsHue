@@ -1,3 +1,7 @@
+# 02/01/2020
+
+- Ajout d'image pour les ampoules générique
+
 # 10/10/2019
 
 - Correction de la remise à 0 de l'état de la lampe lorsqu'on la rallume

@@ -1,3 +1,5 @@
+- Ajout d'une commande pour savoir si l'ampoule est joignable ou non
+
 # 02/01/2020
 
 - Ajout d'image pour les ampoules générique

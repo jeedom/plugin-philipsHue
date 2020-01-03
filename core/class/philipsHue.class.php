@@ -384,6 +384,7 @@ class philipsHue extends eqLogic {
 							break;
 						}
 						$isReachable = ($eqLogic->getConfiguration('alwaysOn', 0) == 0) ? $obj->isReachable() : true;
+						$eqLogic->checkAndUpdateCmd('isReachable', $obj->isReachable(),false);
 						break;
 						case 'group':
 						$obj = $groups[$eqLogic->getConfiguration('id')];
@@ -405,18 +406,9 @@ class philipsHue extends eqLogic {
 							}
 						}
 					}
-					$cmd = $eqLogic->getCmd('info', 'luminosity_state');
-					if (is_object($cmd)) {
-						$eqLogic->checkAndUpdateCmd($cmd, $luminosity,false);
-					}
-					$cmd = $eqLogic->getCmd('info', 'state');
-					if (is_object($cmd)) {
-						$eqLogic->checkAndUpdateCmd($cmd, $obj->isOn(),false);
-					}
-					$cmd = $eqLogic->getCmd('info', 'color_state');
-					if (is_object($cmd)) {
-						$eqLogic->checkAndUpdateCmd($cmd, $color,false);
-					}
+					$eqLogic->checkAndUpdateCmd($cmd, 'luminosity_state',false);
+					$eqLogic->checkAndUpdateCmd('state', $obj->isOn(),false);
+					$eqLogic->checkAndUpdateCmd('color_state', $color,false);
 					$cmd = $eqLogic->getCmd('info', 'alert_state');
 					if (is_object($cmd)) {
 						$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;
@@ -473,10 +465,22 @@ class philipsHue extends eqLogic {
 		if ($this->getConfiguration('applyDevice') != $this->getConfiguration('device')) {
 			$this->applyModuleConfiguration();
 		}
-		$groups = self::getPhilipsHue()->getgroups();
-		$lights = self::getPhilipsHue()->getlights();
+		if ($this->getConfiguration('category') == 'light') {
+			$cmd = $this->getCmd('info', 'isReachable');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setName(__('Joignable', __FILE__));
+				$cmd->setType('info');
+				$cmd->setSubtype('binary');
+				$cmd->setEqLogic_id($this->getId());
+				$cmd->setIsVisible(0);
+				$cmd->setLogicalId('isReachable');
+				$cmd->save();
+			}
+		}
 		$scene_cmd = $this->getCmd('action', 'scene');
 		if ($this->getConfiguration('category') == 'group') {
+			$groups = self::getPhilipsHue()->getgroups();
 			$scene_str = '';
 			foreach (self::getPhilipsHue()->getScenes() as $scene) {
 				$name = $scene->getName();

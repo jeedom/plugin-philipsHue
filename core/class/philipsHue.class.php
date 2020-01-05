@@ -406,7 +406,7 @@ class philipsHue extends eqLogic {
 							}
 						}
 					}
-					$eqLogic->checkAndUpdateCmd($cmd, 'luminosity_state',false);
+					$eqLogic->checkAndUpdateCmd('luminosity_state',$luminosity,false);
 					$eqLogic->checkAndUpdateCmd('state', $obj->isOn(),false);
 					$eqLogic->checkAndUpdateCmd('color_state', $color,false);
 					$cmd = $eqLogic->getCmd('info', 'alert_state');

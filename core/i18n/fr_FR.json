@@ -1,88 +1,74 @@
 {
-    "plugins\/philipsHue\/plugin_info\/info.xml": {
-        "Plugin pour commander les lampes Philips Hue": "Plugin pour commander les lampes Philips Hue",
-        "Lors de la première synchronisation, vous devez appuyer sur le bouton \"LINK\" du bridge avant de cliquer sur \"Synchroniser avec le bridge\"": "Lors de la première synchronisation, vous devez appuyer sur le bouton \"LINK\" du bridge avant de cliquer sur \"Synchroniser avec le bridge\""
+    "plugin_info\/configuration.php": {
+        "IP du bridge": "IP du bridge",
+        "Synchronisation réussie": "Synchronisation réussie"
     },
-    "plugins\/philipsHue\/desktop\/php\/philipsHue.php": {
-        "Ajouter un équipement": "Ajouter un équipement",
-        "Gestion des groupes": "Gestion des groupes",
-        "Rechercher": "Rechercher",
+    "desktop\/js\/philipsHue.js": {
+        "Synchronisation réussie": "Synchronisation réussie",
+        "Nom": "Nom",
+        "Afficher": "Afficher",
+        "Historiser": "Historiser",
+        "Inverser": "Inverser",
+        "Tester": "Tester"
+    },
+    "desktop\/php\/philipsHue.php": {
+        "401 - Accès non autorisé": "401 - Accès non autorisé",
+        "Gestion": "Gestion",
+        "Ajouter": "Ajouter",
+        "Configuration": "Configuration",
+        "Synchroniser": "Synchroniser",
         "Mes Philips Hue": "Mes Philips Hue",
-        "Général": "Général",
+        "Rechercher": "Rechercher",
+        "Configuration avancée": "Configuration avancée",
+        "Sauvegarder": "Sauvegarder",
+        "Supprimer": "Supprimer",
+        "Equipement": "Equipement",
+        "Commandes": "Commandes",
+        "Nom de l'équipement Philips Hue": "Nom de l'équipement Philips Hue",
         "Nom de l'équipement philipsHue": "Nom de l'équipement philipsHue",
         "Objet parent": "Objet parent",
         "Aucun": "Aucun",
         "Catégorie": "Catégorie",
         "Activer": "Activer",
         "Visible": "Visible",
-        "Adresse IP": "Adresse IP",
-        "Synchroniser avec le Bridge": "Synchroniser avec le Bridge",
-        "Device": "Device",
-        " Ajouter une commande philipsHue": " Ajouter une commande philipsHue",
-        "Nom": "Nom",
-        "Type": "Type",
-        "Parametre(s)": "Parametre(s)",
-        "Supprimer": "Supprimer",
-        "Sauvegarder": "Sauvegarder",
-        "Nom de l'équipement Philips Hue": "Nom de l'équipement Philips Hue",
-        "Informations": "Informations",
-        "Model": "Model",
-        "Version du logiciel": "Version du logiciel",
-        "Action": "Action",
-        "Ajouter": "Ajouter",
-        "Gestion": "Gestion",
-        "Configuration": "Configuration",
-        "Configuration avancée": "Configuration avancée",
-        "Equipement": "Equipement",
-        "Commandes": "Commandes",
         "Toujours allumé": "Toujours allumé",
+        "Informations": "Informations",
         "Modèle": "Modèle",
+        "Type": "Type",
         "ID": "ID",
         "Non model": "Non model",
-        "Options": "Options"
-    },
-    "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {
-        "Gestion des groupes": "Gestion des groupes",
-        "Parametres (JSON)": "Parametres (JSON)",
-        "Tester": "Tester",
+        "Version du logiciel": "Version du logiciel",
         "Nom": "Nom",
-        "Afficher": "Afficher",
-        "Historiser": "Historiser"
-    },
-    "plugins\/philipsHue\/core\/class\/philipsHue.class.php": {
-        "On": "On",
-        "Off": "Off",
-        "Etat On Off": "Etat On Off",
-        "Luminosité": "Luminosité",
-        "Etat Luminosité": "Etat Luminosité",
-        "Saturation": "Saturation",
-        "Etat Saturation": "Etat Saturation",
-        "Couleur": "Couleur",
-        "Etat Couleur": "Etat Couleur",
-        "Alerte On": "Alerte On",
-        "Alerte Off": "Alerte Off",
-        "Etat Alerte": "Etat Alerte",
-        "Arc en ciel On": "Arc en ciel On",
-        "Arc en ciel Off": "Arc en ciel Off",
-        "Etat Arc en ciel": "Etat Arc en ciel",
-        "Rafraîchir": "Rafraîchir",
         "Options": "Options",
-        "Nom de l'animation": "Nom de l'animation",
-        "Animation": "Animation",
-        "Scene": "Scene",
-        "Impossible de joindre le bridge": "Impossible de joindre le bridge"
+        "Action": "Action"
     },
-    "plugins\/philipsHue\/plugin_info\/configuration.php": {
-        "IP du bridge": "IP du bridge",
-        "Synchronisation réussie": "Synchronisation réussie",
-        "Découverte": "Découverte",
-        "Rechercher les équipements Sonos": "Rechercher les équipements Sonos",
-        "Synchroniser": "Synchroniser"
+    "core\/ajax\/philipsHue.ajax.php": {
+        "401 - Accès non autorisé": "401 - Accès non autorisé",
+        "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
     },
-    "plugins\/philipsHue\/core\/php\/jeeHueAnimation.php": {
-        "[philipsHue\/jeeAnimation] Lancement de l'animation sur": "[philipsHue\/jeeAnimation] Lancement de l'animation sur",
+    "core\/php\/jeeHueAnimation.php": {
+        "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide": "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide",
+        "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ": "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ",
+        "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ": "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ",
+        "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur": "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur",
         " avec comme options ": " avec comme options ",
+        "Aucune animation correspondante": "Aucune animation correspondante",
+        "Aucune action à faire": "Aucune action à faire",
         "Lancement de ": "Lancement de ",
-        "Fin de l'animation": "Fin de l'animation"
+        "Fin de l\\'animation": "Fin de l\\'animation"
+    },
+    "core\/class\/philipsHue.class.php": {
+        "Veuillez vérifier la configuration": "Veuillez vérifier la configuration",
+        "Tâche cron introuvable": "Tâche cron introuvable",
+        "L\\'adresse du bridge ne peut etre vide": "L\\'adresse du bridge ne peut etre vide",
+        "Impossible de joindre le bridge": "Impossible de joindre le bridge",
+        "Veuillez appuyer sur le bouton du bridge": "Veuillez appuyer sur le bouton du bridge",
+        "Impossible de creer l\\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ": "Impossible de creer l\\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ",
+        "Toute les lampes": "Toute les lampes",
+        "Joignable": "Joignable",
+        "Scene": "Scene",
+        "Animation": "Animation",
+        "Options": "Options",
+        "Nom de l\\'animation": "Nom de l\\'animation"
     }
 }

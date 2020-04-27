@@ -1,17 +1,9 @@
 {
-    "plugin_info\/configuration.php": {
+    "plugins\/philipsHue\/plugin_info\/configuration.php": {
         "IP du bridge": "IP du bridge",
         "Synchronisation réussie": "Synchronisation réussie"
     },
-    "desktop\/js\/philipsHue.js": {
-        "Synchronisation réussie": "Synchronisation réussie",
-        "Nom": "Nom",
-        "Afficher": "Afficher",
-        "Historiser": "Historiser",
-        "Inverser": "Inverser",
-        "Tester": "Tester"
-    },
-    "desktop\/php\/philipsHue.php": {
+    "plugins\/philipsHue\/desktop\/php\/philipsHue.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Gestion": "Gestion",
         "Ajouter": "Ajouter",
@@ -42,11 +34,15 @@
         "Options": "Options",
         "Action": "Action"
     },
-    "core\/ajax\/philipsHue.ajax.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
+    "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {
+        "Synchronisation réussie": "Synchronisation réussie",
+        "Nom": "Nom",
+        "Afficher": "Afficher",
+        "Historiser": "Historiser",
+        "Inverser": "Inverser",
+        "Tester": "Tester"
     },
-    "core\/php\/jeeHueAnimation.php": {
+    "plugins\/philipsHue\/core\/php\/jeeHueAnimation.php": {
         "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide": "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide",
         "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ": "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ",
         "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ": "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ",
@@ -57,7 +53,11 @@
         "Lancement de ": "Lancement de ",
         "Fin de l\\'animation": "Fin de l\\'animation"
     },
-    "core\/class\/philipsHue.class.php": {
+    "plugins\/philipsHue\/core\/ajax\/philipsHue.ajax.php": {
+        "401 - Accès non autorisé": "401 - Accès non autorisé",
+        "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
+    },
+    "plugins\/philipsHue\/core\/class\/philipsHue.class.php": {
         "Veuillez vérifier la configuration": "Veuillez vérifier la configuration",
         "Tâche cron introuvable": "Tâche cron introuvable",
         "L\\'adresse du bridge ne peut etre vide": "L\\'adresse du bridge ne peut etre vide",

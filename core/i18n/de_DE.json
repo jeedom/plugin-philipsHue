@@ -1,66 +1,74 @@
 {
-    "plugin_info\/configuration.php": {
-        "IP du bridge": " IP der Brücke",
-        "Synchronisation réussie": "erfolgreiche Synchronisation"
+    "plugins\/philipsHue\/plugin_info\/configuration.php": {
+        "IP du bridge": "",
+        "Synchronisation réussie": "Erfolgreiche Synchronisation"
     },
-    "desktop\/js\/philipsHue.js": {
-        "Synchronisation réussie": "erfolgreiche Synchronisation",
-        "Nom": "Name",
-        "Afficher": "anzeigen",
-        "Historiser": "Chronik",
-        "Inverser": "umkehren",
-        "Tester": "Test"
-    },
-    "desktop\/php\/philipsHue.php": {
+    "plugins\/philipsHue\/desktop\/php\/philipsHue.php": {
         "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
         "Gestion": "Verwaltung",
         "Ajouter": "Hinzufügen",
         "Configuration": "Konfiguration",
-        "Synchroniser": "Synchronisieren",
-        "Mes Philips Hue": "Meine Phillips Hue",
+        "Synchroniser": "Synchronize",
+        "Mes Philips Hue": "",
         "Rechercher": "Suchen nach",
         "Configuration avancée": "Erweiterte Konfiguration",
         "Sauvegarder": "Speichern",
         "Supprimer": "Löschen",
         "Equipement": "Gerät",
         "Commandes": "Befehle",
-        "Nom de l'équipement Philips Hue": " PhilipsHue Gerätename",
-        "Nom de l'équipement philipsHue": " PhilipsHue Gerätename",
-        "Objet parent": "Eltern-Objekt",
+        "Nom de l'équipement Philips Hue": "",
+        "Nom de l'équipement philipsHue": "",
+        "Objet parent": "Übergeordnetes Objekt",
         "Aucun": "Ohne",
         "Catégorie": "Kategorie",
-        "Activer": "aktivieren",
+        "Activer": "Aktivieren",
         "Visible": "Sichtbar",
-        "Toujours allumé": "Alles an",
+        "Toujours allumé": "",
         "Informations": "Information",
-        "Modèle": "Model",
+        "Modèle": "Modell",
         "Type": "Typ",
         "ID": "Identifikation",
-        "Non model": "Kein Modell",
+        "Non model": "",
         "Version du logiciel": "Softwareversion",
         "Nom": "Name",
         "Options": "Optionen",
         "Action": "Aktion"
     },
-    "core\/ajax\/philipsHue.ajax.php": {
+    "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {
+        "Synchronisation réussie": "Erfolgreiche Synchronisation",
+        "Nom": "Name",
+        "Afficher": "Anzeige",
+        "Historiser": "Chronik",
+        "Inverser": "Umgekehrt",
+        "Tester": "Test"
+    },
+    "plugins\/philipsHue\/core\/php\/jeeHueAnimation.php": {
+        "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide": "",
+        "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ": "",
+        "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ": "",
+        "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur": "",
+        " avec comme options ": "",
+        "Aucune animation correspondante": "",
+        "Aucune action à faire": "",
+        "Lancement de ": "",
+        "Fin de l\\'animation": ""
+    },
+    "plugins\/philipsHue\/core\/ajax\/philipsHue.ajax.php": {
         "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
         "Aucune methode correspondante à : ": "Keine Methode entsprechend:"
     },
-    "core\/php\/jeeHueAnimation.php": {
-        "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide": "[philipsHue \/ jeeAnimation] Die ID darf nicht leer sein",
-        "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ": "[philipsHue \/ jeeAnimation] Die Ausrüstung kann nicht gefunden werden:",
-        "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ": "[philipsHue \/ jeeAnimation] Dieses Gerät ist nicht vom Typ philipsHue:",
-        "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur": "[philipsHue \/ jeeAnimation] Start der Animation am",
-        " avec comme options ": "Mit der gleichen Option",
-        "Aucune animation correspondante": "Keine entsprechende Animation",
-        "Aucune action à faire": "Keine Aktion zu tun",
-        "Lancement de ": "Start",
-        "Fin de l\\'animation": "Ende der Animation"
-    },
-    "core\/class\/philipsHue.class.php": {
-        "[philipsHue\/jeeAnimation] Lancement de l'animation sur": "Start der Animation auf",
-        " avec comme options ": "Mit der gleichen Option",
-        "Lancement de ": "Start",
-        "Fin de l'animation": "Ende der Animation"
+    "plugins\/philipsHue\/core\/class\/philipsHue.class.php": {
+        "Veuillez vérifier la configuration": "Bitte überprüfen Sie die Konfiguration",
+        "Tâche cron introuvable": "Cron-Aufgabe nicht gefunden",
+        "L\\'adresse du bridge ne peut etre vide": "",
+        "Impossible de joindre le bridge": "",
+        "Veuillez appuyer sur le bouton du bridge": "",
+        "Impossible de creer l\\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ": "",
+        "Toute les lampes": "",
+        "Joignable": "",
+        "Scene": "",
+        "Animation": "",
+        "Options": "Optionen",
+        "Nom de l\\'animation": ""
     }
 }

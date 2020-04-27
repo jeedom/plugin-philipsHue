@@ -1,66 +1,74 @@
 {
-    "plugin_info\/configuration.php": {
-        "IP du bridge": "jembatan IP",
+    "plugins\/philipsHue\/plugin_info\/configuration.php": {
+        "IP du bridge": "",
         "Synchronisation réussie": "Sinkronisasi berhasil"
     },
-    "desktop\/js\/philipsHue.js": {
-        "Synchronisation réussie": "Sinkronisasi berhasil",
-        "Nom": "Nama",
-        "Afficher": "Memenitikan",
-        "Historiser": "Historicize",
-        "Inverser": "Inverser",
-        "Tester": "Coba"
-    },
-    "desktop\/php\/philipsHue.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
+    "plugins\/philipsHue\/desktop\/php\/philipsHue.php": {
+        "401 - Accès non autorisé": "401 - Akses tidak sah",
         "Gestion": "Manajemen",
         "Ajouter": "Tambahan",
-        "Configuration": "konfigurasi",
+        "Configuration": "Konfigurasi",
         "Synchroniser": "Menyinkronkan",
-        "Mes Philips Hue": "Saya Philips Hue",
-        "Rechercher": "Mencari",
-        "Configuration avancée": "konfigurasi lanjutan",
+        "Mes Philips Hue": "",
+        "Rechercher": "Pencarian",
+        "Configuration avancée": "Konfigurasi lanjutan",
         "Sauvegarder": "Menyimpan",
         "Supprimer": "Menghapus",
         "Equipement": "Peralatan",
         "Commandes": "Perintah",
-        "Nom de l'équipement Philips Hue": "Nama peralatan Philips Hue",
-        "Nom de l'équipement philipsHue": "Nama Perangkat philipsHue",
+        "Nom de l'équipement Philips Hue": "",
+        "Nom de l'équipement philipsHue": "",
         "Objet parent": "Objek induk",
         "Aucun": "Tak ada",
         "Catégorie": "Kategori",
         "Activer": "Mengaktifkan",
         "Visible": "Terlihat",
-        "Toujours allumé": "Toujours allumé",
+        "Toujours allumé": "",
         "Informations": "Informasi",
         "Modèle": "Model",
         "Type": "Jenis",
-        "ID": "ID",
-        "Non model": "Non model",
-        "Version du logiciel": "software Versi",
+        "ID": "",
+        "Non model": "",
+        "Version du logiciel": "",
         "Nom": "Nama",
         "Options": "Pilihan",
         "Action": "Tindakan"
     },
-    "core\/ajax\/philipsHue.ajax.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
+    "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {
+        "Synchronisation réussie": "Sinkronisasi berhasil",
+        "Nom": "Nama",
+        "Afficher": "Memenitikan",
+        "Historiser": "Historicize",
+        "Inverser": "Membalikkan",
+        "Tester": "Coba"
+    },
+    "plugins\/philipsHue\/core\/php\/jeeHueAnimation.php": {
+        "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide": "",
+        "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ": "",
+        "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ": "",
+        "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur": "",
+        " avec comme options ": "",
+        "Aucune animation correspondante": "",
+        "Aucune action à faire": "",
+        "Lancement de ": "",
+        "Fin de l\\'animation": ""
+    },
+    "plugins\/philipsHue\/core\/ajax\/philipsHue.ajax.php": {
+        "401 - Accès non autorisé": "401 - Akses tidak sah",
         "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
     },
-    "core\/php\/jeeHueAnimation.php": {
-        "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide": "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide",
-        "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ": "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ",
-        "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ": "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ",
-        "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur": "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur",
-        " avec comme options ": "avec comme options",
-        "Aucune animation correspondante": "Aucune animation correspondante",
-        "Aucune action à faire": "Aucune action à faire",
-        "Lancement de ": "Peluncuran",
-        "Fin de l\\'animation": "Fin de l\\'animation"
-    },
-    "core\/class\/philipsHue.class.php": {
-        "[philipsHue\/jeeAnimation] Lancement de l'animation sur": "[philipsHue\/jeeAnimation] Lancement de l'animation sur",
-        " avec comme options ": "avec comme options",
-        "Lancement de ": "Peluncuran",
-        "Fin de l'animation": "Fin de l'animation"
+    "plugins\/philipsHue\/core\/class\/philipsHue.class.php": {
+        "Veuillez vérifier la configuration": "",
+        "Tâche cron introuvable": "",
+        "L\\'adresse du bridge ne peut etre vide": "",
+        "Impossible de joindre le bridge": "",
+        "Veuillez appuyer sur le bouton du bridge": "",
+        "Impossible de creer l\\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ": "",
+        "Toute les lampes": "",
+        "Joignable": "",
+        "Scene": "",
+        "Animation": "",
+        "Options": "Pilihan",
+        "Nom de l\\'animation": ""
     }
 }

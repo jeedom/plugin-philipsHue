@@ -1,66 +1,74 @@
 {
-    "plugin_info\/configuration.php": {
-        "IP du bridge": "Köprünün IPsi",
+    "plugins\/philipsHue\/plugin_info\/configuration.php": {
+        "IP du bridge": "",
         "Synchronisation réussie": "Sekronizasyon başarılı"
     },
-    "desktop\/js\/philipsHue.js": {
-        "Synchronisation réussie": "Sekronizasyon başarılı",
-        "Nom": "İsim",
-        "Afficher": "Göster",
-        "Historiser": "Tarihe göre sırala",
-        "Inverser": "Inverser",
-        "Tester": "Dene"
-    },
-    "desktop\/php\/philipsHue.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Gestion": "Yönetim",
+    "plugins\/philipsHue\/desktop\/php\/philipsHue.php": {
+        "401 - Accès non autorisé": "401 - Yetkisiz erişim",
+        "Gestion": "Idare",
         "Ajouter": "Ekle",
-        "Configuration": "Ayarlar",
+        "Configuration": "Ayar",
         "Synchroniser": "Senkeronize et",
-        "Mes Philips Hue": "Philips Hue'\\lerim",
+        "Mes Philips Hue": "",
         "Rechercher": "Arayın",
         "Configuration avancée": "Gelişmiş ayarlar",
         "Sauvegarder": "Kaydet",
         "Supprimer": "Sil",
         "Equipement": "Cihaz",
         "Commandes": "Komutalar",
-        "Nom de l'équipement Philips Hue": "Philips Hue cihazının ismi",
-        "Nom de l'équipement philipsHue": "PhlipsHue cihazının ismi",
+        "Nom de l'équipement Philips Hue": "",
+        "Nom de l'équipement philipsHue": "",
         "Objet parent": "Üst nesne",
         "Aucun": "Hiçbir",
         "Catégorie": "Kategori",
-        "Activer": "Etkinleştirmek",
+        "Activer": "Etkinleştir",
         "Visible": "Görülebilir",
-        "Toujours allumé": "Toujours allumé",
+        "Toujours allumé": "",
         "Informations": "Bilgiler",
         "Modèle": "Model",
-        "Type": "Ceşit",
-        "ID": "ID",
-        "Non model": "Non model",
-        "Version du logiciel": "Programın versyonu",
+        "Type": "Çeşit",
+        "ID": "Kimlik",
+        "Non model": "",
+        "Version du logiciel": "",
         "Nom": "İsim",
         "Options": "Opsiyonlar",
-        "Action": "Etki"
+        "Action": "Eylem"
     },
-    "core\/ajax\/philipsHue.ajax.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
+    "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {
+        "Synchronisation réussie": "Sekronizasyon başarılı",
+        "Nom": "İsim",
+        "Afficher": "Göster",
+        "Historiser": "Tarihe göre sırala",
+        "Inverser": "Ters çevir",
+        "Tester": "Test et"
     },
-    "core\/php\/jeeHueAnimation.php": {
-        "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide": "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide",
-        "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ": "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ",
-        "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ": "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ",
-        "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur": "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur",
-        " avec comme options ": "avec comme options",
-        "Aucune animation correspondante": "Aucune animation correspondante",
-        "Aucune action à faire": "Aucune action à faire",
-        "Lancement de ": "Başlatılma",
-        "Fin de l\\'animation": "Fin de l\\'animation"
+    "plugins\/philipsHue\/core\/php\/jeeHueAnimation.php": {
+        "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide": "",
+        "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ": "",
+        "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ": "",
+        "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur": "",
+        " avec comme options ": "",
+        "Aucune animation correspondante": "",
+        "Aucune action à faire": "",
+        "Lancement de ": "",
+        "Fin de l\\'animation": ""
     },
-    "core\/class\/philipsHue.class.php": {
-        "[philipsHue\/jeeAnimation] Lancement de l'animation sur": "[philipsHue\/jeeAnimation] Lancement de l'animation sur",
-        " avec comme options ": "avec comme options",
-        "Lancement de ": "Başlatılma",
-        "Fin de l'animation": "Fin de l'animation"
+    "plugins\/philipsHue\/core\/ajax\/philipsHue.ajax.php": {
+        "401 - Accès non autorisé": "401 - Yetkisiz erişim",
+        "Aucune methode correspondante à : ": "Aşağıdakilere karşılık gelen bir yöntem yok:"
+    },
+    "plugins\/philipsHue\/core\/class\/philipsHue.class.php": {
+        "Veuillez vérifier la configuration": "",
+        "Tâche cron introuvable": "",
+        "L\\'adresse du bridge ne peut etre vide": "",
+        "Impossible de joindre le bridge": "",
+        "Veuillez appuyer sur le bouton du bridge": "",
+        "Impossible de creer l\\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ": "",
+        "Toute les lampes": "",
+        "Joignable": "",
+        "Scene": "",
+        "Animation": "",
+        "Options": "Opsiyonlar",
+        "Nom de l\\'animation": ""
     }
 }

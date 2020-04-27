@@ -1,66 +1,74 @@
 {
-    "plugin_info\/configuration.php": {
-        "IP du bridge": "IP мост",
+    "plugins\/philipsHue\/plugin_info\/configuration.php": {
+        "IP du bridge": "",
         "Synchronisation réussie": "Успешная синхронизация"
     },
-    "desktop\/js\/philipsHue.js": {
-        "Synchronisation réussie": "Успешная синхронизация",
-        "Nom": "Имя",
-        "Afficher": "Отобразить",
-        "Historiser": "История",
-        "Inverser": "Inverser",
-        "Tester": "Тест"
-    },
-    "desktop\/php\/philipsHue.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
+    "plugins\/philipsHue\/desktop\/php\/philipsHue.php": {
+        "401 - Accès non autorisé": "401 - Несанкционированный доступ",
         "Gestion": "Управление",
         "Ajouter": "Добавить",
         "Configuration": "Конфигурация",
         "Synchroniser": "Синхронизировать",
-        "Mes Philips Hue": "Мой Philips Hue",
-        "Rechercher": "Искать",
+        "Mes Philips Hue": "",
+        "Rechercher": "поиск",
         "Configuration avancée": "Расширенные настройки",
         "Sauvegarder": "Сохранить",
-        "Supprimer": "Удалить",
+        "Supprimer": "удаление",
         "Equipement": "Оборудование",
         "Commandes": "Команды",
-        "Nom de l'équipement Philips Hue": "Название Philips Hue оборудование",
-        "Nom de l'équipement philipsHue": "Название оборудования Philips Hue",
+        "Nom de l'équipement Philips Hue": "",
+        "Nom de l'équipement philipsHue": "",
         "Objet parent": "Родительский объект",
         "Aucun": "Нет",
-        "Catégorie": "Категория",
-        "Activer": "Активировать",
+        "Catégorie": "категория",
+        "Activer": "активировать",
         "Visible": "Видимый",
-        "Toujours allumé": "Toujours allumé",
+        "Toujours allumé": "",
         "Informations": "Информация",
         "Modèle": "Модель",
         "Type": "Тип",
         "ID": "Идентификатор",
-        "Non model": "Non model",
-        "Version du logiciel": "Версия программного обеспечения",
+        "Non model": "",
+        "Version du logiciel": "",
         "Nom": "Имя",
         "Options": "Опции",
         "Action": "Действие"
     },
-    "core\/ajax\/philipsHue.ajax.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
+    "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {
+        "Synchronisation réussie": "Успешная синхронизация",
+        "Nom": "Имя",
+        "Afficher": "дисплей",
+        "Historiser": "История",
+        "Inverser": "Обратный",
+        "Tester": "Тест"
+    },
+    "plugins\/philipsHue\/core\/php\/jeeHueAnimation.php": {
+        "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide": "",
+        "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ": "",
+        "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ": "",
+        "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur": "",
+        " avec comme options ": "",
+        "Aucune animation correspondante": "",
+        "Aucune action à faire": "",
+        "Lancement de ": "",
+        "Fin de l\\'animation": ""
+    },
+    "plugins\/philipsHue\/core\/ajax\/philipsHue.ajax.php": {
+        "401 - Accès non autorisé": "401 - Несанкционированный доступ",
         "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
     },
-    "core\/php\/jeeHueAnimation.php": {
-        "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide": "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide",
-        "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ": "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ",
-        "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ": "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ",
-        "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur": "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur",
-        " avec comme options ": "avec comme options",
-        "Aucune animation correspondante": "Aucune animation correspondante",
-        "Aucune action à faire": "Aucune action à faire",
-        "Lancement de ": "Запустить",
-        "Fin de l\\'animation": "Fin de l\\'animation"
-    },
-    "core\/class\/philipsHue.class.php": {
-        "[philipsHue\/jeeAnimation] Lancement de l'animation sur": "[philipsHue\/jeeAnimation] Lancement de l'animation sur",
-        " avec comme options ": "avec comme options",
-        "Lancement de ": "Запустить",
-        "Fin de l'animation": "Fin de l'animation"
+    "plugins\/philipsHue\/core\/class\/philipsHue.class.php": {
+        "Veuillez vérifier la configuration": "",
+        "Tâche cron introuvable": "",
+        "L\\'adresse du bridge ne peut etre vide": "",
+        "Impossible de joindre le bridge": "",
+        "Veuillez appuyer sur le bouton du bridge": "",
+        "Impossible de creer l\\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ": "",
+        "Toute les lampes": "",
+        "Joignable": "",
+        "Scene": "",
+        "Animation": "",
+        "Options": "Опции",
+        "Nom de l\\'animation": ""
     }
 }

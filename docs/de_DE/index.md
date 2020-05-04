@@ -71,13 +71,13 @@ existiert :
     Parameter :
 
     -   Dauer : um die Dauer zu definieren, standardmäßig 720s, zB für 5min
-        du musst setzen : Dauer = 300
+        du musst setzen : duration=300
 
 -   Sonnenuntergang : einen Sonnenuntergang simulieren. Er kann nehmen
     Parameter :
 
     -   Dauer : um die Dauer zu definieren, standardmäßig 720s, zB für 5min
-        du musst setzen : Dauer = 300
+        du musst setzen : duration=300
 
 # Fernbedienungstaste
 
@@ -95,7 +95,7 @@ Hier sind zum Beispiel die Sequenzen für die Schaltfläche Ein :
 - Kurz drücken : Wenn gedrückt, gehen wir zu 1000 und wenn wir loslassen, gehen wir zu 1002
 - Lange drücken : Während der Presse geben wir 1000 weiter, während der Presse geben wir 1001 weiter, wenn wir loslassen, geben wir 1002 weiter
 
-# Faq
+# FAQ
 
 > **Ich habe den Eindruck, dass es in bestimmten Farben einen Unterschied zwischen dem, was ich frage, und der Farbe der Glühbirne gibt.**
 >

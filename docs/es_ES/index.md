@@ -62,7 +62,7 @@ minutos. En su escenario solo tiene que llamar al comando
 transición y en el conjunto de parámetros 180, luego llame al comando
 color al color deseado.
 
-# Animación
+# Animation
 
 Las animaciones son secuencias de transición, actualmente hay
 existe :
@@ -71,13 +71,13 @@ existe :
     parámetro :
 
     -   duración : para definir la duración, por defecto 720s, por ejemplo, 5 minutos
-        hay que meter : duración = 300
+        hay que meter : duration=300
 
 -   puesta de sol : para simular una puesta de sol. El puede tomar
     parámetro :
 
     -   duración : para definir la duración, por defecto 720s, por ejemplo, 5 minutos
-        hay que meter : duración = 300
+        hay que meter : duration=300
 
 # Botón de control remoto
 
@@ -95,7 +95,7 @@ Aquí están las secuencias para el botón On por ejemplo :
 - Prensa corta : Cuando lo presionamos vamos a 1000 y cuando lo soltamos vamos a 1002
 - Pulsación larga : Durante la prensa pasamos 1000, durante la prensa pasamos 1001, cuando lanzamos pasamos 1002
 
-# Preguntas frecuentes
+# FAQ
 
 > **Tengo la impresión de que hay una diferencia en cierto color entre lo que pido y el color de la bombilla..**
 >

@@ -11,7 +11,7 @@
 # 09/23/2019
 
 - Correcciones de errores
-- Optimizaciones
+- Optimisations
 
 # 01/08/2019
 

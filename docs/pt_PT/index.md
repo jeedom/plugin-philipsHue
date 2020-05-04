@@ -62,7 +62,7 @@ minutos. No seu cenário, você apenas precisa chamar o comando
 transição e no conjunto de parâmetros 180, chame o comando
 cor à cor desejada.
 
-# Animação
+# Animation
 
 As animações são sequências de transição, atualmente existem
 existe :
@@ -71,13 +71,13 @@ existe :
     parâmetro :
 
     -   duração : para definir a duração, por padrão 720s, ex por 5min
-        você tem que colocar : duração = 300
+        você tem que colocar : duration=300
 
 -   pôr do sol : para simular um pôr do sol. Ele pode levar
     parâmetro :
 
     -   duração : para definir a duração, por padrão 720s, ex por 5min
-        você tem que colocar : duração = 300
+        você tem que colocar : duration=300
 
 # Botão de controle remoto
 
@@ -95,7 +95,7 @@ Aqui estão as sequências para o botão On, por exemplo :
 - Pressão curta : Quando pressionado, vamos para 1000 e, quando liberamos, vamos para 1002
 - Pressão longa : Durante a imprensa, passamos a 1000, durante a imprensa, passamos a 1001, quando liberamos, passamos a 1002
 
-# Faq
+# FAQ
 
 > **Tenho a impressão de que há uma diferença em determinada cor entre o que peço e a cor da lâmpada.**
 >

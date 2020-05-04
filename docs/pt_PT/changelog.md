@@ -11,7 +11,7 @@
 # 23/09/2019
 
 - Correções de bugs
-- Otimizações
+- Optimisations
 
 # 01/08/2019
 

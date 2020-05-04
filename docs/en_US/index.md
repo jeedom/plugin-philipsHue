@@ -71,13 +71,13 @@ exist :
     setting :
 
     -   duration : to define the duration, by default 720s, ex for 5min
-        it is necessary to put : duration = 300
+        it is necessary to put : duration=300
 
 -   sunset : to simulate a sunset. He can take
     setting :
 
     -   duration : to define the duration, by default 720s, ex for 5min
-        it is necessary to put : duration = 300
+        it is necessary to put : duration=300
 
 # Remote control button
 

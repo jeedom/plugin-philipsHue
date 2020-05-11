@@ -1,28 +1,28 @@
 {
-  "id": "philipsHue",
-  "name": "Philips Hue",
-  "description": "Plugin pour s'integrer à l'écosystème Philips Hue.<br\/>",
-  "licence": "AGPL",
-  "author": "Jeedom SAS",
-  "require": "3.3.32",
-  "category": "communication",
-  "hasOwnDeamon": 1,
-  "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/communication\/philipsHue\/changelog",
-  "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/communication\/philipsHue\/",
-  "language": [
-    "fr_FR",
-    "en_US",
-    "de_DE",
-    "sp_SP",
-    "ru_RU",
-    "id_ID",
-    "it_IT"
-  ],
-  "compatibility": [
-    "miniplus",
-    "smart",
-    "rpi",
-    "docker",
-    "diy"
-  ]
+    "id": "philipsHue",
+    "name": "Philips Hue",
+    "description": "Plugin pour s'integrer à l'écosystème Philips Hue.<br\/>",
+    "licence": "AGPL",
+    "author": "Jeedom SAS",
+    "require": "3.3.32",
+    "category": "communication",
+    "hasOwnDeamon": 1,
+    "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/communication\/philipsHue\/changelog",
+    "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/communication\/philipsHue\/",
+    "language": [
+        "fr_FR",
+        "en_US",
+        "de_DE",
+        "sp_SP",
+        "ru_RU",
+        "id_ID",
+        "it_IT"
+    ],
+    "compatibility": [
+        "miniplus",
+        "smart",
+        "rpi",
+        "docker",
+        "diy"
+    ]
 }

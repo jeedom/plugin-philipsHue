@@ -1,83 +1,52 @@
-Plugin para controlar lâmpadas Philips Hue.
+# Philips Hue plugin
+
+Plugin para integrar no ecossistema Philips Hue.
 
 # Configuração do plugin
 
-Depois de baixar o plug-in, você precisará inserir o endereço IP
-da sua ponte de matiz, se ainda não tiver sido feito pelo
-descoberta automática.
+Após o download do plug-in, você precisará inserir o endereço IP da sua ponte de matiz, se ainda não o tiver feito pelo sistema de descoberta automática.
 
 # Configuração do equipamento
 
 > **Note**
 >
-> Você sempre terá o equipamento "Todas as lâmpadas" que corresponda
-> chegar ao grupo 0, que existe o tempo todo
+> Você sempre terá o equipamento "Todas as lâmpadas", que realmente corresponde ao grupo 0, que existe o tempo todo
 
 Aqui você encontra toda a configuração do seu equipamento :
 
 -   **Nome do equipamento Hue** : nome do seu equipamento Hue,
-
--   **Objeto pai** : indica o objeto pai ao qual pertence
-    o equipamento,
-
--   **Categoria** : categorias de equipamentos (pode pertencer a
-    várias categorias),
-
+-   **Objeto pai** : indica o objeto pai ao qual o equipamento pertence,
+-   **Categoria** : categorias de equipamentos (pode pertencer a várias categorias),
 -   **Activer** : torna seu equipamento ativo,
-
 -   **Visible** : torna seu equipamento visível no painel,
 
 Abaixo você encontra a lista de pedidos :
 
 -   **Nom** : o nome exibido no painel,
-
--   **Configuração avançada** : permite exibir a janela de
-    configuração de controle avançado,
-
--   **Options** : permite mostrar ou ocultar certos
-    pedidos e / ou registrá-los
-
+-   **Configuração avançada** : exibe a janela de configuração avançada do comando,
+-   **Options** : permite exibir ou ocultar certos comandos e / ou registrá-los
 -   **Tester** : permite testar o comando
 
 # Grupo 0 (todas as lâmpadas)
 
-O grupo 0 é um pouco especial porque não pode ser excluído ou
-modificado, ele necessariamente aciona todas as lâmpadas e também é ele quem
-carrega as cenas.
+O grupo 0 é um pouco especial porque não pode ser excluído ou modificado, necessariamente aciona todas as lâmpadas e também é ele que carrega as cenas.
 
-Na verdade, você pode fazer "cenas" no Philips Hue. Isto
-absolutamente deve ser feito a partir do aplicativo móvel
-(impossível fazê-los em Jeedom). E após a adição de uma cena
-você absolutamente deve sincronizar o Jeedom com o correto (salvando novamente
-configuração simples de plugins)
+Na verdade, você pode fazer "cenas" no Philips Hue. Isso deve ser feito absolutamente a partir do aplicativo móvel (impossível fazê-lo no Jeedom). E após a adição de uma cena, você deve absolutamente sincronizar o Jeedom com a cena correta (simplesmente salvando a configuração do plugin)
 
 # Tansition
 
-Um pequeno comando específico que deve ser usado em um cenário,
-permite dizer a transição entre o estado atual e o próximo
-comando deve durar X segundos.
+Comando um pouco específico que deve ser usado em um cenário, permite dizer que a transição entre o estado atual e o próximo comando deve durar X segundos.
 
-Por exemplo, de manhã, você pode simular o nascer do sol em 3
-minutos. No seu cenário, você apenas precisa chamar o comando
-transição e no conjunto de parâmetros 180, chame o comando
-cor à cor desejada.
+Por exemplo, de manhã, você pode simular o nascer do sol em 3 minutos. Portanto, no seu cenário, basta chamar o comando de transição e, no conjunto de parâmetros 180, chamar o comando color para a cor desejada..
 
 # Animation
 
-As animações são sequências de transição, atualmente existem
-existe :
+As animações são sequências de transição, atualmente existem :
 
--   nascer do sol : para simular um nascer do sol. Ele pode levar
-    parâmetro :
-
-    -   duração : para definir a duração, por padrão 720s, ex por 5min
-        você tem que colocar : duration=300
-
--   pôr do sol : para simular um pôr do sol. Ele pode levar
-    parâmetro :
-
-    -   duração : para definir a duração, por padrão 720s, ex por 5min
-        você tem que colocar : duration=300
+-   nascer do sol : para simular um nascer do sol. Pode tomar como parâmetro :
+    -   duração : para definir a duração, por padrão 720s, ex por 5min, você deve colocar : duration=300
+-   pôr do sol : para simular um pôr do sol. Pode tomar como parâmetro :
+    -   duração : para definir a duração, por padrão 720s, ex por 5min, você deve colocar : duration=300
 
 # Botão de controle remoto
 
@@ -108,6 +77,4 @@ Aqui estão as sequências para o botão On, por exemplo :
 > **Meu equipamento (lâmpada / interruptor ....) não é reconhecido pelo plug-in, como fazer ?**
 >
 > Você deve :
-> - nós escrevemos o equipamento que você deseja adicionar com a foto e as possibilidades dele
-> - envie-nos o log no início da sincronização com a ponte
-> Tudo entrando em contato conosco com uma solicitação de suporte
+> - escreva-nos o equipamento que você deseja adicionar com a foto e as possibilidades - envie-nos o log de depuração da sincronização com a ponte enquanto nos contata com uma solicitação de suporte

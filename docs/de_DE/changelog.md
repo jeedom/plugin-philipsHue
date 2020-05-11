@@ -1,3 +1,9 @@
+>**IMPORTANT**
+>
+>Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt.
+
+# 05/11/2020
+
 - Hinzufügen einer Bestellung, um zu wissen, ob die Glühbirne erreichbar ist oder nicht
 
 # 01/02/2020

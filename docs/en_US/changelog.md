@@ -1,3 +1,9 @@
+>**IMPORTANT**
+>
+>As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text.
+
+# 05/11/2020
+
 - Addition of an order to know if the bulb is reachable or not
 
 # 01/02/2020

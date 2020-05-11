@@ -1,83 +1,52 @@
-Plugin zur Steuerung von Philips Hue-Lampen.
+# Philips Hue Plugin
+
+Plugin zur Integration in das Philips Hue-Ökosystem.
 
 # Plugin Konfiguration
 
-Nach dem Herunterladen des Plugins müssen Sie die IP-Adresse eingeben
-von Ihrer Farbtonbrücke, falls nicht bereits von der
-automatische Erkennung.
+Nach dem Herunterladen des Plugins müssen Sie die IP-Adresse Ihrer Farbtonbrücke eingeben, sofern dies nicht bereits vom automatischen Erkennungssystem durchgeführt wurde.
 
 # Gerätekonfiguration
 
 > **Note**
 >
-> Sie haben immer die passende Ausrüstung "Alle Lampen"
-> Schaffe es bis zur Gruppe 0, die ständig existiert
+> Sie haben immer "Alle Lampen" Geräte, die tatsächlich der Gruppe 0 entsprechen, die ständig existiert
 
 Hier finden Sie die gesamte Konfiguration Ihrer Geräte :
 
 -   **Name der Farbtonausrüstung** : Name Ihrer Hue-Ausrüstung,
-
--   **Übergeordnetes Objekt** : gibt das übergeordnete Objekt an, zu dem es gehört
-    Ausrüstung,
-
--   **Kategorie** : Gerätekategorien (es kann gehören
-    mehrere Kategorien),
-
+-   **Übergeordnetes Objekt** : Gibt das übergeordnete Objekt an, zu dem das Gerät gehört,
+-   **Kategorie** : Gerätekategorien (es kann zu mehreren Kategorien gehören),
 -   **Activer** : macht Ihre Ausrüstung aktiv,
-
 -   **Visible** : macht Ihre Ausrüstung auf dem Armaturenbrett sichtbar,
 
 Nachfolgend finden Sie die Liste der Bestellungen :
 
 -   **Nom** : Der im Dashboard angezeigte Name,
-
--   **Erweiterte Konfiguration** : ermöglicht die Anzeige des Fensters von
-    erweiterte Steuerungskonfiguration,
-
--   **Options** : ermöglicht es Ihnen, bestimmte ein- oder auszublenden
-    Bestellungen und / oder um sie aufzuzeichnen
-
+-   **Erweiterte Konfiguration** : Zeigt das erweiterte Konfigurationsfenster des Befehls an,
+-   **Options** : Mit dieser Option können Sie bestimmte Befehle anzeigen oder ausblenden und / oder protokollieren
 -   **Tester** : Wird zum Testen des Befehls verwendet
 
 # Gruppe 0 (Alle Lampen)
 
-Gruppe 0 ist etwas Besonderes, da sie nicht gelöscht werden kann oder
-modifiziert treibt es zwangsläufig alle lampen an und es ist auch er wer
-trägt die Szenen.
+Gruppe 0 ist etwas Besonderes, da sie nicht gelöscht oder geändert werden kann, notwendigerweise alle Lampen antreibt und auch die Szenen trägt.
 
-In der Tat können Sie "Szenen" auf dem Philips Hue machen. Das hier
-muss unbedingt aus der mobilen App gemacht werden
-(unmöglich, sie in Jeedom zu tun). Und nach dem Hinzufügen einer Szene
-Sie müssen Jeedom unbedingt mit dem richtigen synchronisieren (durch erneutes Speichern
-einfache Plugin-Konfiguration)
+In der Tat können Sie "Szenen" auf Philips Hue machen. Diese müssen unbedingt über die mobile Anwendung erfolgen (in Jeedom nicht möglich).. Und nach dem Hinzufügen einer Szene müssen Sie Jeedom unbedingt mit der richtigen synchronisieren (indem Sie einfach die Konfiguration des Plugins speichern).
 
 # Tansition
 
-Ein kleiner bestimmter Befehl, der in einem Szenario verwendet werden muss,
-es erlaubt den Übergang zwischen dem aktuellen Zustand und dem nächsten zu sagen
-Befehl muss X Sekunden dauern.
+Befehl ein wenig speziell, der in einem Szenario verwendet werden muss, macht es möglich zu sagen, dass der Übergang zwischen dem aktuellen Status und dem nächsten Befehl X Sekunden dauern muss.
 
-Zum Beispiel möchten Sie am Morgen den Sonnenaufgang in 3 simulieren
-Minuten. In Ihrem Szenario müssen Sie nur den Befehl aufrufen
-Übergang und im Parametersatz 180, dann den Befehl aufrufen
-Farbe auf die gewünschte Farbe.
+Zum Beispiel möchten Sie am Morgen den Sonnenaufgang in 3 Minuten simulieren. In Ihrem Szenario müssen Sie daher nur den Übergangsbefehl und im Parametersatz 180 aufrufen und dann den Farbbefehl in Richtung der gewünschten Farbe aufrufen.
 
 # Animation
 
-Die Animationen sind Übergangssequenzen, die derzeit vorhanden sind
-existiert :
+Die Animationen sind Übergangssequenzen, derzeit gibt es :
 
--   Sonnenaufgang : einen Sonnenaufgang simulieren. Er kann nehmen
-    Parameter :
-
-    -   Dauer : um die Dauer zu definieren, standardmäßig 720s, zB für 5min
-        du musst setzen : duration=300
-
--   Sonnenuntergang : einen Sonnenuntergang simulieren. Er kann nehmen
-    Parameter :
-
-    -   Dauer : um die Dauer zu definieren, standardmäßig 720s, zB für 5min
-        du musst setzen : duration=300
+-   Sonnenaufgang : einen Sonnenaufgang simulieren. Es kann als Parameter verwendet werden :
+    -   Dauer : Um die Dauer zu definieren, müssen Sie standardmäßig 720s, z. B. für 5 Minuten, eingeben : duration=300
+-   Sonnenuntergang : einen Sonnenuntergang simulieren. Es kann als Parameter verwendet werden :
+    -   Dauer : Um die Dauer zu definieren, müssen Sie standardmäßig 720s, z. B. für 5 Minuten, eingeben : duration=300
 
 # Fernbedienungstaste
 
@@ -108,6 +77,4 @@ Hier sind zum Beispiel die Sequenzen für die Schaltfläche Ein :
 > **Meine Ausrüstung (Lampe / Schalter ....) wird vom Plugin nicht erkannt ?**
 >
 > Du musst :
-> - wir schreiben die Ausrüstung, die Sie hinzufügen möchten, mit Foto und Möglichkeiten davon
-> - Senden Sie uns das Protokoll zu Beginn der Synchronisation mit der Bridge
-> Alles, indem Sie uns mit einer Support-Anfrage kontaktieren
+> - Schreiben Sie uns die Ausrüstung, die Sie hinzufügen möchten, mit Foto und Möglichkeiten - senden Sie uns das Protokoll-Debug der Synchronisation mit der Bridge, während Sie uns mit einer Support-Anfrage kontaktieren

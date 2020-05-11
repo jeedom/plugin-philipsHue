@@ -1,83 +1,52 @@
-Plugin para controlar lámparas Philips Hue.
+# Complemento Philips Hue
+
+Complemento para integrarse en el ecosistema Philips Hue.
 
 # Configuración del plugin
 
-Después de descargar el complemento, deberá ingresar la dirección IP
-desde su puente de color, si no lo ha hecho ya el
-descubrimiento automático.
+Después de descargar el complemento, deberá ingresar la dirección IP de su puente hue, si no lo ha hecho ya el sistema de descubrimiento automático.
 
 # Configuración del equipo
 
 > **Note**
 >
-> Siempre tendrá equipos "Todas las lámparas" que coincidan
-> llegar al grupo 0 que existe todo el tiempo
+> Siempre tendrá el equipo "Todas las lámparas" que realmente corresponde al grupo 0 que existe todo el tiempo
 
 Aquí encontrarás toda la configuración de tu equipo :
 
 -   **Nombre del equipo de tono** : nombre de su equipo Hue,
-
--   **Objeto padre** : indica el objeto padre al que pertenece
-    equipo,
-
--   **Categoría** : categorías de equipos (puede pertenecer a
-    categorías múltiples),
-
+-   **Objeto padre** : indica el objeto padre al que pertenece el equipo,
+-   **Categoría** : categorías de equipos (puede pertenecer a varias categorías),
 -   **Activer** : activa su equipo,
-
 -   **Visible** : hace que su equipo sea visible en el tablero,
 
 A continuación encontrará la lista de pedidos. :
 
 -   **Nom** : el nombre que se muestra en el tablero,
-
--   **Configuración avanzada** : permite visualizar la ventana de
-    configuración de control avanzada,
-
--   **Options** : le permite mostrar u ocultar ciertos
-    órdenes y / o grabarlos
-
+-   **Configuración avanzada** : muestra la ventana de configuración avanzada del comando,
+-   **Options** : le permite mostrar u ocultar ciertos comandos y / o registrarlos
 -   **Tester** : Se usa para probar el comando
 
 # Grupo 0 (todas las lámparas)
 
-El grupo 0 es un poco especial porque no se puede eliminar o
-modificado, necesariamente enciende todas las lámparas y también es él quien
-lleva las escenas.
+El grupo 0 es un poco especial porque no puede eliminarse ni modificarse, necesariamente controla todas las lámparas y también es el que lleva las escenas.
 
-De hecho, puedes hacer "escenas" en Philips Hue. Esta
-absolutamente debe hacerse desde la aplicación móvil
-(imposible hacerlos en Jeedom). Y luego de la adición de una escena
-absolutamente debe sincronizar Jeedom con el correcto (volviendo a guardar
-configuración simple del complemento)
+De hecho, puedes hacer "escenas" en Philips Hue. Estos deben hacerse absolutamente desde la aplicación móvil (imposible hacerlos en Jeedom). Y después de agregar una escena, debe sincronizar absolutamente Jeedom con la correcta (simplemente guardando la configuración del complemento)
 
 # Tansition
 
-Un pequeño comando particular que debe usarse en un escenario,
-permite decir la transición entre el estado actual y el siguiente
-el comando debe durar X segundos.
+Comando un poco particular que debe usarse en un escenario, permite decir que la transición entre el estado actual y el siguiente comando debe durar X segundos.
 
-Por ejemplo, en la mañana es posible que desee simular el amanecer en 3
-minutos. En su escenario solo tiene que llamar al comando
-transición y en el conjunto de parámetros 180, luego llame al comando
-color al color deseado.
+Por ejemplo, en la mañana es posible que desee simular el amanecer en 3 minutos. En su escenario, por lo tanto, solo tiene que llamar al comando de transición y en el conjunto de parámetros 180, luego llamar al comando de color hacia el color deseado.
 
 # Animation
 
-Las animaciones son secuencias de transición, actualmente hay
-existe :
+Las animaciones son secuencias de transición, actualmente hay :
 
--   amanecer : para simular un amanecer. El puede tomar
-    parámetro :
-
-    -   duración : para definir la duración, por defecto 720s, por ejemplo, 5 minutos
-        hay que meter : duration=300
-
--   puesta de sol : para simular una puesta de sol. El puede tomar
-    parámetro :
-
-    -   duración : para definir la duración, por defecto 720s, por ejemplo, 5 minutos
-        hay que meter : duration=300
+-   amanecer : para simular un amanecer. Puede tomar como parámetro :
+    -   duración : para definir la duración, por defecto 720s, por ejemplo, durante 5 minutos tienes que poner : duration=300
+-   puesta de sol : para simular una puesta de sol. Puede tomar como parámetro :
+    -   duración : para definir la duración, por defecto 720s, por ejemplo, durante 5 minutos tienes que poner : duration=300
 
 # Botón de control remoto
 
@@ -108,6 +77,4 @@ Aquí están las secuencias para el botón On por ejemplo :
 > **Mi equipo (lámpara / interruptor ...) no es reconocido por el complemento, cómo hacerlo ?**
 >
 > Hay que :
-> - nosotros para escribir el equipo que desea agregar con foto y las posibilidades del mismo
-> - envíenos el registro al inicio de la sincronización con el puente
-> Todo contactándonos con una solicitud de soporte
+> - escríbanos el equipo que desea agregar con una foto y sus posibilidades; envíenos el registro de depuración de la sincronización con el puente mientras nos contacta con una solicitud de soporte

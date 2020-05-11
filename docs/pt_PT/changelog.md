@@ -1,3 +1,9 @@
+>**IMPORTANT**
+>
+>Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto.
+
+# 05/11/2020
+
 - Adição de uma ordem para saber se a lâmpada está acessível ou não
 
 # 01/02/2020

@@ -8,24 +8,24 @@ Después de descargar el complemento, deberá ingresar la dirección IP de su pu
 
 # Configuración del equipo
 
-> **Note**
+> **Nota**
 >
 > Siempre tendrá el equipo "Todas las lámparas" que realmente corresponde al grupo 0 que existe todo el tiempo
 
 Aquí encontrarás toda la configuración de tu equipo :
 
--   **Nombre del equipo de tono** : nombre de su equipo Hue,
+-   **Nombre de l'équipement Hue** : nombre de su equipo Hue,
 -   **Objeto padre** : indica el objeto padre al que pertenece el equipo,
 -   **Categoría** : categorías de equipos (puede pertenecer a varias categorías),
--   **Activer** : activa su equipo,
+-   **Activar** : activa su equipo,
 -   **Visible** : hace que su equipo sea visible en el tablero,
 
-A continuación encontrará la lista de pedidos. :
+A continuación encontrará la lista de pedidos :
 
--   **Nom** : el nombre que se muestra en el tablero,
+-   **Nombre** : el nombre que se muestra en el tablero,
 -   **Configuración avanzada** : muestra la ventana de configuración avanzada del comando,
--   **Options** : le permite mostrar u ocultar ciertos comandos y / o registrarlos
--   **Tester** : Se usa para probar el comando
+-   **Opciones** : le permite mostrar u ocultar ciertos comandos y / o registrarlos
+-   **Probar** : Se usa para probar el comando
 
 # Grupo 0 (todas las lámparas)
 
@@ -50,7 +50,7 @@ Las animaciones son secuencias de transición, actualmente hay :
 
 # Botón de control remoto
 
-Aquí está la lista de códigos para los botones. :
+Aquí está la lista de códigos para los botones :
 
 - 1002 para el botón de encendido
 - 2002 para el botón de aumento
@@ -66,13 +66,13 @@ Aquí están las secuencias para el botón On por ejemplo :
 
 # FAQ
 
-> **Tengo la impresión de que hay una diferencia en cierto color entre lo que pido y el color de la bombilla..**
+> **Tengo la impresión de que hay una diferencia en cierto color entre lo que pido y el color de la bombilla.**
 >
 > Parece que la cuadrícula de color de las bombillas tiene un desplazamiento, estamos buscando cómo corregir
 
 > **¿Cuál es la frecuencia de actualización? ?**
 >
-> El sistema recupera información cada 2 segundos..
+> El sistema recupera información cada 2 segundos.
 
 > **Mi equipo (lámpara / interruptor ...) no es reconocido por el complemento, cómo hacerlo ?**
 >

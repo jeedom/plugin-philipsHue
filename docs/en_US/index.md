@@ -8,24 +8,24 @@ After downloading the plugin, you will need to enter the IP address of your hue 
 
 # Equipment configuration
 
-> **Note**
+> **NOTE**
 >
 > You will always have "All lamps" equipment which actually corresponds to group 0 which exists all the time
 
 Here you find all the configuration of your equipment :
 
--   **Hue equipment name** : name of your Hue equipment,
+-   **Name de l'équipement Hue** : name of your Hue equipment,
 -   **Parent object** : indicates the parent object to which the equipment belongs,
 -   **Category** : equipment categories (it can belong to several categories),
--   **Activer** : makes your equipment active,
+-   **Activate** : makes your equipment active,
 -   **Visible** : makes your equipment visible on the dashboard,
 
 Below you find the list of orders :
 
--   **Nom** : the name displayed on the dashboard,
+-   **Name** : the name displayed on the dashboard,
 -   **Advanced configuration** : displays the command's advanced configuration window,
 -   **Options** : allows you to display or hide certain commands and / or log them
--   **Tester** : Used to test the command
+-   **Test** : Used to test the command
 
 # Group 0 (All lamps)
 

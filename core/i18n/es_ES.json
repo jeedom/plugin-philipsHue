@@ -49,9 +49,9 @@
         "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur": "[philipsHue \/ jeeAnimation] Lanzamiento de la animación en",
         " avec comme options ": "con opciones",
         "Aucune animation correspondante": "Sin animación correspondiente",
-        "Aucune action à faire": "No hay acción que hacer.",
+        "Aucune action à faire": "No hay acción que hacer",
         "Lancement de ": "Lanzamiento de",
-        "Fin de l\\'animation": "Fin de la animación."
+        "Fin de l\\'animation": "Fin de la animación"
     },
     "plugins\/philipsHue\/core\/ajax\/philipsHue.ajax.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
@@ -60,7 +60,7 @@
     "plugins\/philipsHue\/core\/class\/philipsHue.class.php": {
         "Veuillez vérifier la configuration": "Por favor verifique la configuración",
         "Tâche cron introuvable": "Tarea Cron no encontrada",
-        "L\\'adresse du bridge ne peut etre vide": "La dirección del puente no puede estar vacía.",
+        "L\\'adresse du bridge ne peut etre vide": "La dirección del puente no puede estar vacía",
         "Impossible de joindre le bridge": "Incapaz de unirse al puente",
         "Veuillez appuyer sur le bouton du bridge": "Por favor presione el botón de puente",
         "Impossible de creer l\\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ": "No se puede crear un usuario. Presione el botón de puente e intente nuevamente:",

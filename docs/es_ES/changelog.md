@@ -1,6 +1,6 @@
->**IMPORTANT**
+>**Importante**
 >
->Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto.
+>Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
 # 05/11/2020
 
@@ -75,7 +75,7 @@
 
 # 14/04/2018
 
--   Corrección de un error en el tiempo de los valores del sensor.
+-   Corrección de un error en el tiempo de los valores del sensor
 -   Panel FLOALT WS 30x90
 -   Bombilla TRADFRI E14 WS opal 400lm
 -	TRADFRI E27 WS opal 980lm
@@ -92,7 +92,7 @@
 - 	Cambiar al nuevo sistema de documentación
 -   Adición del modelo MWB001
 -   Agregar el modelo ltw010
--   Adición del modelo OSRAM.
+-   Adición del modelo OSRAM
 -   Adición del modelo de bombilla TRADFRI GU10 W 400lm
 
 # 20/11/2017
@@ -111,5 +111,5 @@
 -   Corrección de escenas
 -   Corrección de cambio de color
 -   Agregar imágenes de módulo
--   Soporte para más módulos.
+-   Soporte para más módulos
 -   Además de la gestión de la temperatura de color

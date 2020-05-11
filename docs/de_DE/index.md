@@ -8,30 +8,30 @@ Nach dem Herunterladen des Plugins müssen Sie die IP-Adresse Ihrer Farbtonbrüc
 
 # Gerätekonfiguration
 
-> **Note**
+> **Notiz**
 >
 > Sie haben immer "Alle Lampen" Geräte, die tatsächlich der Gruppe 0 entsprechen, die ständig existiert
 
 Hier finden Sie die gesamte Konfiguration Ihrer Geräte :
 
--   **Name der Farbtonausrüstung** : Name Ihrer Hue-Ausrüstung,
+-   **Name de l'équipement Hue** : Name Ihrer Hue-Ausrüstung,
 -   **Übergeordnetes Objekt** : Gibt das übergeordnete Objekt an, zu dem das Gerät gehört,
 -   **Kategorie** : Gerätekategorien (es kann zu mehreren Kategorien gehören),
--   **Activer** : macht Ihre Ausrüstung aktiv,
--   **Visible** : macht Ihre Ausrüstung auf dem Armaturenbrett sichtbar,
+-   **Aktivieren** : macht Ihre Ausrüstung aktiv,
+-   **Sichtbar** : macht Ihre Ausrüstung auf dem Armaturenbrett sichtbar,
 
 Nachfolgend finden Sie die Liste der Bestellungen :
 
--   **Nom** : Der im Dashboard angezeigte Name,
+-   **Name** : Der im Dashboard angezeigte Name,
 -   **Erweiterte Konfiguration** : Zeigt das erweiterte Konfigurationsfenster des Befehls an,
--   **Options** : Mit dieser Option können Sie bestimmte Befehle anzeigen oder ausblenden und / oder protokollieren
--   **Tester** : Wird zum Testen des Befehls verwendet
+-   **Optionen** : Mit dieser Option können Sie bestimmte Befehle anzeigen oder ausblenden und / oder protokollieren
+-   **Test** : Wird zum Testen des Befehls verwendet
 
 # Gruppe 0 (Alle Lampen)
 
 Gruppe 0 ist etwas Besonderes, da sie nicht gelöscht oder geändert werden kann, notwendigerweise alle Lampen antreibt und auch die Szenen trägt.
 
-In der Tat können Sie "Szenen" auf Philips Hue machen. Diese müssen unbedingt über die mobile Anwendung erfolgen (in Jeedom nicht möglich).. Und nach dem Hinzufügen einer Szene müssen Sie Jeedom unbedingt mit der richtigen synchronisieren (indem Sie einfach die Konfiguration des Plugins speichern).
+In der Tat können Sie "Szenen" auf Philips Hue machen. Diese müssen unbedingt über die mobile Anwendung erfolgen (in Jeedom nicht möglich). Und nach dem Hinzufügen einer Szene müssen Sie Jeedom unbedingt mit der richtigen synchronisieren (indem Sie einfach die Konfiguration des Plugins speichern)
 
 # Tansition
 

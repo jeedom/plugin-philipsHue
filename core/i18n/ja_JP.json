@@ -1,6 +1,6 @@
 {
     "plugins\/philipsHue\/plugin_info\/configuration.php": {
-        "IP du bridge": "",
+        "IP du pont": "",
         "Synchronisation réussie": "正常な同期"
     },
     "plugins\/philipsHue\/desktop\/php\/philipsHue.php": {
@@ -23,6 +23,7 @@
         "Catégorie": "カテゴリ",
         "Activer": "アクティブ",
         "Visible": "目に見えます",
+        "Pont": "",
         "Toujours allumé": "",
         "Informations": "情報",
         "Modèle": "モデル",

@@ -1,6 +1,6 @@
 {
     "plugins\/philipsHue\/plugin_info\/configuration.php": {
-        "IP du bridge": "Bridge IP",
+        "IP du pont": "Brücke ip",
         "Synchronisation réussie": "Erfolgreiche Synchronisation"
     },
     "plugins\/philipsHue\/desktop\/php\/philipsHue.php": {
@@ -23,6 +23,7 @@
         "Catégorie": "Kategorie",
         "Activer": "Aktivieren",
         "Visible": "Sichtbar",
+        "Pont": "Brücke",
         "Toujours allumé": "Immer an",
         "Informations": "Information",
         "Modèle": "Modell",

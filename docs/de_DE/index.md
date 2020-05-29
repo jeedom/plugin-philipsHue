@@ -14,7 +14,7 @@ Nach dem Herunterladen des Plugins müssen Sie die IP-Adresse Ihrer Farbtonbrüc
 
 Hier finden Sie die gesamte Konfiguration Ihrer Geräte :
 
--   **Name de l'équipement Hue** : Name Ihrer Hue-Ausrüstung,
+-   **Name der Farbtonausrüstung** : Name Ihrer Hue-Ausrüstung,
 -   **Übergeordnetes Objekt** : Gibt das übergeordnete Objekt an, zu dem das Gerät gehört,
 -   **Kategorie** : Gerätekategorien (es kann zu mehreren Kategorien gehören),
 -   **Aktivieren** : macht Ihre Ausrüstung aktiv,
@@ -31,7 +31,7 @@ Nachfolgend finden Sie die Liste der Bestellungen :
 
 Gruppe 0 ist etwas Besonderes, da sie nicht gelöscht oder geändert werden kann, notwendigerweise alle Lampen antreibt und auch die Szenen trägt.
 
-In der Tat können Sie "Szenen" auf Philips Hue machen. Diese müssen unbedingt über die mobile Anwendung erfolgen (in Jeedom nicht möglich). Und nach dem Hinzufügen einer Szene müssen Sie Jeedom unbedingt mit der richtigen synchronisieren (indem Sie einfach die Konfiguration des Plugins speichern)
+In der Tat können Sie "Szenen" auf Philips Hue machen. Diese müssen unbedingt über die mobile Anwendung erfolgen (in Jeedom ist dies nicht möglich)). Und nach dem Hinzufügen einer Szene müssen Sie Jeedom unbedingt mit der richtigen synchronisieren (indem Sie einfach die Konfiguration des Plugins speichern)
 
 # Tansition
 

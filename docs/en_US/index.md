@@ -14,7 +14,7 @@ After downloading the plugin, you will need to enter the IP address of your hue 
 
 Here you find all the configuration of your equipment :
 
--   **Name de l'équipement Hue** : name of your Hue equipment,
+-   **Hue equipment name** : name of your Hue equipment,
 -   **Parent object** : indicates the parent object to which the equipment belongs,
 -   **Category** : equipment categories (it can belong to several categories),
 -   **Activate** : makes your equipment active,

@@ -1,6 +1,6 @@
 {
     "plugins\/philipsHue\/plugin_info\/configuration.php": {
-        "IP du bridge": "",
+        "IP du pont": "",
         "Synchronisation réussie": "Sinkronisasi berhasil"
     },
     "plugins\/philipsHue\/desktop\/php\/philipsHue.php": {
@@ -23,6 +23,7 @@
         "Catégorie": "Kategori",
         "Activer": "Mengaktifkan",
         "Visible": "Terlihat",
+        "Pont": "",
         "Toujours allumé": "",
         "Informations": "Informasi",
         "Modèle": "Model",

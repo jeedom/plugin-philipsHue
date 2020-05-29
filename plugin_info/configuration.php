@@ -24,12 +24,16 @@ if (!isConnect()) {
 ?>
 <form class="form-horizontal">
 	<fieldset>
-		<div class="form-group useShare">
-			<label class="col-lg-4 control-label">{{IP du bridge}}</label>
-			<div class="col-lg-2">
-				<input type="text" class="configKey tooltips form-control" data-l1key="bridge_ip" />
-			</div>
-		</div>
+		<?php
+		for($i=1;$i<=config::byKey('nbBridge','philipsHue');$i++){
+			echo '<div class="form-group">';
+			echo '<label class="col-lg-4 control-label">{{IP du pont}} '.$i.'</label>';
+			echo '<div class="col-lg-2">';
+			echo '<input type="text" class="configKey tooltips form-control" data-l1key="bridge_ip'.$i.'" />';
+			echo '</div>';
+			echo '</div>';
+		}
+		?>
 	</div>
 </fieldset>
 </form>

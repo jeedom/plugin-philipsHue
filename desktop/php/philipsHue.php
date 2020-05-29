@@ -106,9 +106,21 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									</div>
 								</div>
 								<div class="form-group">
+									<label class="col-lg-4 control-label">{{Pont}}</label>
+									<div class="col-lg-6">
+										<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="bridge">
+											<?php
+											for($i=1;$i<=config::byKey('nbBridge','philipsHue');$i++){
+												echo '<option value="'.$i.'">{{Pont}} '.$i.'</option>';
+											}
+											?>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
 									<label class="col-lg-4 control-label">{{Toujours allumé}}</label>
 									<div class="col-lg-2">
-										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="alwaysOn" /></label>
+										<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="alwaysOn" />
 									</div>
 								</div>
 							</fieldset>

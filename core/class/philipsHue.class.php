@@ -23,7 +23,7 @@ require_once dirname(__FILE__) . '/../../vendor/autoload.php';
 class philipsHue extends eqLogic {
 	/*     * *************************Attributs****************************** */
 	
-	private static $_hue = null;
+	private static $_hue = array();
 	private static $_eqLogics = null;
 	
 	/*     * ***********************Methode static*************************** */
@@ -82,39 +82,21 @@ class philipsHue extends eqLogic {
 		}
 	}
 	
-	public static function findBridgeIp() {
-		$response = @file_get_contents('http://www.meethue.com/api/nupnp');
-		if ($response === false) {
-			return false;
-		}
-		$bridges = json_decode($response);
-		if (isset($bridges[0])) {
-			return $bridges[0]->internalipaddress;
-		}
-		return false;
-	}
-	
-	public static function getPhilipsHue() {
-		if (!self::$_hue !== null) {
-			if (config::byKey('bridge_ip', 'philipsHue') == '' || config::byKey('bridge_ip', 'philipsHue') == '-') {
-				$ip = self::findBridgeIp();
-				if ($ip !== false) {
-					config::save('bridge_ip', $ip, 'philipsHue');
-				}
-				if (config::byKey('bridge_ip', 'philipsHue') == '' || config::byKey('bridge_ip', 'philipsHue') == '-') {
-					throw new Exception(__('L\'adresse du bridge ne peut etre vide', __FILE__));
-				}
+	public static function getPhilipsHue($_bridge_number = 1) {
+		if (!isset(self::$_hue[$_bridge_number]) || self::$_hue[$_bridge_number] === null) {
+			if (config::byKey('bridge_ip'.$_bridge_number, 'philipsHue') == '' || config::byKey('bridge_ip'.$_bridge_number, 'philipsHue') == '-') {
+				return null;
 			}
-			self::$_hue = new \Phue\Client(config::byKey('bridge_ip', 'philipsHue'), config::byKey('bridge_username', 'philipsHue', 'newdeveloper'));
+			self::$_hue[$_bridge_number] = new \Phue\Client(config::byKey('bridge_ip'.$_bridge_number, 'philipsHue'), config::byKey('bridge_username'.$_bridge_number, 'philipsHue', 'newdeveloper'));
 		}
-		return self::$_hue;
+		return self::$_hue[$_bridge_number];
 	}
 	
-	public function createUser() {
-		if (config::byKey('bridge_ip', 'philipsHue') == '') {
+	public function createUser($_bridge_number = 1) {
+		if (config::byKey('bridge_ip'.$_bridge_number, 'philipsHue') == '') {
 			throw new Exception(__('L\'adresse du bridge ne peut etre vide', __FILE__));
 		}
-		$hue = new \Phue\Client(config::byKey('bridge_ip', 'philipsHue'));
+		$hue = new \Phue\Client(config::byKey('bridge_ip'.$_bridge_number, 'philipsHue'));
 		try {
 			$hue->sendCommand(new \Phue\Command\Ping);
 		} catch (\Phue\Transport\Exception\ConnectionException $e) {
@@ -136,7 +118,7 @@ class philipsHue extends eqLogic {
 				$response = $hue->sendCommand(
 					new \Phue\Command\CreateUser
 				);
-				config::save('bridge_username', $response->username, 'philipsHue');
+				config::save('bridge_username'.$_bridge_number, $response->username, 'philipsHue');
 				break;
 			} catch (\Phue\Transport\Exception\LinkButtonException $e) {
 				
@@ -150,11 +132,11 @@ class philipsHue extends eqLogic {
 		}
 	}
 	
-	public static function syncBridge() {
+	public static function syncBridge($_bridge_number = 1) {
 		try {
-			$hue = self::getPhilipsHue();
+			$hue = self::getPhilipsHue($_bridge_number);
 		} catch (Exception $e) {
-			self::createUser();
+			self::createUser($_bridge_number);
 		}
 		try {
 			$hue->sendCommand(new \Phue\Command\Ping);
@@ -162,10 +144,10 @@ class philipsHue extends eqLogic {
 			throw new Exception(__('Impossible de joindre le bridge', __FILE__));
 		}
 		if (!$hue->sendCommand(new \Phue\Command\IsAuthorized)) {
-			self::createUser();
+			self::createUser($_bridge_number);
 		}
 		self::$_hue = null;
-		$hue = self::getPhilipsHue();
+		$hue = self::getPhilipsHue($_bridge_number);
 		if (!$hue->sendCommand(new \Phue\Command\IsAuthorized)) {
 			throw new Exception(__('Impossible de creer l\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ', __FILE__) . $e->getMessage());
 		}
@@ -184,16 +166,17 @@ class philipsHue extends eqLogic {
 				}
 				log::add('philipsHue', 'debug', 'Use generic configuration : '.$modelId);
 			}
-			$eqLogic = self::byLogicalId('light' . $id, 'philipsHue');
+			$eqLogic = self::byLogicalId('light' . $id.'-'.$_bridge_number, 'philipsHue');
 			if (!is_object($eqLogic)) {
 				$eqLogic = new self();
-				$eqLogic->setLogicalId('light' . $id);
+				$eqLogic->setLogicalId('light' . $id.'-'.$_bridge_number);
 				$eqLogic->setName($light->getName());
 				$eqLogic->setEqType_name('philipsHue');
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
 				$eqLogic->setConfiguration('device', $modelId);
 			}
+			$eqLogic->setConfiguration('bridge', $_bridge_number);
 			$eqLogic->setConfiguration('category', 'light');
 			$eqLogic->setConfiguration('id', $id);
 			$eqLogic->setConfiguration('modelName', $light->getModel()->getName());
@@ -202,29 +185,31 @@ class philipsHue extends eqLogic {
 			$eqLogic->save();
 			$lights_exist[$id] = $id;
 		}
-		$eqLogic = self::byLogicalId('group0', 'philipsHue');
+		$eqLogic = self::byLogicalId('group0-'.$_bridge_number, 'philipsHue');
 		if (!is_object($eqLogic)) {
 			$eqLogic = new self();
-			$eqLogic->setLogicalId('group0');
+			$eqLogic->setLogicalId('group0-'.$_bridge_number);
 			$eqLogic->setName(__('Toute les lampes', __FILE__));
 			$eqLogic->setEqType_name('philipsHue');
 			$eqLogic->setConfiguration('device', 'GROUP0');
 			$eqLogic->setIsVisible(1);
 			$eqLogic->setIsEnable(1);
 		}
+		$eqLogic->setConfiguration('bridge', $_bridge_number);
 		$eqLogic->setConfiguration('category', 'group');
 		$eqLogic->setConfiguration('id', 0);
 		$eqLogic->save();
 		foreach ($hue->getgroups() as $id => $group) {
-			$eqLogic = self::byLogicalId('group' . $id, 'philipsHue');
+			$eqLogic = self::byLogicalId('group' . $id.'-'.$_bridge_number, 'philipsHue');
 			if (!is_object($eqLogic)) {
 				$eqLogic = new self();
-				$eqLogic->setLogicalId('group' . $id);
+				$eqLogic->setLogicalId('group' . $id.'-'.$_bridge_number);
 				$eqLogic->setName($group->getName());
 				$eqLogic->setEqType_name('philipsHue');
 				$eqLogic->setIsVisible(0);
 				$eqLogic->setIsEnable(1);
 			}
+			$eqLogic->setConfiguration('bridge', $_bridge_number);
 			$eqLogic->setConfiguration('device', 'GROUP');
 			$eqLogic->setConfiguration('category', 'group');
 			$eqLogic->setConfiguration('id', $id);
@@ -239,16 +224,17 @@ class philipsHue extends eqLogic {
 				log::add('philipsHue', 'debug', 'No configuration found for sensor : ' . $sensor->getModelId() . ' => ' . json_encode(utils::o2a($sensor)));
 				continue;
 			}
-			$eqLogic = self::byLogicalId('sensor' . $id, 'philipsHue');
+			$eqLogic = self::byLogicalId('sensor' . $id.'-'.$_bridge_number, 'philipsHue');
 			if (!is_object($eqLogic)) {
 				$eqLogic = new self();
-				$eqLogic->setLogicalId('sensor' . $id);
+				$eqLogic->setLogicalId('sensor' . $id.'-'.$_bridge_number);
 				$eqLogic->setName($sensor->getName());
 				$eqLogic->setEqType_name('philipsHue');
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
 				$eqLogic->setConfiguration('device', $sensor->getModelId());
 			}
+			$eqLogic->setConfiguration('bridge', $_bridge_number);
 			$eqLogic->setConfiguration('category', 'sensor');
 			$eqLogic->setConfiguration('id', $id);
 			$eqLogic->setConfiguration('modelName', $sensor->getModel()->getName());
@@ -258,6 +244,9 @@ class philipsHue extends eqLogic {
 		}
 		
 		foreach (self::byType('philipsHue') as $eqLogic) {
+			if($eqLogic->getConfiguration('bridge') != $_bridge_number){
+				continue;
+			}
 			if ($eqLogic->getConfiguration('category') == 'light') {
 				if (!isset($lights_exist[$eqLogic->getConfiguration('id')])) {
 					$eqLogic->remove();
@@ -290,9 +279,9 @@ class philipsHue extends eqLogic {
 		return $return;
 	}
 	
-	public static function pull($_eqLogic_id = null) {
+	public static function pullBridge($_bridge_number,$_eqLogic_id = null){
 		try {
-			$hue = philipsHue::getPhilipsHue();
+			$hue = philipsHue::getPhilipsHue($_bridge_number);
 		} catch (Exception $e) {
 			return;
 		}
@@ -313,7 +302,7 @@ class philipsHue extends eqLogic {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
 			}
-			if ($eqLogic->getIsEnable() == 0 || $eqLogic->getLogicalId() == 'group0') {
+			if ($eqLogic->getIsEnable() == 0 || $eqLogic->getLogicalId() == 'group0-'.$_bridge_number) {
 				continue;
 			}
 			$isReachable = true;
@@ -431,6 +420,15 @@ class philipsHue extends eqLogic {
 					log::add('philipsHue', 'error', $e->getMessage());
 				}
 			}
+		}
+	}
+	
+	public static function pull($_eqLogic_id = null) {
+		for($i=1;$i<=config::byKey('nbBridge','philipsHue');$i++){
+			if(config::byKey('bridge_ip'.$i, 'philipsHue') == ''){
+				continue;
+			}
+			self::pullBridge($i,$_eqLogic_id);
 		}
 	}
 	
@@ -614,7 +612,7 @@ class philipsHueCmd extends cmd {
 			return;
 		}
 		$eqLogic = $this->getEqLogic();
-		$hue = philipsHue::getPhilipsHue();
+		$hue = philipsHue::getPhilipsHue($eqLogic->getConfiguration('bridge'));
 		if ($eqLogic->getConfiguration('category') == 'sensor') {
 			$sensors = philipsHue::sanitizeSensors($hue->getSensors());
 			if (!isset($sensors[$eqLogic->getConfiguration('id')])) {

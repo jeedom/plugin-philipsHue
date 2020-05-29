@@ -14,7 +14,7 @@ Después de descargar el complemento, deberá ingresar la dirección IP de su pu
 
 Aquí encontrarás toda la configuración de tu equipo :
 
--   **Nombre de l'équipement Hue** : nombre de su equipo Hue,
+-   **Nombre del equipo de tono** : nombre de su equipo Hue,
 -   **Objeto padre** : indica el objeto padre al que pertenece el equipo,
 -   **Categoría** : categorías de equipos (puede pertenecer a varias categorías),
 -   **Activar** : activa su equipo,
@@ -31,7 +31,7 @@ A continuación encontrará la lista de pedidos :
 
 El grupo 0 es un poco especial porque no puede eliminarse ni modificarse, necesariamente controla todas las lámparas y también es el que lleva las escenas.
 
-De hecho, puedes hacer "escenas" en Philips Hue. Estos deben hacerse absolutamente desde la aplicación móvil (imposible hacerlos en Jeedom). Y después de agregar una escena, debe sincronizar absolutamente Jeedom con la correcta (simplemente guardando la configuración del complemento)
+De hecho, puedes hacer "escenas" en Philips Hue. Estos deben hacerse absolutamente desde la aplicación móvil (imposible hacerlos en Jeedom). Y después de la adición de una escena, debe sincronizar absolutamente Jeedom con la correcta (simplemente guardando la configuración del complemento)
 
 # Tansition
 

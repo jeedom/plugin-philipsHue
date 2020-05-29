@@ -1,6 +1,6 @@
 {
     "plugins\/philipsHue\/plugin_info\/configuration.php": {
-        "IP du bridge": "IP da ponte",
+        "IP du pont": "Ip da ponte",
         "Synchronisation réussie": "Sincronização bem-sucedida"
     },
     "plugins\/philipsHue\/desktop\/php\/philipsHue.php": {
@@ -23,6 +23,7 @@
         "Catégorie": "Categoria",
         "Activer": "Ativar",
         "Visible": "Visivél",
+        "Pont": "Ponte",
         "Toujours allumé": "Sempre ligado",
         "Informations": "Informação",
         "Modèle": "Modelo",
@@ -66,7 +67,7 @@
         "Impossible de creer l\\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ": "Não foi possível criar o usuário. Por favor, pressione o botão bridge e tente novamente:",
         "Toute les lampes": "Todas as lâmpadas",
         "Joignable": "Acessível",
-        "Scene": "Scene",
+        "Scene": "Cena",
         "Animation": "Animação",
         "Options": "Opções",
         "Nom de l\\'animation": "Nome da animação"

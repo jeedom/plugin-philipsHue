@@ -14,7 +14,7 @@ Após o download do plug-in, você precisará inserir o endereço IP da sua pont
 
 Aqui você encontra toda a configuração do seu equipamento :
 
--   **Nome de l'équipement Hue** : nome do seu equipamento Hue,
+-   **Nome do equipamento Hue** : nome do seu equipamento Hue,
 -   **Objeto pai** : indica o objeto pai ao qual o equipamento pertence,
 -   **Categoria** : categorias de equipamentos (pode pertencer a várias categorias),
 -   **Ativar** : torna seu equipamento ativo,

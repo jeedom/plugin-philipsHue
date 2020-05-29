@@ -108,7 +108,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<div class="form-group">
 									<label class="col-lg-4 control-label">{{Pont}}</label>
 									<div class="col-lg-6">
-										<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="bridge">
+										<select class="eqLogicAttr form-control" disabled data-l1key="configuration" data-l2key="bridge">
 											<?php
 											for($i=1;$i<=config::byKey('nbBridge','philipsHue');$i++){
 												echo '<option value="'.$i.'">{{Pont}} '.$i.'</option>';

@@ -1,10 +1,10 @@
 # Philips Hue Plugin
 
-Plugin zur Integration in das Philips Hue-Ökosystem.
+Plugin zur Integration in das Philips Hue-Ökosystem (kann bis zu 2 Bridges gleichzeitig verwalten).
 
 # Plugin Konfiguration
 
-Nach dem Herunterladen des Plugins müssen Sie die IP-Adresse Ihrer Farbtonbrücke eingeben, sofern dies nicht bereits vom automatischen Erkennungssystem durchgeführt wurde.
+Nach dem Herunterladen des Plugins müssen Sie die IP-Adresse Ihrer Farbtonbrücke (n) eingeben.
 
 # Gerätekonfiguration
 
@@ -19,6 +19,8 @@ Hier finden Sie die gesamte Konfiguration Ihrer Geräte :
 -   **Kategorie** : Gerätekategorien (es kann zu mehreren Kategorien gehören),
 -   **Aktivieren** : macht Ihre Ausrüstung aktiv,
 -   **Sichtbar** : macht Ihre Ausrüstung auf dem Armaturenbrett sichtbar,
+-   **Brücke** : zeigt die Brücke an, an die die Lampe angeschlossen ist
+-   **Immer an** : Sagen Sie jeedom, dass die Lampe niemals als nicht erreichbar markiert werden soll
 
 Nachfolgend finden Sie die Liste der Bestellungen :
 

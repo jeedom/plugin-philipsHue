@@ -1,10 +1,10 @@
 # Complemento Philips Hue
 
-Complemento para integrarse en el ecosistema Philips Hue.
+Complemento para integrarse en el ecosistema Philips Hue (puede administrar hasta 2 puentes simultáneamente).
 
 # Configuración del plugin
 
-Después de descargar el complemento, deberá ingresar la dirección IP de su puente hue, si no lo ha hecho ya el sistema de descubrimiento automático.
+Después de descargar el complemento, deberá ingresar la dirección IP de su (s) puente (s) hue.
 
 # Configuración del equipo
 
@@ -19,6 +19,8 @@ Aquí encontrarás toda la configuración de tu equipo :
 -   **Categoría** : categorías de equipos (puede pertenecer a varias categorías),
 -   **Activar** : activa su equipo,
 -   **Visible** : hace que su equipo sea visible en el tablero,
+-   **Puente** : indica el puente al que está conectada la lámpara
+-   **Siempre en** : dile a libertad que nunca marque la lámpara como inalcanzable
 
 A continuación encontrará la lista de pedidos :
 

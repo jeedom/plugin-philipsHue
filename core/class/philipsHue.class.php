@@ -302,7 +302,7 @@ class philipsHue extends eqLogic {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
 			}
-			if ($eqLogic->getIsEnable() == 0 || $eqLogic->getLogicalId() == 'group0-'.$_bridge_number) {
+			if ($eqLogic->getIsEnable() == 0 || $eqLogic->getConfiguration('bridge') != $_bridge_number || $eqLogic->getLogicalId() == 'group0-'.$_bridge_number) {
 				continue;
 			}
 			$isReachable = true;

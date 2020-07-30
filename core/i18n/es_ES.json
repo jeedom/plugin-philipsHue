@@ -71,5 +71,8 @@
         "Animation": "Animación",
         "Options": "Opciones",
         "Nom de l\\'animation": "Nombre de la animación"
+    },
+    "info.json": {
+        "Plugin pour s'integrer à l'écosystème Philips Hue (peut gerer jusqu'a 2 ponts simultanement).": "Complemento para integrarse en el ecosistema Philips Hue (puede gestionar hasta 2 puentes simultáneamente)"
     }
 }

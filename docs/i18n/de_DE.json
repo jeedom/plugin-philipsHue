@@ -145,6 +145,8 @@
         "Mon équipement (lampe\/interrupteur....) n'est pas reconnu par le plugin, comment faire": "Meine Ausrüstung (Lampe \/ Schalter ....) wird vom Plugin nicht erkannt",
         "Il faut": "Du musst",
         "nous d'écrire l'équipement que vous voulez qu'on ajoute avec photo et possibilités de celui-ci - nous envoyer le log en debug de la synchronisation avec le pont Le tout en nous contactant par une demande de support": "Schreiben Sie uns die Ausrüstung, die Sie hinzufügen möchten, mit Foto und Möglichkeiten - senden Sie uns das Protokoll-Debug der Synchronisation mit der Bridge, während Sie uns mit einer Support-Anfrage kontaktieren",
+        "J'ai ajouté l'historisation d'une commande mais ca ne marche pas": "Ich habe die Historisierung eines Auftrags hinzugefügt, aber es funktioniert nicht",
+        "Pour des questions de performance il faut redemarrer le demon philips hue pour qu'il prenne en compte ce changement": "Bei Leistungsproblemen müssen Sie den philips hue-Daemon neu starten, damit diese Änderung berücksichtigt wird",
         " Note.": " Notiz.",
         " Note?": " Notiz?",
         "Note ": "Notiz ",

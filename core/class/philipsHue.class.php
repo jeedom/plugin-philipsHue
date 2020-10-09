@@ -103,17 +103,10 @@ class philipsHue extends eqLogic {
 		} catch (\Phue\Transport\Exception\ConnectionException $e) {
 			throw new Exception(__('Impossible de joindre le bridge', __FILE__));
 		}
-		if (class_exists('event')) {
-			event::add('jeedom::alert', array(
-				'level' => 'warning',
-				'message' => __('Veuillez appuyer sur le bouton du bridge', __FILE__),
-			));
-		} else {
-			nodejs::pushUpdate('jeedom::alert', array(
-				'level' => 'warning',
-				'message' => __('Veuillez appuyer sur le bouton du bridge', __FILE__),
-			));
-		}
+		event::add('jeedom::alert', array(
+			'level' => 'warning',
+			'message' => __('Veuillez appuyer sur le bouton du bridge', __FILE__),
+		));
 		for ($i = 1; $i <= 30; ++$i) {
 			try {
 				$response = $hue->sendCommand(

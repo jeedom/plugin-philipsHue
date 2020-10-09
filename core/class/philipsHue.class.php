@@ -25,7 +25,7 @@ class philipsHue extends eqLogic {
 	
 	private static $_hue = array();
 	private static $_eqLogics = null;
-	public static $_encryptConfigKey = array('bridge_ip1','bridge_ip2');
+	public static $_encryptConfigKey = array('bridge_ip1','bridge_ip2','bridge_username1','bridge_username2');
 	
 	/*     * ***********************Methode static*************************** */
 	

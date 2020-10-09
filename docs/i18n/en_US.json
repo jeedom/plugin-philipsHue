@@ -145,6 +145,8 @@
         "Mon équipement (lampe\/interrupteur....) n'est pas reconnu par le plugin, comment faire": "My equipment (lamp \/ switch ....) is not recognized by the plugin, how to do",
         "Il faut": "It is necessary",
         "nous d'écrire l'équipement que vous voulez qu'on ajoute avec photo et possibilités de celui-ci - nous envoyer le log en debug de la synchronisation avec le pont Le tout en nous contactant par une demande de support": "write us the equipment you want to add with photo and possibilities of it - send us the log debug of synchronization with the bridge while contacting us with a support request",
+        "J'ai ajouté l'historisation d'une commande mais ca ne marche pas": "I added the historization of an order but it does not work",
+        "Pour des questions de performance il faut redemarrer le demon philips hue pour qu'il prenne en compte ce changement": "For performance issues, you must restart the philips hue daemon so that it takes this change into account",
         " Note.": " NOTE.",
         " Note?": " NOTE?",
         "Note ": "NOTE ",

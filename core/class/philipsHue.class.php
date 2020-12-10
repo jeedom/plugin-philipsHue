@@ -314,7 +314,7 @@ class philipsHue extends eqLogic {
 							$datetime->setTimezone(new \DateTimezone($timezone));
 						}
 						foreach ($obj->getState() as $key => $value) {
-							if ($key == 'lastupdated' || $value === '') {
+							if ($key == 'lastupdated' || $value === '' || $value === null) {
 								continue;
 							}
 							$cmd = $eqLogic->getCmd('info', $key);
@@ -345,7 +345,7 @@ class philipsHue extends eqLogic {
 							$eqLogic->checkAndUpdateCmd($key, $value, $datetime->format('Y-m-d H:i:s'));
 						}
 						foreach ($obj->getConfig() as $key => $value) {
-							if ($value === '') {
+							if ($value === '' || $value === null) {
 								continue;
 							}
 							if ($key == 'battery') {

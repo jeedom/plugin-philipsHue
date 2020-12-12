@@ -4,6 +4,10 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
+# 11.12.2020
+
+- Behebung eines Problems der CPU-Überlastung beim Deaktivieren eines Sensors (Beachten Sie, dass Sie den Daemon nach dem Update neu starten müssen, um die Korrektur durchzuführen)
+
 # 25.06.2020
 
 - Multi-Bridge-Unterstützung (derzeit 2)

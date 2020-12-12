@@ -2,6 +2,8 @@
     "changelog.md": {
         "Changelog Philips Hue": "Alterações Philips Hue",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto",
+        "11\/12\/2020": "11\/12\/2020",
+        "Correction d'un soucis de surcharge du CPU lors de la désactivation d'un capteur (à noter qu'il faut relancer le demon suite à la mise à jour pour avoir la correction": "Correção de um problema de sobrecarga de CPU ao desativar um sensor (note que você deve reiniciar o daemon após a atualização para ter a correção",
         "25\/06\/2020": "25\/06\/2020",
         "Support multipont (2 pour le moment": "Suporte multi-ponte (2 no momento",
         "11\/05\/2020": "05\/11\/2020",

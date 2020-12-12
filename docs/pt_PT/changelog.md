@@ -4,6 +4,10 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+# 11/12/2020
+
+- Correção de um problema de sobrecarga de CPU ao desativar um sensor (note que você deve reiniciar o daemon após a atualização para ter a correção)
+
 # 25/06/2020
 
 - Suporte multi-ponte (2 no momento)

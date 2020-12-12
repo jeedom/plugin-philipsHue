@@ -4,6 +4,10 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+# 12/11/2020
+
+- Correction of a problem of CPU overload when deactivating a sensor (note that you must restart the daemon after the update to have the correction)
+
 # 06/25/2020
 
 - Multi-bridge support (2 at the moment)

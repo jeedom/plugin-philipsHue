@@ -4,6 +4,10 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+# 12/11/2020
+
+- Corrección de un problema de sobrecarga de CPU al desactivar un sensor (tenga en cuenta que debe reiniciar el demonio después de la actualización para tener la corrección)
+
 # 25/06/2020
 
 - Soporte multi-puente (2 en este momento)

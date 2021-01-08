@@ -6,7 +6,12 @@
         "en_US": "Plugin to integrate into the Philips Hue ecosystem (can manage up to 2 bridges simultaneously)",
         "es_ES": "Complemento para integrarse en el ecosistema Philips Hue (puede gestionar hasta 2 puentes simultáneamente)",
         "de_DE": "Plugin zur Integration in das Philips Hue-Ökosystem (kann bis zu 2 Bridges gleichzeitig verwalten)",
-        "pt_PT": "Plug-in para integrar-se ao ecossistema Philips Hue (pode gerenciar até 2 pontes simultaneamente)"
+        "pt_PT": "Plug-in para integrar-se ao ecossistema Philips Hue (pode gerenciar até 2 pontes simultaneamente)",
+        "ru_RU": "Plugin pour s'integrer à l'écosystème Philips Hue (peut gerer jusqu'a 2 ponts simultanement)",
+        "id_ID": "Plugin pour s'integrer à l'écosystème Philips Hue (peut gerer jusqu'a 2 ponts simultanement)",
+        "it_IT": "Plugin pour s'integrer à l'écosystème Philips Hue (peut gerer jusqu'a 2 ponts simultanement)",
+        "ja_JP": "Plugin pour s'integrer à l'écosystème Philips Hue (peut gerer jusqu'a 2 ponts simultanement)",
+        "tr": "Plugin pour s'integrer à l'écosystème Philips Hue (peut gerer jusqu'a 2 ponts simultanement)"
     },
     "licence": "AGPL",
     "author": "Jeedom SAS",
@@ -20,7 +25,12 @@
         "en_US",
         "es_ES",
         "de_DE",
-        "pt_PT"
+        "ru_RU",
+        "id_ID",
+        "it_IT",
+        "ja_JP",
+        "pt_PT",
+        "tr"
     ],
     "compatibility": [
         "miniplus",

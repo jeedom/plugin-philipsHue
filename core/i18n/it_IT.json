@@ -1,6 +1,6 @@
 {
     "plugins\/philipsHue\/plugin_info\/configuration.php": {
-        "IP du pont": "",
+        "IP du pont": "IP du pont",
         "Synchronisation réussie": "Sincronizzazione avvenuta con successo"
     },
     "plugins\/philipsHue\/desktop\/php\/philipsHue.php": {
@@ -9,28 +9,28 @@
         "Ajouter": "Aggiungi",
         "Configuration": "Configurazione",
         "Synchroniser": "Sincronizzare",
-        "Mes Philips Hue": "",
+        "Mes Philips Hue": "Mes Philips Hue",
         "Rechercher": "Ricercare",
         "Configuration avancée": "Configurazione avanzata",
         "Sauvegarder": "Salva",
         "Supprimer": "Rimuovere",
         "Equipement": "Dispositivo",
         "Commandes": "Comandi",
-        "Nom de l'équipement Philips Hue": "",
-        "Nom de l'équipement philipsHue": "",
+        "Nom de l'équipement Philips Hue": "Nom de l'équipement Philips Hue",
+        "Nom de l'équipement philipsHue": "Nom de l'équipement philipsHue",
         "Objet parent": "Oggetto padre",
         "Aucun": "Nessuno",
         "Catégorie": "Categoria",
         "Activer": "Attivare",
         "Visible": "Visibile",
-        "Pont": "",
-        "Toujours allumé": "",
+        "Pont": "Pont",
+        "Toujours allumé": "Toujours allumé",
         "Informations": "Informazioni",
         "Modèle": "Modello",
         "Type": "Tipo",
-        "ID": "",
-        "Non model": "",
-        "Version du logiciel": "",
+        "ID": "ID",
+        "Non model": "Non model",
+        "Version du logiciel": "Version du logiciel",
         "Nom": "Nome",
         "Options": "Opzioni",
         "Action": "Azione"
@@ -44,35 +44,35 @@
         "Tester": "Prova"
     },
     "plugins\/philipsHue\/core\/php\/jeeHueAnimation.php": {
-        "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide": "",
-        "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ": "",
-        "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ": "",
-        "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur": "",
-        " avec comme options ": "",
-        "Aucune animation correspondante": "",
-        "Aucune action à faire": "",
-        "Lancement de ": "",
-        "Fin de l\\'animation": ""
+        "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide": "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide",
+        "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ": "[philipsHue\/jeeAnimation] L\\'équipement est introuvable :",
+        "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ": "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue :",
+        "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur": "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur",
+        " avec comme options ": "avec comme options",
+        "Aucune animation correspondante": "Aucune animation correspondante",
+        "Aucune action à faire": "Aucune action à faire",
+        "Lancement de ": "Lancement de",
+        "Fin de l\\'animation": "Fin de l\\'animation"
     },
     "plugins\/philipsHue\/core\/ajax\/philipsHue.ajax.php": {
         "401 - Accès non autorisé": "401 - Accesso non autorizzato",
         "Aucune methode correspondante à : ": "Nessun metodo corrispondente a:"
     },
     "plugins\/philipsHue\/core\/class\/philipsHue.class.php": {
-        "Veuillez vérifier la configuration": "",
-        "Tâche cron introuvable": "",
-        "L\\'adresse du bridge ne peut etre vide": "",
-        "Impossible de joindre le bridge": "",
-        "Veuillez appuyer sur le bouton du bridge": "",
-        "Impossible de creer l\\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ": "",
-        "Toute les lampes": "",
-        "Joignable": "",
-        "Scene": "",
-        "Animation": "",
+        "Veuillez vérifier la configuration": "Veuillez vérifier la configuration",
+        "Tâche cron introuvable": "Tâche cron introuvable",
+        "L\\'adresse du bridge ne peut etre vide": "L\\'adresse du bridge ne peut etre vide",
+        "Impossible de joindre le bridge": "Impossible de joindre le bridge",
+        "Veuillez appuyer sur le bouton du bridge": "Veuillez appuyer sur le bouton du bridge",
+        "Impossible de creer l\\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ": "Impossible de creer l\\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer :",
+        "Toute les lampes": "Toute les lampes",
+        "Joignable": "Joignable",
+        "Scene": "Scene",
+        "Animation": "Animation",
         "Options": "Opzioni",
-        "Nom de l\\'animation": ""
+        "Nom de l\\'animation": "Nom de l\\'animation"
     },
     "info.json": {
-        "Plugin pour s'integrer à l'écosystème Philips Hue (peut gerer jusqu'a 2 ponts simultanement).": ""
+        "Plugin pour s'integrer à l'écosystème Philips Hue (peut gerer jusqu'a 2 ponts simultanement).": "Plugin pour s'integrer à l'écosystème Philips Hue (peut gerer jusqu'a 2 ponts simultanement)"
     }
 }

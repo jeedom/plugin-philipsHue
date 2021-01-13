@@ -412,7 +412,7 @@ class philipsHue extends eqLogic {
 						$eqLogic->checkAndUpdateCmd($cmd, $obj->getColorTemp(),false);
 					}
 				}
-				if(config::byKey('failed_contact_bridge_'.$_bridge_number, 'philipsHue',0) != 0){
+				if(config::byKey('failed_contact_bridge_'.$_bridge_number, 'philipsHue') !== 0){
 					config::save('failed_contact_bridge_'.$_bridge_number, 0, 'philipsHue');
 				}
 			} catch (Exception $e) {

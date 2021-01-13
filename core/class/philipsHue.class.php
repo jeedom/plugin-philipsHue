@@ -417,6 +417,7 @@ class philipsHue extends eqLogic {
 				}
 			} catch (Exception $e) {
 				config::save('failed_contact_bridge_'.$_bridge_number, config::byKey('failed_contact_bridge_'.$_bridge_number, 'philipsHue',0) + 1, 'philipsHue');
+				sleep(2);
 				if ($_eqLogic_id != null && config::byKey('failed_contact_bridge_'.$_bridge_number, 'philipsHue') > 3) {
 					log::add('philipsHue', 'error', $e->getMessage());
 				}

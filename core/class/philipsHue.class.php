@@ -282,15 +282,16 @@ class philipsHue extends eqLogic {
 		try {
 			$groups = $hue->getgroups();
 			$lights = $hue->getLights();
+			$sensors = self::sanitizeSensors($hue->getSensors());
 		} catch (Exception $e) {
 			sleep(5);
 			$groups = $hue->getgroups();
 			$lights = $hue->getLights();
+			$sensors = self::sanitizeSensors($hue->getSensors());
 		}
 		if (self::$_eqLogics == null) {
 			self::$_eqLogics = self::byType('philipsHue');
 		}
-		$sensors = self::sanitizeSensors($hue->getSensors());
 		$timezone = config::byKey('timezone', 'core', 'Europe/Brussels');
 		foreach (self::$_eqLogics as &$eqLogic) {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
@@ -412,15 +413,8 @@ class philipsHue extends eqLogic {
 						$eqLogic->checkAndUpdateCmd($cmd, $obj->getColorTemp(),false);
 					}
 				}
-				if(config::byKey('failed_contact_bridge_'.$_bridge_number, 'philipsHue') !== 0){
-					config::save('failed_contact_bridge_'.$_bridge_number, 0, 'philipsHue');
-				}
 			} catch (Exception $e) {
-				config::save('failed_contact_bridge_'.$_bridge_number, config::byKey('failed_contact_bridge_'.$_bridge_number, 'philipsHue',0) + 1, 'philipsHue');
-				sleep(2);
-				if ($_eqLogic_id != null && config::byKey('failed_contact_bridge_'.$_bridge_number, 'philipsHue') > 20) {
-					log::add('philipsHue', 'error', $e->getMessage());
-				}
+				log::add('philipsHue', 'error', $e->getMessage());
 			}
 		}
 	}

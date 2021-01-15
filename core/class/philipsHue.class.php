@@ -279,15 +279,20 @@ class philipsHue extends eqLogic {
 		} catch (Exception $e) {
 			return;
 		}
-		try {
-			$groups = $hue->getgroups();
-			$lights = $hue->getLights();
-			$sensors = self::sanitizeSensors($hue->getSensors());
-		} catch (Exception $e) {
-			sleep(5);
-			$groups = $hue->getgroups();
-			$lights = $hue->getLights();
-			$sensors = self::sanitizeSensors($hue->getSensors());
+		$retry = 0;
+		while (true) {
+			try {
+				$groups = $hue->getgroups();
+				$lights = $hue->getLights();
+				$sensors = self::sanitizeSensors($hue->getSensors());
+				break;
+			} catch (Exception $e) {
+				$retry++;
+				if($retry > 30){
+					throw $e;
+				}
+				sleep(5);
+			}
 		}
 		if (self::$_eqLogics == null) {
 			self::$_eqLogics = self::byType('philipsHue');

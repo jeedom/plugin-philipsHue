@@ -1,6 +1,6 @@
 {
     "plugins\/philipsHue\/plugin_info\/configuration.php": {
-        "IP du pont": "IP du pont",
+        "Adresse IP du pont": "Adresse IP du pont",
         "Synchronisation réussie": "正常な同期"
     },
     "plugins\/philipsHue\/desktop\/php\/philipsHue.php": {
@@ -16,31 +16,42 @@
         "Supprimer": "取り除きます",
         "Equipement": "設備",
         "Commandes": "コマンド",
-        "Nom de l'équipement Philips Hue": "Nom de l'équipement Philips Hue",
+        "Général": "Général",
+        "Nom de l'équipement": "Nom de l'équipement",
         "Nom de l'équipement philipsHue": "Nom de l'équipement philipsHue",
         "Objet parent": "親オブジェクト",
         "Aucun": "何でもありません",
         "Catégorie": "カテゴリ",
+        "Options": "オプション",
         "Activer": "アクティブ",
         "Visible": "目に見えます",
-        "Pont": "Pont",
-        "Toujours allumé": "Toujours allumé",
-        "Informations": "情報",
+        "Paramètres": "Paramètres",
         "Modèle": "モデル",
+        "Sélectionner le modèle d'équipement Philips Hue à piloter": "Sélectionner le modèle d'équipement Philips Hue à piloter",
+        "Pont": "Pont",
+        "Pont Philips Hue sur lequel l'équipement est connecté": "Pont Philips Hue sur lequel l'équipement est connecté",
+        "Toujours allumé": "Toujours allumé",
+        "Cocher la case pour ne jamais indiquer l'équipement comme non joignable": "Cocher la case pour ne jamais indiquer l'équipement comme non joignable",
+        "Informations": "情報",
         "Type": "タイプ",
-        "ID": "ID",
-        "Non model": "Non model",
+        "Identifiant": "Identifiant",
+        "Nom du modèle": "Nom du modèle",
         "Version du logiciel": "Version du logiciel",
+        "Visuel": "Visuel",
+        "Id": "ID",
         "Nom": "表題",
-        "Options": "オプション",
         "Action": "アクション"
     },
     "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {
         "Synchronisation réussie": "正常な同期",
         "Nom": "表題",
+        "Icône": "Icône",
         "Afficher": "ディスプレイ",
         "Historiser": "Historicize",
         "Inverser": "逆",
+        "Min.": "Min.",
+        "Max.": "Max.",
+        "Unité": "Unité",
         "Tester": "テスト"
     },
     "plugins\/philipsHue\/core\/php\/jeeHueAnimation.php": {
@@ -73,6 +84,6 @@
         "Nom de l\\'animation": "Nom de l\\'animation"
     },
     "info.json": {
-        "Plugin pour s'integrer à l'écosystème Philips Hue (peut gerer jusqu'a 2 ponts simultanement).": "Plugin pour s'integrer à l'écosystème Philips Hue (peut gerer jusqu'a 2 ponts simultanement)"
+        "Plugin permettant d'intégrer un écosystème Philips Hue dans Jeedom. Le plugin est capable de gérer jusqu'à 2 ponts simultanément.": "Plugin permettant d'intégrer un écosystème Philips Hue dans Jeedom. Le plugin est capable de gérer jusqu'à 2 ponts simultanément"
     }
 }

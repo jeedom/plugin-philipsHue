@@ -1,6 +1,6 @@
 {
     "plugins\/philipsHue\/plugin_info\/configuration.php": {
-        "IP du pont": "Puente ip",
+        "Adresse IP du pont": "Dirección IP del puente",
         "Synchronisation réussie": "Sincronización exitosa"
     },
     "plugins\/philipsHue\/desktop\/php\/philipsHue.php": {
@@ -16,31 +16,42 @@
         "Supprimer": "Borrar",
         "Equipement": "Dispositivos",
         "Commandes": "Comandos",
-        "Nom de l'équipement Philips Hue": "Nombre del equipo Philips Hue",
+        "Général": "General",
+        "Nom de l'équipement": "Nombre del equipo",
         "Nom de l'équipement philipsHue": "Nombre del equipo philipsHue",
         "Objet parent": "Objeto padre",
         "Aucun": "Ninguna",
         "Catégorie": "Categoría",
+        "Options": "Opciones",
         "Activer": "Activar",
         "Visible": "Visible",
-        "Pont": "Puente",
-        "Toujours allumé": "Siempre en",
-        "Informations": "Información",
+        "Paramètres": "Configuraciones",
         "Modèle": "Modelo",
+        "Sélectionner le modèle d'équipement Philips Hue à piloter": "Seleccione el modelo de equipo Philips Hue para controlar",
+        "Pont": "Puente",
+        "Pont Philips Hue sur lequel l'équipement est connecté": "Puente Philips Hue al que está conectado el equipo",
+        "Toujours allumé": "Siempre en",
+        "Cocher la case pour ne jamais indiquer l'équipement comme non joignable": "Marque la casilla para no indicar nunca el equipo como inalcanzable",
+        "Informations": "Información",
         "Type": "Tipo",
-        "ID": "Identificación",
-        "Non model": "No modelo",
+        "Identifiant": "Nombre de usuario",
+        "Nom du modèle": "Nombre del modelo",
         "Version du logiciel": "Versión de software",
+        "Visuel": "Visual",
+        "Id": "Identificación",
         "Nom": "Nombre",
-        "Options": "Opciones",
         "Action": "Acción"
     },
     "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {
         "Synchronisation réussie": "Sincronización exitosa",
         "Nom": "Nombre",
+        "Icône": "Icono",
         "Afficher": "Mostrar",
         "Historiser": "Guardar historial",
         "Inverser": "Invertir",
+        "Min.": "Min.",
+        "Max.": "Max.",
+        "Unité": "Unidad",
         "Tester": "Probar"
     },
     "plugins\/philipsHue\/core\/php\/jeeHueAnimation.php": {
@@ -73,6 +84,6 @@
         "Nom de l\\'animation": "Nombre de la animación"
     },
     "info.json": {
-        "Plugin pour s'integrer à l'écosystème Philips Hue (peut gerer jusqu'a 2 ponts simultanement).": "Complemento para integrarse en el ecosistema Philips Hue (puede gestionar hasta 2 puentes simultáneamente)"
+        "Plugin permettant d'intégrer un écosystème Philips Hue dans Jeedom. Le plugin est capable de gérer jusqu'à 2 ponts simultanément.": "Complemento que permite integrar un ecosistema Philips Hue en Jeedom. El complemento puede administrar hasta 2 puentes simultáneamente"
     }
 }

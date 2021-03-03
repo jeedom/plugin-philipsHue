@@ -1,3 +1,5 @@
+# Changelog Philips Hue
+
 # Changelog plugin Philips Hue
 
 >**IMPORTANT**

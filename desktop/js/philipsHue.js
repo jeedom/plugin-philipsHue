@@ -15,7 +15,6 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').on('change', function () {
   if($('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').value() == ''){
     $('#img_device').attr("src",'plugins/philipsHue/plugin_info/philipsHue_icon.png');
@@ -78,16 +77,29 @@ function addCmdToTable(_cmd) {
     _cmd.configuration = {};
   }
   var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">';
-  tr += '<td>';
+  tr += '<td style="min-width:300px;width:350px;">';
+  tr += '<div class="row">';
+  tr += '<div class="col-xs-7">';
   tr += '<span class="cmdAttr" data-l1key="id" style="display:none;"></span>';
   tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" placeholder="{{Nom}}">';
   tr += '<input class="cmdAttr form-control input-sm" data-l1key="type" style="display : none;">';
   tr += '<input class="cmdAttr form-control input-sm" data-l1key="subType" style="display : none;">';
+  tr += '</div>';
+  tr += '<div class="col-xs-5">';
+  tr += '<a class="cmdAction btn btn-default btn-sm" data-l1key="chooseIcon"><i class="fas fa-flag"></i> {{Icône}}</a>';
+  tr += '<span class="cmdAttr" data-l1key="display" data-l2key="icon" style="margin-left : 10px;"></span>';
+  tr += '</div>';
+  tr += '</div>';
   tr += '</td>';
-  tr += '<td>';
-  tr += '<label class="checkbox-inline"><input type="checkbox" class="cmdAttr" data-l1key="isVisible" />{{Afficher}}</label>';
-  tr += '<label class="checkbox-inline"><input type="checkbox" class="cmdAttr" data-l1key="isHistorized" />{{Historiser}}</label>';
-  tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr" data-l1key="display" data-l2key="invertBinary"/>{{Inverser}}</label></span> ';
+  tr += '<td style="min-width:120px;width:300px;">';
+  tr += '<label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/>{{Afficher}}</label> ';
+  tr += '<label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isHistorized" checked/>{{Historiser}}</label> ';
+  tr += '<label class="checkbox-inline"><input type="checkbox" class="cmdAttr" data-l1key="display" data-l2key="invertBinary"/>{{Inverser}}</label>';
+  tr += '</td>';
+  tr += '<td style="min-width:150px;">';
+  tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="minValue" placeholder="{{Min.}}" title="{{Min.}}" style="width:30%;display:inline-block;"/> ';
+  tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="maxValue" placeholder="{{Max.}}" title="{{Max.}}" style="width:30%;display:inline-block;"/> ';
+  tr += '<input class="cmdAttr form-control input-sm" data-l1key="unite" placeholder="{{Unité}}" title="{{Unité}}" style="width:30%;display:inline-block;"/>';
   tr += '</td>';
   tr += '<td>';
   if (is_numeric(_cmd.id)) {

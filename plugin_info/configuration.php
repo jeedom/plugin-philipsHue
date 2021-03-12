@@ -27,9 +27,9 @@ if (!isConnect()) {
 		<?php
 		for($i=1;$i<=config::byKey('nbBridge','philipsHue');$i++){
 			echo '<div class="form-group">';
-			echo '<label class="col-lg-4 control-label">{{IP du pont}} '.$i.'</label>';
-			echo '<div class="col-lg-2">';
-			echo '<input type="text" class="configKey tooltips form-control" data-l1key="bridge_ip'.$i.'" />';
+			echo '<label class="col-sm-3 control-label">{{Adresse IP du pont}} '.$i.'</label>';
+			echo '<div class="col-sm-7">';
+			echo '<input type="text" class="configKey form-control" data-l1key="bridge_ip'.$i.'" />';
 			echo '</div>';
 			echo '</div>';
 		}

@@ -6,12 +6,15 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+
+
 # ??/??/ 2021
 
 - Adición de la bombilla Hue White A67 E27 1600lm
 - Optimizaciones y corrección de errores
 - Modernización de la interfaz
 - Optimización de imagen
+- Se agregó un nuevo interruptor de atenuación de tono
 
 # 12/11/2020
 

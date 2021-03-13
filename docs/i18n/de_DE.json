@@ -9,6 +9,7 @@
         "Optimisations et corrections de bugs": "Optimierungen und Fehlerbehebungen",
         "Modernisation de l'interface": "Modernisierung der Schnittstelle",
         "Optimisation des images": "Bildoptimierung",
+        "Ajout du nouveau hue Dimmer Switch": "Neuer Farbton-Dimmerschalter hinzugefügt",
         "11\/12\/2020": "11.12.2020",
         "Correction d'un défaut de surcharge CPU lors de la désactivation d'un capteur (il faut relancer le démon suite à la mise à jour pour appliquer la correction": "Korrektur eines CPU-Überlastungsfehlers beim Deaktivieren eines Sensors (der Dämon muss nach dem Update neu gestartet werden, um die Korrektur anzuwenden",
         "25\/06\/2020": "25.06.2020",

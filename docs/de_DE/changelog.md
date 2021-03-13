@@ -6,12 +6,15 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
+
+
 # ??/.??/ 2021
 
 - Zugabe der Hue White Bulb A67 E27 1600lm
 - Optimierungen und Fehlerbehebungen
 - Modernisierung der Schnittstelle
 - Bildoptimierung
+- Neuer Farbton-Dimmerschalter hinzugefügt
 
 # 11.12.2020
 

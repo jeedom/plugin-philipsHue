@@ -500,7 +500,7 @@ class philipsHue extends eqLogic {
 				if (!$find) {
 					continue;
 				}
-				$scene_str .= $scene->getId() . '|' . $name . ';';
+				$scene_str .= $scene->getId() . '|' . utf8_encode($name) . ';';
 			}
 			if ($scene_str != '') {
 				$scene_cmd = $this->getCmd('action', 'scene');

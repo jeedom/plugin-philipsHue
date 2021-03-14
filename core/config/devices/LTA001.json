@@ -1,9 +1,8 @@
 {
-  "LTC001": {
-    "name": "Hue ambiance ceiling",
+  "LTA001": {
+    "name": "Hue White E27 with Bluetooth",
     "configuration" :{
-      "gammut" : "2200K-6500K",
-      "alwaysOn" : 1
+      "gammut" : "2200K-6500K"
     },
     "commands": [
       {

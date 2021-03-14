@@ -14,7 +14,7 @@
 				"logicalId": "buttonevent",
 				"configuration" : {
 					"repeatEventManagement" : "always",
-					"onType" : "ZGPSwitch"
+					"onType" : "ZLLSwitch"
 				}
 			},
 			{
@@ -25,7 +25,7 @@
 				"isHistorized": 0,
 				"logicalId": "on",
 				"configuration" : {
-					"onType" : "ZGPSwitch"
+					"onType" : "ZLLSwitch"
 				}
 			}
 		]

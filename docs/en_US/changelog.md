@@ -6,15 +6,14 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
-
-
-# ??/??/ 2021
+# 03/15/2021
 
 - Addition of the Hue White Bulb A67 E27 1600lm
 - Optimizations and bug fixes
 - Modernization of the interface
 - Image optimization
 - Added new hue Dimmer Switch
+- Addition of the smart plug (on / off only no status feedback for the moment)
 
 # 12/11/2020
 

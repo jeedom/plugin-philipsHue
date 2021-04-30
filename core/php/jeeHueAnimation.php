@@ -80,8 +80,8 @@ try {
 			$pourcent_sun =  ($sun_info['sunset'] - strtotime('now')) / ($sun_info['sunset'] - $sun_info['transit']);
 			$pourcent_sun = 1 - $pourcent_sun;
 		}
-		$max_color_temp = 500;
-		$min_color_temp = 153;
+		$max_color_temp = 153;
+		$min_color_temp = 500;
 		$max_brightness = 254;
 		$min_brightness = 1;
 		
@@ -91,7 +91,7 @@ try {
 			);
 		}else{
 			$scenario = array(
-				array('colorTemp' => intval(($max_color_temp - $min_color_temp)*$pourcent_sun+$min_color_temp), 'bri' =>  intval(($max_brightness - $min_brightness)*$pourcent_sun+$min_brightness), 'transition' => 0, 'sleep' => 0)
+				array('colorTemp' => intval(($min_color_temp - $max_color_temp)*(1-$pourcent_sun)+$max_color_temp), 'bri' =>  intval(($max_brightness - $min_brightness)*$pourcent_sun+$min_brightness), 'transition' => 0, 'sleep' => 0)
 			);
 		}
 		if(strtotime('now') < $sun_info['transit']){

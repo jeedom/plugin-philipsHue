@@ -78,26 +78,62 @@ try {
 			$pourcent_sun = $pourcent_sun;
 		}else{
 			$pourcent_sun =  ($sun_info['sunset'] - strtotime('now')) / ($sun_info['sunset'] - $sun_info['transit']);
-			$pourcent_sun = 1 - $pourcent_sun;
+			$pourcent_sun = $pourcent_sun;
 		}
 		$max_color_temp = 153;
 		$min_color_temp = 500;
 		$max_brightness = 254;
 		$min_brightness = 1;
-		
+		$scenario = array();
 		if(strtotime('now') > $sun_info['sunset'] || strtotime('now') < $sun_info['sunrise']){
-			$scenario = array(
-				array('colorTemp' => $min_color_temp,'bri' => $min_brightness, 'transition' => 0, 'sleep' => $sun_info['sunrise'] - strtotime('now'))
-			);
+			$scenario[] = 	array('colorTemp' => $color_temp,'bri' => $brightness_temp, 'transition' => 0, 'sleep' => $sun_info['sunrise'] - strtotime('now'));
 		}else{
-			$scenario = array(
-				array('colorTemp' => intval(($min_color_temp - $max_color_temp)*(1-$pourcent_sun)+$max_color_temp), 'bri' =>  intval(($max_brightness - $min_brightness)*$pourcent_sun+$min_brightness), 'transition' => 0, 'sleep' => 0)
-			);
+			$scenario[] = array('colorTemp' => intval(($min_color_temp - $max_color_temp)*(1-$pourcent_sun)+$max_color_temp), 'bri' =>  intval(($max_brightness - $min_brightness)*$pourcent_sun+$min_brightness), 'transition' => 0, 'sleep' => 0);
 		}
 		if(strtotime('now') < $sun_info['transit']){
+			$prev_temp = end($scenario)['colorTemp'];
+			$prev_brightness = end($scenario)['bri'];
+			$starttime = strtotime('now');
+			while(true){
+				$duration = $sun_info['transit'] - $starttime;
+				$color_temp = $max_color_temp;
+				$brightness = $max_brightness;
+				if($duration > 6500){
+					$duration = 6500;
+					$percent = (($starttime + $duration) - strtotime('now')) / ($sun_info['transit'] - strtotime('now'));
+					$color_temp = intval((1-$percent) * ($prev_temp - $color_temp) + $color_temp);
+					$brightness = intval((1-$percent) * ($prev_brightness - $brightness) + $brightness);
+				}
+				$scenario[] = array('colorTemp' => $color_temp,'bri' => $brightness, 'transition' => $duration, 'sleep' => $duration);
+				$starttime += 6500;
+				if($starttime >= $sun_info['transit']){
+					break;
+				}
+			}
 			$scenario[] = array('colorTemp' => $max_color_temp,'bri' => $max_brightness, 'transition' => $sun_info['transit'] - strtotime('now'), 'sleep' => $sun_info['transit'] - strtotime('now'));
 		}
-		$scenario[] = array('colorTemp' => $min_color_temp,'bri' => $min_brightness, 'transition' => $sun_info['sunset'] - strtotime('now'), 'sleep' => $sun_info['sunset'] - strtotime('now'));
+		
+		if($sun_info['sunset'] > strtotime('now')){
+			$prev_temp = end($scenario)['colorTemp'];
+			$prev_brightness = end($scenario)['bri'];
+			$starttime = strtotime('now');
+			while(true){
+				$duration = $sun_info['sunset'] - $starttime;
+				$color_temp = $min_color_temp;
+				$brightness = $min_brightness;
+				if($duration > 6500){
+					$duration = 6500;
+					$percent = (($starttime + $duration) - strtotime('now')) / ($sun_info['sunset'] - strtotime('now'));
+					$color_temp = intval((1-$percent) * ($prev_temp - $color_temp) + $color_temp);
+					$brightness = intval((1-$percent) * ($prev_brightness - $brightness) + $brightness);
+				}
+				$scenario[] = array('colorTemp' => $color_temp,'bri' => $brightness, 'transition' => $duration, 'sleep' => $duration);
+				$starttime += $duration;
+				if($starttime >= $sun_info['sunset']){
+					break;
+				}
+			}
+		}
 		break;
 		default:
 		throw new Exception(__('Aucune animation correspondante', __FILE__));

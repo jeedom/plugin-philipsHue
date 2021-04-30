@@ -6,6 +6,8 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
+- Hinzufügen einer adaptiven_Lichtanimation
+
 # 15.03.2021
 
 - Zugabe der Hue White Bulb A67 E27 1600lm

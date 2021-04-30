@@ -6,6 +6,8 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+- Agregar una animación adaptive_light
+
 # 15/03/2021
 
 - Adición de la bombilla Hue White A67 E27 1600lm

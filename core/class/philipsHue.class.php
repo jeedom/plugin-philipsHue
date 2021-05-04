@@ -469,11 +469,24 @@ class philipsHue extends eqLogic {
 			if (!is_object($cmd)) {
 				$cmd = new philipsHueCmd();
 				$cmd->setName(__('Joignable', __FILE__));
-				$cmd->setType('info');
-				$cmd->setSubtype('binary');
 				$cmd->setEqLogic_id($this->getId());
 				$cmd->setIsVisible(0);
 				$cmd->setLogicalId('isReachable');
+			}
+			$cmd->setConfiguration('repeatEventManagement','never');
+			$cmd->setType('info');
+			$cmd->setSubtype('binary');
+			$cmd->save();
+			
+			$cmd = $this->getCmd('info', 'alert_state');
+			if (is_object($cmd)) {
+				$cmd->setConfiguration('repeatEventManagement','never');
+				$cmd->save();
+			}
+			
+			$cmd = $this->getCmd('info', 'rainbow_state');
+			if (is_object($cmd)) {
+				$cmd->setConfiguration('repeatEventManagement','never');
 				$cmd->save();
 			}
 		}

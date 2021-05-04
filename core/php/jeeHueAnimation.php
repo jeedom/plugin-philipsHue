@@ -83,7 +83,7 @@ try {
 		$max_color_temp = 153;
 		$min_color_temp = 500;
 		$max_brightness = 254;
-		$min_brightness = 1;
+		$min_brightness = 25;
 		$scenario = array();
 		if(strtotime('now') > $sun_info['sunset'] || strtotime('now') < $sun_info['sunrise']){
 			$scenario[] = 	array('colorTemp' => $color_temp,'bri' => $brightness_temp, 'transition' => 0, 'sleep' => $sun_info['sunrise'] - strtotime('now'));

@@ -218,7 +218,7 @@ class philipsHue extends eqLogic {
 				log::add('philipsHue', 'debug', 'No configuration found for sensor : ' . $sensor->getModelId() . ' => ' . json_encode(utils::o2a($sensor)));
 				continue;
 			}
-			if(in_array($sensor->getModel()->getName(),array('cycleState','cycling','dimDirection','isDimming','slotState'))){
+			if(in_array($sensor->getName(),array('cycleState','cycling','dimDirection','isDimming','slotState'))){
 				continue;
 			}
 			$eqLogic = self::byLogicalId('sensor' . $id.'-'.$_bridge_number, 'philipsHue');

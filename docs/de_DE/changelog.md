@@ -7,6 +7,7 @@
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
 - Hinzufügen einer adaptiven_Lichtanimation
+- Ein Problem beim Auffinden von Szenen auf der 2. Hue-Brücke wurde behoben
 
 # 15.03.2021
 

@@ -495,9 +495,9 @@ class philipsHue extends eqLogic {
 		}
 		$scene_cmd = $this->getCmd('action', 'scene');
 		if ($this->getConfiguration('category') == 'group') {
-			$groups = self::getPhilipsHue()->getgroups();
+			$groups = self::getPhilipsHue($this->getConfiguration('bridge'))->getgroups();
 			$scene_str = '';
-			foreach (self::getPhilipsHue()->getScenes() as $scene) {
+			foreach (self::getPhilipsHue($this->getConfiguration('bridge'))->getScenes() as $scene) {
 				$name = $scene->getName();
 				if ($name == '') {
 					continue;
@@ -564,7 +564,6 @@ class philipsHue extends eqLogic {
 			$animation->setDisplay('title_placeholder', __('Nom de l\'animation', __FILE__));
 			$animation->save();
 		}
-		
 	}
 	
 	public function applyModuleConfiguration() {

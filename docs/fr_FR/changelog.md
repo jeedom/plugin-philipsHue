@@ -6,6 +6,8 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
+# 07/06/2021
+
 - Ajout d'une animation adaptative_light
 - Correction d'un soucis sur la decouverte des scenes sur le 2eme pont Hue
 

@@ -62,7 +62,7 @@ function philipsHue_update() {
 		if(strpos($philipsHue->getLogicalId(),'-1') === false){
 			$philipsHue->setLogicalId($philipsHue->getLogicalId().'-1');
 		}
-		$philipsHue->save(true);
+		$philipsHue->save();
 	}
 	if(config::byKey('bridge_ip','philipsHue') != '' && config::byKey('bridge_ip1','philipsHue') == ''){
 		config::save('bridge_ip1',config::byKey('bridge_ip','philipsHue'),'philipsHue');

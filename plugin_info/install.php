@@ -62,7 +62,24 @@ function philipsHue_update() {
 		if(strpos($philipsHue->getLogicalId(),'-1') === false){
 			$philipsHue->setLogicalId($philipsHue->getLogicalId().'-1');
 		}
-		$philipsHue->save();
+		$philipsHue->save(true);
+		$cmd = $philipsHue->getCmd('info', 'alert_state');
+		if (is_object($cmd)) {
+			$cmd->setConfiguration('repeatEventManagement','never');
+			$cmd->save();
+		}
+		
+		$cmd = $philipsHue->getCmd('info', 'rainbow_state');
+		if (is_object($cmd)) {
+			$cmd->setConfiguration('repeatEventManagement','never');
+			$cmd->save();
+		}
+		
+		$cmd = $philipsHue->getCmd('info', 'isReachable');
+		if (is_object($cmd)) {
+			$cmd->setConfiguration('repeatEventManagement','never');
+			$cmd->save();
+		}
 	}
 	if(config::byKey('bridge_ip','philipsHue') != '' && config::byKey('bridge_ip1','philipsHue') == ''){
 		config::save('bridge_ip1',config::byKey('bridge_ip','philipsHue'),'philipsHue');

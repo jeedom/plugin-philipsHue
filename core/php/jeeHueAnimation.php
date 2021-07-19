@@ -110,7 +110,6 @@ try {
 						break;
 					}
 				}
-				$scenario[] = array('colorTemp' => $max_color_temp, 'bri' => $max_brightness, 'transition' => $duration - strtotime('now'), 'sleep' => $sun_info['transit'] - strtotime('now'));
 			}
 
 			if ($sun_info['sunset'] > strtotime('now')) {

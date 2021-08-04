@@ -298,7 +298,7 @@ class philipsHue extends eqLogic {
 			}
 		}
 		if (self::$_eqLogics == null) {
-			self::$_eqLogics = self::byType('philipsHue');
+			self::$_eqLogics = self::byType('philipsHue',true);
 		}
 		$timezone = config::byKey('timezone', 'core', 'Europe/Brussels');
 		foreach (self::$_eqLogics as &$eqLogic) {

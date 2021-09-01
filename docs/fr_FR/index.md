@@ -22,6 +22,10 @@ Le plugin **Philips Hue** utilise son propre démon afin de rester en contact co
 >    
 >Il n'est normalement pas nécessaire de démarrer le démon manuellement, celui-ci étant automatiquement géré par le plugin.
 
+## Compatibilité
+
+Vous pouvez trouver [ici](https://compatibility.jeedom.com/index.php?v=d&p=home&plugin=philipsHue) la liste des modules compatible avec le plugin
+
 ## Configuration des équipements
 
 Pour accéder aux différents équipements **Philips Hue**, dirigez-vous vers le menu **Plugins → Communication → Philips Hue**.

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Phue: Philips Hue PHP Client
  *
@@ -6,13 +7,13 @@
  * @copyright Copyright (c) 2012 Michael K. Squires
  * @license   http://github.com/sqmk/Phue/wiki/License
  */
+
 namespace Phue\Transport\Adapter;
 
 /**
  * cURL Http adapter
  */
-class Curl implements AdapterInterface
-{
+class Curl implements AdapterInterface {
 
     /**
      * cURL resource
@@ -24,10 +25,9 @@ class Curl implements AdapterInterface
     /**
      * Constructs a cURL adapter
      */
-    public function __construct()
-    {
+    public function __construct() {
         // Throw exception if cURL extension is not loaded
-        if (! extension_loaded('curl')) {
+        if (!extension_loaded('curl')) {
             throw new \BadFunctionCallException('The cURL extension is required.');
         }
     }
@@ -35,8 +35,7 @@ class Curl implements AdapterInterface
     /**
      * Opens the connection
      */
-    public function open()
-    {
+    public function open() {
         $this->curl = curl_init();
     }
 
@@ -52,18 +51,17 @@ class Curl implements AdapterInterface
      *
      * @return string Result
      */
-    public function send($address, $method, $body = null)
-    {
+    public function send($address, $method, $body = null) {
         // Set connection options
         curl_setopt($this->curl, CURLOPT_URL, $address);
         curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $method);
         curl_setopt($this->curl, CURLOPT_HEADER, false);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
-        
+
         if (strlen($body)) {
             curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
         }
-        
+
         return curl_exec($this->curl);
     }
 
@@ -72,8 +70,7 @@ class Curl implements AdapterInterface
      *
      * @return string Response http code
      */
-    public function getHttpStatusCode()
-    {
+    public function getHttpStatusCode() {
         return curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
     }
 
@@ -82,16 +79,14 @@ class Curl implements AdapterInterface
      *
      * @return string Response content type
      */
-    public function getContentType()
-    {
+    public function getContentType() {
         return curl_getinfo($this->curl, CURLINFO_CONTENT_TYPE);
     }
 
     /**
      * Closes the cURL connection
      */
-    public function close()
-    {
+    public function close() {
         curl_close($this->curl);
         $this->curl = null;
     }

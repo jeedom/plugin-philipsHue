@@ -6,6 +6,12 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
+
+- Réécriture complete du plugin pour utiliser l'api 2.0
+- Necessite une resynchronisation pour marcher
+- ATTENTION : beaucoup de truc ne marche pas (capteur, scéne, groupe...)
+- IMPORTANT : certaine commandes ne seront plus disponible avec cette nouvelle version dont les alertes et les effets
+
 # 04/10/2021
 
 - Ajout de module

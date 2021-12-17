@@ -53,18 +53,18 @@ try {
 	switch (init('animation')) {
 		case 'sunset':
 			$scenario = array(
-				array('hue' => 12750, 'sat' => 0, 'bri' => 254, 'transition' => 0, 'sleep' => 0),
-				array('hue' => 12750, 'sat' => 254, 'bri' => 254, 'transition' => intval(init('duration', 720) * 0.58), 'sleep' => intval(init('duration', 720) * 0.58)),
-				array('hue' => 65280, 'sat' => 254, 'bri' => 128, 'transition' => intval(init('duration', 720) * 0.33), 'sleep' => intval(init('duration', 720) * 0.33)),
-				array('hue' => 46920, 'sat' => 254, 'bri' => 0, 'transition' => intval(init('duration', 720) * 0.09), 'sleep' => intval(init('duration', 720) * 0.09)),
+				array('x' => 95.05, 'y' => 100, 'bri' => 100, 'transition' => 0, 'sleep' => 0),
+				array('x' => 63.06, 'y' => 85.59, 'bri' => 100, 'transition' => intval(init('duration', 720) * 0.58), 'sleep' => intval(init('duration', 720) * 0.58)),
+				array('x' => 52.76, 'y' => 38.11, 'bri' => 50, 'transition' => intval(init('duration', 720) * 0.33), 'sleep' => intval(init('duration', 720) * 0.33)),
+				array('x' => 0, 'y' => 0, 'bri' => 0, 'transition' => intval(init('duration', 720) * 0.09), 'sleep' => intval(init('duration', 720) * 0.09)),
 			);
 			break;
 		case 'sunrise':
 			$scenario = array(
-				array('hue' => 46920, 'sat' => 254, 'bri' => 0, 'transition' => 0, 'sleep' => 0),
-				array('hue' => 65280, 'sat' => 254, 'bri' => 128, 'transition' => intval(init('duration', 720) * 0.09), 'sleep' => intval(init('duration', 720) * 0.09)),
-				array('hue' => 12750, 'sat' => 254, 'bri' => 254, 'transition' => intval(init('duration', 720) * 0.33), 'sleep' => intval(init('duration', 720) * 0.33)),
-				array('hue' => 12750, 'sat' => 0, 'bri' => 254, 'transition' => intval(init('duration', 720) * 0.58), 'sleep' => intval(init('duration', 720) * 0.58)),
+				array('x' => 0, 'y' => 0, 'bri' => 0, 'transition' => 0, 'sleep' => 0),
+				array('x' => 52.76, 'y' => 38.11, 'bri' => 50, 'transition' => intval(init('duration', 720) * 0.09), 'sleep' => intval(init('duration', 720) * 0.09)),
+				array('x' => 95.05, 'y' => 100, 'bri' => 100, 'transition' => intval(init('duration', 720) * 0.33), 'sleep' => intval(init('duration', 720) * 0.33)),
+				array('x' => 95.05, 'y' => 100, 'bri' => 100, 'transition' => intval(init('duration', 720) * 0.58), 'sleep' => intval(init('duration', 720) * 0.58)),
 			);
 			break;
 		case 'adaptive_lighting':
@@ -82,8 +82,8 @@ try {
 			}
 			$max_color_temp = 153;
 			$min_color_temp = 500;
-			$max_brightness = 254;
-			$min_brightness = 25;
+			$max_brightness = 100;
+			$min_brightness = 1;
 			$scenario = array();
 			if (strtotime('now') > $sun_info['sunset'] || strtotime('now') < $sun_info['sunrise']) {
 				$scenario[] = 	array('colorTemp' => $color_temp, 'bri' => $brightness_temp, 'transition' => 0, 'sleep' => $sun_info['sunrise'] - strtotime('now'));
@@ -143,20 +143,22 @@ try {
 	$hue = philipsHue::getPhilipsHue();
 	foreach ($scenario as $action) {
 		log::add('philipsHue', 'debug', __('Lancement de ', __FILE__) . print_r($action, true));
-		$command = new \Phue\Command\SetLightState($philipsHue->getConfiguration('id'));
-		$command->transitionTime($action['transition']);
-		$command->on(true);
-		$command->brightness($action['bri']);
-		if (isset($action['hue'])) {
-			$command->hue($action['hue']);
-		}
-		if (isset($action['sat'])) {
-			$command->saturation($action['sat']);
-		}
+		$data = array();
+		$data['dynamics'] = array('duration' => $action['transition'] * 1000);
+		$data['on'] = array('on' => true);
+		$data['dimming'] = array('brightness' => (int) $action['bri'] / 2.55);
 		if (isset($action['colorTemp'])) {
-			$command->colorTemp($action['colorTemp']);
+			$data['color_temperature'] = array('mirek' => (int) $action['colorTemp']);
 		}
-		$hue->sendCommand($command);
+		if (isset($action['x'])) {
+			$data['color'] = array('xy' => array('x' => $action['x'], 'y' => $action['y']));
+		}
+		log::add('philipsHue', 'debug', json_encode($data));
+		$result = $hue->light($philipsHue->getConfiguration('service_light'), $data);
+		log::add('philipsHue', 'debug', json_encode($result));
+		if (isset($result['errors']) && count($result['errors']) > 0) {
+			throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));
+		}
 		sleep($action['sleep']);
 	}
 	$philipsHue->setCache('current_animate', 0);

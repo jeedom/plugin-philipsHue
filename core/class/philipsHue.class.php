@@ -316,7 +316,6 @@ class philipsHue extends eqLogic {
 						if ($obj == null || !is_object($obj)) {
 							continue;
 						}
-						$lastupdate = 0;
 						$datetime = new \DateTime();
 						if (isset($obj->getState()->lastupdated) && $obj->getState()->lastupdated !== "none") {
 							$datetime = new \DateTime($obj->getState()->lastupdated, new \DateTimeZone("UTC"));
@@ -754,4 +753,3 @@ class philipsHueCmd extends cmd {
 
 	/*     * **********************Getteur Setteur*************************** */
 }
-?>

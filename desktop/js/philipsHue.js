@@ -15,6 +15,44 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
+
+$('#bt_touchLink').off('click').on('click', function () {
+  var inputOptions = [];
+  for(let i =1;i<= nb_philipsHue_bridge;i++){
+    inputOptions.push({value : i,text : "{{Bridge }}"+i});
+  }
+  bootbox.prompt({
+    title: "Activer le touchlink sur le pont ?",
+    value : inputOptions[0].value,
+    inputType: 'select',
+    inputOptions:inputOptions,
+    callback: function (bridge_id) {
+      if(bridge_id === null){
+        return;
+      }
+      $.ajax({
+        type: "POST",
+        url: "plugins/philipsHue/core/ajax/philipsHue.ajax.php",
+        data: {
+          action: "setTouchLink",
+          model: bridge_id,
+        },
+        dataType: 'json',
+        error: function (request, status, error) {
+          handleAjaxError(request, status, error);
+        },
+        success: function (data) {
+          if (data.state != 'ok') {
+            $('#div_alert').showAlert({message: data.result, level: 'danger'});
+            return;
+          }
+          $('#div_alert').showAlert({message: '{{Touchlink activé sur le bridge}} : '+bridge_id, level: 'success'});
+        }
+      });
+    }
+  });
+});
+
 $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').on('change', function () {
   if($('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').value() == ''){
     $('#img_device').attr("src",'plugins/philipsHue/plugin_info/philipsHue_icon.png');

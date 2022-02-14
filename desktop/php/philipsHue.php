@@ -5,31 +5,38 @@ if (!isConnect('admin')) {
 $plugin = plugin::byId('philipsHue');
 sendVarToJS('eqType', $plugin->getId());
 $eqLogics = eqLogic::byType($plugin->getId());
+
+sendVarToJS('nb_philipsHue_bridge', config::byKey('nbBridge', 'philipsHue'));
 ?>
 
 <div class="row row-overflow">
 	<div class="col-xs-12 eqLogicThumbnailDisplay">
-		<legend><i class="fas fa-cog"></i>  {{Gestion}}</legend>
+		<legend><i class="fas fa-cog"></i> {{Gestion}}</legend>
 		<div class="eqLogicThumbnailContainer">
 			<div class="cursor eqLogicAction logoPrimary" data-action="add">
 				<i class="fas fa-plus-circle"></i>
-				<br/>
+				<br />
 				<span>{{Ajouter}}</span>
 			</div>
 			<div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
 				<i class="fas fa-wrench"></i>
-				<br/>
+				<br />
 				<span>{{Configuration}}</span>
 			</div>
 			<div class="cursor logoSecondary" id="bt_syncEqLogic">
 				<i class="fas fa-sync-alt"></i>
-				<br/>
+				<br />
 				<span>{{Synchroniser}}</span>
+			</div>
+			<div class="cursor card logoSecondary" id="bt_touchLink">
+				<i class="fas fa-sign-in-alt fa-rotate-90"></i>
+				<br />
+				<span>{{Touchlink}}</span>
 			</div>
 		</div>
 		<legend><i class="far fa-lightbulb"></i> {{Mes Philips Hue}}</legend>
 		<div class="input-group" style="margin:5px;">
-			<input class="form-control roundedLeft" placeholder="{{Rechercher}}" id="in_searchEqlogic"/>
+			<input class="form-control roundedLeft" placeholder="{{Rechercher}}" id="in_searchEqlogic" />
 			<div class="input-group-btn">
 				<a id="bt_resetSearch" class="btn roundedRight" style="width:30px"><i class="fas fa-times"></i></a>
 			</div>
@@ -38,7 +45,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			<?php
 			foreach ($eqLogics as $eqLogic) {
 				$opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
-				echo '<div class="eqLogicDisplayCard cursor '.$opacity.'" data-eqLogic_id="' . $eqLogic->getId() . '">';
+				echo '<div class="eqLogicDisplayCard cursor ' . $opacity . '" data-eqLogic_id="' . $eqLogic->getId() . '">';
 				if ($eqLogic->getImgFilePath() !== false) {
 					echo '<img class="lazy" src="plugins/philipsHue/core/config/devices/' . $eqLogic->getImgFilePath() . '"/>';
 				} else {
@@ -78,11 +85,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<label class="col-sm-3 control-label">{{Nom de l'équipement}}</label>
 								<div class="col-sm-7">
 									<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
-									<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement philipsHue}}"/>
+									<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement philipsHue}}" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label" >{{Objet parent}}</label>
+								<label class="col-sm-3 control-label">{{Objet parent}}</label>
 								<div class="col-sm-7">
 									<select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
 										<option value="">{{Aucun}}</option>
@@ -111,8 +118,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<div class="form-group">
 								<label class="col-sm-3 control-label">{{Options}}</label>
 								<div class="col-sm-7">
-									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
-									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
+									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked />{{Activer}}</label>
+									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked />{{Visible}}</label>
 								</div>
 							</div>
 							<br>
@@ -141,8 +148,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<div class="col-sm-7">
 									<select class="eqLogicAttr form-control" disabled data-l1key="configuration" data-l2key="bridge">
 										<?php
-										for($i=1;$i<=config::byKey('nbBridge','philipsHue');$i++){
-											echo '<option value="'.$i.'">{{Pont}} '.$i.'</option>';
+										for ($i = 1; $i <= config::byKey('nbBridge', 'philipsHue'); $i++) {
+											echo '<option value="' . $i . '">{{Pont}} ' . $i . '</option>';
 										}
 										?>
 									</select>
@@ -158,79 +165,79 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 							<!-- </fieldset>
 						</form> -->
-					</div>
+						</div>
 
-					<div class="col-lg-6">
-						<legend><i class="fas fa-info"></i> {{Informations}}</legend>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Catégorie}}</label>
-							<div class="col-sm-7">
-								<span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="category" style="font-size : 1em"></span>
+						<div class="col-lg-6">
+							<legend><i class="fas fa-info"></i> {{Informations}}</legend>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">{{Catégorie}}</label>
+								<div class="col-sm-7">
+									<span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="category" style="font-size : 1em"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">{{Type}}</label>
+								<div class="col-sm-7">
+									<span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="type" style="font-size : 1em"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">{{Identifiant}}</label>
+								<div class="col-sm-7">
+									<span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="id" style="font-size : 1em"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">{{Nom du modèle}}</label>
+								<div class="col-sm-7">
+									<span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="modelName" style="font-size : 1em"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">{{Version du logiciel}}</label>
+								<div class="col-sm-7">
+									<span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="softwareVersion" style="font-size : 1em"></span>
+								</div>
+							</div>
+							<br>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">{{Visuel}}</label>
+								<div class="col-sm-7">
+									<center>
+										<img src="<?php echo $plugin->getPathImgIcon() ?>" data-original=".jpg" id="img_device" class="img-responsive" style="max-width:160px;" onerror="this.src='<?php echo $plugin->getPathImgIcon() ?>'" />
+									</center>
+								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Type}}</label>
-							<div class="col-sm-7">
-								<span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="type" style="font-size : 1em"></span>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Identifiant}}</label>
-							<div class="col-sm-7">
-								<span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="id" style="font-size : 1em"></span>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Nom du modèle}}</label>
-							<div class="col-sm-7">
-								<span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="modelName" style="font-size : 1em"></span>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Version du logiciel}}</label>
-							<div class="col-sm-7">
-								<span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="softwareVersion" style="font-size : 1em"></span>
-							</div>
-						</div>
-						<br>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Visuel}}</label>
-							<div class="col-sm-7">
-								<center>
-									<img src="<?php echo $plugin->getPathImgIcon() ?>" data-original=".jpg" id="img_device" class="img-responsive" style="max-width:160px;"  onerror="this.src='<?php echo $plugin->getPathImgIcon() ?>'"/>
-								</center>
-							</div>
-						</div>
-					</div>
 
-				</fieldset>
-			</form>
-			<hr>
-		</div>
+					</fieldset>
+				</form>
+				<hr>
+			</div>
 
-		<div role="tabpanel" class="tab-pane" id="commandtab">
-			<br/>
-			<div class="table-responsive">
-				<table id="table_cmd" class="table table-bordered table-condensed">
-					<thead>
-						<tr>
-							<!-- <th>{{Id}}</th> -->
-							<th>{{Nom}}</th>
-							<!-- <th>{{Type}}</th> -->
-							<th>{{Options}}</th>
-							<th>{{Paramètres}}</th>
-							<th>{{Action}}</th>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
+			<div role="tabpanel" class="tab-pane" id="commandtab">
+				<br />
+				<div class="table-responsive">
+					<table id="table_cmd" class="table table-bordered table-condensed">
+						<thead>
+							<tr>
+								<!-- <th>{{Id}}</th> -->
+								<th>{{Nom}}</th>
+								<!-- <th>{{Type}}</th> -->
+								<th>{{Options}}</th>
+								<th>{{Paramètres}}</th>
+								<th>{{Action}}</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
+
 	</div>
-
-</div>
 </div>
 
-<?php include_file('desktop', 'philipsHue', 'js', 'philipsHue');?>
-<?php include_file('core', 'plugin.template', 'js');?>
+<?php include_file('desktop', 'philipsHue', 'js', 'philipsHue'); ?>
+<?php include_file('core', 'plugin.template', 'js'); ?>

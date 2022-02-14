@@ -124,6 +124,16 @@ class philipsHue extends eqLogic {
 		}
 	}
 
+	public static function setTouchLink($_bridge_number = 1) {
+		$result = self::getPhilipsHue($_bridge_number)->sendCommand(
+			new \Phue\Command\SetBridgeConfig(
+				array(
+					'touchlink' => true
+				)
+			)
+		);
+	}
+
 	public static function syncBridge($_bridge_number = 1) {
 		try {
 			$hue = self::getPhilipsHue($_bridge_number);

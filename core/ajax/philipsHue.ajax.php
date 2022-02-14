@@ -19,31 +19,35 @@
 try {
 	require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 	include_file('core', 'authentification', 'php');
-	
+
 	if (!isConnect('admin')) {
 		throw new Exception(__('401 - Accès non autorisé', __FILE__));
 	}
-	
+
 	if (init('action') == 'syncPhilipsHue') {
-		for($i=1;$i<=config::byKey('nbBridge','philipsHue');$i++){
-			if(config::byKey('bridge_ip'.$i, 'philipsHue') == ''){
+		for ($i = 1; $i <= config::byKey('nbBridge', 'philipsHue'); $i++) {
+			if (config::byKey('bridge_ip' . $i, 'philipsHue') == '') {
 				continue;
 			}
 			philipsHue::syncBridge($i);
 		}
 		ajax::success();
 	}
-	
+
 	if (init('action') == 'getImageModel') {
 		if (file_exists(dirname(__FILE__) . '/../../core/config/devices/' . init('model') . '.png')) {
 			ajax::success(init('model') . '.png');
 		}
 		ajax::success(false);
 	}
-	
+
+	if (init('action') == 'setTouchLink') {
+		philipsHue::setTouchLink($bridge_id);
+		ajax::success(false);
+	}
+
 	throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
 	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {
 	ajax::error(displayExeption($e), $e->getCode());
 }
-?>

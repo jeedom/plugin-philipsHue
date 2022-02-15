@@ -9,6 +9,7 @@
         "Ajouter": "Hinzufügen",
         "Configuration": "Konfiguration",
         "Synchroniser": "Synchronize",
+        "Touchlink": "Link berühren",
         "Mes Philips Hue": "Mein Philips Farbton",
         "Rechercher": "Suchen nach",
         "Configuration avancée": "Erweiterte Konfiguration",
@@ -43,6 +44,8 @@
         "Action": "Aktion"
     },
     "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {
+        "Bridge ": "Brücke",
+        "Touchlink activé sur le bridge": "Touchlink auf der Bridge aktiviert",
         "Synchronisation réussie": "Erfolgreiche Synchronisation",
         "Nom": "Name",
         "Icône": "Symbol",

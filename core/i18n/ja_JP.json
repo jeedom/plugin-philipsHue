@@ -9,6 +9,7 @@
         "Ajouter": "加えます",
         "Configuration": "コンフィギュレーション",
         "Synchroniser": "同期",
+        "Touchlink": "Touchlink",
         "Mes Philips Hue": "Mes Philips Hue",
         "Rechercher": "検索",
         "Configuration avancée": "高度な構成",
@@ -43,6 +44,8 @@
         "Action": "アクション"
     },
     "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {
+        "Bridge ": "Bridge ",
+        "Touchlink activé sur le bridge": "Touchlink activé sur le bridge",
         "Synchronisation réussie": "正常な同期",
         "Nom": "表題",
         "Icône": "Icône",

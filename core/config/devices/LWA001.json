@@ -1,0 +1,92 @@
+{
+  "LWA001": {
+    "name": "Hue White Ambiance A60 E27 Bluetooth",
+    "configuration" :{
+      "gammut" : "-"
+    },
+    "commands": [
+      {
+        "name": "Etat Luminosité",
+        "type": "info",
+        "subtype": "numeric",
+        "display": {
+          "generic_type": "LIGHT_STATE"
+        },
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "luminosity_state"
+      },
+      {
+        "name": "On",
+        "type": "action",
+        "subtype": "other",
+        "display": {
+          "generic_type": "LIGHT_ON"
+        },
+        "value" : "Etat Luminosité",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "on"
+      },
+      {
+        "name": "Off",
+        "type": "action",
+        "subtype": "other",
+        "display": {
+          "generic_type": "LIGHT_OFF"
+        },
+        "value" : "Etat Luminosité",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "off"
+      },
+      {
+        "name": "Luminosité",
+        "type": "action",
+        "subtype": "slider",
+        "display": {
+          "generic_type": "LIGHT_SLIDER"
+        },
+        "configuration" :{
+          "minValue" : 0,
+          "maxValue" : 255
+        },
+        "template":{
+          "dashboard" : "light",
+          "mobile" : "light"
+        },
+        "value" : "Etat Luminosité",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "luminosity"
+      },
+      {
+        "name": "Transition status",
+        "type": "info",
+        "subtype": "numeric",
+        "display": {
+          "generic_type": "DONT"
+        },
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "transition_state"
+      },
+      {
+        "name": "Transition",
+        "type": "action",
+        "subtype": "slider",
+        "display": {
+          "generic_type": "DONT"
+        },
+        "configuration" :{
+          "minValue" : 0,
+          "maxValue" : 1800
+        },
+        "value" : "Transition status",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "transition"
+      }
+    ]
+  }
+}

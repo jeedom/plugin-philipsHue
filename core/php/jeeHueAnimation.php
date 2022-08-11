@@ -98,8 +98,8 @@ try {
 					$duration = $sun_info['transit'] - $starttime;
 					$color_temp = $max_color_temp;
 					$brightness = $max_brightness;
-					if ($duration > 6500) {
-						$duration = 6500;
+					if ($duration > 6000) {
+						$duration = 6000;
 						$percent = (($starttime + $duration) - strtotime('now')) / ($sun_info['transit'] - strtotime('now'));
 						$color_temp = intval((1 - $percent) * ($prev_temp - $color_temp) + $color_temp);
 						$brightness = intval((1 - $percent) * ($prev_brightness - $brightness) + $brightness);
@@ -120,8 +120,8 @@ try {
 					$duration = $sun_info['sunset'] - $starttime;
 					$color_temp = $min_color_temp;
 					$brightness = $min_brightness;
-					if ($duration > 6500) {
-						$duration = 6500;
+					if ($duration > 6000) {
+						$duration = 6000;
 						$percent = (($starttime + $duration) - strtotime('now')) / ($sun_info['sunset'] - strtotime('now'));
 						$color_temp = intval((1 - $percent) * ($prev_temp - $color_temp) + $color_temp);
 						$brightness = intval((1 - $percent) * ($prev_brightness - $brightness) + $brightness);

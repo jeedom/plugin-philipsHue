@@ -25,7 +25,6 @@ class philipsHue extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
 	private static $_hue = array();
-	private static $_eqLogics = null;
 	public static $_encryptConfigKey = array('bridge_username1', 'bridge_username2');
 
 	/*     * ***********************Methode static*************************** */
@@ -166,23 +165,7 @@ class philipsHue extends eqLogic {
 			$eqLogic->save();
 		}
 
-		$eqLogic = self::byLogicalId('group0-' . $_bridge_number, 'philipsHue');
-		if (!is_object($eqLogic)) {
-			$eqLogic = new self();
-			$eqLogic->setLogicalId('group0-' . $_bridge_number);
-			$eqLogic->setName(__('Toute les lampes', __FILE__));
-			$eqLogic->setEqType_name('philipsHue');
-			$eqLogic->setConfiguration('device', 'GROUP0');
-			$eqLogic->setIsVisible(1);
-			$eqLogic->setIsEnable(1);
-		}
-		$eqLogic->setConfiguration('bridge', $_bridge_number);
-		$eqLogic->setConfiguration('category', 'group');
-		$eqLogic->setConfiguration('id', 0);
-		$eqLogic->save();
-
 		$groups = $hue->grouped_light();
-
 		foreach ($groups['data'] as $group) {
 			log::add('philipsHue', 'debug', 'Found group ' . $group['id'] . ' => ' . json_encode($group));
 			$eqLogic = self::byLogicalId($group['id'], 'philipsHue');
@@ -213,12 +196,12 @@ class philipsHue extends eqLogic {
 	public static function syncState($_bridge_number = 1, $_data = null) {
 		$hue = self::getPhilipsHue($_bridge_number);
 		if ($_data == null) {
-			log::add('philipsHue', 'debug', 'Full sync');
 			$lights = $hue->light();
 		} else {
 			log::add('philipsHue', 'debug', 'Event sync : ' . json_encode($_data));
 			$lights = array('data' => $_data);
 		}
+
 		foreach ($lights['data'] as $light) {
 			$eqLogic = self::byLogicalId($light['owner']['rid'], 'philipsHue');
 			if (!is_object($eqLogic) || $eqLogic->getIsEnable() == 0) {
@@ -245,172 +228,6 @@ class philipsHue extends eqLogic {
 		}
 	}
 
-	public static function sanitizeSensors($_sensors) {
-		$return = array();
-		foreach ($_sensors as $id => $sensor) {
-			$unique_id = explode('-', $sensor->getUniqueId())[0];
-			if ($unique_id == '') {
-				$unique_id = $id;
-			}
-			if (!isset($return[$unique_id])) {
-				$return[$unique_id] = array();
-			}
-			$return[$unique_id][$id] = $sensor;
-		}
-		return $return;
-	}
-
-	public static function pullBridge_old($_bridge_number, $_eqLogic_id = null) {
-		try {
-			$hue = philipsHue::getPhilipsHue($_bridge_number);
-		} catch (Exception $e) {
-			return;
-		}
-		$retry = 0;
-		while (true) {
-			try {
-				$groups = $hue->getgroups();
-				$lights = $hue->getLights();
-				$sensors = self::sanitizeSensors($hue->getSensors());
-				break;
-			} catch (Exception $e) {
-				$retry++;
-				if ($retry > 30) {
-					throw $e;
-				}
-				sleep(5);
-			}
-		}
-		if (self::$_eqLogics == null) {
-			self::$_eqLogics = self::byType('philipsHue', true);
-		}
-		$timezone = config::byKey('timezone', 'core', 'Europe/Brussels');
-		foreach (self::$_eqLogics as &$eqLogic) {
-			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
-				continue;
-			}
-			if ($eqLogic->getIsEnable() == 0 || $eqLogic->getConfiguration('bridge') != $_bridge_number || $eqLogic->getLogicalId() == 'group0-' . $_bridge_number) {
-				continue;
-			}
-			$isReachable = true;
-			try {
-				if ($eqLogic->getConfiguration('category') == 'sensor') {
-					$sensor = $sensors[$eqLogic->getConfiguration('id')];
-					foreach ($sensor as $id => $obj) {
-						if ($obj == null || !is_object($obj)) {
-							continue;
-						}
-						$lastupdate = 0;
-						$datetime = new \DateTime();
-						if (isset($obj->getState()->lastupdated) && $obj->getState()->lastupdated !== "none") {
-							$datetime = new \DateTime($obj->getState()->lastupdated, new \DateTimeZone("UTC"));
-							$datetime->setTimezone(new \DateTimezone($timezone));
-						}
-						foreach ($obj->getState() as $key => $value) {
-							if ($key == 'lastupdated' || $value === '' || $value === null) {
-								continue;
-							}
-							$cmd = $eqLogic->getCmd('info', $key);
-							if (!is_object($cmd)) {
-								continue;
-							}
-							if ($cmd->getConfiguration('onType') != '' && $cmd->getConfiguration('onType') != $obj->getType()) {
-								continue;
-							}
-							if ($key == 'temperature') {
-								$value = $value / 100;
-							} else if ($key == 'buttonevent') {
-								switch ($value) {
-									case 34:
-										$value = 1;
-										break;
-									case 16:
-										$value = 2;
-										break;
-									case 17:
-										$value = 3;
-										break;
-									case 18:
-										$value = 4;
-										break;
-								}
-							}
-							$eqLogic->checkAndUpdateCmd($key, $value, $datetime->format('Y-m-d H:i:s'));
-						}
-						foreach ($obj->getConfig() as $key => $value) {
-							if ($value === '' || $value === null) {
-								continue;
-							}
-							if ($key == 'battery') {
-								$eqLogic->batteryStatus($value);
-								continue;
-							}
-							$cmd = $eqLogic->getCmd('info', $key);
-							if (!is_object($cmd)) {
-								continue;
-							}
-							if ($cmd->getConfiguration('onType') != '' && $cmd->getConfiguration('onType') != $obj->getType()) {
-								continue;
-							}
-							$eqLogic->checkAndUpdateCmd($cmd, $value, false);
-						}
-					}
-				} else {
-					switch ($eqLogic->getConfiguration('category')) {
-						case 'light':
-							$obj = $lights[$eqLogic->getConfiguration('id')];
-							if ($obj == null || !is_object($obj)) {
-								break;
-							}
-							$isReachable = ($eqLogic->getConfiguration('alwaysOn', 0) == 0) ? $obj->isReachable() : true;
-							$eqLogic->checkAndUpdateCmd('isReachable', $obj->isReachable(), false);
-							break;
-						case 'group':
-							$obj = $groups[$eqLogic->getConfiguration('id')];
-							break;
-					}
-					if ($obj === null || !is_object($obj)) {
-						continue;
-					}
-					if (!$isReachable || !$obj->isOn()) {
-						$luminosity = 0;
-						$color = '#000000';
-					} else {
-						$luminosity = $obj->getBrightness();
-						if (is_object($eqLogic->getCmd('info', 'color_state'))) {
-							$rgb = $obj->getRGB();
-							$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
-							if (!is_nan($rgb['red']) && !is_nan($rgb['green']) && !is_nan($rgb['blue']) && $color == '#000000') {
-								$luminosity = 0;
-							}
-						}
-					}
-					$eqLogic->checkAndUpdateCmd('luminosity_state', $luminosity, false);
-					$eqLogic->checkAndUpdateCmd('state', $obj->isOn(), false);
-					$eqLogic->checkAndUpdateCmd('color_state', $color, false);
-					$cmd = $eqLogic->getCmd('info', 'alert_state');
-					if (is_object($cmd)) {
-						$value = (!$isReachable || $obj->getAlert() == "none") ? 0 : 1;
-						$eqLogic->checkAndUpdateCmd($cmd, $value, false);
-					}
-					if ($eqLogic->getConfiguration('category') != 'group') {
-						$cmd = $eqLogic->getCmd('info', 'rainbow_state');
-						if (is_object($cmd)) {
-							$value = (!$isReachable || $obj->getEffect() == "none") ? 0 : 1;
-							$eqLogic->checkAndUpdateCmd($cmd, $value, false);
-						}
-					}
-					$cmd = $eqLogic->getCmd('info', 'color_temp_state');
-					if (is_object($cmd)) {
-						$eqLogic->checkAndUpdateCmd($cmd, $obj->getColorTemp(), false);
-					}
-				}
-			} catch (Exception $e) {
-				log::add('philipsHue', 'error', $e->getMessage());
-			}
-		}
-	}
-
 	public static function pull() {
 		$enable_bridge = array();
 		for ($i = 1; $i <= config::byKey('nbBridge', 'philipsHue'); $i++) {
@@ -422,24 +239,8 @@ class philipsHue extends eqLogic {
 		if (count($enable_bridge) == 0) {
 			return;
 		}
-		if (count($enable_bridge) == 1) {
-			foreach ($enable_bridge as $bridge_number) {
-				$hue = philipsHue::getPhilipsHue($bridge_number);
-				self::syncState($bridge_number);
-				while (true) {
-					try {
-						$data = $hue->event();
-						if (isset($data[0])) {
-							self::syncState($bridge_number);
-						}
-					} catch (\Throwable $th) {
-					}
-				}
-			}
-		} else {
-			foreach ($enable_bridge as $bridge_number) {
-				self::syncState($bridge_number);
-			}
+		foreach ($enable_bridge as $bridge_number) {
+			self::syncState($bridge_number);
 		}
 	}
 
@@ -567,37 +368,7 @@ class philipsHueCmd extends cmd {
 		}
 		$eqLogic = $this->getEqLogic();
 		$hue = philipsHue::getPhilipsHue($eqLogic->getConfiguration('bridge'));
-		if ($eqLogic->getConfiguration('category') == 'sensor') {
-			$sensors = philipsHue::sanitizeSensors($hue->getSensors());
-			if (!isset($sensors[$eqLogic->getConfiguration('id')])) {
-				return;
-			}
-			$sensor = $sensors[$eqLogic->getConfiguration('id')];
-			foreach ($sensor as $mine) {
-				foreach ($this->getConfiguration('toUpdate') as $value) {
-					if (isset($value['onType']) && $value['onType'] != $mine->getType()) {
-						continue;
-					}
-					$toSet = $value['value'];
-					if (isset($value['valueType'])) {
-						switch ($value['valueType']) {
-							case 'boolean':
-								$toSet = (bool) $value['value'];
-								break;
-							case 'int':
-								$toSet = (int) $value['value'];
-								break;
-						}
-					}
-					if ($value['type'] == 'config') {
-						$command = new \Phue\Command\UpdateSensorConfig($mine);
-						$command = $command->configAttribute($value['key'], $toSet);
-						$hue->sendCommand($command);
-					}
-				}
-			}
-			return;
-		}
+
 		$transition = $eqLogic->getCmd(null, 'transition_state');
 		$transistion_time = 0;
 		if (is_object($transition)) {

@@ -170,14 +170,27 @@ class pHueApi {
         if ($_data == null) {
             return $this->request('/clip/v2/resource/light/' . $_id);
         }
-        if (isset($_data['dynamics']['duration']) && $_data['dynamics']['duration'] > 65535) {
-            $_data['dynamics']['duration'] = 65535;
+        if (isset($_data['dynamics']['duration']) && $_data['dynamics']['duration'] > 6000000) {
+            $_data['dynamics']['duration'] = 6000000;
         }
         return $this->request('/clip/v2/resource/light/' . $_id, 'PUT', json_encode($_data));
     }
 
-    public function grouped_light() {
-        return $this->request('/clip/v2/resource/grouped_light');
+    public function grouped_light($_id = null, $_data = null) {
+        if ($_id == null) {
+            return $this->request('/clip/v2/resource/grouped_light');
+        }
+        if ($_data == null) {
+            return $this->request('/clip/v2/resource/grouped_light/' . $_id);
+        }
+        if (isset($_data['dynamics']['duration']) && $_data['dynamics']['duration'] > 6000000) {
+            $_data['dynamics']['duration'] = 6000000;
+        }
+        return $this->request('/clip/v2/resource/grouped_light/' . $_id, 'PUT', json_encode($_data));
+    }
+
+    public function room() {
+        return $this->request('/clip/v2/resource/room');
     }
 
     public function event() {

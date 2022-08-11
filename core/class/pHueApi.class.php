@@ -170,6 +170,9 @@ class pHueApi {
         if ($_data == null) {
             return $this->request('/clip/v2/resource/light/' . $_id);
         }
+        if (isset($_data['dynamics']['duration']) && $_data['dynamics']['duration'] > 65535) {
+            $_data['dynamics']['duration'] = 65535;
+        }
         return $this->request('/clip/v2/resource/light/' . $_id, 'PUT', json_encode($_data));
     }
 

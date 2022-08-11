@@ -126,11 +126,11 @@ class philipsHue extends eqLogic {
 		foreach ($devices['data'] as $device) {
 			$type = $device['services'][0]['rtype'];
 			$modelId = $device['product_data']['model_id'];
-			log::add('philipsHue', 'debug', 'Found device type ' . $type . ' model : ' . $modelId);
+			log::add('philipsHue', 'debug', 'Found device type ' . $type . ' model : ' . $modelId . ' => ' . json_encode($device));
 			if (count(self::devicesParameters($modelId)) == 0) {
-				log::add('philipsHue', 'debug', 'No configuration found for device : ' . $modelId . ' => ' . json_encode(utils::o2a($device)));
+				log::add('philipsHue', 'warning', 'No configuration found for device : ' . $modelId . ' => ' . json_encode($device));
 				$modelId = 'default_color';
-				log::add('philipsHue', 'debug', 'Use generic configuration : ' . $modelId);
+				log::add('philipsHue', 'warning', 'Use generic configuration : ' . $modelId);
 			}
 			$id = $device['id'];
 			$eqLogic = self::byLogicalId($id, 'philipsHue');
@@ -144,7 +144,11 @@ class philipsHue extends eqLogic {
 			if (!is_object($eqLogic)) {
 				$eqLogic = new self();
 				$eqLogic->setLogicalId($id);
-				$eqLogic->setName($device['metadata']['name']);
+				if (!isset($device['metadata']['name']) || $device['metadata']['name'] == '') {
+					$eqLogic->setName($id);
+				} else {
+					$eqLogic->setName($device['metadata']['name']);
+				}
 				$eqLogic->setEqType_name('philipsHue');
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
@@ -180,19 +184,19 @@ class philipsHue extends eqLogic {
 		$groups = $hue->grouped_light();
 
 		foreach ($groups['data'] as $group) {
-			$id = $group['id'];
-			$eqLogic = self::byLogicalId($id, 'philipsHue');
+			log::add('philipsHue', 'debug', 'Found group ' . $group['id'] . ' => ' . json_encode($group));
+			$eqLogic = self::byLogicalId($group['id'], 'philipsHue');
 			if (!is_object($eqLogic)) {
 				$eqLogic = self::byLogicalId('group' . str_replace(array('/groups/'), '', $group['id_v1']) . '-' . $_bridge_number, 'philipsHue');
 				if (is_object($eqLogic)) {
-					$eqLogic->setLogicalId($id);
+					$eqLogic->setLogicalId($group['id']);
 					$eqLogic->save();
 				}
 			}
 			if (!is_object($eqLogic)) {
 				$eqLogic = new self();
-				$eqLogic->setLogicalId($id);
-				$eqLogic->setName($group['']);
+				$eqLogic->setLogicalId($group['id']);
+				$eqLogic->setName($group['id']);
 				$eqLogic->setEqType_name('philipsHue');
 				$eqLogic->setIsVisible(0);
 				$eqLogic->setIsEnable(1);
@@ -200,7 +204,7 @@ class philipsHue extends eqLogic {
 			$eqLogic->setConfiguration('bridge', $_bridge_number);
 			$eqLogic->setConfiguration('device', 'GROUP');
 			$eqLogic->setConfiguration('category', 'group');
-			$eqLogic->setConfiguration('id', $id);
+			$eqLogic->setConfiguration('id', $group['id']);
 			$eqLogic->save();
 		}
 		self::deamon_start();
@@ -639,6 +643,7 @@ class philipsHueCmd extends cmd {
 				}
 				break;
 		}
+		log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_light') . ' => ' . json_encode($data));
 		$result = $hue->light($eqLogic->getConfiguration('service_light'), $data);
 		if (isset($result['errors']) && count($result['errors']) > 0) {
 			throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));

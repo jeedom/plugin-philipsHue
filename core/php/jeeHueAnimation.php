@@ -142,20 +142,21 @@ try {
 	}
 	$hue = philipsHue::getPhilipsHue();
 	foreach ($scenario as $action) {
-		log::add('philipsHue', 'debug', __('Lancement de ', __FILE__) . print_r($action, true));
+		log::add('philipsHue', 'debug', __('Execution de ', __FILE__) . json_encode($action));
 		$data = array();
-		$data['dynamics'] = array('duration' => $action['transition'] * 1000);
+		if ($action['transition'] > 0) {
+			$data['dynamics'] = array('duration' => $action['transition'] * 1000);
+		}
 		$data['on'] = array('on' => true);
-		$data['dimming'] = array('brightness' => (int) $action['bri'] / 2.55);
+		$data['dimming'] = array('brightness' => (int) $action['bri']);
 		if (isset($action['colorTemp'])) {
 			$data['color_temperature'] = array('mirek' => (int) $action['colorTemp']);
 		}
 		if (isset($action['x'])) {
 			$data['color'] = array('xy' => array('x' => $action['x'], 'y' => $action['y']));
 		}
-		log::add('philipsHue', 'debug', json_encode($data));
+		log::add('philipsHue', 'debug', $philipsHue->getConfiguration('service_light') . ' => ' . json_encode($data));
 		$result = $hue->light($philipsHue->getConfiguration('service_light'), $data);
-		log::add('philipsHue', 'debug', json_encode($result));
 		if (isset($result['errors']) && count($result['errors']) > 0) {
 			throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));
 		}

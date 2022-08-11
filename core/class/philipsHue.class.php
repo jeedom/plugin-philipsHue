@@ -125,6 +125,9 @@ class philipsHue extends eqLogic {
 	}
 
 	public static function setTouchLink($_bridge_number = 1) {
+		if ($_bridge_number == NULL) {
+			throw new Exception(__('Numéro de pont invalide : ', __FILE__) . $_bridge_number);
+		}
 		$result = self::getPhilipsHue($_bridge_number)->sendCommand(
 			new \Phue\Command\SetBridgeConfig(
 				array(

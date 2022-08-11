@@ -212,10 +212,8 @@ class philipsHue extends eqLogic {
 	public static function syncState($_bridge_number = 1, $_data = null) {
 		$hue = self::getPhilipsHue($_bridge_number);
 		if ($_data == null) {
-			log::add('philipsHue', 'debug', 'Full sync');
 			$lights = $hue->light();
 		} else {
-			log::add('philipsHue', 'debug', 'Event sync on bridge ' . $_bridge_number . ' => ' . json_encode($_data));
 			$lights = $_data;
 		}
 		foreach ($lights['data'] as $light) {
@@ -223,7 +221,6 @@ class philipsHue extends eqLogic {
 			if (!is_object($eqLogic) || $eqLogic->getIsEnable() == 0) {
 				continue;
 			}
-			log::add('philipsHue', 'debug', json_encode($light));
 			if (isset($light['on']['on'])) {
 				$eqLogic->checkAndUpdateCmd('state', $light['on']['on'], false);
 				if (!$light['on']['on']) {

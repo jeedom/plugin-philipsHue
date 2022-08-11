@@ -31,55 +31,71 @@ class philipsHue extends eqLogic {
 
 	public static function deamon_info() {
 		$return = array();
-		$return['log'] = '';
+		$return['log'] = 'philipsHue';
 		$return['state'] = 'nok';
-		$cron = cron::byClassAndFunction('philipsHue', 'pull');
-		if (is_object($cron) && $cron->running()) {
-			$return['state'] = 'ok';
+		$pid_file = jeedom::getTmpFolder('philipsHue') . '/deamon.pid';
+		if (file_exists($pid_file)) {
+			if (@posix_getsid(trim(file_get_contents($pid_file)))) {
+				$return['state'] = 'ok';
+			} else {
+				shell_exec(system::getCmdSudo() . 'rm -rf ' . $pid_file . ' 2>&1 > /dev/null');
+			}
 		}
 		$return['launchable'] = 'ok';
 		return $return;
 	}
 
-	public static function deamon_start($_debug = false) {
+	public static function deamon_start() {
+		log::remove(__CLASS__ . '_update');
 		self::deamon_stop();
 		$deamon_info = self::deamon_info();
 		if ($deamon_info['launchable'] != 'ok') {
 			throw new Exception(__('Veuillez vérifier la configuration', __FILE__));
 		}
-		$cron = cron::byClassAndFunction('philipsHue', 'pull');
-		if (!is_object($cron)) {
-			throw new Exception(__('Tâche cron introuvable', __FILE__));
+		$philipsHue_path = realpath(dirname(__FILE__) . '/../../resources/philipsHued');
+		chdir($philipsHue_path);
+		$cmd = 'sudo /usr/bin/node ' . $philipsHue_path . '/philipsHued.js';
+		$cmd .= ' --loglevel ' . log::convertLogLevel(log::getLogLevel('philipsHue'));
+		$cmd .= ' --socketport ' . config::byKey('socketport', 'philipsHue');
+		$cmd .= ' --callback ' . network::getNetworkAccess('internal', 'proto:127.0.0.1:port:comp') . '/plugins/philipsHue/core/php/jeephilipsHue.php';
+		$cmd .= ' --apikey ' . jeedom::getApiKey('philipsHue');
+		$cmd .= ' --cycle ' . config::byKey('cycle', 'philipsHue');
+		$cmd .= ' --pid ' . jeedom::getTmpFolder('philipsHue') . '/deamon.pid';
+		$bridges = array();
+		for ($i = 1; $i <= config::byKey('nbBridge', 'philipsHue'); $i++) {
+			if (config::byKey('bridge_ip' . $i, 'philipsHue') == '') {
+				continue;
+			}
+			$bridges[$i] = array('ip' => config::byKey('bridge_ip' . $i, 'philipsHue'), 'key' => config::byKey('bridge_username' . $i, 'philipsHue', 'newdeveloper'));
 		}
-		$cron->run();
+		$cmd .= ' --bridges ' . escapeshellarg(json_encode($bridges));
+		log::add('philipsHue', 'info', 'Lancement démon philipsHue : ' . $cmd);
+		$result = exec($cmd . ' >> ' . log::getPathToLog('philipsHued') . ' 2>&1 &');
+		$i = 0;
+		while ($i < 15) {
+			$deamon_info = self::deamon_info();
+			if ($deamon_info['state'] == 'ok') {
+				break;
+			}
+			sleep(1);
+			$i++;
+		}
+		if ($i >= 14) {
+			log::add('philipsHue', 'error', 'Impossible de lancer le démon philipsHued, vérifiez le log', 'unableStartDeamon');
+			return false;
+		}
+		message::removeAll('philipsHue', 'unableStartDeamon');
+		return true;
 	}
 
 	public static function deamon_stop() {
-		$cron = cron::byClassAndFunction('philipsHue', 'pull');
-		if (!is_object($cron)) {
-			throw new Exception(__('Tâche cron introuvable', __FILE__));
+		$pid_file = jeedom::getTmpFolder('philipsHue') . '/deamon.pid';
+		if (file_exists($pid_file)) {
+			$pid = intval(trim(file_get_contents($pid_file)));
+			system::kill($pid);
 		}
-		$cron->halt();
-	}
-
-	public static function deamon_changeAutoMode($_mode) {
-		$cron = cron::byClassAndFunction('philipsHue', 'pull');
-		if (!is_object($cron)) {
-			throw new Exception(__('Tâche cron introuvable', __FILE__));
-		}
-		$cron->setEnable($_mode);
-		$cron->save();
-	}
-
-	public static function cronDaily() {
-		try {
-			if (date('i') == 0 && date('s') < 10) {
-				sleep(10);
-			}
-			$plugin = plugin::byId(__CLASS__);
-			$plugin->deamon_start(true);
-		} catch (\Exception $e) {
-		}
+		system::kill('philipsHued.js');
+		system::fuserk(config::byKey('socketport', 'philipsHue'));
 	}
 
 	public static function getPhilipsHue($_bridge_number = 1) {
@@ -196,12 +212,12 @@ class philipsHue extends eqLogic {
 	public static function syncState($_bridge_number = 1, $_data = null) {
 		$hue = self::getPhilipsHue($_bridge_number);
 		if ($_data == null) {
+			log::add('philipsHue', 'debug', 'Full sync');
 			$lights = $hue->light();
 		} else {
-			log::add('philipsHue', 'debug', 'Event sync : ' . json_encode($_data));
-			$lights = array('data' => $_data);
+			log::add('philipsHue', 'debug', 'Event sync on bridge ' . $_bridge_number . ' => ' . json_encode($_data));
+			$lights = $_data;
 		}
-
 		foreach ($lights['data'] as $light) {
 			$eqLogic = self::byLogicalId($light['owner']['rid'], 'philipsHue');
 			if (!is_object($eqLogic) || $eqLogic->getIsEnable() == 0) {
@@ -225,22 +241,6 @@ class philipsHue extends eqLogic {
 				$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
 				$eqLogic->checkAndUpdateCmd('color_state', $color, false);
 			}
-		}
-	}
-
-	public static function pull() {
-		$enable_bridge = array();
-		for ($i = 1; $i <= config::byKey('nbBridge', 'philipsHue'); $i++) {
-			if (config::byKey('bridge_ip' . $i, 'philipsHue') == '') {
-				continue;
-			}
-			$enable_bridge[] = $i;
-		}
-		if (count($enable_bridge) == 0) {
-			return;
-		}
-		foreach ($enable_bridge as $bridge_number) {
-			self::syncState($bridge_number);
 		}
 	}
 

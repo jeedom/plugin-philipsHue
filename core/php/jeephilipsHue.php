@@ -16,17 +16,23 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
-require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
+require_once dirname(__FILE__) . "/../../../../core/php/core.inc.php";
 
-function philipsHue_install() {
+if (!jeedom::apiAccess(init('apikey'), 'philipsHue')) {
+    echo __('Vous n\'etes pas autorisé à effectuer cette action', __FILE__);
+    die();
 }
 
-function philipsHue_update() {
-	$cron = cron::byClassAndFunction('philipsHue', 'pull');
-	if (is_object($cron)) {
-		$cron->remove();
-	}
+if (init('test') != '') {
+    echo 'OK';
+    die();
 }
-
-function philipsHue_remove() {
+$result = json_decode(file_get_contents("php://input"), true);
+log::add('philipsHue', 'debug', 'Received message : ' . json_encode($result));
+foreach ($result['bridge'] as $i => $datas) {
+    $data = array('data' => array());
+    foreach (json_decode($datas, true) as $info) {
+        $data['data'][] = $info['data'][0];
+    }
+    philipsHue::syncState($i, $data);
 }

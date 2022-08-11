@@ -1,0 +1,14 @@
+{
+  "name": "philipsHued",
+  "version": "1.0.1",
+  "description": "Jeedom hue",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "request": "^2.81.0",
+    "fs": "0.0.1-security",
+    "eventsource" : "2.0.2",
+    "express": "^4.17.1"
+  }
+}

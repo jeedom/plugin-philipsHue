@@ -9,6 +9,7 @@
         "Ajouter": "Tambahan",
         "Configuration": "Konfigurasi",
         "Synchroniser": "Menyinkronkan",
+        "Touchlink": "Touchlink",
         "Mes Philips Hue": "Mes Philips Hue",
         "Rechercher": "Pencarian",
         "Configuration avancée": "Konfigurasi lanjutan",
@@ -43,6 +44,8 @@
         "Action": "Tindakan"
     },
     "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {
+        "Bridge ": "Bridge ",
+        "Touchlink activé sur le bridge": "Touchlink activé sur le bridge",
         "Synchronisation réussie": "Sinkronisasi berhasil",
         "Nom": "Nama",
         "Icône": "Icône",

@@ -9,6 +9,7 @@
         "Ajouter": "Ekle",
         "Configuration": "Ayar",
         "Synchroniser": "Senkeronize et",
+        "Touchlink": "Touchlink",
         "Mes Philips Hue": "Mes Philips Hue",
         "Rechercher": "Arayın",
         "Configuration avancée": "Gelişmiş ayarlar",
@@ -43,6 +44,8 @@
         "Action": "Eylem"
     },
     "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {
+        "Bridge ": "Bridge ",
+        "Touchlink activé sur le bridge": "Touchlink activé sur le bridge",
         "Synchronisation réussie": "Sekronizasyon başarılı",
         "Nom": "İsim",
         "Icône": "Icône",

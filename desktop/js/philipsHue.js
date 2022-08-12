@@ -63,6 +63,7 @@ $('#bt_syncEqLogic').off('click').on('click',function(){
         return;
       }
       $('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'});
+      window.location.reload();
     }
   });
 })

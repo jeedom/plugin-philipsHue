@@ -189,8 +189,14 @@ class pHueApi {
         return $this->request('/clip/v2/resource/grouped_light/' . $_id, 'PUT', json_encode($_data));
     }
 
-    public function room() {
-        return $this->request('/clip/v2/resource/room');
+    public function room($_id = null, $_data = null) {
+        if ($_id == null) {
+            return $this->request('/clip/v2/resource/room');
+        }
+        if ($_data == null) {
+            return $this->request('/clip/v2/resource/room/' . $_id);
+        }
+        return $this->request('/clip/v2/resource/room/' . $_id, 'PUT', json_encode($_data));
     }
 
     public function event() {

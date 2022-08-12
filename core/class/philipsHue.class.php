@@ -181,29 +181,32 @@ class philipsHue extends eqLogic {
 			$eqLogic->save();
 		}
 
-		$groups = $hue->grouped_light();
-		foreach ($groups['data'] as $group) {
-			log::add('philipsHue', 'debug', 'Found group ' . $group['id'] . ' => ' . json_encode($group));
-			$eqLogic = self::byLogicalId($group['id'], 'philipsHue');
+		$rooms = $hue->room();
+		foreach ($rooms['data'] as $room) {
+			log::add('philipsHue', 'debug', 'Found room ' . $room['id'] . ' => ' . json_encode($room));
+			$eqLogic = self::byLogicalId($room['id'], 'philipsHue');
 			if (!is_object($eqLogic)) {
-				$eqLogic = self::byLogicalId('group' . str_replace(array('/groups/'), '', $group['id_v1']) . '-' . $_bridge_number, 'philipsHue');
+				$eqLogic = self::byLogicalId('group' . str_replace(array('/groups/'), '', $room['id_v1']) . '-' . $_bridge_number, 'philipsHue');
 				if (is_object($eqLogic)) {
-					$eqLogic->setLogicalId($group['id']);
+					$eqLogic->setLogicalId($room['id']);
 					$eqLogic->save();
 				}
 			}
 			if (!is_object($eqLogic)) {
 				$eqLogic = new self();
-				$eqLogic->setLogicalId($group['id']);
-				$eqLogic->setName($group['id']);
+				$eqLogic->setLogicalId($room['id']);
+				$eqLogic->setName($room['metadata']['name']);
 				$eqLogic->setEqType_name('philipsHue');
 				$eqLogic->setIsVisible(0);
 				$eqLogic->setIsEnable(1);
 			}
+			foreach ($room['services'] as $service) {
+				$eqLogic->setConfiguration('service_' . $service['rtype'], $service['rid']);
+			}
 			$eqLogic->setConfiguration('bridge', $_bridge_number);
-			$eqLogic->setConfiguration('device', 'GROUP');
-			$eqLogic->setConfiguration('category', 'group');
-			$eqLogic->setConfiguration('id', $group['id']);
+			$eqLogic->setConfiguration('device', 'ROOM');
+			$eqLogic->setConfiguration('category', 'room');
+			$eqLogic->setConfiguration('id', $room['id']);
 			$eqLogic->save();
 		}
 		self::deamon_start();
@@ -365,7 +368,6 @@ class philipsHueCmd extends cmd {
 		}
 		$eqLogic = $this->getEqLogic();
 		$hue = philipsHue::getPhilipsHue($eqLogic->getConfiguration('bridge'));
-
 		$transition = $eqLogic->getCmd(null, 'transition_state');
 		$transistion_time = 0;
 		if (is_object($transition)) {
@@ -376,7 +378,6 @@ class philipsHueCmd extends cmd {
 		}
 		$transistion_time = ($transistion_time == 0) ? 0 : $transistion_time * 1000;
 		$data = array();
-
 		if ($this->getLogicalId() != 'off') {
 			$data['dynamics'] = array('duration' => $transistion_time);
 			$data['on'] = array('on' => true);
@@ -411,8 +412,13 @@ class philipsHueCmd extends cmd {
 				}
 				break;
 		}
-		log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_light') . ' => ' . json_encode($data));
-		$result = $hue->light($eqLogic->getConfiguration('service_light'), $data);
+		if ($eqLogic->getConfiguration('category') == 'light') {
+			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_light') . ' => ' . json_encode($data));
+			$result = $hue->light($eqLogic->getConfiguration('service_light'), $data);
+		} else if ($eqLogic->getConfiguration('category') == 'room') {
+			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_grouped_light') . ' => ' . json_encode($data));
+			$result = $hue->grouped_light($eqLogic->getConfiguration('service_grouped_light'), $data);
+		}
 		usleep(100000);
 		if (isset($result['errors']) && count($result['errors']) > 0) {
 			throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));

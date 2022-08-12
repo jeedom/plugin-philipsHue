@@ -1,6 +1,6 @@
 {
-  "GROUP": {
-    "name": "Groupe",
+  "ROOM": {
+    "name": "Piece",
     "commands": [
       {
         "name": "Etat Luminosité",
@@ -112,92 +112,6 @@
         "logicalId": "color_temp"
       },
       {
-        "name": "Etat Alerte",
-        "type": "info",
-        "subtype": "binary",
-        "display": {
-          "generic_type": "DONT"
-        },
-        "isVisible": 0,
-        "isHistorized": 0,
-        "logicalId": "alert_state"
-      },
-      {
-        "name": "Alerte On",
-        "type": "action",
-        "subtype": "other",
-        "display": {
-          "generic_type": "LIGHT_MODE"
-        },
-        "template":{
-          "dashboard" : "btnAlert",
-          "mobile" : "alert"
-        },
-        "value" : "Etat Alerte",
-        "isVisible": 0,
-        "isHistorized": 0,
-        "logicalId": "alert_on"
-      },
-      {
-        "name": "Alerte Off",
-        "type": "action",
-        "subtype": "other",
-        "display": {
-          "generic_type": "LIGHT_MODE"
-        },
-        "template":{
-          "dashboard" : "btnAlert",
-          "mobile" : "alert"
-        },
-        "value" : "Etat Alerte",
-        "isVisible": 0,
-        "isHistorized": 0,
-        "logicalId": "alert_off"
-      },
-      {
-        "name": "Etat Arc en ciel",
-        "type": "info",
-        "subtype": "binary",
-        "display": {
-          "generic_type": "DONT"
-        },
-        "isVisible": 0,
-        "isHistorized": 0,
-        "logicalId": "rainbow_state"
-      },
-      {
-        "name": "Arc en ciel On",
-        "type": "action",
-        "subtype": "other",
-        "display": {
-          "generic_type": "LIGHT_MODE"
-        },
-        "template":{
-          "dashboard" : "btnCircle",
-          "mobile" : "circle"
-        },
-        "value" : "Etat Arc en ciel",
-        "isVisible": 0,
-        "isHistorized": 0,
-        "logicalId": "rainbow_on"
-      },
-      {
-        "name": "Arc en ciel Off",
-        "type": "action",
-        "subtype": "other",
-        "display": {
-          "generic_type": "LIGHT_MODE"
-        },
-        "template":{
-          "dashboard" : "btnCircle",
-          "mobile" : "circle"
-        },
-        "value" : "Etat Arc en ciel",
-        "isVisible": 0,
-        "isHistorized": 0,
-        "logicalId": "rainbow_off"
-      },
-      {
         "name": "Transition status",
         "type": "info",
         "subtype": "numeric",
@@ -207,22 +121,6 @@
         "isVisible": 0,
         "isHistorized": 0,
         "logicalId": "transition_state"
-      },
-      {
-        "name": "Arc en ciel On",
-        "type": "action",
-        "subtype": "slider",
-        "display": {
-          "generic_type": "DONT"
-        },
-        "configuration" :{
-          "minValue" : 0,
-          "maxValue" : 1800
-        },
-        "value" : "Transition status",
-        "isVisible": 0,
-        "isHistorized": 0,
-        "logicalId": "transition"
       }
     ]
   }

@@ -12,32 +12,7 @@
 				"subtype": "numeric",
 				"isVisible": 1,
 				"isHistorized": 1,
-				"logicalId": "lightlevel",
-				"configuration" : {
-					"onType" : "ZLLLightLevel"
-				}
-			},
-			{
-				"name": "Nuit",
-				"type": "info",
-				"subtype": "binary",
-				"isVisible": 1,
-				"isHistorized": 0,
-				"logicalId": "dark",
-				"configuration" : {
-					"onType" : "ZLLLightLevel"
-				}
-			},
-			{
-				"name": "Jour",
-				"type": "info",
-				"subtype": "binary",
-				"isVisible": 1,
-				"isHistorized": 0,
-				"logicalId": "daylight",
-				"configuration" : {
-					"onType" : "ZLLLightLevel"
-				}
+				"logicalId": "light_level"
 			},
 			{
 				"name": "Température",
@@ -46,10 +21,7 @@
 				"unite" : "°C",
 				"isVisible": 1,
 				"isHistorized": 1,
-				"logicalId": "temperature",
-				"configuration" : {
-					"onType" : "ZLLTemperature"
-				}
+				"logicalId": "temperature"
 			},
 			{
 				"name": "Présence",
@@ -57,12 +29,9 @@
 				"subtype": "binary",
 				"isVisible": 1,
 				"isHistorized": 1,
-				"logicalId": "presence",
+				"logicalId": "motion",
 				"display": {
 					"invertBinary": "1"
-				},
-				"configuration" : {
-					"onType" : "ZLLPresence"
 				}
 			},
 			{
@@ -71,10 +40,25 @@
 				"subtype": "binary",
 				"isVisible": 0,
 				"isHistorized": 0,
-				"logicalId": "on",
-				"configuration" : {
-					"onType" : "ZLLPresence"
-				}
+				"logicalId": "enabled"
+			},
+			{
+				"name": "Activer",
+				"type": "action",
+				"subtype": "other",
+				"isVisible": 0,
+				"isHistorized": 0,
+				"value" : "Etat",
+				"logicalId": "enable"
+			},
+			{
+				"name": "Désactiver",
+				"type": "action",
+				"subtype": "other",
+				"isVisible": 0,
+				"isHistorized": 0,
+				"value" : "Etat",
+				"logicalId": "disable"
 			}
 		]
 	}

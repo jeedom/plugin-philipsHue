@@ -199,6 +199,36 @@ class pHueApi {
         return $this->request('/clip/v2/resource/room/' . $_id, 'PUT', json_encode($_data));
     }
 
+    public function scene($_id = null, $_data = null) {
+        if ($_id == null) {
+            return $this->request('/clip/v2/resource/scene');
+        }
+        if ($_data == null) {
+            return $this->request('/clip/v2/resource/scene/' . $_id);
+        }
+        return $this->request('/clip/v2/resource/scene/' . $_id, 'PUT', json_encode($_data));
+    }
+
+    public function motion($_id = null, $_data = null) {
+        if ($_id == null) {
+            return $this->request('/clip/v2/resource/motion');
+        }
+        if ($_data == null) {
+            return $this->request('/clip/v2/resource/motion/' . $_id);
+        }
+        return $this->request('/clip/v2/resource/motion/' . $_id, 'PUT', json_encode($_data));
+    }
+
+    public function temperature($_id = null, $_data = null) {
+        if ($_id == null) {
+            return $this->request('/clip/v2/resource/temperature');
+        }
+        if ($_data == null) {
+            return $this->request('/clip/v2/resource/temperature/' . $_id);
+        }
+        return $this->request('/clip/v2/resource/temperature/' . $_id, 'PUT', json_encode($_data));
+    }
+
     public function event() {
         return $this->request('/eventstream/clip/v2', 'GET', array(), 1200);
     }

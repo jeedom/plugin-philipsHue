@@ -199,6 +199,10 @@ class philipsHue extends eqLogic {
 				$eqLogic->setEqType_name('philipsHue');
 				$eqLogic->setIsVisible(0);
 				$eqLogic->setIsEnable(1);
+				$object = jeeObject::byName($room['metadata']['name']);
+				if (is_object($object)) {
+					$eqLogic->setObject_id($object->getId());
+				}
 			}
 			foreach ($room['services'] as $service) {
 				$eqLogic->setConfiguration('service_' . $service['rtype'], $service['rid']);
@@ -209,37 +213,69 @@ class philipsHue extends eqLogic {
 			$eqLogic->setConfiguration('id', $room['id']);
 			$eqLogic->save();
 		}
-		self::deamon_start();
+
+		$scenes = $hue->scene();
+		foreach ($scenes['data'] as $scene) {
+			if (!isset($scene['group']['rtype']) || $scene['group']['rtype'] != 'room') {
+				continue;
+			}
+			$eqLogic = self::byLogicalId($scene['group']['rid'], 'philipsHue');
+			if (!is_object($eqLogic)) {
+				continue;
+			}
+			$cmd = $eqLogic->getCmd('action', $scene['id']);
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setName(__('Scene ', __FILE__) . $scene['metadata']['name']);
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setIsVisible(1);
+				$cmd->setLogicalId($scene['id']);
+			}
+			$cmd->setType('action');
+			$cmd->setSubtype('other');
+			$cmd->setConfiguration('category', 'scene');
+			$cmd->save();
+		}
 	}
 
-	public static function syncState($_bridge_number = 1, $_data = null) {
-		$hue = self::getPhilipsHue($_bridge_number);
-		if ($_data == null) {
-			$lights = $hue->light();
-		} else {
-			$lights = $_data;
+	public static function syncState($_bridge_number = 1, $_datas = null) {
+		if ($_datas == null) {
+			$hue = self::getPhilipsHue($_bridge_number);
+			$_datas = $hue->light();
 		}
-		foreach ($lights['data'] as $light) {
-			$eqLogic = self::byLogicalId($light['owner']['rid'], 'philipsHue');
+		foreach ($_datas['data'] as $data) {
+			$eqLogic = self::byLogicalId($data['owner']['rid'], 'philipsHue');
 			if (!is_object($eqLogic) || $eqLogic->getIsEnable() == 0) {
 				continue;
 			}
-			if (isset($light['on']['on'])) {
-				$eqLogic->checkAndUpdateCmd('state', $light['on']['on'], false);
-				if (!$light['on']['on']) {
-					$light['dimming']['brightness'] = 0;
+			if (isset($data['enabled'])) {
+				$eqLogic->checkAndUpdateCmd('enabled', $data['enabled']);
+			}
+			if (isset($data['motion'])) {
+				$eqLogic->checkAndUpdateCmd('motion', $data['motion']['motion']);
+			}
+			if (isset($data['light'])) {
+				$eqLogic->checkAndUpdateCmd('light_level', $data['light']['light_level']);
+			}
+			if (isset($data['temperature'])) {
+				$eqLogic->checkAndUpdateCmd('temperature', $data['temperature']['temperature']);
+			}
+			if (isset($data['on']['on'])) {
+				$eqLogic->checkAndUpdateCmd('state', $data['on']['on']);
+				if (!$data['on']['on']) {
+					$data['dimming']['brightness'] = 0;
 				}
 			}
-			if (isset($light['dimming']['brightness'])) {
-				$eqLogic->checkAndUpdateCmd('luminosity_state', $light['dimming']['brightness'], false);
+			if (isset($data['dimming']['brightness'])) {
+				$eqLogic->checkAndUpdateCmd('luminosity_state', $data['dimming']['brightness']);
 			}
-			if (isset($light['color_temperature']['mirek'])) {
-				$eqLogic->checkAndUpdateCmd('color_temp_state', $light['color_temperature']['mirek'], false);
+			if (isset($data['color_temperature']['mirek'])) {
+				$eqLogic->checkAndUpdateCmd('color_temp_state', $data['color_temperature']['mirek']);
 			}
-			if (isset($light['color']['xy'])) {
-				$rgb = pHueApi::convertXYToRGB($light['color']['xy']['x'], $light['color']['xy']['y'], $light['dimming']['brightness']);
+			if (isset($data['color']['xy'])) {
+				$rgb = pHueApi::convertXYToRGB($data['color']['xy']['x'], $data['color']['xy']['y'], $data['dimming']['brightness']);
 				$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
-				$eqLogic->checkAndUpdateCmd('color_state', $color, false);
+				$eqLogic->checkAndUpdateCmd('color_state', $color,);
 			}
 		}
 	}
@@ -274,36 +310,6 @@ class philipsHue extends eqLogic {
 		if ($this->getConfiguration('applyDevice') != $this->getConfiguration('device')) {
 			$this->applyModuleConfiguration();
 		}
-		if ($this->getConfiguration('category') == 'light') {
-			$cmd = $this->getCmd('info', 'isReachable');
-			if (!is_object($cmd)) {
-				$cmd = new philipsHueCmd();
-				$cmd->setName(__('Joignable', __FILE__));
-				$cmd->setEqLogic_id($this->getId());
-				$cmd->setIsVisible(0);
-				$cmd->setLogicalId('isReachable');
-			}
-			$cmd->setConfiguration('repeatEventManagement', 'never');
-			$cmd->setType('info');
-			$cmd->setSubtype('binary');
-			$cmd->save();
-
-			$cmd = $this->getCmd('info', 'alert_state');
-			if (is_object($cmd)) {
-				$cmd->remove();
-			}
-
-			$cmd = $this->getCmd('info', 'rainbow_state');
-			if (is_object($cmd)) {
-				$cmd->remove();
-			}
-
-			$cmd = $this->getCmd('action', 'luminosity');
-			if (is_object($cmd)) {
-				$cmd->setConfiguration('maxValue', 100);
-				$cmd->save();
-			}
-		}
 	}
 
 	public function applyModuleConfiguration() {
@@ -333,26 +339,6 @@ class philipsHue extends eqLogic {
 		}
 		return 'plugins/philipsHue/core/config/devices/' . $imgpath;
 	}
-
-	public function animation($_animation, $_options) {
-		if (count(system::ps('core/php/jeeHueAnimation.php id=' . $this->getId())) > 0) {
-			return true;
-		}
-		$cmd = 'php ' . dirname(__FILE__) . '/../../core/php/jeeHueAnimation.php id=' . $this->getId();
-		$cmd .= ' animation=' . $_animation;
-		$cmd .= ' ' . $_options;
-		$cmd .= ' >> ' . log::getPathToLog('philipsHue_animation') . ' 2>&1 &';
-		shell_exec($cmd);
-		$this->setCache('current_animate', 1);
-	}
-
-	public function stopAnimation() {
-		if (count(system::ps('core/php/jeeHueAnimation.php id=' . $this->getId())) > 0) {
-			system::kill('core/php/jeeHueAnimation.php id=' . $this->getId(), false);
-		}
-		$this->setCache('current_animate', 0);
-		return true;
-	}
 }
 
 class philipsHueCmd extends cmd {
@@ -368,6 +354,37 @@ class philipsHueCmd extends cmd {
 		}
 		$eqLogic = $this->getEqLogic();
 		$hue = philipsHue::getPhilipsHue($eqLogic->getConfiguration('bridge'));
+		if (in_array($this->getLogicalId(), array('enable', 'disable'))) {
+			if ($eqLogic->getConfiguration('service_motion') != '') {
+				$data = array('enabled' => ($this->getLogicalId() == 'enable'));
+				log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_motion') . ' => ' . json_encode($data));
+				$result = $hue->motion($eqLogic->getConfiguration('service_motion'), $data);
+				usleep(100000);
+				if (isset($result['errors']) && count($result['errors']) > 0) {
+					throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));
+				}
+			}
+			if ($eqLogic->getConfiguration('service_temperature') != '') {
+				$data = array('enabled' => ($this->getLogicalId() == 'enable'));
+				log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_temperature') . ' => ' . json_encode($data));
+				$result = $hue->temperature($eqLogic->getConfiguration('service_temperature'), $data);
+				usleep(100000);
+				if (isset($result['errors']) && count($result['errors']) > 0) {
+					throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));
+				}
+			}
+			return;
+		}
+		if ($this->getConfiguration('category') == 'scene') {
+			$data = array('recall' => array('action' => 'dynamic_palette'));
+			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $this->getLogicalId() . ' => ' . json_encode($data));
+			$result = $hue->scene($this->getLogicalId(), $data);
+			usleep(100000);
+			if (isset($result['errors']) && count($result['errors']) > 0) {
+				throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));
+			}
+			return;
+		}
 		$transition = $eqLogic->getCmd(null, 'transition_state');
 		$transistion_time = 0;
 		if (is_object($transition)) {
@@ -384,13 +401,7 @@ class philipsHueCmd extends cmd {
 		} else {
 			$data['on'] = array('on' => false);
 		}
-		if ($this->getLogicalId() != 'animation' && $eqLogic->getCache('current_animate', 0) == 1) {
-			$eqLogic->stopAnimation();
-		}
 		switch ($this->getLogicalId()) {
-			case 'animation':
-				$eqLogic->animation($_options['title'], $_options['message']);
-				return;
 			case 'luminosity':
 				if ($_options['slider'] == 0) {
 					$data['on'] = array('on' => false);

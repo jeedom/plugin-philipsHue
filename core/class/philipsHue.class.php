@@ -413,6 +413,7 @@ class philipsHueCmd extends cmd {
 		}
 		log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_light') . ' => ' . json_encode($data));
 		$result = $hue->light($eqLogic->getConfiguration('service_light'), $data);
+		usleep(100000);
 		if (isset($result['errors']) && count($result['errors']) > 0) {
 			throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));
 		}

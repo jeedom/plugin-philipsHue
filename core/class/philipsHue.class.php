@@ -179,6 +179,68 @@ class philipsHue extends eqLogic {
 				$eqLogic->setConfiguration('service_' . $service['rtype'], $service['rid']);
 			}
 			$eqLogic->save();
+
+			$num_button = 1;
+			foreach ($device['services'] as $service) {
+				if ($service['rtype'] == 'button') {
+					$cmd = $eqLogic->getCmd('info', $service['rid']);
+					if (!is_object($cmd)) {
+						$cmd = new philipsHueCmd();
+						$cmd->setName(__('Bouton ', __FILE__) . $num_button);
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setIsVisible(1);
+						$cmd->setLogicalId($service['rid']);
+					}
+					$cmd->setType('info');
+					$cmd->setSubtype('string');
+					$cmd->setConfiguration('category', 'button');
+					$cmd->save();
+					$num_button++;
+				}
+				if ($service['rtype'] == 'motion') {
+					$cmd = $eqLogic->getCmd('info', $service['rid']);
+					if (!is_object($cmd)) {
+						$cmd = new philipsHueCmd();
+						$cmd->setName(__('Présence', __FILE__));
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setIsVisible(1);
+						$cmd->setLogicalId($service['rid']);
+					}
+					$cmd->setType('info');
+					$cmd->setSubtype('binary');
+					$cmd->setConfiguration('category', 'motion');
+					$cmd->save();
+				}
+				if ($service['rtype'] == 'light_level') {
+					$cmd = $eqLogic->getCmd('info', $service['rid']);
+					if (!is_object($cmd)) {
+						$cmd = new philipsHueCmd();
+						$cmd->setName(__('Luminosité', __FILE__));
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setIsVisible(1);
+						$cmd->setLogicalId($service['rid']);
+					}
+					$cmd->setType('info');
+					$cmd->setSubtype('numeric');
+					$cmd->setConfiguration('category', 'light_level');
+					$cmd->save();
+				}
+				if ($service['rtype'] == 'temperature') {
+					$cmd = $eqLogic->getCmd('info', $service['rid']);
+					if (!is_object($cmd)) {
+						$cmd = new philipsHueCmd();
+						$cmd->setName(__('Température', __FILE__));
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setIsVisible(1);
+						$cmd->setLogicalId($service['rid']);
+					}
+					$cmd->setType('info');
+					$cmd->setSubtype('numeric');
+					$cmd->setUnite('°C');
+					$cmd->setConfiguration('category', 'temperature');
+					$cmd->save();
+				}
+			}
 		}
 
 		$rooms = $hue->room();
@@ -252,13 +314,16 @@ class philipsHue extends eqLogic {
 				$eqLogic->checkAndUpdateCmd('enabled', $data['enabled']);
 			}
 			if (isset($data['motion'])) {
-				$eqLogic->checkAndUpdateCmd('motion', $data['motion']['motion']);
+				$eqLogic->checkAndUpdateCmd($data['id'], $data['motion']['motion']);
 			}
 			if (isset($data['light'])) {
-				$eqLogic->checkAndUpdateCmd('light_level', $data['light']['light_level']);
+				$eqLogic->checkAndUpdateCmd($data['id'], $data['light']['light_level']);
 			}
 			if (isset($data['temperature'])) {
-				$eqLogic->checkAndUpdateCmd('temperature', $data['temperature']['temperature']);
+				$eqLogic->checkAndUpdateCmd($data['id'], $data['temperature']['temperature']);
+			}
+			if (isset($data['button'])) {
+				$eqLogic->checkAndUpdateCmd($data['id'], $data['button']['last_event']);
 			}
 			if (isset($data['on']['on'])) {
 				$eqLogic->checkAndUpdateCmd('state', $data['on']['on']);

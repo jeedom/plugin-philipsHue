@@ -5,29 +5,7 @@
 			"battery_type" : "1x CR2450"
 		},
 		"commands": [
-			{
-				"name": "Bouton",
-				"type": "info",
-				"subtype": "numeric",
-				"isVisible": 0,
-				"isHistorized": 0,
-				"logicalId": "buttonevent",
-				"configuration" : {
-					"repeatEventManagement" : "always",
-					"onType" : "ZLLSwitch"
-				}
-			},
-			{
-				"name": "Etat",
-				"type": "info",
-				"subtype": "binary",
-				"isVisible": 0,
-				"isHistorized": 0,
-				"logicalId": "on",
-				"configuration" : {
-					"onType" : "ZLLSwitch"
-				}
-			}
+			
 		]
 	}
 }

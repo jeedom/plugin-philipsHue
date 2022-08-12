@@ -28,11 +28,11 @@ if (init('test') != '') {
     die();
 }
 $result = json_decode(file_get_contents("php://input"), true);
-log::add('philipsHue', 'debug', 'Received message : ' . json_encode($result));
 foreach ($result['bridge'] as $i => $datas) {
     $data = array('data' => array());
     foreach (json_decode($datas, true) as $info) {
         $data['data'][] = $info['data'][0];
     }
+    log::add('philipsHue', 'debug', 'Received message for bridge : ' . $i . ' => ' . json_encode($data));
     philipsHue::syncState($i, $data);
 }

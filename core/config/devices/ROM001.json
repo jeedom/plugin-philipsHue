@@ -2,18 +2,7 @@
 	"ROM001": {
 		"name": "Smart Button",
 		"commands": [
-			{
-				"name": "Bouton",
-				"type": "info",
-				"subtype": "numeric",
-				"isVisible": 0,
-				"isHistorized": 0,
-				"logicalId": "buttonevent",
-				"configuration" : {
-					"repeatEventManagement" : "always",
-					"onType" : "ZLLSwitch"
-				}
-			}
+			
 		]
 	}
 }

@@ -347,7 +347,7 @@ class philipsHue extends eqLogic {
 		}
 	}
 
-	public static function cron5() {
+	public static function cron15() {
 		$hue = self::getPhilipsHue($_bridge_number);
 		$zigbee_connectivities = $hue->zigbee_connectivity();
 		foreach ($zigbee_connectivities['data'] as $zigbee_connectivity) {
@@ -356,6 +356,14 @@ class philipsHue extends eqLogic {
 				continue;
 			}
 			$eqLogic->checkAndUpdateCmd($zigbee_connectivity['id'], $zigbee_connectivity['status']);
+		}
+		$devices_power = $hue->device_power();
+		foreach ($devices_power['data'] as $device_power) {
+			$eqLogic = self::byLogicalId($device_power['owner']['rid'], 'philipsHue');
+			if (!is_object($eqLogic)) {
+				continue;
+			}
+			$eqLogic->batteryStatus($device_power['power_state']['battery_level']);
 		}
 	}
 

@@ -239,6 +239,16 @@ class pHueApi {
         return $this->request('/clip/v2/resource/zigbee_connectivity/' . $_id, 'PUT', json_encode($_data));
     }
 
+    public function device_power($_id = null, $_data = null) {
+        if ($_id == null) {
+            return $this->request('/clip/v2/resource/device_power');
+        }
+        if ($_data == null) {
+            return $this->request('/clip/v2/resource/device_power/' . $_id);
+        }
+        return $this->request('/clip/v2/resource/device_power/' . $_id, 'PUT', json_encode($_data));
+    }
+
     public function event() {
         return $this->request('/eventstream/clip/v2', 'GET', array(), 1200);
     }

@@ -6,6 +6,14 @@
         },
         "commands": [
             {
+              "name": "Etat",
+              "type": "info",
+              "subtype": "binary",
+              "isVisible": 0,
+              "isHistorized": 0,
+              "logicalId": "state"
+            },
+            {
                 "name": "Etat Luminosité",
                 "type": "info",
                 "subtype": "numeric",
@@ -59,50 +67,6 @@
                 "isVisible": 1,
                 "isHistorized": 0,
                 "logicalId": "luminosity"
-            },
-            {
-                "name": "Etat Alerte",
-                "type": "info",
-                "subtype": "binary",
-                "display": {
-                    "generic_type": "DONT"
-                },
-                "value" : "Etat Couleur",
-                "isVisible": 0,
-                "isHistorized": 0,
-                "logicalId": "alert_state"
-            },
-            {
-                "name": "Alerte On",
-                "type": "action",
-                "subtype": "other",
-                "display": {
-                    "generic_type": "LIGHT_MODE"
-                },
-                "template":{
-                    "dashboard" : "btnAlert",
-                    "mobile" : "alert"
-                },
-                "value" : "Etat Alerte",
-                "isVisible": 0,
-                "isHistorized": 0,
-                "logicalId": "alert_on"
-            },
-            {
-                "name": "Alerte Off",
-                "type": "action",
-                "subtype": "other",
-                "display": {
-                    "generic_type": "LIGHT_MODE"
-                },
-                "template":{
-                    "dashboard" : "btnAlert",
-                    "mobile" : "alert"
-                },
-                "value" : "Etat Alerte",
-                "isVisible": 0,
-                "isHistorized": 0,
-                "logicalId": "alert_off"
             },
             {
                 "name": "Transition status",

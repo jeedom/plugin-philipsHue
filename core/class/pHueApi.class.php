@@ -229,6 +229,16 @@ class pHueApi {
         return $this->request('/clip/v2/resource/temperature/' . $_id, 'PUT', json_encode($_data));
     }
 
+    public function zigbee_connectivity($_id = null, $_data = null) {
+        if ($_id == null) {
+            return $this->request('/clip/v2/resource/zigbee_connectivity');
+        }
+        if ($_data == null) {
+            return $this->request('/clip/v2/resource/zigbee_connectivity/' . $_id);
+        }
+        return $this->request('/clip/v2/resource/zigbee_connectivity/' . $_id, 'PUT', json_encode($_data));
+    }
+
     public function event() {
         return $this->request('/eventstream/clip/v2', 'GET', array(), 1200);
     }

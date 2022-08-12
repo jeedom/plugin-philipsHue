@@ -5,6 +5,14 @@
 			"gammut" : "-"
 		},
 		"commands":[
+            {
+              "name": "Etat",
+              "type": "info",
+              "subtype": "binary",
+              "isVisible": 0,
+              "isHistorized": 0,
+              "logicalId": "state"
+            },
 			{
 				"name": "Etat Luminosité",
 				"type": "info",

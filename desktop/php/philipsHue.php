@@ -206,9 +206,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
 					<table id="table_cmd" class="table table-bordered table-condensed">
 						<thead>
 							<tr>
-								<!-- <th>{{Id}}</th> -->
+								<th>{{Id}}</th>
 								<th>{{Nom}}</th>
-								<!-- <th>{{Type}}</th> -->
+								<th>{{Type}}</th>
+								<th>{{Logical ID}}</th>
 								<th>{{Options}}</th>
 								<th>{{Paramètres}}</th>
 								<th>{{Action}}</th>

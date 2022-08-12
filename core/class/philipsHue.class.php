@@ -179,7 +179,6 @@ class philipsHue extends eqLogic {
 				$eqLogic->setConfiguration('service_' . $service['rtype'], $service['rid']);
 			}
 			$eqLogic->save();
-
 			$num_button = 1;
 			foreach ($device['services'] as $service) {
 				if ($service['rtype'] == 'button') {
@@ -240,9 +239,58 @@ class philipsHue extends eqLogic {
 					$cmd->setConfiguration('category', 'temperature');
 					$cmd->save();
 				}
+				if ($service['rtype'] == 'zigbee_connectivity') {
+					$cmd = $eqLogic->getCmd('info', $service['rid']);
+					if (!is_object($cmd)) {
+						$cmd = new philipsHueCmd();
+						$cmd->setName(__('Connecté', __FILE__));
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setIsVisible(0);
+						$cmd->setLogicalId($service['rid']);
+					}
+					$cmd->setType('info');
+					$cmd->setSubtype('string');
+					$cmd->setConfiguration('category', 'zigbee_connectivity');
+					$cmd->save();
+				}
+				if ($service['rtype'] == 'light') {
+					$light = $hue->light($service['rid']);
+					if (isset($light['data'][0]['effects']['effect_values'])) {
+						$cmd = $eqLogic->getCmd('info', 'effect_status');
+						if (!is_object($cmd)) {
+							$cmd = new philipsHueCmd();
+							$cmd->setName(__('Effet état', __FILE__));
+							$cmd->setEqLogic_id($eqLogic->getId());
+							$cmd->setIsVisible(1);
+							$cmd->setLogicalId('effect_status');
+						}
+						$cmd->setType('info');
+						$cmd->setSubtype('string');
+						$cmd->save();
+						$effect_status_id = $cmd->getId();
+
+						$cmd = $eqLogic->getCmd('action', 'effect');
+						if (!is_object($cmd)) {
+							$cmd = new philipsHueCmd();
+							$cmd->setName(__('Effet', __FILE__));
+							$cmd->setEqLogic_id($eqLogic->getId());
+							$cmd->setIsVisible(1);
+							$cmd->setLogicalId('effect');
+						}
+						$cmd->setType('action');
+						$cmd->setSubtype('select');
+						$select = '';
+						foreach ($light['data'][0]['effects']['effect_values'] as $effect) {
+							$select .= $effect . '|' . $effect . ';';
+						}
+						$select = trim($select, ';');
+						$cmd->setConfiguration('listValue', $select);
+						$cmd->setValue($effect_status_id);
+						$cmd->save();
+					}
+				}
 			}
 		}
-
 		$rooms = $hue->room();
 		foreach ($rooms['data'] as $room) {
 			log::add('philipsHue', 'debug', 'Found room ' . $room['id'] . ' => ' . json_encode($room));
@@ -300,6 +348,18 @@ class philipsHue extends eqLogic {
 		}
 	}
 
+	public static function cron5() {
+		$hue = self::getPhilipsHue($_bridge_number);
+		$zigbee_connectivities = $hue->zigbee_connectivity();
+		foreach ($zigbee_connectivities['data'] as $zigbee_connectivity) {
+			$eqLogic = self::byLogicalId($zigbee_connectivity['owner']['rid'], 'philipsHue');
+			if (!is_object($eqLogic)) {
+				continue;
+			}
+			$eqLogic->checkAndUpdateCmd($zigbee_connectivity['id'], $zigbee_connectivity['status']);
+		}
+	}
+
 	public static function syncState($_bridge_number = 1, $_datas = null) {
 		if ($_datas == null) {
 			$hue = self::getPhilipsHue($_bridge_number);
@@ -325,14 +385,22 @@ class philipsHue extends eqLogic {
 			if (isset($data['button'])) {
 				$eqLogic->checkAndUpdateCmd($data['id'], $data['button']['last_event']);
 			}
+			if (isset($data['status'])) {
+				$eqLogic->checkAndUpdateCmd($data['id'], $data['status']);
+			}
 			if (isset($data['on']['on'])) {
 				$eqLogic->checkAndUpdateCmd('state', $data['on']['on']);
 				if (!$data['on']['on']) {
 					$data['dimming']['brightness'] = 0;
+				} elseif (!isset($data['dimming']['brightness'])) {
+					$data['dimming']['brightness'] = $eqLogic->getCache('previous_luminosity');
 				}
 			}
 			if (isset($data['dimming']['brightness'])) {
 				$eqLogic->checkAndUpdateCmd('luminosity_state', $data['dimming']['brightness']);
+				if ($data['dimming']['brightness'] != 0) {
+					$eqLogic->setCache('previous_luminosity', $data['dimming']['brightness']);
+				}
 			}
 			if (isset($data['color_temperature']['mirek'])) {
 				$eqLogic->checkAndUpdateCmd('color_temp_state', $data['color_temperature']['mirek']);
@@ -341,6 +409,9 @@ class philipsHue extends eqLogic {
 				$rgb = pHueApi::convertXYToRGB($data['color']['xy']['x'], $data['color']['xy']['y'], $data['dimming']['brightness']);
 				$color = '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']);
 				$eqLogic->checkAndUpdateCmd('color_state', $color,);
+			}
+			if (isset($data['effects']['status'])) {
+				$eqLogic->checkAndUpdateCmd('effect_status', $data['effects']['status']);
 			}
 		}
 	}
@@ -486,6 +557,9 @@ class philipsHueCmd extends cmd {
 					$data['color'] = array('xy' => array('x' => $xyb['x'], 'y' => $xyb['y']));
 					$data['dimming'] = array('brightness' => $xyb['bri']);
 				}
+				break;
+			case 'effect':
+				$data['effects'] = array('effect' => $_options['select']);
 				break;
 		}
 		if ($eqLogic->getConfiguration('category') == 'light') {

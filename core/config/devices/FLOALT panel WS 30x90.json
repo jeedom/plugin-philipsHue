@@ -6,6 +6,14 @@
         },
         "commands": [
             {
+                "name": "Etat",
+                "type": "info",
+                "subtype": "binary",
+                "isVisible": 0,
+                "isHistorized": 0,
+                "logicalId": "state"
+            },
+            {
                 "name": "Etat Luminosité",
                 "type": "info",
                 "subtype": "numeric",
@@ -90,92 +98,6 @@
                 "isVisible": 1,
                 "isHistorized": 0,
                 "logicalId": "color_temp"
-            },
-            {
-                "name": "Etat Alerte",
-                "type": "info",
-                "subtype": "binary",
-                "display": {
-                    "generic_type": "DONT"
-                },
-                "isVisible": 0,
-                "isHistorized": 0,
-                "logicalId": "alert_state"
-            },
-            {
-                "name": "Alerte On",
-                "type": "action",
-                "subtype": "other",
-                "display": {
-                    "generic_type": "LIGHT_MODE"
-                },
-                "template":{
-                    "dashboard" : "btnAlert",
-                    "mobile" : "alert"
-                },
-                "value" : "Etat Alerte",
-                "isVisible": 0,
-                "isHistorized": 0,
-                "logicalId": "alert_on"
-            },
-            {
-                "name": "Alerte Off",
-                "type": "action",
-                "subtype": "other",
-                "display": {
-                    "generic_type": "LIGHT_MODE"
-                },
-                "template":{
-                    "dashboard" : "btnAlert",
-                    "mobile" : "alert"
-                },
-                "value" : "Etat Alerte",
-                "isVisible": 0,
-                "isHistorized": 0,
-                "logicalId": "alert_off"
-            },
-            {
-                "name": "Etat Arc en ciel",
-                "type": "info",
-                "subtype": "binary",
-                "display": {
-                    "generic_type": "DONT"
-                },
-                "isVisible": 0,
-                "isHistorized": 0,
-                "logicalId": "rainbow_state"
-            },
-            {
-                "name": "Arc en ciel On",
-                "type": "action",
-                "subtype": "other",
-                "display": {
-                    "generic_type": "LIGHT_MODE"
-                },
-                "template":{
-                    "dashboard" : "btnCircle",
-                    "mobile" : "circle"
-                },
-                "value" : "Etat Arc en ciel",
-                "isVisible": 0,
-                "isHistorized": 0,
-                "logicalId": "rainbow_on"
-            },
-            {
-                "name": "Arc en ciel Off",
-                "type": "action",
-                "subtype": "other",
-                "display": {
-                    "generic_type": "LIGHT_MODE"
-                },
-                "template":{
-                    "dashboard" : "btnCircle",
-                    "mobile" : "circle"
-                },
-                "value" : "Etat Arc en ciel",
-                "isVisible": 0,
-                "isHistorized": 0,
-                "logicalId": "rainbow_off"
             },
             {
                 "name": "Transition status",

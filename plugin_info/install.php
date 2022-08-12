@@ -24,7 +24,16 @@ function philipsHue_install() {
 function philipsHue_update() {
 	$cron = cron::byClassAndFunction('philipsHue', 'pull');
 	if (is_object($cron)) {
+		$cron->stop();
 		$cron->remove();
+	}
+	foreach (eqLogic::byType('philipsHue') as $eqLogic) {
+		foreach (array('rainbow_on', 'rainbow_off', 'alert_off', 'alert_on', 'animation', 'isReachable') as $cid) {
+			$cmd = $eqLogic->getCmd(null, $cid);
+			if (is_object($cmd)) {
+				$cmd->remove();
+			}
+		}
 	}
 }
 

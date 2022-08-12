@@ -2,8 +2,7 @@
 	"SML001": {
 		"name": "Hue Motion sensor",
 		"configuration": {
-			"battery_type": "2x AAA (LR03)",
-			"animation" : 0
+			"battery_type": "2x AAA (LR03)"
 		},
 		"commands": [
 			{

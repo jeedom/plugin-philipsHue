@@ -1,9 +1,6 @@
 {
 	"ROM001": {
 		"name": "Smart Button",
-		"configuration" : {
-			"animation" : 0
-		},
 		"commands": [
 			{
 				"name": "Bouton",

@@ -2,7 +2,6 @@
 	"RWL021": {
 		"name": "Hue dimmer",
 		"configuration" : {
-			"animation" : 0,
 			"battery_type" : "1x CR2450"
 		},
 		"commands": [

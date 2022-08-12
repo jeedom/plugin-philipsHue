@@ -1,9 +1,6 @@
 {
 	"RDM001": {
 		"name": "Wall swtich",
-		"configuration" : {
-			"animation" : 0
-		},
 		"commands": [
 			{
 				"name": "Bouton",

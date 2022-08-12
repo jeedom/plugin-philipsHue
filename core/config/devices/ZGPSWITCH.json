@@ -1,9 +1,6 @@
 {
 	"ZGPSWITCH": {
 		"name": "Hue tap switch",
-		"configuration" : {
-			"animation" : 0
-		},
 		"commands": [
 			{
 				"name": "Bouton",

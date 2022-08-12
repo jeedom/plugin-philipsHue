@@ -1,9 +1,6 @@
 {
 	"RWL022": {
 		"name": "Hue dimmer switch",
-		"configuration" : {
-			"animation" : 0
-		},
 		"commands": [
 			{
 				"name": "Bouton",

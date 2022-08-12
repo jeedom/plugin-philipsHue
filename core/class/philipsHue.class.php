@@ -173,7 +173,6 @@ class philipsHue extends eqLogic {
 			$eqLogic->setConfiguration('category', $type);
 			$eqLogic->setConfiguration('id', $id);
 			$eqLogic->setConfiguration('modelName', $device['product_data']['product_name']);
-			$eqLogic->setConfiguration('type', $type);
 			$eqLogic->setConfiguration('softwareVersion', $device['product_data']['software_version']);
 			foreach ($device['services'] as $service) {
 				$eqLogic->setConfiguration('service_' . $service['rtype'], $service['rid']);

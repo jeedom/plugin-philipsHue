@@ -9,8 +9,8 @@
 
 - Réécriture complete du plugin pour utiliser l'api 2.0
 - Necessite une resynchronisation pour marcher
-- ATTENTION : beaucoup de truc ne marche pas (capteur, scéne, groupe...)
-- IMPORTANT : certaine commandes ne seront plus disponible avec cette nouvelle version dont les alertes et les effets
+- ATTENTION : Pour les capteurs les commandes changent completement il faut donc revoir vos scénarios
+- IMPORTANT : certaine commandes ne seront plus disponible avec cette nouvelle version dont les alertes, l'arc en ciel et les animation
 
 # 04/10/2021
 

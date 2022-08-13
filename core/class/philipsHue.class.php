@@ -404,6 +404,9 @@ class philipsHue extends eqLogic {
 				}
 			}
 			if (isset($data['dimming']['brightness'])) {
+				if ($data['dimming']['brightness'] < 1) {
+					$data['dimming']['brightness'] = 0;
+				}
 				$eqLogic->checkAndUpdateCmd('luminosity_state', $data['dimming']['brightness']);
 				if ($data['dimming']['brightness'] != 0) {
 					$eqLogic->setCache('previous_luminosity', $data['dimming']['brightness']);

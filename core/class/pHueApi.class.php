@@ -104,6 +104,9 @@ class pHueApi {
     }
 
     public static function convertXYToRGB($x, $y, $bri = 255) {
+        if ($bri > 195) {
+            $bri = 195;
+        }
         $z = 1.0 - $x - $y;
         $xyz['y'] = $bri / 255;
         $xyz['x'] = ($xyz['y'] / $y) * $x;

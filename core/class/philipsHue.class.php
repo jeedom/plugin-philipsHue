@@ -593,6 +593,10 @@ class philipsHueCmd extends cmd {
 		} else if ($eqLogic->getConfiguration('category') == 'room') {
 			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_grouped_light') . ' => ' . json_encode($data));
 			$result = $hue->grouped_light($eqLogic->getConfiguration('service_grouped_light'), $data);
+			if (isset($result['errors']) && count($result['errors']) > 0) {
+				usleep(500000);
+				$result = $hue->grouped_light($eqLogic->getConfiguration('service_grouped_light'), $data);
+			}
 		}
 		usleep(100000);
 		if (isset($result['errors']) && count($result['errors']) > 0) {

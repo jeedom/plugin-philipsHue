@@ -5,8 +5,6 @@ if (!isConnect('admin')) {
 $plugin = plugin::byId('philipsHue');
 sendVarToJS('eqType', $plugin->getId());
 $eqLogics = eqLogic::byType($plugin->getId());
-
-sendVarToJS('nb_philipsHue_bridge', config::byKey('nbBridge', 'philipsHue'));
 ?>
 
 <div class="row row-overflow">
@@ -28,18 +26,12 @@ sendVarToJS('nb_philipsHue_bridge', config::byKey('nbBridge', 'philipsHue'));
 				<br />
 				<span>{{Synchroniser}}</span>
 			</div>
-			<div class="cursor card logoSecondary" id="bt_touchLink">
-				<i class="fas fa-sign-in-alt fa-rotate-90"></i>
-				<br />
-				<span>{{Touchlink}}</span>
-			</div>
 		</div>
 		<legend><i class="far fa-lightbulb"></i> {{Mes Philips Hue}}</legend>
 		<div class="input-group" style="margin:5px;">
 			<input class="form-control roundedLeft" placeholder="{{Rechercher}}" id="in_searchEqlogic" />
 			<div class="input-group-btn">
 				<a id="bt_resetSearch" class="btn roundedRight" style="width:30px"><i class="fas fa-times"></i></a>
-				<a class="btn roundedRight hidden" id="bt_pluginDisplayAsTable" data-coreSupport="1" data-state="0"><i class="fas fa-grip-lines"></i></a>
 			</div>
 		</div>
 		<div class="eqLogicThumbnailContainer">
@@ -156,14 +148,6 @@ sendVarToJS('nb_philipsHue_bridge', config::byKey('nbBridge', 'philipsHue'));
 									</select>
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Toujours allumé}}
-									<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour ne jamais indiquer l'équipement comme non joignable}}"></i></sup>
-								</label>
-								<div class="col-sm-7">
-									<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="alwaysOn" />
-								</div>
-							</div>
 							<!-- </fieldset>
 						</form> -->
 						</div>
@@ -174,12 +158,6 @@ sendVarToJS('nb_philipsHue_bridge', config::byKey('nbBridge', 'philipsHue'));
 								<label class="col-sm-3 control-label">{{Catégorie}}</label>
 								<div class="col-sm-7">
 									<span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="category" style="font-size : 1em"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Type}}</label>
-								<div class="col-sm-7">
-									<span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="type" style="font-size : 1em"></span>
 								</div>
 							</div>
 							<div class="form-group">
@@ -222,9 +200,10 @@ sendVarToJS('nb_philipsHue_bridge', config::byKey('nbBridge', 'philipsHue'));
 					<table id="table_cmd" class="table table-bordered table-condensed">
 						<thead>
 							<tr>
-								<!-- <th>{{Id}}</th> -->
+								<th>{{Id}}</th>
 								<th>{{Nom}}</th>
-								<!-- <th>{{Type}}</th> -->
+								<th>{{Type}}</th>
+								<th>{{Logical ID}}</th>
 								<th>{{Options}}</th>
 								<th>{{Paramètres}}</th>
 								<th>{{Action}}</th>

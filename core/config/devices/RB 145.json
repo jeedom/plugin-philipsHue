@@ -49,7 +49,7 @@
                 },
                 "configuration" :{
                     "minValue" : 0,
-                    "maxValue" : 255
+                    "maxValue" : 100
                 },
                 "template":{
                     "dashboard" : "light",
@@ -90,49 +90,6 @@
                 "isVisible": 1,
                 "isHistorized": 0,
                 "logicalId": "color_temp"
-            },
-            {
-                "name": "Etat Alerte",
-                "type": "info",
-                "subtype": "binary",
-                "display": {
-                    "generic_type": "DONT"
-                },
-                "isVisible": 0,
-                "isHistorized": 0,
-                "logicalId": "alert_state"
-            },
-            {
-                "name": "Alerte On",
-                "type": "action",
-                "subtype": "other",
-                "display": {
-                    "generic_type": "LIGHT_MODE"
-                },
-                "template":{
-                    "dashboard" : "btnAlert",
-                    "mobile" : "alert"
-                },
-                "value" : "Etat Alerte",
-                "isVisible": 0,
-                "isHistorized": 0,
-                "logicalId": "alert_on"
-            },
-            {
-                "name": "Alerte Off",
-                "type": "action",
-                "subtype": "other",
-                "display": {
-                    "generic_type": "LIGHT_MODE"
-                },
-                "template":{
-                    "dashboard" : "btnAlert",
-                    "mobile" : "alert"
-                },
-                "value" : "Etat Alerte",
-                "isVisible": 0,
-                "isHistorized": 0,
-                "logicalId": "alert_off"
             },
             {
                 "name": "Transition status",

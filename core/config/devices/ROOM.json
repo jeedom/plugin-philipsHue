@@ -1,9 +1,6 @@
 {
-  "default_nocolor": {
-    "name": "Lumière génerique non couleur",
-    "configuration" :{
-      "gammut" : "A"
-    },
+  "ROOM": {
+    "name": "Piece",
     "commands": [
       {
         "name": "Etat Luminosité",
@@ -49,7 +46,7 @@
         },
         "configuration" :{
           "minValue" : 0,
-          "maxValue" : 255
+          "maxValue" : 100
         },
         "template":{
           "dashboard" : "light",
@@ -61,6 +58,60 @@
         "logicalId": "luminosity"
       },
       {
+        "name": "Etat Couleur",
+        "type": "info",
+        "subtype": "string",
+        "display": {
+          "generic_type": "LIGHT_COLOR"
+        },
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "color_state"
+      },
+      {
+        "name": "Couleur",
+        "type": "action",
+        "subtype": "color",
+        "display": {
+          "generic_type": "LIGHT_SET_COLOR"
+        },
+        "value" : "Etat Couleur",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "color"
+      },
+      {
+        "name": "Etat Couleur temp",
+        "type": "info",
+        "subtype": "numeric",
+        "display": {
+          "generic_type": "DONT"
+        },
+        "configuration" :{
+          "minValue" : 153,
+          "maxValue" : 500
+        },
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "color_temp_state"
+      },
+      {
+        "name": "Couleur temp",
+        "type": "action",
+        "subtype": "slider",
+        "display": {
+          "generic_type": "DONT"
+        },
+        "configuration" :{
+          "minValue" : 153,
+          "maxValue" : 500
+        },
+        "value" : "Etat Couleur temp",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "color_temp"
+      },
+      {
         "name": "Transition status",
         "type": "info",
         "subtype": "numeric",
@@ -70,22 +121,6 @@
         "isVisible": 0,
         "isHistorized": 0,
         "logicalId": "transition_state"
-      },
-      {
-        "name": "Transition",
-        "type": "action",
-        "subtype": "slider",
-        "display": {
-          "generic_type": "DONT"
-        },
-        "configuration" :{
-          "minValue" : 0,
-          "maxValue" : 1800
-        },
-        "value" : "Transition status",
-        "isVisible": 0,
-        "isHistorized": 0,
-        "logicalId": "transition"
       }
     ]
   }

@@ -16,26 +16,23 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
-require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
+require_once dirname(__FILE__) . "/../../../../core/php/core.inc.php";
 
-function philipsHue_install() {
+if (!jeedom::apiAccess(init('apikey'), 'philipsHue')) {
+    echo __('Vous n\'etes pas autorisé à effectuer cette action', __FILE__);
+    die();
 }
 
-function philipsHue_update() {
-	$cron = cron::byClassAndFunction('philipsHue', 'pull');
-	if (is_object($cron)) {
-		$cron->stop();
-		$cron->remove();
-	}
-	foreach (eqLogic::byType('philipsHue') as $eqLogic) {
-		foreach (array('rainbow_on', 'rainbow_off', 'alert_off', 'alert_on', 'animation', 'isReachable') as $cid) {
-			$cmd = $eqLogic->getCmd(null, $cid);
-			if (is_object($cmd)) {
-				$cmd->remove();
-			}
-		}
-	}
+if (init('test') != '') {
+    echo 'OK';
+    die();
 }
-
-function philipsHue_remove() {
+$result = json_decode(file_get_contents("php://input"), true);
+foreach ($result['bridge'] as $i => $datas) {
+    $data = array('data' => array());
+    foreach (json_decode($datas, true) as $info) {
+        $data['data'][] = $info['data'][0];
+    }
+    log::add('philipsHue', 'debug', 'Received message for bridge : ' . $i . ' => ' . json_encode($data));
+    philipsHue::syncState($i, $data);
 }

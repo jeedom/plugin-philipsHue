@@ -1,22 +1,8 @@
 {
 	"RDM001": {
 		"name": "Wall swtich",
-		"configuration" : {
-			"animation" : 0
-		},
 		"commands": [
-			{
-				"name": "Bouton",
-				"type": "info",
-				"subtype": "numeric",
-				"isVisible": 0,
-				"isHistorized": 0,
-				"logicalId": "buttonevent",
-				"configuration" : {
-					"repeatEventManagement" : "always",
-					"onType" : "ZLLSwitch"
-				}
-			}
+			
 		]
 	}
 }

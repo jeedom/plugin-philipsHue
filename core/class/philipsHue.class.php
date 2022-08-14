@@ -423,9 +423,6 @@ class philipsHue extends eqLogic {
 				if (!isset($data['dimming']['brightness'])) {
 					$data['dimming']['brightness'] = $eqLogic->getCache('previous_luminosity');
 				}
-				if ($data['dimming']['brightness'] == 0) {
-					$data['dimming']['brightness'] = 255;
-				}
 				$to_cache['previous_color_x'] = $data['color']['xy']['x'];
 				$to_cache['previous_color_y'] = $data['color']['xy']['y'];
 				$rgb = pHueApi::convertXYToRGB($data['color']['xy']['x'], $data['color']['xy']['y'], $data['dimming']['brightness'] * 2.55);

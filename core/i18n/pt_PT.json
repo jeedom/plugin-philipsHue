@@ -9,7 +9,6 @@
         "Ajouter": "Adicionar",
         "Configuration": "Configuração",
         "Synchroniser": "Sincronizar",
-        "Touchlink": "Toque no link",
         "Mes Philips Hue": "My Philips Hue",
         "Rechercher": "Pesquisa",
         "Configuration avancée": "Configuração avançada",
@@ -31,42 +30,34 @@
         "Sélectionner le modèle d'équipement Philips Hue à piloter": "Selecione o modelo de equipamento Philips Hue para controlar",
         "Pont": "Ponte",
         "Pont Philips Hue sur lequel l'équipement est connecté": "Ponte Philips Hue à qual o equipamento está conectado",
-        "Toujours allumé": "Sempre ligado",
-        "Cocher la case pour ne jamais indiquer l'équipement comme non joignable": "Marque a caixa para nunca indicar o equipamento como inacessível",
         "Informations": "Informação",
-        "Type": "Tipo",
         "Identifiant": "Nome de usuário",
         "Nom du modèle": "Nome do modelo",
         "Version du logiciel": "Versão do software",
         "Visuel": "Visual",
         "Id": "ID",
         "Nom": "Nome",
+        "Type": "Tipo",
+        "Logical ID": "ID lógico",
         "Action": "Ação"
     },
     "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {
         "Bridge ": "Ponte",
         "Touchlink activé sur le bridge": "Touchlink ativado na ponte",
         "Synchronisation réussie": "Sincronização bem-sucedida",
-        "Nom": "Nome",
+        "Nom de la commande": "Nome do comando",
+        "Commande information liée": "Informações relacionadas ao pedido",
+        "Aucune": "Nenhum",
         "Icône": "Ícone",
         "Afficher": "Display",
         "Historiser": "Historicizar",
         "Inverser": "Inverter",
         "Min.": "Min.",
         "Max.": "Máx.",
-        "Unité": "Unidade",
-        "Tester": "Teste"
+        "Unité": "Unidade"
     },
-    "plugins\/philipsHue\/core\/php\/jeeHueAnimation.php": {
-        "[philipsHue\/jeeAnimation] L\\'id ne peut etre vide": "[philipsHue \/ jeeAnimation] O ID não pode estar vazio",
-        "[philipsHue\/jeeAnimation] L\\'équipement est introuvable : ": "[philipsHue \/ jeeAnimation] Não é possível encontrar o equipamento:",
-        "[philipsHue\/jeeAnimation] Cet équipement n\\'est pas de type philipsHue : ": "[philipsHue \/ jeeAnimation] Este equipamento não é do tipo philipsHue:",
-        "[philipsHue\/jeeAnimation] Lancement de l\\'animation sur": "[philipsHue \/ jeeAnimation] Lançamento da animação em",
-        " avec comme options ": "com opções",
-        "Aucune animation correspondante": "Nenhuma animação correspondente",
-        "Aucune action à faire": "Nenhuma ação a ser realizada",
-        "Lancement de ": "Lançamento de",
-        "Fin de l\\'animation": "Fim da animação"
+    "plugins\/philipsHue\/core\/php\/jeephilipsHue.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": "Você não está autorizado a realizar esta ação"
     },
     "plugins\/philipsHue\/core\/ajax\/philipsHue.ajax.php": {
         "401 - Accès non autorisé": "401 - Acesso não autorizado",
@@ -74,17 +65,19 @@
     },
     "plugins\/philipsHue\/core\/class\/philipsHue.class.php": {
         "Veuillez vérifier la configuration": "Por favor, verifique a configuração",
-        "Tâche cron introuvable": "Tarefa Cron não encontrada",
         "L\\'adresse du bridge ne peut etre vide": "O endereço da ponte não pode estar vazio",
-        "Impossible de joindre le bridge": "Não foi possível ingressar na ponte",
         "Veuillez appuyer sur le bouton du bridge": "Por favor, pressione o botão ponte",
-        "Impossible de creer l\\'utilisateur. Veuillez bien presser le bouton du bridge puis réessayer : ": "Não foi possível criar o usuário. Por favor, pressione o botão bridge e tente novamente:",
-        "Toute les lampes": "Todas as lâmpadas",
-        "Joignable": "Acessível",
-        "Scene": "Cena",
-        "Animation": "Animação",
-        "Options": "Opções",
-        "Nom de l\\'animation": "Nome da animação"
+        "Impossible de créer l\\'utilisateur, pressez vous bien le bouton du pont bridge ?": "Impossível criar o usuário, você aperta o botão da bridge bridge?",
+        "Erreur lors de la requetes sur le pont hue :": "Erro durante solicitações na ponte de matiz:",
+        "Bouton ": "Botão",
+        "Présence": "Presença",
+        "Luminosité": "Brilho",
+        "Température": "Temperatura",
+        "Connecté": "Conectado",
+        "Effet état": "Efeito de status",
+        "Effet": "Efeito",
+        "Scene ": "Cena",
+        "Erreur d\\'éxecution de la commande :": "Erro de execução do comando:"
     },
     "info.json": {
         "Plugin permettant d'intégrer un écosystème Philips Hue dans Jeedom. Le plugin est capable de gérer jusqu'à 2 ponts simultanément.": "Plugin que permite integrar um ecossistema Philips Hue no Jeedom. O plugin é capaz de gerenciar até 2 pontes simultaneamente"

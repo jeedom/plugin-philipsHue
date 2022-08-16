@@ -39,6 +39,7 @@
         "Nom": "İsim",
         "Type": "Çeşit",
         "Logical ID": "Logical ID",
+        "Etat": "Etat",
         "Action": "Eylem"
     },
     "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {

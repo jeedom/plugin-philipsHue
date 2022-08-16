@@ -121,6 +121,12 @@ class pHueApi {
                 $color[$key] = (1.0 + 0.055) * pow($normalized, 1.0 / 2.4) - 0.055;
             }
             $color[$key] = round($color[$key] * 255);
+            if ($color[$key] < 0) {
+                $color[$key] = 0;
+            }
+            if ($color[$key] > 255) {
+                $color[$key] = 255;
+            }
         }
         return $color;
     }

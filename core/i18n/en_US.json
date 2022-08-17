@@ -39,6 +39,7 @@
         "Nom": "Name",
         "Type": "Type",
         "Logical ID": "Logical ID",
+        "Etat": "State",
         "Action": "Action"
     },
     "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {

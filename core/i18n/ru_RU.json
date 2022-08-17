@@ -39,6 +39,7 @@
         "Nom": "Имя",
         "Type": "Тип",
         "Logical ID": "Logical ID",
+        "Etat": "Etat",
         "Action": "Действие"
     },
     "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {

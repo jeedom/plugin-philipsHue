@@ -39,6 +39,7 @@
         "Nom": "Nama",
         "Type": "Jenis",
         "Logical ID": "Logical ID",
+        "Etat": "Etat",
         "Action": "Tindakan"
     },
     "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {

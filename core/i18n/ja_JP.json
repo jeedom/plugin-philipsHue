@@ -39,6 +39,7 @@
         "Nom": "表題",
         "Type": "タイプ",
         "Logical ID": "Logical ID",
+        "Etat": "Etat",
         "Action": "アクション"
     },
     "plugins\/philipsHue\/desktop\/js\/philipsHue.js": {

@@ -54,7 +54,7 @@ $('#bt_touchLink').off('click').on('click', function () {
 });
 
 $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').on('change', function () {
-  if($('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').value() == ''){
+  if($('select.eqLogicAttr[data-l1key=configuration][data-l2key=device]').value() == ''){
     $('#img_device').attr("src",'plugins/philipsHue/plugin_info/philipsHue_icon.png');
     return;
   }
@@ -63,7 +63,7 @@ $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').on('change', func
     url: "plugins/philipsHue/core/ajax/philipsHue.ajax.php",
     data: {
       action: "getImageModel",
-      model: $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').value(),
+      model: $('select.eqLogicAttr[data-l1key=configuration][data-l2key=device]').value(),
     },
     dataType: 'json',
     global: false,

@@ -132,10 +132,9 @@ class philipsHue extends eqLogic {
 		if (config::byKey('bridge_username' . $_bridge_number, 'philipsHue') == '') {
 			self::createUser($_bridge_number);
 		}
-		try {
-			$hue = self::getPhilipsHue($_bridge_number);
-			$devices = $hue->device();
-		} catch (\Throwable $th) {
+		$hue = self::getPhilipsHue($_bridge_number);
+		$devices = $hue->device();
+		if (!is_array($devices)) {
 			self::createUser($_bridge_number);
 			self::$_hue = null;
 			$hue = self::getPhilipsHue($_bridge_number);

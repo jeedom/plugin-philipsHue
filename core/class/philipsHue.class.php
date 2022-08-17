@@ -105,7 +105,7 @@ class philipsHue extends eqLogic {
 			if (config::byKey('bridge_ip' . $_bridge_number, 'philipsHue') == '' || config::byKey('bridge_ip' . $_bridge_number, 'philipsHue') == '-') {
 				return null;
 			}
-			self::$_hue[$_bridge_number] = new pHueApi(config::byKey('bridge_ip' . $_bridge_number, 'philipsHue'), config::byKey('bridge_username' . $_bridge_number, 'philipsHue', 'newdeveloper'));
+			self::$_hue[$_bridge_number] = new pHueApi(config::byKey('bridge_ip' . $_bridge_number, 'philipsHue'), config::byKey('bridge_username' . $_bridge_number, 'philipsHue'));
 		}
 		return self::$_hue[$_bridge_number];
 	}
@@ -129,16 +129,17 @@ class philipsHue extends eqLogic {
 	}
 
 	public static function syncBridge($_bridge_number = 1) {
-		$hue = self::getPhilipsHue($_bridge_number);
-		$devices = $hue->device();
-		if (isset($devices['errors']) && count($devices['errors']) > 0) {
+		if (config::byKey('bridge_username' . $_bridge_number, 'philipsHue') == '') {
+			self::createUser($_bridge_number);
+		}
+		try {
+			$hue = self::getPhilipsHue($_bridge_number);
+			$devices = $hue->device();
+		} catch (\Throwable $th) {
 			self::createUser($_bridge_number);
 			self::$_hue = null;
 			$hue = self::getPhilipsHue($_bridge_number);
 			$devices = $hue->device();
-		}
-		if (isset($devices['errors']) && count($devices['errors']) > 0) {
-			throw new Exception(__('Erreur lors de la requetes sur le pont hue :', __FILE__) . ' ' . json_encode($devices['errors']));
 		}
 		foreach ($devices['data'] as $device) {
 			$type = $device['services'][0]['rtype'];
@@ -588,31 +589,32 @@ class philipsHueCmd extends cmd {
 		}
 		if ($eqLogic->getConfiguration('category') == 'light') {
 			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_light') . ' => ' . json_encode($data));
-			$result = $hue->light($eqLogic->getConfiguration('service_light'), $data);
-			if (isset($result['errors']) && count($result['errors']) > 0) {
-				usleep(500000);
-				$result = $hue->light($eqLogic->getConfiguration('service_light'), $data);
-			}
-			if (isset($result['errors']) && count($result['errors']) > 0) {
-				sleep(3);
-				$result = $hue->light($eqLogic->getConfiguration('service_light'), $data);
+			try {
+				$hue->light($eqLogic->getConfiguration('service_light'), $data);
+			} catch (\Throwable $th) {
+				try {
+					usleep(500000);
+					$hue->light($eqLogic->getConfiguration('service_light'), $data);
+				} catch (\Throwable $th) {
+					sleep(3);
+					$hue->light($eqLogic->getConfiguration('service_light'), $data);
+				}
 			}
 		} else if ($eqLogic->getConfiguration('category') == 'room') {
 			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_grouped_light') . ' => ' . json_encode($data));
-			$result = $hue->grouped_light($eqLogic->getConfiguration('service_grouped_light'), $data);
-			if (isset($result['errors']) && count($result['errors']) > 0) {
-				usleep(500000);
-				$result = $hue->grouped_light($eqLogic->getConfiguration('service_grouped_light'), $data);
-			}
-			if (isset($result['errors']) && count($result['errors']) > 0) {
-				sleep(3);
-				$result = $hue->grouped_light($eqLogic->getConfiguration('service_grouped_light'), $data);
+			try {
+				$hue->grouped_light($eqLogic->getConfiguration('service_grouped_light'), $data);
+			} catch (\Throwable $th) {
+				try {
+					usleep(500000);
+					$hue->grouped_light($eqLogic->getConfiguration('service_grouped_light'), $data);
+				} catch (\Throwable $th) {
+					sleep(3);
+					$hue->grouped_light($eqLogic->getConfiguration('service_grouped_light'), $data);
+				}
 			}
 		}
 		usleep(100000);
-		if (isset($result['errors']) && count($result['errors']) > 0) {
-			throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));
-		}
 	}
 
 	/*     * **********************Getteur Setteur*************************** */

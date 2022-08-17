@@ -149,7 +149,12 @@ class pHueApi {
         if ($this->_client_key != null) {
             $headers = array('hue-application-key: ' . $this->_client_key);
         }
-        return self::makeRequest('https://' . $this->_ip . $_path, $_method, $_params, $headers, $_timeout);
+        $result = self::makeRequest('https://' . $this->_ip . $_path, $_method, $_params, $headers, $_timeout);
+        if (isset($result['errors']) && count($result['errors']) > 0) {
+            throw new Exception(json_encode($result['errors']));
+        }
+
+        return $result;
     }
 
     public function generateClientKey($_duration = 60) {

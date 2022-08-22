@@ -375,6 +375,9 @@ class philipsHue extends eqLogic {
 			$_datas = $hue->light();
 		}
 		foreach ($_datas['data'] as $data) {
+			if (!isset($data['owner']['rid'])) {
+				continue;
+			}
 			$eqLogic = self::byLogicalId($data['owner']['rid'], 'philipsHue');
 			if (!is_object($eqLogic) || $eqLogic->getIsEnable() == 0) {
 				continue;

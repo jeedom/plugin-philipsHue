@@ -37,14 +37,27 @@ var bridges = JSON.parse(args.bridges);
 for (i in bridges) {
   let bridge = bridges[i]
   Jeedom.log.debug('Launch listenner for : '+bridge['ip']);
+  launchConnection(bridge,0)
+}
+
+
+function launchConnection(bridge,retry){
+  if(retry > 10){
+    Jeedom.log.error('Too much retry, I will kill me...')
+    process.exit()
+  }
   let es = new EventSource('https://'+bridge['ip']+'/eventstream/clip/v2', {headers: {'hue-application-key': bridge['key']},https: {rejectUnauthorized: false}});
   es.onerror = function (err) {
-    Jeedom.log.error('Error on connextion to bridge : '+err)
+    Jeedom.log.error('Error on connextion to bridge : '+JSON.stringify(err)+'. Retry number '+retry+'...')
+    setTimeout(function(){
+      launchConnection(bridge,(retry+1))
+    },1000)
   };
   es.addEventListener('message', function (e) {
+    if(retry != 0){
+      retry = 0;
+    }
     Jeedom.log.debug('Event on bridge : '+i+' => '+e.data)
     Jeedom.com.add_changes('bridge::'+i,e.data);
   })
 }
-
-

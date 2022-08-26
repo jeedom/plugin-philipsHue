@@ -194,6 +194,7 @@ class philipsHue extends eqLogic {
 					$cmd->setType('info');
 					$cmd->setSubtype('string');
 					$cmd->setConfiguration('category', 'button');
+					$cmd->setConfiguration('repeatEventManagement', 'always');
 					$cmd->save();
 					$num_button++;
 				}

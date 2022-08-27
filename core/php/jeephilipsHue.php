@@ -28,6 +28,10 @@ if (init('test') != '') {
     die();
 }
 $result = json_decode(file_get_contents("php://input"), true);
+if (!isset($result['bridge'])) {
+    log::add('philipsHue', 'debug', 'No bridge information :  => ' . json_encode($result));
+    die();
+}
 foreach ($result['bridge'] as $i => $datas) {
     $data = array('data' => array());
     foreach (json_decode($datas, true) as $info) {

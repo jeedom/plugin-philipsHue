@@ -433,7 +433,6 @@ class philipsHue extends eqLogic {
 					$to_cache['previous_color_x'] = $data['color']['xy']['x'];
 					$to_cache['previous_color_y'] = $data['color']['xy']['y'];
 					$rgb = pHueApi::convertXYToRGB($data['color']['xy']['x'], $data['color']['xy']['y'], $data['dimming']['brightness'] * 2.55);
-					log::add('philipsHue', 'debug', json_encode($data['color']['xy']) . ' => ' . json_encode($rgb));
 					$eqLogic->checkAndUpdateCmd('color_state', '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']));
 				}
 			}

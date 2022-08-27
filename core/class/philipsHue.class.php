@@ -351,22 +351,27 @@ class philipsHue extends eqLogic {
 	}
 
 	public static function cron15() {
-		$hue = self::getPhilipsHue($_bridge_number);
-		$zigbee_connectivities = $hue->zigbee_connectivity();
-		foreach ($zigbee_connectivities['data'] as $zigbee_connectivity) {
-			$eqLogic = self::byLogicalId($zigbee_connectivity['owner']['rid'], 'philipsHue');
-			if (!is_object($eqLogic)) {
+		for ($i = 1; $i <= config::byKey('nbBridge', 'philipsHue'); $i++) {
+			if (config::byKey('bridge_ip' . $i, 'philipsHue') == '') {
 				continue;
 			}
-			$eqLogic->checkAndUpdateCmd($zigbee_connectivity['id'], $zigbee_connectivity['status']);
-		}
-		$devices_power = $hue->device_power();
-		foreach ($devices_power['data'] as $device_power) {
-			$eqLogic = self::byLogicalId($device_power['owner']['rid'], 'philipsHue');
-			if (!is_object($eqLogic)) {
-				continue;
+			$hue = self::getPhilipsHue($i);
+			$zigbee_connectivities = $hue->zigbee_connectivity();
+			foreach ($zigbee_connectivities['data'] as $zigbee_connectivity) {
+				$eqLogic = self::byLogicalId($zigbee_connectivity['owner']['rid'], 'philipsHue');
+				if (!is_object($eqLogic)) {
+					continue;
+				}
+				$eqLogic->checkAndUpdateCmd($zigbee_connectivity['id'], $zigbee_connectivity['status']);
 			}
-			$eqLogic->batteryStatus($device_power['power_state']['battery_level']);
+			$devices_power = $hue->device_power();
+			foreach ($devices_power['data'] as $device_power) {
+				$eqLogic = self::byLogicalId($device_power['owner']['rid'], 'philipsHue');
+				if (!is_object($eqLogic)) {
+					continue;
+				}
+				$eqLogic->batteryStatus($device_power['power_state']['battery_level']);
+			}
 		}
 	}
 

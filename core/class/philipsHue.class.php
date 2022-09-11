@@ -19,7 +19,6 @@
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 require_once dirname(__FILE__) . '/pHueApi.class.php';
-require_once dirname(__FILE__) . '/../../vendor/autoload.php';
 
 class philipsHue extends eqLogic {
 	/*     * *************************Attributs****************************** */

@@ -554,15 +554,20 @@ class philipsHueCmd extends cmd {
 			}
 			return;
 		}
-		$transition = $eqLogic->getCmd(null, 'transition_state');
-		$transistion_time = 0;
-		if (is_object($transition)) {
-			$transistion_time = $transition->execCmd(null, 2);
-			if ($transistion_time !== 0) {
-				$transition->event(0);
+		if (isset($_options['transition'])) {
+			$transistion_time = $_options['transition'] * 1000;
+		} else {
+			$transition = $eqLogic->getCmd(null, 'transition_state');
+			$transistion_time = 0;
+			if (is_object($transition)) {
+				$transistion_time = $transition->execCmd(null, 2);
+				if ($transistion_time !== 0) {
+					$transition->event(0);
+				}
 			}
+			$transistion_time = ($transistion_time == 0) ? 0 : $transistion_time * 1000;
 		}
-		$transistion_time = ($transistion_time == 0) ? 0 : $transistion_time * 1000;
+
 		$data = array();
 		if ($this->getLogicalId() != 'off') {
 			$data['dynamics'] = array('duration' => $transistion_time);

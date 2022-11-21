@@ -32,11 +32,7 @@ if (!isset($result['bridge'])) {
     log::add('philipsHue', 'debug', 'No bridge information :  => ' . json_encode($result));
     die();
 }
+
 foreach ($result['bridge'] as $i => $datas) {
-    $data = array('data' => array());
-    foreach (json_decode($datas, true) as $info) {
-        $data['data'][] = $info['data'][0];
-    }
-    log::add('philipsHue', 'debug', 'Received message for bridge : ' . $i . ' => ' . json_encode($data));
-    philipsHue::syncState($i, $data);
+    philipsHue::syncState($i, json_decode($datas, true)[0]);
 }

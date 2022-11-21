@@ -380,6 +380,7 @@ class philipsHue extends eqLogic {
 			$hue = self::getPhilipsHue($_bridge_number);
 			$_datas = $hue->light();
 		}
+		log::add('philipsHue', 'debug', 'Received message for bridge : ' . $_bridge_number . ' => ' . json_encode($_datas));
 		foreach ($_datas['data'] as $data) {
 			if (!isset($data['owner']['rid'])) {
 				continue;
@@ -411,6 +412,8 @@ class philipsHue extends eqLogic {
 				$eqLogic->checkAndUpdateCmd('state', $data['on']['on']);
 				if (!$data['on']['on']) {
 					$data['dimming']['brightness'] = 0;
+				} elseif (!isset($data['dimming']['brightness'])) {
+					$data['dimming']['brightness'] = $eqLogic->getCache('previous_luminosity');
 				}
 			}
 			if (isset($data['dimming']['brightness'])) {
@@ -419,7 +422,7 @@ class philipsHue extends eqLogic {
 				}
 				$eqLogic->checkAndUpdateCmd('luminosity_state', $data['dimming']['brightness']);
 				if ($data['dimming']['brightness'] != 0) {
-					$to_cache['brightness'] = $data['dimming']['brightness'];
+					$to_cache['previous_luminosity'] = $data['dimming']['brightness'];
 				}
 				if (!isset($data['color']['xy'])) {
 					$data['color']['xy'] = array('x' => $eqLogic->getCache('previous_color_x'), 'y' => $eqLogic->getCache('previous_color_y'));

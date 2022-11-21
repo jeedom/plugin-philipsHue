@@ -28,6 +28,10 @@ class philipsHue extends eqLogic {
 
 	/*     * ***********************Methode static*************************** */
 
+	public static function cron() {
+		self::syncState();
+	}
+
 	public static function deamon_info() {
 		$return = array();
 		$return['log'] = 'philipsHue';

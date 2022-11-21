@@ -57,7 +57,6 @@ function launchConnection(bridge,retry){
     if(retry != 0){
       retry = 0;
     }
-    Jeedom.log.debug('Event on bridge : '+i+' => '+e.data)
     Jeedom.com.add_changes('bridge::'+i,e.data);
   })
 }

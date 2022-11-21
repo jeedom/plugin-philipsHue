@@ -28,10 +28,6 @@ class philipsHue extends eqLogic {
 
 	/*     * ***********************Methode static*************************** */
 
-	public static function cron() {
-		self::syncState();
-	}
-
 	public static function deamon_info() {
 		$return = array();
 		$return['log'] = 'philipsHue';
@@ -375,6 +371,7 @@ class philipsHue extends eqLogic {
 				}
 				$eqLogic->batteryStatus($device_power['power_state']['battery_level']);
 			}
+			self::syncState($i);
 		}
 	}
 

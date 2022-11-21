@@ -112,12 +112,12 @@ Jeedom.com.config = function(_apikey,_callback,_cycle){
   }
 }
 
-Jeedom.com.add_changes = function(_key,_value){
+Jeedom.com.add_changes = function(_key,_value,_noMerge){
   if (_key.indexOf('::') != -1){
     tmp_changes = {}
-    var changes = _value
-    var keys = _key.split('::').reverse();
-    for (var k in keys){
+    let changes = _value
+    let keys = _key.split('::').reverse();
+    for (let k in keys){
       if (typeof tmp_changes[keys[k]] == 'undefined'){
         tmp_changes[keys[k]] = {}
       }

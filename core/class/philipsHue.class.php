@@ -179,6 +179,19 @@ class philipsHue extends eqLogic {
 				$eqLogic->setConfiguration('service_' . $service['rtype'], $service['rid']);
 			}
 			$eqLogic->save();
+
+			$cmd = $eqLogic->getCmd('action', 'refresh');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setName(__('Rafraichir', __FILE__));
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setIsVisible(1);
+				$cmd->setLogicalId('refresh');
+			}
+			$cmd->setType('action');
+			$cmd->setSubtype('other');
+			$cmd->save();
+
 			$num_button = 1;
 			foreach ($device['services'] as $service) {
 				if ($service['rtype'] == 'button') {
@@ -524,6 +537,10 @@ class philipsHueCmd extends cmd {
 			return;
 		}
 		$eqLogic = $this->getEqLogic();
+		if ($this->getLogicalId() != 'refresh') {
+			philipsHue::syncState($eqLogic->getConfiguration('bridge'));
+			return;
+		}
 		$hue = philipsHue::getPhilipsHue($eqLogic->getConfiguration('bridge'));
 		if (in_array($this->getLogicalId(), array('enable', 'disable'))) {
 			if ($eqLogic->getConfiguration('service_motion') != '') {

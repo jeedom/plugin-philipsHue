@@ -363,6 +363,7 @@ class philipsHue extends eqLogic {
 	}
 
 	public static function cron5() {
+		return;
 		for ($i = 1; $i <= config::byKey('nbBridge', 'philipsHue'); $i++) {
 			if (config::byKey('bridge_ip' . $i, 'philipsHue') == '') {
 				continue;

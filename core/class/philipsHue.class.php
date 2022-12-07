@@ -362,16 +362,6 @@ class philipsHue extends eqLogic {
 		}
 	}
 
-	public static function cron5() {
-		return;
-		for ($i = 1; $i <= config::byKey('nbBridge', 'philipsHue'); $i++) {
-			if (config::byKey('bridge_ip' . $i, 'philipsHue') == '') {
-				continue;
-			}
-			self::syncState($i);
-		}
-	}
-
 	public static function cron15() {
 		for ($i = 1; $i <= config::byKey('nbBridge', 'philipsHue'); $i++) {
 			if (config::byKey('bridge_ip' . $i, 'philipsHue') == '') {
@@ -402,7 +392,7 @@ class philipsHue extends eqLogic {
 			$hue = self::getPhilipsHue($_bridge_number);
 			$_datas = array_merge_recursive($hue->light(), $hue->motion(), $hue->temperature());
 		}
-		log::add('philipsHue', 'debug', 'Received message for bridge : ' . $_bridge_number . ' => ' . json_encode($_datas));
+		//log::add('philipsHue', 'debug', 'Received message for bridge : ' . $_bridge_number . ' => ' . json_encode($_datas));
 		foreach ($_datas['data'] as $data) {
 			if (!isset($data['owner']['rid'])) {
 				continue;

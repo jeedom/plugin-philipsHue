@@ -392,7 +392,7 @@ class philipsHue extends eqLogic {
 			$hue = self::getPhilipsHue($_bridge_number);
 			$_datas = array_merge_recursive($hue->light(), $hue->motion(), $hue->temperature());
 		}
-		//log::add('philipsHue', 'debug', 'Received message for bridge : ' . $_bridge_number . ' => ' . json_encode($_datas));
+		log::add('philipsHue', 'debug', 'Received message for bridge : ' . $_bridge_number . ' => ' . json_encode($_datas));
 		$states = array();
 		foreach ($_datas['data'] as $data) {
 			if (!isset($data['owner']['rid'])) {

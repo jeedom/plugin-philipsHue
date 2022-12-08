@@ -393,6 +393,7 @@ class philipsHue extends eqLogic {
 			$_datas = array_merge_recursive($hue->light(), $hue->motion(), $hue->temperature());
 		}
 		//log::add('philipsHue', 'debug', 'Received message for bridge : ' . $_bridge_number . ' => ' . json_encode($_datas));
+		$states = array();
 		foreach ($_datas['data'] as $data) {
 			if (!isset($data['owner']['rid'])) {
 				continue;
@@ -421,6 +422,7 @@ class philipsHue extends eqLogic {
 				$eqLogic->checkAndUpdateCmd($data['id'], $data['status']);
 			}
 			if (isset($data['on']['on'])) {
+				$states[$data['owner']['rid']] = $data['on']['on'];
 				$eqLogic->checkAndUpdateCmd('state', $data['on']['on']);
 				if (!$data['on']['on']) {
 					$data['dimming']['brightness'] = 0;
@@ -430,6 +432,9 @@ class philipsHue extends eqLogic {
 			}
 			if (isset($data['dimming']['brightness'])) {
 				if ($data['dimming']['brightness'] < 1) {
+					$data['dimming']['brightness'] = 0;
+				}
+				if (isset($states[$data['owner']['rid']]) && $states[$data['owner']['rid']] === false) {
 					$data['dimming']['brightness'] = 0;
 				}
 				$eqLogic->checkAndUpdateCmd('luminosity_state', $data['dimming']['brightness']);

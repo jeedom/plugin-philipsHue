@@ -424,6 +424,9 @@ class philipsHue extends eqLogic {
 			if (isset($data['on']['on'])) {
 				$states[$data['owner']['rid']] = $data['on']['on'];
 				$eqLogic->checkAndUpdateCmd('state', $data['on']['on']);
+				if (!isset($data['dimming'])) {
+					$data['dimming'] = array();
+				}
 				if (!$data['on']['on']) {
 					$data['dimming']['brightness'] = 0;
 				} elseif (!isset($data['dimming']['brightness'])) {
@@ -434,7 +437,7 @@ class philipsHue extends eqLogic {
 				if ($data['dimming']['brightness'] < 1) {
 					$data['dimming']['brightness'] = 0;
 				}
-				if (isset($states[$data['owner']['rid']]) && $states[$data['owner']['rid']] === false) {
+				if (isset($states[$data['owner']['rid']]) && !$states[$data['owner']['rid']]) {
 					$data['dimming']['brightness'] = 0;
 				}
 				$eqLogic->checkAndUpdateCmd('luminosity_state', $data['dimming']['brightness']);

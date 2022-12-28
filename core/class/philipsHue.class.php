@@ -28,6 +28,11 @@ class philipsHue extends eqLogic {
 
 	/*     * ***********************Methode static*************************** */
 
+	public static function cronDaily() {
+		$plugin = plugin::byId(__CLASS__);
+		$plugin->deamon_start(true);
+	}
+
 	public static function deamon_info() {
 		$return = array();
 		$return['log'] = 'philipsHue';

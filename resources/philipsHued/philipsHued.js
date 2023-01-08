@@ -46,7 +46,17 @@ function launchConnection(bridge,retry){
     Jeedom.log.error('Too much retry, I will kill me...')
     process.exit()
   }
-  let es = new EventSource('https://'+bridge['ip']+'/eventstream/clip/v2', {headers: {'hue-application-key': bridge['key']},https: {rejectUnauthorized: false}});
+  let es = new EventSource('https://'+bridge['ip']+'/eventstream/clip/v2',{
+    headers:{
+      'hue-application-key': bridge['key'],
+      'Connection':'keep-alive',
+      'Accept':'text/event-stream',
+      'Cache-Control':'no-cache'
+    },
+    https: {
+      rejectUnauthorized: false
+    }
+  });
   es.onerror = function (err) {
     Jeedom.log.error('Error on connextion to bridge : '+JSON.stringify(err)+'. Retry number '+retry+'...')
     setTimeout(function(){

@@ -28,7 +28,7 @@ class philipsHue extends eqLogic {
 
 	/*     * ***********************Methode static*************************** */
 
-	public static function cronDaily() {
+	public static function cronHourly() {
 		$plugin = plugin::byId(__CLASS__);
 		$plugin->deamon_start(true);
 	}

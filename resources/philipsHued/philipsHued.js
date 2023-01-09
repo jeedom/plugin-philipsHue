@@ -68,19 +68,26 @@ function launchConnection(_bridge_id,_retry){
     if(_retry != 0){
       _retry = 0;
     }
-    let datas = JSON.parse(e.data)
-    for(let i in datas){
-      if(datas[i].type != 'update'){
-        continue;
-      }
-      for(let j in datas[i].data){
-        if(datas[i].data[j].type=='geofence_client' && datas[i].data[j].name.indexOf('jeedom') === 0 && bridges[_bridge_id]['keepalive']){
-          clearTimeout(bridges[_bridge_id]['keepalive']);
-        }
-      }
-    }
+    bridges[_bridge_id]['lastMessage'] = Math.floor(new Date().getTime() / 1000)
     Jeedom.com.add_changes('bridge::'+_bridge_id,e.data);
   })
+
+  setInterval(function(){
+    if((bridges[_bridge_id]['lastMessage']+61) < Math.floor(new Date().getTime() / 1000)){
+      Jeedom.log.error('[launchConnection] Lost connection to SSE server. Try reconnect...')
+      bridges[_bridge_id]['es'] = new EventSource('https://'+bridges[_bridge_id]['ip']+'/eventstream/clip/v2',{
+        headers:{
+          'hue-application-key': bridges[_bridge_id]['key'],
+          'Connection':'keep-alive',
+          'Accept':'text/event-stream',
+          'Cache-Control':'no-cache'
+        },
+        https: {
+          rejectUnauthorized: false
+        }
+      });
+    }
+  },60000);
 }
 
 function initGeolocClient(_bridge_id){
@@ -181,20 +188,7 @@ function updateJeedomGeolocName(_bridge_id){
         body = body + chunk;
       });
       res.on('end',function(){
-        bridges[_bridge_id]['keepalive'] = setTimeout(function(){
-          Jeedom.log.debug("[updateJeedomGeolocName] Lost SSE event server on bridge : " + _bridge_id);
-          bridges[_bridge_id]['es'] = new EventSource('https://'+bridges[_bridge_id]['ip']+'/eventstream/clip/v2',{
-            headers:{
-              'hue-application-key': bridges[_bridge_id]['key'],
-              'Connection':'keep-alive',
-              'Accept':'text/event-stream',
-              'Cache-Control':'no-cache'
-            },
-            https: {
-              rejectUnauthorized: false
-            }
-          });
-        },5000)
+        
       });
     });
     req.write(JSON.stringify({

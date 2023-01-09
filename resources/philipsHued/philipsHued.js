@@ -73,7 +73,7 @@ function launchConnection(_bridge_id,_retry){
   })
 
   setInterval(function(){
-    if((bridges[_bridge_id]['lastMessage']+61) < Math.floor(new Date().getTime() / 1000)){
+    if((bridges[_bridge_id]['lastMessage']+121) < Math.floor(new Date().getTime() / 1000)){
       Jeedom.log.error('[launchConnection] Lost connection to SSE server. Try reconnect...')
       bridges[_bridge_id]['es'] = new EventSource('https://'+bridges[_bridge_id]['ip']+'/eventstream/clip/v2',{
         headers:{
@@ -181,6 +181,9 @@ function updateJeedomGeolocName(_bridge_id){
     }
   };
   setInterval(function(){
+    if((bridges[_bridge_id]['lastMessage']+60) > Math.floor(new Date().getTime() / 1000)){
+      return;
+    }
     let req = https.request(options, function(res) {
       res.setEncoding('utf8');
       let body = '';

@@ -33,6 +33,12 @@ if (!isset($result['bridge'])) {
     die();
 }
 
+
+
 foreach ($result['bridge'] as $i => $datas) {
+    if ($datas == 'resync') {
+        philipsHue::syncState($i);
+        continue;
+    }
     philipsHue::syncState($i, json_decode($datas, true)[0]);
 }

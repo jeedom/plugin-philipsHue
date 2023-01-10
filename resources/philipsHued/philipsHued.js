@@ -72,21 +72,27 @@ function launchConnection(_bridge_id,_retry){
     Jeedom.com.add_changes('bridge::'+_bridge_id,e.data);
   })
 
-  setInterval(function(){
-    if((bridges[_bridge_id]['lastMessage']+121) < Math.floor(new Date().getTime() / 1000)){
-      Jeedom.log.error('[launchConnection] Lost connection to SSE server. Try reconnect...')
-      bridges[_bridge_id]['es'] = new EventSource('https://'+bridges[_bridge_id]['ip']+'/eventstream/clip/v2',{
-        headers:{
-          'hue-application-key': bridges[_bridge_id]['key'],
-          'Connection':'keep-alive',
-          'Accept':'text/event-stream',
-          'Cache-Control':'no-cache'
-        },
-        https: {
-          rejectUnauthorized: false
-        }
-      });
+  if(bridges[_bridge_id]['keepalive']){
+    clearInterval(bridges[_bridge_id]['keepalive']);
+  }
+
+  bridges[_bridge_id]['keepalive'] = setInterval(function(){
+    if((bridges[_bridge_id]['lastMessage']+121) > Math.floor(new Date().getTime() / 1000)){
+      return
     }
+    Jeedom.log.error('[launchConnection] Lost connection to SSE server. Try reconnect...')
+    bridges[_bridge_id]['es'] = new EventSource('https://'+bridges[_bridge_id]['ip']+'/eventstream/clip/v2',{
+      headers:{
+        'hue-application-key': bridges[_bridge_id]['key'],
+        'Connection':'keep-alive',
+        'Accept':'text/event-stream',
+        'Cache-Control':'no-cache'
+      },
+      https: {
+        rejectUnauthorized: false
+      }
+    });
+    Jeedom.com.add_changes('bridge::'+_bridge_id,'resync');
   },60000);
 }
 

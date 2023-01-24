@@ -77,7 +77,7 @@ function launchConnection(_bridge_id,_retry){
   }
 
   bridges[_bridge_id]['keepalive'] = setInterval(function(){
-    if((bridges[_bridge_id]['lastMessage']+121) > Math.floor(new Date().getTime() / 1000)){
+    if((bridges[_bridge_id]['lastMessage']+61) > Math.floor(new Date().getTime() / 1000)){
       return
     }
     Jeedom.log.error('[launchConnection] Lost connection to SSE server. Try reconnect...')
@@ -93,7 +93,7 @@ function launchConnection(_bridge_id,_retry){
       }
     });
     Jeedom.com.add_changes('bridge::'+_bridge_id,'resync');
-  },60000);
+  },30000);
 }
 
 function initGeolocClient(_bridge_id){
@@ -187,7 +187,7 @@ function updateJeedomGeolocName(_bridge_id){
     }
   };
   setInterval(function(){
-    if((bridges[_bridge_id]['lastMessage']+60) > Math.floor(new Date().getTime() / 1000)){
+    if((bridges[_bridge_id]['lastMessage']+30) > Math.floor(new Date().getTime() / 1000)){
       return;
     }
     let req = https.request(options, function(res) {
@@ -206,6 +206,6 @@ function updateJeedomGeolocName(_bridge_id){
       'name' : 'jeedom_'+((Math.random() + 1).toString(36).substring(7))
     }));
     req.end();
- }, 60000)
+ }, 30000)
 
 }

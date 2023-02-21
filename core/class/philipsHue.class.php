@@ -627,7 +627,7 @@ class philipsHueCmd extends cmd {
 					list($r, $g, $b) = str_split(str_replace('#', '', $_options['color']), 2);
 					$xyb = pHueApi::convertRGBToXY(hexdec($r), hexdec($g), hexdec($b));
 					$data['color'] = array('xy' => array('x' => $xyb['x'], 'y' => $xyb['y']));
-					$data['dimming'] = array('brightness' => $xyb['bri']);
+					//$data['dimming'] = array('brightness' => $xyb['bri']);
 				}
 				break;
 			case 'effect':

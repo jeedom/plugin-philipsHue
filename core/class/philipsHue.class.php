@@ -552,6 +552,12 @@ class philipsHueCmd extends cmd {
 			return;
 		}
 		$eqLogic = $this->getEqLogic();
+		if ($this->getLogicalId() == 'transition') {
+			$transition = $eqLogic->getCmd(null, 'transition_state');
+			if (is_object($transition)) {
+				$transition->event($_options['slider']);
+			}
+		}
 		if ($this->getLogicalId() == 'refresh') {
 			philipsHue::syncState($eqLogic->getConfiguration('bridge'));
 			return;

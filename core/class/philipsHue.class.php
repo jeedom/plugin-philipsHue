@@ -370,6 +370,15 @@ class philipsHue extends eqLogic {
 		}
 	}
 
+	public static function cron() {
+		for ($i = 1; $i <= config::byKey('nbBridge', 'philipsHue'); $i++) {
+			if (config::byKey('bridge_ip' . $i, 'philipsHue') == '') {
+				continue;
+			}
+			self::syncState($i);
+		}
+	}
+
 	public static function cron15() {
 		for ($i = 1; $i <= config::byKey('nbBridge', 'philipsHue'); $i++) {
 			if (config::byKey('bridge_ip' . $i, 'philipsHue') == '') {

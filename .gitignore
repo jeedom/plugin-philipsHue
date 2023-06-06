@@ -5,3 +5,5 @@ plugins
 .remote-sync.json
 .project
 /.vscode
+node_modules
+data/

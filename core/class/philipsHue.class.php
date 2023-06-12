@@ -222,6 +222,7 @@ class philipsHue extends eqLogic {
 					$cmd->setType('info');
 					$cmd->setSubtype('binary');
 					$cmd->setConfiguration('category', 'motion');
+					$cmd->setGeneric_type('PRESENCE');
 					$cmd->save();
 				}
 				if ($service['rtype'] == 'light_level') {
@@ -236,6 +237,7 @@ class philipsHue extends eqLogic {
 					$cmd->setType('info');
 					$cmd->setSubtype('numeric');
 					$cmd->setConfiguration('category', 'light_level');
+					$cmd->setGeneric_type('BRIGHTNESS');
 					$cmd->save();
 				}
 				if ($service['rtype'] == 'temperature') {
@@ -251,6 +253,7 @@ class philipsHue extends eqLogic {
 					$cmd->setSubtype('numeric');
 					$cmd->setUnite('°C');
 					$cmd->setConfiguration('category', 'temperature');
+					$cmd->setGeneric_type('TEMPERATURE');
 					$cmd->save();
 				}
 				if ($service['rtype'] == 'zigbee_connectivity') {

@@ -652,6 +652,9 @@ class philipsHueCmd extends cmd {
 				$data['effects'] = array('effect' => $_options['select']);
 				break;
 		}
+		if(isset($data['dimming']) && $data['dimming'] > 100){
+			$data['dimming'] = 100;
+		}
 		if ($eqLogic->getConfiguration('category') == 'light') {
 			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_light') . ' => ' . json_encode($data));
 			try {

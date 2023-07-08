@@ -353,7 +353,7 @@ class philipsHue extends eqLogic {
 			$cmd = $eqLogic->getCmd('action', $scene['id']);
 			if (!is_object($cmd)) {
 				foreach ($eqLogic->getCmd() as $cmd_found) {
-					if ($cmd_found->getName() == __('Scene ', __FILE__) . $scene['metadata']['name']) {
+					if (strtolower($cmd_found->getName()) == strtolower(__('Scene ', __FILE__) . $scene['metadata']['name'])) {
 						$cmd = $cmd_found;
 						break;
 					}
@@ -652,7 +652,7 @@ class philipsHueCmd extends cmd {
 				$data['effects'] = array('effect' => $_options['select']);
 				break;
 		}
-		if(isset($data['dimming']['brightness']) && $data['dimming']['brightness'] > 100){
+		if (isset($data['dimming']['brightness']) && $data['dimming']['brightness'] > 100) {
 			$data['dimming']['brightness'] = 100;
 		}
 		if ($eqLogic->getConfiguration('category') == 'light') {

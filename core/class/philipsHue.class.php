@@ -389,12 +389,14 @@ class philipsHue extends eqLogic {
 			}
 			$hue = self::getPhilipsHue($i);
 			$zigbee_connectivities = $hue->zigbee_connectivity();
-			foreach ($zigbee_connectivities['data'] as $zigbee_connectivity) {
-				$eqLogic = self::byLogicalId($zigbee_connectivity['owner']['rid'], 'philipsHue');
-				if (!is_object($eqLogic)) {
-					continue;
+			if($zigbee_connectivities['data'] && is_array($zigbee_connectivities['data']) && count($zigbee_connectivities['data']) > 0){
+				foreach ($zigbee_connectivities['data'] as $zigbee_connectivity) {
+					$eqLogic = self::byLogicalId($zigbee_connectivity['owner']['rid'], 'philipsHue');
+					if (!is_object($eqLogic)) {
+						continue;
+					}
+					$eqLogic->checkAndUpdateCmd($zigbee_connectivity['id'], $zigbee_connectivity['status']);
 				}
-				$eqLogic->checkAndUpdateCmd($zigbee_connectivity['id'], $zigbee_connectivity['status']);
 			}
 			$devices_power = $hue->device_power();
 			foreach ($devices_power['data'] as $device_power) {
@@ -410,7 +412,7 @@ class philipsHue extends eqLogic {
 	public static function syncState($_bridge_number = 1, $_datas = null) {
 		if ($_datas == null) {
 			$hue = self::getPhilipsHue($_bridge_number);
-			$_datas = array_merge_recursive($hue->light(), $hue->motion(), $hue->temperature());
+			$_datas = @array_merge_recursive($hue->light(), $hue->motion(), $hue->temperature());
 		}
 		log::add('philipsHue', 'debug', 'Received message for bridge : ' . $_bridge_number . ' => ' . json_encode($_datas));
 		$states = array();

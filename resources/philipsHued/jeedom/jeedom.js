@@ -14,7 +14,7 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
-const request = require('request');
+const axios = require('axios');
 var express = require('express');
 
 var Jeedom = {}
@@ -112,12 +112,12 @@ Jeedom.com.config = function(_apikey,_callback,_cycle){
   }
 }
 
-Jeedom.com.add_changes = function(_key,_value,_noMerge){
+Jeedom.com.add_changes = function(_key,_value){
   if (_key.indexOf('::') != -1){
     tmp_changes = {}
-    let changes = _value
-    let keys = _key.split('::').reverse();
-    for (let k in keys){
+    var changes = _value
+    var keys = _key.split('::').reverse();
+    for (var k in keys){
       if (typeof tmp_changes[keys[k]] == 'undefined'){
         tmp_changes[keys[k]] = {}
       }
@@ -141,19 +141,22 @@ Jeedom.com.add_changes = function(_key,_value,_noMerge){
 
 Jeedom.com.send_change_immediate = function(_changes){
   Jeedom.log.debug('Send data to jeedom : '+JSON.stringify(_changes));
-  request.post({url:Jeedom.com.callback+'?apikey='+Jeedom.com.apikey, json: _changes}, function(error, response, body){
-    if(response.statusCode != 200){
+  axios({
+    method : 'POST',
+    url:Jeedom.com.callback+'?apikey='+Jeedom.com.apikey,
+    data: JSON.stringify(_changes)
+  }).catch(function (error) {
       Jeedom.log.error('Error on send to jeedom : '+JSON.stringify(error));
-    }
   })
 }
 
-Jeedom.com.test = function(_changes){
-  request.post({url:Jeedom.com.callback+'?apikey='+Jeedom.com.apikey, json: {}}, function(error, response, body){
-    if(response.statusCode != 200){
-      Jeedom.log.error('Callback error.Please check your network configuration page : '+JSON.stringify(error));
-      process.exit();
-    }
+Jeedom.com.test = function(){
+  axios({
+    method:'GET',
+    url:Jeedom.com.callback+'?apikey='+Jeedom.com.apikey
+  }).catch(function (error) {
+    Jeedom.log.error('Callback error.Please check your network configuration page : '+JSON.stringify(error));
+    process.exit();
   })
 }
 
@@ -162,6 +165,8 @@ Jeedom.com.test = function(_changes){
 Jeedom.http.config = function(_port,_apikey){
   Jeedom.http.apikey = _apikey;
   Jeedom.http.app = express();
+  Jeedom.http.app.use(express.urlencoded({limit: '5mb'}));
+  Jeedom.http.app.use(express.json({limit: '5mb'}));
   Jeedom.http.app.get('/', function(req, res) {
     res.setHeader('Content-Type', 'text/plain');
     res.status(404).send('Not found');
@@ -172,7 +177,7 @@ Jeedom.http.config = function(_port,_apikey){
 }
 
 Jeedom.http.checkApikey = function(_req){
-  return (_req.query.apikey == Jeedom.http.apikey)
+  return (_req.query.apikey === Jeedom.http.apikey)
 }
 
 /***************************EXPORTS*******************************/

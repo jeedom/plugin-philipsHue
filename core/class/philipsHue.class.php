@@ -313,13 +313,6 @@ class philipsHue extends eqLogic {
 			log::add('philipsHue', 'debug', 'Found room ' . $room['id'] . ' => ' . json_encode($room));
 			$eqLogic = self::byLogicalId($room['id'], 'philipsHue');
 			if (!is_object($eqLogic)) {
-				$eqLogic = self::byLogicalId('group' . str_replace(array('/groups/'), '', $room['id_v1']) . '-' . $_bridge_number, 'philipsHue');
-				if (is_object($eqLogic)) {
-					$eqLogic->setLogicalId($room['id']);
-					$eqLogic->save();
-				}
-			}
-			if (!is_object($eqLogic)) {
 				$eqLogic = new self();
 				$eqLogic->setLogicalId($room['id']);
 				$eqLogic->setName($room['metadata']['name']);
@@ -338,6 +331,32 @@ class philipsHue extends eqLogic {
 			$eqLogic->setConfiguration('device', 'ROOM');
 			$eqLogic->setConfiguration('category', 'room');
 			$eqLogic->setConfiguration('id', $room['id']);
+			$eqLogic->save();
+		}
+
+		$grouped_lights = $hue->grouped_light();
+		foreach ($grouped_lights['data'] as $grouped_light) {
+			log::add('philipsHue', 'debug', 'Found group light ' . $grouped_light['id'] . ' => ' . json_encode($grouped_light));
+			$eqLogic = self::byLogicalId($grouped_light['id'], 'philipsHue');
+			if (!is_object($eqLogic)) {
+				$eqLogic = new self();
+				$eqLogic->setLogicalId($grouped_light['id']);
+				$eqLogic->setName($grouped_light['metadata']['name']);
+				$eqLogic->setEqType_name('philipsHue');
+				$eqLogic->setIsVisible(0);
+				$eqLogic->setIsEnable(1);
+				$object = jeeObject::byName($grouped_light['metadata']['name']);
+				if (is_object($object)) {
+					$eqLogic->setObject_id($object->getId());
+				}
+			}
+			foreach ($grouped_light['services'] as $service) {
+				$eqLogic->setConfiguration('service_' . $service['rtype'], $service['rid']);
+			}
+			$eqLogic->setConfiguration('bridge', $_bridge_number);
+			$eqLogic->setConfiguration('device', 'GROUPED_LIGHT');
+			$eqLogic->setConfiguration('category', 'grouped_light');
+			$eqLogic->setConfiguration('id', $grouped_light['id']);
 			$eqLogic->save();
 		}
 
@@ -670,7 +689,7 @@ class philipsHueCmd extends cmd {
 					$hue->light($eqLogic->getConfiguration('service_light'), $data);
 				}
 			}
-		} else if ($eqLogic->getConfiguration('category') == 'room') {
+		} else if ($eqLogic->getConfiguration('category') == 'room' || $eqLogic->getConfiguration('category') == 'grouped_light') {
 			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_grouped_light') . ' => ' . json_encode($data));
 			try {
 				$hue->grouped_light($eqLogic->getConfiguration('service_grouped_light'), $data);

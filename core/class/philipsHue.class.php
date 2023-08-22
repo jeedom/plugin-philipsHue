@@ -337,7 +337,7 @@ class philipsHue extends eqLogic {
 		$grouped_lights = $hue->grouped_light();
 		foreach ($grouped_lights['data'] as $grouped_light) {
 			log::add('philipsHue', 'debug', 'Found group light ' . $grouped_light['id'] . ' => ' . json_encode($grouped_light));
-			if($grouped_light['metadata']['name'] == ''){
+			if(!isset($grouped_light['metadata']) || $grouped_light['metadata']['name'] == ''){
 				continue;
 			}
 			$eqLogic = self::byLogicalId($grouped_light['id'], 'philipsHue');

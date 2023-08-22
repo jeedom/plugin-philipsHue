@@ -311,6 +311,9 @@ class philipsHue extends eqLogic {
 		$rooms = $hue->room();
 		foreach ($rooms['data'] as $room) {
 			log::add('philipsHue', 'debug', 'Found room ' . $room['id'] . ' => ' . json_encode($room));
+			if(!isset($room['metadata']) || $room['metadata']['name'] == ''){
+				continue;
+			}
 			$eqLogic = self::byLogicalId($room['id'], 'philipsHue');
 			if (!is_object($eqLogic)) {
 				$eqLogic = new self();
@@ -331,6 +334,31 @@ class philipsHue extends eqLogic {
 			$eqLogic->setConfiguration('device', 'ROOM');
 			$eqLogic->setConfiguration('category', 'room');
 			$eqLogic->setConfiguration('id', $room['id']);
+			$eqLogic->save();
+		}
+
+		$zones = $hue->zone();
+		foreach ($zones['data'] as $zone) {
+			log::add('philipsHue', 'debug', 'Found zone ' . $zone['id'] . ' => ' . json_encode($zone));
+			if(!isset($zone['metadata']) || $zone['metadata']['name'] == ''){
+				continue;
+			}
+			$eqLogic = self::byLogicalId($zone['id'], 'philipsHue');
+			if (!is_object($eqLogic)) {
+				$eqLogic = new self();
+				$eqLogic->setLogicalId($zone['id']);
+				$eqLogic->setName($zone['metadata']['name']);
+				$eqLogic->setEqType_name('philipsHue');
+				$eqLogic->setIsVisible(0);
+				$eqLogic->setIsEnable(1);
+			}
+			foreach ($zone['services'] as $service) {
+				$eqLogic->setConfiguration('service_' . $service['rtype'], $service['rid']);
+			}
+			$eqLogic->setConfiguration('bridge', $_bridge_number);
+			$eqLogic->setConfiguration('device', 'ZONE');
+			$eqLogic->setConfiguration('category', 'zone');
+			$eqLogic->setConfiguration('id', $zone['id']);
 			$eqLogic->save();
 		}
 

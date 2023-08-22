@@ -337,6 +337,9 @@ class philipsHue extends eqLogic {
 		$grouped_lights = $hue->grouped_light();
 		foreach ($grouped_lights['data'] as $grouped_light) {
 			log::add('philipsHue', 'debug', 'Found group light ' . $grouped_light['id'] . ' => ' . json_encode($grouped_light));
+			if($grouped_light['metadata']['name'] == ''){
+				continue;
+			}
 			$eqLogic = self::byLogicalId($grouped_light['id'], 'philipsHue');
 			if (!is_object($eqLogic)) {
 				$eqLogic = new self();
@@ -345,10 +348,6 @@ class philipsHue extends eqLogic {
 				$eqLogic->setEqType_name('philipsHue');
 				$eqLogic->setIsVisible(0);
 				$eqLogic->setIsEnable(1);
-				$object = jeeObject::byName($grouped_light['metadata']['name']);
-				if (is_object($object)) {
-					$eqLogic->setObject_id($object->getId());
-				}
 			}
 			foreach ($grouped_light['services'] as $service) {
 				$eqLogic->setConfiguration('service_' . $service['rtype'], $service['rid']);

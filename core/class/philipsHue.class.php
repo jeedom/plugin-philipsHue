@@ -716,7 +716,7 @@ class philipsHueCmd extends cmd {
 					$hue->light($eqLogic->getConfiguration('service_light'), $data);
 				}
 			}
-		} else if ($eqLogic->getConfiguration('category') == 'room' || $eqLogic->getConfiguration('category') == 'grouped_light') {
+		} else if ($eqLogic->getConfiguration('category') == 'room' || $eqLogic->getConfiguration('category') == 'grouped_light' || $eqLogic->getConfiguration('category') == 'zone') {
 			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_grouped_light') . ' => ' . json_encode($data));
 			try {
 				$hue->grouped_light($eqLogic->getConfiguration('service_grouped_light'), $data);

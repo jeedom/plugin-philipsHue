@@ -213,6 +213,16 @@ class pHueApi {
         return $this->request('/clip/v2/resource/room/' . $_id, 'PUT', json_encode($_data));
     }
 
+    public function zone($_id = null, $_data = null) {
+        if ($_id == null) {
+            return $this->request('/clip/v2/resource/zone');
+        }
+        if ($_data == null) {
+            return $this->request('/clip/v2/resource/zone/' . $_id);
+        }
+        return $this->request('/clip/v2/resource/zone/' . $_id, 'PUT', json_encode($_data));
+    }
+
     public function scene($_id = null, $_data = null) {
         if ($_id == null) {
             return $this->request('/clip/v2/resource/scene');

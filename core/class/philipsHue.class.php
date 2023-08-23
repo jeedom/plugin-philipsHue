@@ -703,20 +703,7 @@ class philipsHueCmd extends cmd {
 		if (isset($data['dimming']['brightness']) && $data['dimming']['brightness'] > 100) {
 			$data['dimming']['brightness'] = 100;
 		}
-		if ($eqLogic->getConfiguration('category') == 'light') {
-			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_light') . ' => ' . json_encode($data));
-			try {
-				$hue->light($eqLogic->getConfiguration('service_light'), $data);
-			} catch (\Throwable $th) {
-				try {
-					usleep(500000);
-					$hue->light($eqLogic->getConfiguration('service_light'), $data);
-				} catch (\Throwable $th) {
-					sleep(3);
-					$hue->light($eqLogic->getConfiguration('service_light'), $data);
-				}
-			}
-		} else if ($eqLogic->getConfiguration('category') == 'room' || $eqLogic->getConfiguration('category') == 'grouped_light' || $eqLogic->getConfiguration('category') == 'zone') {
+		if ($eqLogic->getConfiguration('category') == 'room' || $eqLogic->getConfiguration('category') == 'grouped_light' || $eqLogic->getConfiguration('category') == 'zone') {
 			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_grouped_light') . ' => ' . json_encode($data));
 			try {
 				$hue->grouped_light($eqLogic->getConfiguration('service_grouped_light'), $data);
@@ -729,7 +716,20 @@ class philipsHueCmd extends cmd {
 					$hue->grouped_light($eqLogic->getConfiguration('service_grouped_light'), $data);
 				}
 			}
-		}
+		}else{
+            log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_light') . ' => ' . json_encode($data));
+			try {
+				$hue->light($eqLogic->getConfiguration('service_light'), $data);
+			} catch (\Throwable $th) {
+				try {
+					usleep(500000);
+					$hue->light($eqLogic->getConfiguration('service_light'), $data);
+				} catch (\Throwable $th) {
+					sleep(3);
+					$hue->light($eqLogic->getConfiguration('service_light'), $data);
+				}
+			} 
+        }
 		usleep(100000);
 	}
 

@@ -435,7 +435,7 @@ class philipsHue extends eqLogic {
 			}
 			$hue = self::getPhilipsHue($i);
 			$zigbee_connectivities = $hue->zigbee_connectivity();
-			if($zigbee_connectivities['data'] && is_array($zigbee_connectivities['data']) && count($zigbee_connectivities['data']) > 0){
+			if(isset($zigbee_connectivities['data']) && is_array($zigbee_connectivities['data']) && count($zigbee_connectivities['data']) > 0){
 				foreach ($zigbee_connectivities['data'] as $zigbee_connectivity) {
 					$eqLogic = self::byLogicalId($zigbee_connectivity['owner']['rid'], 'philipsHue');
 					if (!is_object($eqLogic)) {
@@ -445,12 +445,14 @@ class philipsHue extends eqLogic {
 				}
 			}
 			$devices_power = $hue->device_power();
-			foreach ($devices_power['data'] as $device_power) {
-				$eqLogic = self::byLogicalId($device_power['owner']['rid'], 'philipsHue');
-				if (!is_object($eqLogic)) {
-					continue;
+			if(isset($devices_power['data']) && is_array($devices_power['data']) && count($devices_power['data']) > 0){
+				foreach ($devices_power['data'] as $device_power) {
+					$eqLogic = self::byLogicalId($device_power['owner']['rid'], 'philipsHue');
+					if (!is_object($eqLogic)) {
+						continue;
+					}
+					$eqLogic->batteryStatus($device_power['power_state']['battery_level']);
 				}
-				$eqLogic->batteryStatus($device_power['power_state']['battery_level']);
 			}
 		}
 	}

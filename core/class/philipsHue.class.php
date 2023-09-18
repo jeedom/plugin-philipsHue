@@ -225,6 +225,35 @@ class philipsHue extends eqLogic {
 					$cmd->setGeneric_type('PRESENCE');
 					$cmd->save();
 				}
+				if ($service['rtype'] == 'contact') {
+					$cmd = $eqLogic->getCmd('info', $service['rid']);
+					if (!is_object($cmd)) {
+						$cmd = new philipsHueCmd();
+						$cmd->setName(__('Porte', __FILE__));
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setIsVisible(1);
+						$cmd->setLogicalId($service['rid']);
+					}
+					$cmd->setType('info');
+					$cmd->setSubtype('binary');
+					$cmd->setConfiguration('category', 'contact');
+					$cmd->setGeneric_type('OPENING');
+					$cmd->save();
+				}
+				if ($service['rtype'] == 'tamper') {
+					$cmd = $eqLogic->getCmd('info', $service['rid']);
+					if (!is_object($cmd)) {
+						$cmd = new philipsHueCmd();
+						$cmd->setName(__('Trafiqué', __FILE__));
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setIsVisible(1);
+						$cmd->setLogicalId($service['rid']);
+					}
+					$cmd->setType('info');
+					$cmd->setSubtype('binary');
+					$cmd->setConfiguration('category', 'tamper');
+					$cmd->save();
+				}
 				if ($service['rtype'] == 'light_level') {
 					$cmd = $eqLogic->getCmd('info', $service['rid']);
 					if (!is_object($cmd)) {

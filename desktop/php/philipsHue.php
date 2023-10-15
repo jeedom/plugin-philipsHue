@@ -16,22 +16,33 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<br />
 				<span>{{Ajouter}}</span>
 			</div>
-			<div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
-				<i class="fas fa-wrench"></i>
-				<br />
-				<span>{{Configuration}}</span>
-			</div>
 			<div class="cursor logoSecondary" id="bt_syncEqLogic">
 				<i class="fas fa-sync-alt"></i>
 				<br />
 				<span>{{Synchroniser}}</span>
 			</div>
+			<div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
+				<i class="fas fa-wrench"></i>
+				<br />
+				<span>{{Configuration}}</span>
+			</div>
+			<?php
+			$jeedomVersion  = jeedom::version() ?? '0';
+			$displayInfo = version_compare($jeedomVersion, '4.4.0', '>=');
+			if ($displayInfo) {
+				echo '<div class="cursor eqLogicAction info" data-action="createCommunityPost">';
+				echo '<i class="fas fa-ambulance"></i><br>';
+				echo '<span>{{Community}}</span>';
+				echo '</div>';
+			}
+			?>
 		</div>
 		<legend><i class="far fa-lightbulb"></i> {{Mes Philips Hue}}</legend>
 		<div class="input-group" style="margin:5px;">
 			<input class="form-control roundedLeft" placeholder="{{Rechercher}}" id="in_searchEqlogic" />
 			<div class="input-group-btn">
-				<a id="bt_resetSearch" class="btn roundedRight" style="width:30px"><i class="fas fa-times"></i></a>
+				<a id="bt_resetSearch" class="btn" style="width:30px"><i class="fas fa-times"></i>
+				</a><a class="btn hidden roundedRight" id="bt_pluginDisplayAsTable" data-coreSupport="1" data-state="0"><i class="fas fa-grip-lines"></i></a>
 			</div>
 		</div>
 		<div class="eqLogicThumbnailContainer">
@@ -46,6 +57,9 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				}
 				echo '<br/>';
 				echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
+				echo '<span class="hidden hiddenAsCard displayTableRight">';
+				echo ($eqLogic->getIsVisible() == 1) ? '<i class="fas fa-eye" title="{{Équipement visible}}"></i>' : '<i class="fas fa-eye-slash" title="{{Équipement non visible}}"></i>';
+				echo '</span>';
 				echo '</div>';
 			}
 			?>
@@ -63,7 +77,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		<ul class="nav nav-tabs" role="tablist">
 			<li role="presentation"><a class="eqLogicAction cursor" aria-controls="home" role="tab" data-action="returnToThumbnailDisplay"><i class="fas fa-arrow-circle-left"></i></a></li>
 			<li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer-alt"></i> {{Equipement}}</a></li>
-			<li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list-alt"></i> {{Commandes}}</a></li>
+			<li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list"></i> {{Commandes}}</a></li>
 		</ul>
 
 		<div class="tab-content">
@@ -73,17 +87,17 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<form class="form-horizontal">
 					<fieldset>
 						<div class="col-lg-6">
-							<legend><i class="fas fa-wrench"></i> {{Général}}</legend>
+							<legend><i class="fas fa-wrench"></i> {{Paramètres généraux}}</legend>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Nom de l'équipement}}</label>
-								<div class="col-sm-7">
+								<label class="col-sm-4 control-label">{{Nom de l'équipement}}</label>
+								<div class="col-sm-6">
 									<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
 									<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement philipsHue}}" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Objet parent}}</label>
-								<div class="col-sm-7">
+								<label class="col-sm-4 control-label">{{Objet parent}}</label>
+								<div class="col-sm-6">
 									<select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
 										<option value="">{{Aucun}}</option>
 										<?php
@@ -97,8 +111,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Catégorie}}</label>
-								<div class="col-sm-7">
+								<label class="col-sm-4 control-label">{{Catégorie}}</label>
+								<div class="col-sm-6">
 									<?php
 									foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
 										echo '<label class="checkbox-inline">';
@@ -109,20 +123,18 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Options}}</label>
-								<div class="col-sm-7">
+								<label class="col-sm-4 control-label">{{Options}}</label>
+								<div class="col-sm-6">
 									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked />{{Activer}}</label>
 									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked />{{Visible}}</label>
 								</div>
 							</div>
-							<br>
-
-							<legend><i class="fas fa-cogs"></i> {{Paramètres}}</legend>
+							<legend><i class="fas fa-cogs"></i> {{Paramètres spécifiques}}</legend>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Modèle}}
+								<label class="col-sm-4 control-label">{{Modèle}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{Sélectionner le modèle d'équipement Philips Hue à piloter}}"></i></sup>
 								</label>
-								<div class="col-sm-7">
+								<div class="col-sm-6">
 									<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="device">
 										<option value="">Aucun</option>
 										<?php
@@ -135,10 +147,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Pont}}
+								<label class="col-sm-4 control-label">{{Pont}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{Pont Philips Hue sur lequel l'équipement est connecté}}"></i></sup>
 								</label>
-								<div class="col-sm-7">
+								<div class="col-sm-6">
 									<select class="eqLogicAttr form-control" disabled data-l1key="configuration" data-l2key="bridge">
 										<?php
 										for ($i = 1; $i <= config::byKey('nbBridge', 'philipsHue'); $i++) {
@@ -200,13 +212,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 					<table id="table_cmd" class="table table-bordered table-condensed">
 						<thead>
 							<tr>
-								<th>{{Id}}</th>
-								<th>{{Nom}}</th>
-								<th>{{Type}}</th>
-								<th>{{Logical ID}}</th>
+								<th class="hidden-xs" style="min-width:50px;width:70px;">ID</th>
+								<th style="width:450px;">{{Nom}}</th>
+								<th style="width:150px;">{{Type}}</th>
+								<th style="min-width:350px">{{Logical ID}}</th>
 								<th>{{Options}}</th>
-								<th>{{Paramètres}}</th>
-								<th>{{Etat}}</th>
+								<th>{{Valeur}}</th>
 								<th>{{Action}}</th>
 							</tr>
 						</thead>

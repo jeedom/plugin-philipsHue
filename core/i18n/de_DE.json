@@ -82,6 +82,7 @@
         "Effet état": "Statuseffekt",
         "Effet": "Wirkung",
         "Scene ": "Szene",
+        "Smart Scene ": "Intelligente Szene",
         "Erreur d\\'éxecution de la commande :": "Fehler bei der Befehlsausführung:"
     },
     "info.json": {

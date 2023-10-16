@@ -69,7 +69,7 @@ function launchConnection(_bridge_id,_retry){
       _retry = 0;
     }
     bridges[_bridge_id]['lastMessage'] = Math.floor(new Date().getTime() / 1000)
-    Jeedom.com.send_change_immediate('bridge::'+_bridge_id,e.data);
+    Jeedom.com.send_change_immediate({'bridge':{_bridge_id:e.data}});
   })
 
   if(bridges[_bridge_id]['keepalive']){
@@ -92,7 +92,7 @@ function launchConnection(_bridge_id,_retry){
         rejectUnauthorized: false
       }
     });
-    Jeedom.com.send_change_immediate('bridge::'+_bridge_id,'resync');
+    Jeedom.com.send_change_immediate({'bridge':{_bridge_id:'resync'}});
   },30000);
 }
 

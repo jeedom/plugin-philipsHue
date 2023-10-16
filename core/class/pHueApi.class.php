@@ -232,6 +232,16 @@ class pHueApi {
         }
         return $this->request('/clip/v2/resource/scene/' . $_id, 'PUT', json_encode($_data));
     }
+  
+    public function smart_scene($_id = null, $_data = null) {
+        if ($_id == null) {
+            return $this->request('/clip/v2/resource/smart_scene');
+        }
+        if ($_data == null) {
+            return $this->request('/clip/v2/resource/smart_scene/' . $_id);
+        }
+        return $this->request('/clip/v2/resource/smart_scene/' . $_id, 'PUT', json_encode($_data));
+    }
 
     public function motion($_id = null, $_data = null) {
         if ($_id == null) {

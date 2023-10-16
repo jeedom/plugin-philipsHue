@@ -446,6 +446,38 @@ class philipsHue extends eqLogic {
 			$cmd->setConfiguration('category', 'scene');
 			$cmd->save();
 		}
+      	
+      	$scenes = $hue->smart_scene();
+		foreach ($scenes['data'] as $scene) {
+			if (!isset($scene['group']['rtype']) || $scene['group']['rtype'] != 'room') {
+				continue;
+			}
+			$eqLogic = self::byLogicalId($scene['group']['rid'], 'philipsHue');
+			if (!is_object($eqLogic)) {
+				continue;
+			}
+			$cmd = $eqLogic->getCmd('action', $scene['id']);
+			if (!is_object($cmd)) {
+				foreach ($eqLogic->getCmd() as $cmd_found) {
+					if (strtolower($cmd_found->getName()) == strtolower(__('Smart Scene ', __FILE__) . $scene['metadata']['name'])) {
+						$cmd = $cmd_found;
+						break;
+					}
+				}
+			}
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setName(__('Smart Scene ', __FILE__) . $scene['metadata']['name']);
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setIsVisible(1);
+				$cmd->setLogicalId($scene['id']);
+			}
+			$cmd->setType('action');
+			$cmd->setSubtype('other');
+			$cmd->setConfiguration('category', 'smart_scene');
+			$cmd->save();
+		}
+      
 	}
 
 	public static function cron() {
@@ -498,9 +530,11 @@ class philipsHue extends eqLogic {
 				continue;
 			}
 			$eqLogic = self::byLogicalId($data['owner']['rid'], 'philipsHue');
-			if (!is_object($eqLogic) || $eqLogic->getIsEnable() == 0) {
+			log::add('philipsHue', 'debug', 'Current eqLogic ID to update is : ' . $eqLogic );
+          	if (!is_object($eqLogic) || $eqLogic->getIsEnable() == 0) {
 				continue;
 			}
+          	
 			$to_cache = array();
 			if (isset($data['enabled'])) {
 				$eqLogic->checkAndUpdateCmd('enabled', $data['enabled']);
@@ -685,6 +719,17 @@ class philipsHueCmd extends cmd {
 			$data = array('recall' => array('action' => 'dynamic_palette'));
 			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $this->getLogicalId() . ' => ' . json_encode($data));
 			$result = $hue->scene($this->getLogicalId(), $data);
+			usleep(100000);
+			if (isset($result['errors']) && count($result['errors']) > 0) {
+				throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));
+			}
+			return;
+		}
+      
+      	if ($this->getConfiguration('category') == 'smart_scene') {
+			$data = array('recall' => array('action' => 'activate'));
+			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $this->getLogicalId() . ' => ' . json_encode($data));
+			$result = $hue->smart_scene($this->getLogicalId(), $data);
 			usleep(100000);
 			if (isset($result['errors']) && count($result['errors']) > 0) {
 				throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));

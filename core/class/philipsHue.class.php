@@ -530,8 +530,7 @@ class philipsHue extends eqLogic {
 				continue;
 			}
 			$eqLogic = self::byLogicalId($data['owner']['rid'], 'philipsHue');
-			log::add('philipsHue', 'debug', 'Current eqLogic ID to update is : ' . $eqLogic );
-          	if (!is_object($eqLogic) || $eqLogic->getIsEnable() == 0) {
+          		if (!is_object($eqLogic) || $eqLogic->getIsEnable() == 0) {
 				continue;
 			}
           	

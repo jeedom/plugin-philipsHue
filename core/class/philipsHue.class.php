@@ -477,16 +477,6 @@ class philipsHue extends eqLogic {
 			$cmd->setConfiguration('category', 'smart_scene');
 			$cmd->save();
 		}
-      
-	}
-
-	public static function cron() {
-		for ($i = 1; $i <= config::byKey('nbBridge', 'philipsHue'); $i++) {
-			if (config::byKey('bridge_ip' . $i, 'philipsHue') == '') {
-				continue;
-			}
-			self::syncState($i);
-		}
 	}
 
 	public static function cron15() {

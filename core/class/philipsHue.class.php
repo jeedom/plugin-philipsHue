@@ -531,10 +531,9 @@ class philipsHue extends eqLogic {
 		foreach ($_datas['data'] as $data) {
 			if (isset($data['type']) && ($data['type'] == 'scene' || $data['type'] == 'smart_scene') && isset($data['status']['active']) && $data['status']['active'] == 'static') {
 				$cmd = cmd::byLogicalId($data['id'], 'action');
-				$cmd = $cmd[0];
-				if(is_object($cmd)) {
-					$eqLogic = self::byId($cmd->getEqLogic_id());
-					if(is_object($eqLogic)) {
+				if(is_object($cmd[0])) {
+					$eqLogic = $cmd[0]->getEqLogic();
+					if(is_object($eqLogic) && $eqLogic->getEqType_name() == 'philipsHue') {
 						$eqLogic->checkAndUpdateCmd('current_scene', $data['id']);
 					}
 				}

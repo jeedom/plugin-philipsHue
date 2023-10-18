@@ -40,5 +40,8 @@ foreach ($result['bridge'] as $i => $datas) {
         philipsHue::syncState($i);
         continue;
     }
-    philipsHue::syncState($i, json_decode($datas, true)[0]);
+    $datas_decode = json_decode($datas, true);
+    foreach($datas_decode as $data){
+        philipsHue::syncState($i, $data);
+    }
 }

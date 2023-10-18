@@ -364,6 +364,19 @@ class philipsHue extends eqLogic {
 			$eqLogic->setConfiguration('category', 'room');
 			$eqLogic->setConfiguration('id', $room['id']);
 			$eqLogic->save();
+
+			$cmd = $eqLogic->getCmd('info', 'current_scene');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setName(__('Scène en cours', __FILE__));
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setIsVisible(1);
+				$cmd->setLogicalId('current_scene');
+			}
+			$cmd->setType('info');
+			$cmd->setSubtype('string');
+			$cmd->setConfiguration('category', 'current_scene');
+			$cmd->save();
 		}
 
 		$zones = $hue->zone();
@@ -446,14 +459,36 @@ class philipsHue extends eqLogic {
 			$cmd->setConfiguration('category', 'scene');
 			$cmd->save();
 		}
-	}
-
-	public static function cron() {
-		for ($i = 1; $i <= config::byKey('nbBridge', 'philipsHue'); $i++) {
-			if (config::byKey('bridge_ip' . $i, 'philipsHue') == '') {
+      	
+      	$scenes = $hue->smart_scene();
+		foreach ($scenes['data'] as $scene) {
+			if (!isset($scene['group']['rtype']) || $scene['group']['rtype'] != 'room') {
 				continue;
 			}
-			self::syncState($i);
+			$eqLogic = self::byLogicalId($scene['group']['rid'], 'philipsHue');
+			if (!is_object($eqLogic)) {
+				continue;
+			}
+			$cmd = $eqLogic->getCmd('action', $scene['id']);
+			if (!is_object($cmd)) {
+				foreach ($eqLogic->getCmd() as $cmd_found) {
+					if (strtolower($cmd_found->getName()) == strtolower(__('Smart Scene ', __FILE__) . $scene['metadata']['name'])) {
+						$cmd = $cmd_found;
+						break;
+					}
+				}
+			}
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setName(__('Smart Scene ', __FILE__) . $scene['metadata']['name']);
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setIsVisible(1);
+				$cmd->setLogicalId($scene['id']);
+			}
+			$cmd->setType('action');
+			$cmd->setSubtype('other');
+			$cmd->setConfiguration('category', 'smart_scene');
+			$cmd->save();
 		}
 	}
 
@@ -494,13 +529,23 @@ class philipsHue extends eqLogic {
 		log::add('philipsHue', 'debug', 'Received message for bridge : ' . $_bridge_number . ' => ' . json_encode($_datas));
 		$states = array();
 		foreach ($_datas['data'] as $data) {
+			if (isset($data['type']) && ($data['type'] == 'scene' || $data['type'] == 'smart_scene') && isset($data['status']['active']) && $data['status']['active'] == 'static') {
+				$cmd = cmd::byLogicalId($data['id'], 'action');
+				if(is_object($cmd[0])) {
+					$eqLogic = $cmd[0]->getEqLogic();
+					if(is_object($eqLogic) && $eqLogic->getEqType_name() == 'philipsHue') {
+						$eqLogic->checkAndUpdateCmd('current_scene', $data['id']);
+					}
+				}
+			} 
 			if (!isset($data['owner']['rid'])) {
 				continue;
 			}
 			$eqLogic = self::byLogicalId($data['owner']['rid'], 'philipsHue');
-			if (!is_object($eqLogic) || $eqLogic->getIsEnable() == 0) {
+          		if (!is_object($eqLogic) || $eqLogic->getIsEnable() == 0) {
 				continue;
 			}
+          	
 			$to_cache = array();
 			if (isset($data['enabled'])) {
 				$eqLogic->checkAndUpdateCmd('enabled', $data['enabled']);
@@ -685,6 +730,17 @@ class philipsHueCmd extends cmd {
 			$data = array('recall' => array('action' => 'dynamic_palette'));
 			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $this->getLogicalId() . ' => ' . json_encode($data));
 			$result = $hue->scene($this->getLogicalId(), $data);
+			usleep(100000);
+			if (isset($result['errors']) && count($result['errors']) > 0) {
+				throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));
+			}
+			return;
+		}
+      
+      	if ($this->getConfiguration('category') == 'smart_scene') {
+			$data = array('recall' => array('action' => 'activate'));
+			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $this->getLogicalId() . ' => ' . json_encode($data));
+			$result = $hue->smart_scene($this->getLogicalId(), $data);
 			usleep(100000);
 			if (isset($result['errors']) && count($result['errors']) > 0) {
 				throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));

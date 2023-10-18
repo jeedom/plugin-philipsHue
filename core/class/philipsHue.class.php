@@ -364,6 +364,19 @@ class philipsHue extends eqLogic {
 			$eqLogic->setConfiguration('category', 'room');
 			$eqLogic->setConfiguration('id', $room['id']);
 			$eqLogic->save();
+
+			$cmd = $eqLogic->getCmd('info', 'current_scene');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setName(__('Scène en cours', __FILE__));
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setIsVisible(1);
+				$cmd->setLogicalId('current_scene');
+			}
+			$cmd->setType('info');
+			$cmd->setSubtype('string');
+			$cmd->setConfiguration('category', 'current_scene');
+			$cmd->save();
 		}
 
 		$zones = $hue->zone();
@@ -516,6 +529,16 @@ class philipsHue extends eqLogic {
 		log::add('philipsHue', 'debug', 'Received message for bridge : ' . $_bridge_number . ' => ' . json_encode($_datas));
 		$states = array();
 		foreach ($_datas['data'] as $data) {
+			if (isset($data['type']) && ($data['type'] == 'scene' || $data['type'] == 'smart_scene') && isset($data['status']['active']) && $data['status']['active'] == 'static') {
+				$cmd = cmd::byLogicalId($data['id'], 'action');
+				$cmd = $cmd[0];
+				if(is_object($cmd)) {
+					$eqLogic = self::byId($cmd->getEqLogic_id());
+					if(is_object($eqLogic)) {
+						$eqLogic->checkAndUpdateCmd('current_scene', $data['id']);
+					}
+				}
+			} 
 			if (!isset($data['owner']['rid'])) {
 				continue;
 			}

@@ -178,7 +178,12 @@ class philipsHue extends eqLogic {
 			foreach ($device['services'] as $service) {
 				$eqLogic->setConfiguration('service_' . $service['rtype'], $service['rid']);
 			}
-			$eqLogic->save();
+			try {
+				$eqLogic->save();
+			} catch (Exception $e) {
+				$eqLogic->setName($eqLogic->getName().' '.config::genKey(4));
+				$eqLogic->save();
+			}
 
 			$cmd = $eqLogic->getCmd('action', 'refresh');
 			if (!is_object($cmd)) {
@@ -363,7 +368,12 @@ class philipsHue extends eqLogic {
 			$eqLogic->setConfiguration('device', 'ROOM');
 			$eqLogic->setConfiguration('category', 'room');
 			$eqLogic->setConfiguration('id', $room['id']);
-			$eqLogic->save();
+			try {
+				$eqLogic->save();
+			} catch (Exception $e) {
+				$eqLogic->setName($eqLogic->getName().' '.config::genKey(4));
+				$eqLogic->save();
+			}
 
 			$cmd = $eqLogic->getCmd('info', 'current_scene');
 			if (!is_object($cmd)) {
@@ -401,7 +411,12 @@ class philipsHue extends eqLogic {
 			$eqLogic->setConfiguration('device', 'ZONE');
 			$eqLogic->setConfiguration('category', 'zone');
 			$eqLogic->setConfiguration('id', $zone['id']);
-			$eqLogic->save();
+			try {
+				$eqLogic->save();
+			} catch (Exception $e) {
+				$eqLogic->setName($eqLogic->getName().' '.config::genKey(4));
+				$eqLogic->save();
+			}
 		}
 
 		$grouped_lights = $hue->grouped_light();
@@ -426,7 +441,12 @@ class philipsHue extends eqLogic {
 			$eqLogic->setConfiguration('device', 'GROUPED_LIGHT');
 			$eqLogic->setConfiguration('category', 'grouped_light');
 			$eqLogic->setConfiguration('id', $grouped_light['id']);
-			$eqLogic->save();
+			try {
+				$eqLogic->save();
+			} catch (Exception $e) {
+				$eqLogic->setName($eqLogic->getName().' '.config::genKey(4));
+				$eqLogic->save();
+			}
 		}
 
 		$scenes = $hue->scene();

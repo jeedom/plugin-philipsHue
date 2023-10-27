@@ -549,8 +549,7 @@ class philipsHue extends eqLogic {
 		log::add('philipsHue', 'debug', 'Received message for bridge : ' . $_bridge_number . ' => ' . json_encode($_datas));
 		$states = array();
 		foreach ($_datas['data'] as $data) {
-			if (isset($data['type']) && ($data['type'] == 'scene' || $data['type'] == 'smart_scene') && isset($data['status']['active']) && $data['status']['active'] == 'static') {
-				$cmd = cmd::byLogicalId($data['id'], 'action');
+			if (isset($data['type']) && ($data['type'] == 'scene' || $data['type'] == 'smart_scene') && isset($data['status']['active']) && ($data['status']['active'] == 'static' || $data['status']['active'] == 'dynamic_palette')) {				$cmd = cmd::byLogicalId($data['id'], 'action');
 				if(is_object($cmd[0])) {
 					$eqLogic = $cmd[0]->getEqLogic();
 					if(is_object($eqLogic) && $eqLogic->getEqType_name() == 'philipsHue') {

@@ -604,6 +604,10 @@ class philipsHue extends eqLogic {
 			if (isset($data['tamper_reports'])) {
 				$eqLogic->checkAndUpdateCmd($data['id'], ($data['tamper_reports']['state'] == 'tampered'));
 			}
+			if (isset($data['relative_rotary'])) {
+				$direction = ($data['relative_rotary']['last_event']['rotation']['direction'] == 'counter_clock_wise') ? 1 : - 1;
+				$eqLogic->checkAndUpdateCmd($data['id'], $direction * $data['relative_rotary']['last_event']['rotation']['steps']);
+			}
 			if (isset($data['on']['on'])) {
 				$states[$data['owner']['rid']] = $data['on']['on'];
 				$eqLogic->checkAndUpdateCmd('state', $data['on']['on']);

@@ -290,6 +290,20 @@ class philipsHue extends eqLogic {
 					$cmd->setGeneric_type('TEMPERATURE');
 					$cmd->save();
 				}
+				if ($service['rtype'] == 'relative_rotary') {
+					$cmd = $eqLogic->getCmd('info', $service['rid']);
+					if (!is_object($cmd)) {
+						$cmd = new philipsHueCmd();
+						$cmd->setName(__('Rotation', __FILE__));
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setIsVisible(1);
+						$cmd->setLogicalId($service['rid']);
+					}
+					$cmd->setType('info');
+					$cmd->setSubtype('numeric');
+					$cmd->setConfiguration('category', 'relative_rotary');
+					$cmd->save();
+				}
 				if ($service['rtype'] == 'zigbee_connectivity') {
 					$cmd = $eqLogic->getCmd('info', $service['rid']);
 					if (!is_object($cmd)) {

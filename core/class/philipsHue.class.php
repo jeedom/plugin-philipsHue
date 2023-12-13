@@ -595,9 +595,6 @@ class philipsHue extends eqLogic {
 			if (isset($data['button'])) {
 				$eqLogic->checkAndUpdateCmd($data['id'], $data['button']['last_event']);
 			}
-			if (isset($data['button'])) {
-				$eqLogic->checkAndUpdateCmd($data['id'], $data['button']['last_event']);
-			}
 			if (isset($data['contact_report'])) {
 				$eqLogic->checkAndUpdateCmd($data['id'],  ($data['contact_report']['state'] == 'contact'));
 			}

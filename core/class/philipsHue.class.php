@@ -496,9 +496,6 @@ class philipsHue extends eqLogic {
       	
       	$scenes = $hue->smart_scene();
 		foreach ($scenes['data'] as $scene) {
-			if (!isset($scene['group']['rtype']) || $scene['group']['rtype'] != 'room') {
-				continue;
-			}
 			$eqLogic = self::byLogicalId($scene['group']['rid'], 'philipsHue');
 			if (!is_object($eqLogic)) {
 				continue;

@@ -727,6 +727,7 @@ class philipsHueCmd extends cmd {
 			if (is_object($transition)) {
 				$transition->event($_options['slider']);
 			}
+			return;
 		}
 		if ($this->getLogicalId() == 'refresh') {
 			philipsHue::syncState($eqLogic->getConfiguration('bridge'));
@@ -765,7 +766,7 @@ class philipsHueCmd extends cmd {
 			return;
 		}
       
-      	if ($this->getConfiguration('category') == 'smart_scene') {
+      		if ($this->getConfiguration('category') == 'smart_scene') {
 			$data = array('recall' => array('action' => 'activate'));
 			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $this->getLogicalId() . ' => ' . json_encode($data));
 			$result = $hue->smart_scene($this->getLogicalId(), $data);
@@ -790,8 +791,8 @@ class philipsHueCmd extends cmd {
 		}
 
 		$data = array();
+		$data['dynamics'] = array('duration' => $transistion_time);
 		if ($this->getLogicalId() != 'off') {
-			$data['dynamics'] = array('duration' => $transistion_time);
 			$data['on'] = array('on' => true);
 		} else {
 			$data['on'] = array('on' => false);
@@ -838,7 +839,7 @@ class philipsHueCmd extends cmd {
 				}
 			}
 		}else{
-            log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_light') . ' => ' . json_encode($data));
+            		log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_light') . ' => ' . json_encode($data));
 			try {
 				$hue->light($eqLogic->getConfiguration('service_light'), $data);
 			} catch (\Throwable $th) {

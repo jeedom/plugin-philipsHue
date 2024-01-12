@@ -783,9 +783,6 @@ class philipsHueCmd extends cmd {
 			$transistion_time = 0;
 			if (is_object($transition)) {
 				$transistion_time = $transition->execCmd(null, 2);
-				if ($transistion_time !== 0) {
-					$transition->event(0);
-				}
 			}
 			$transistion_time = ($transistion_time == 0) ? 0 : $transistion_time * 1000;
 		}

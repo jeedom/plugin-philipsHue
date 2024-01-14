@@ -8,6 +8,10 @@
 
 - Amélioration de la gestion des transitions
 
+# 14/01/2024
+
+- LTC002 (Hue Ambiance Ceiling)
+
 # 10/01/2024
 
 - Support des scénes sur les zones

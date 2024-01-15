@@ -727,6 +727,34 @@ class philipsHue extends eqLogic {
 			$cmd->setSubtype('other');
 			$cmd->setConfiguration('category', 'scene');
 			$cmd->save();
+
+			/*$cmd = $eqLogic->getCmd('info', 'scene_speed_state');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setName(__('Vitesse scène état', __FILE__));
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setIsVisible(0);
+				$cmd->setLogicalId('scene_speed_state');
+			}
+			$cmd->setType('info');
+			$cmd->setSubtype('numeric');
+			$cmd->save();
+			$cmd_scene_speed_state_id = $cmd->getId();
+
+			$cmd = $eqLogic->getCmd('action', 'scene_speed');
+			if (!is_object($cmd)) {
+				$cmd = new philipsHueCmd();
+				$cmd->setName(__('Vitesse scène', __FILE__));
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setIsVisible(0);
+				$cmd->setLogicalId('scene_speed');
+				$cmd->setConfiguration('minValue',0);
+				$cmd->setConfiguration('maxValue',9);
+			}
+			$cmd->setType('action');
+			$cmd->setSubtype('slider');
+			$cmd->setValue($cmd_scene_speed_state_id);
+			$cmd->save();*/
 		}
       	
       	$scenes = $hue->smart_scene();
@@ -990,8 +1018,15 @@ class philipsHueCmd extends cmd {
 		if ($this->getConfiguration('category') == 'scene') {
 			$data = array(
 				'recall' => array('action' => 'dynamic_palette'),
-				'dynamics' => array('duration' => $transistion_time)
+				'actions' => array(
+					'dynamics' => array('duration' => $transistion_time)
+				)
 			);
+			/*$speed = $eqLogic->getCmd(null, 'speed_state');
+			if (is_object($speed)) {
+				$data['speed'] = $speed->execCmd(null, 2);
+			}*/
+			$transistion_time = ($transistion_time == 0) ? 0 : $transistion_time * 1000;
 			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $this->getLogicalId() . ' => ' . json_encode($data));
 			$result = $hue->scene($this->getLogicalId(), $data);
 			usleep(100000);
@@ -1003,8 +1038,7 @@ class philipsHueCmd extends cmd {
       
       	if ($this->getConfiguration('category') == 'smart_scene') {
 			$data = array(
-				'recall' => array('action' => 'activate'),
-				'dynamics' => array('duration' => $transistion_time)
+				'recall' => array('action' => 'activate')
 			);
 			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $this->getLogicalId() . ' => ' . json_encode($data));
 			$result = $hue->smart_scene($this->getLogicalId(), $data);

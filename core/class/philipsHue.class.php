@@ -450,6 +450,36 @@ class philipsHue extends eqLogic {
 						$cmd->setValue($cmd_color_state_id);
 						$cmd->save();
 					}
+
+					if (isset($light['data'][0]['color_temperature'])) {
+						$cmd = $eqLogic->getCmd('info', 'color_temp_state');
+						if (!is_object($cmd)) {
+							$cmd = new philipsHueCmd();
+							$cmd->setName(__('Etat Couleur temp', __FILE__));
+							$cmd->setEqLogic_id($eqLogic->getId());
+							$cmd->setIsVisible(1);
+							$cmd->setLogicalId('color_temp_state');
+						}
+						$cmd->setType('info');
+						$cmd->setSubtype('numeric');
+						$cmd->save();
+						$cmd_temp_state_id = $cmd->getId();
+
+						$cmd = $eqLogic->getCmd('info', 'color_temp');
+						if (!is_object($cmd)) {
+							$cmd = new philipsHueCmd();
+							$cmd->setName(__('Couleur temp', __FILE__));
+							$cmd->setEqLogic_id($eqLogic->getId());
+							$cmd->setIsVisible(1);
+							$cmd->setLogicalId('color_temp');
+							$cmd->setConfiguration('minValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_minimum']);
+							$cmd->setConfiguration('maxValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_maximum']);
+						}
+						$cmd->setType('action');
+						$cmd->setSubtype('slider');
+						$cmd->setValue($cmd_temp_state_id);
+						$cmd->save();
+					}
 					
 					if (isset($light['data'][0]['effects']['effect_values'])) {
 						$cmd = $eqLogic->getCmd('info', 'effect_status');

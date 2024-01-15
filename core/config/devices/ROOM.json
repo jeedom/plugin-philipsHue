@@ -144,7 +144,7 @@
         "configuration" :{
           "category" : "current_scene"
         },
-        "isVisible": 1,
+        "isVisible": 0,
         "isHistorized": 0,
         "logicalId": "current_scene"
       }

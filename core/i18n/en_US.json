@@ -96,6 +96,8 @@
         "Effet état": "Status effect",
         "Effet": "Effect",
         "Scene ": "Scene",
+        "Vitesse scène état": "State scene speed",
+        "Vitesse scène": "Scene speed",
         "Smart Scene ": "Smart Scene",
         "Erreur d\\'éxecution de la commande :": "Command execution error:"
     },

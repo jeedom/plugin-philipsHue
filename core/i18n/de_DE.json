@@ -96,6 +96,8 @@
         "Effet état": "Statuseffekt",
         "Effet": "Wirkung",
         "Scene ": "Szene",
+        "Vitesse scène état": "Zustandsszenengeschwindigkeit",
+        "Vitesse scène": "Szenengeschwindigkeit",
         "Smart Scene ": "Intelligente Szene",
         "Erreur d\\'éxecution de la commande :": "Fehler bei der Befehlsausführung:"
     },

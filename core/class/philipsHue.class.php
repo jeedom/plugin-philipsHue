@@ -224,7 +224,45 @@ class philipsHue extends eqLogic {
 					$cmd->setConfiguration('category', 'motion');
 					$cmd->setGeneric_type('PRESENCE');
 					$cmd->save();
+
+					$cmd = $eqLogic->getCmd('info', 'enabled');
+					if (!is_object($cmd)) {
+						$cmd = new philipsHueCmd();
+						$cmd->setName(__('Etat', __FILE__));
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setIsVisible(0);
+						$cmd->setLogicalId('enabled');
+					}
+					$cmd->setType('info');
+					$cmd->setSubtype('binary');
+					$cmd->save();
+
+					$cmd = $eqLogic->getCmd('action', 'enable');
+					if (!is_object($cmd)) {
+						$cmd = new philipsHueCmd();
+						$cmd->setName(__('Activer', __FILE__));
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setIsVisible(0);
+						$cmd->setLogicalId('enable');
+					}
+					$cmd->setType('action');
+					$cmd->setSubtype('other');
+					$cmd->save();
+
+					$cmd = $eqLogic->getCmd('action', 'disable');
+					if (!is_object($cmd)) {
+						$cmd = new philipsHueCmd();
+						$cmd->setName(__('Désactiver', __FILE__));
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setIsVisible(0);
+						$cmd->setLogicalId('disable');
+					}
+					$cmd->setType('action');
+					$cmd->setSubtype('other');
+					$cmd->save();
 				}
+
+
 				if ($service['rtype'] == 'contact') {
 					$cmd = $eqLogic->getCmd('info', $service['rid']);
 					if (!is_object($cmd)) {
@@ -240,6 +278,7 @@ class philipsHue extends eqLogic {
 					$cmd->setGeneric_type('OPENING');
 					$cmd->save();
 				}
+
 				if ($service['rtype'] == 'tamper') {
 					$cmd = $eqLogic->getCmd('info', $service['rid']);
 					if (!is_object($cmd)) {
@@ -283,6 +322,42 @@ class philipsHue extends eqLogic {
 					$cmd->setUnite('°C');
 					$cmd->setConfiguration('category', 'temperature');
 					$cmd->setGeneric_type('TEMPERATURE');
+					$cmd->save();
+
+					$cmd = $eqLogic->getCmd('info', 'enabled');
+					if (!is_object($cmd)) {
+						$cmd = new philipsHueCmd();
+						$cmd->setName(__('Etat', __FILE__));
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setIsVisible(0);
+						$cmd->setLogicalId('enabled');
+					}
+					$cmd->setType('info');
+					$cmd->setSubtype('binary');
+					$cmd->save();
+
+					$cmd = $eqLogic->getCmd('action', 'enable');
+					if (!is_object($cmd)) {
+						$cmd = new philipsHueCmd();
+						$cmd->setName(__('Activer', __FILE__));
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setIsVisible(0);
+						$cmd->setLogicalId('enable');
+					}
+					$cmd->setType('action');
+					$cmd->setSubtype('other');
+					$cmd->save();
+
+					$cmd = $eqLogic->getCmd('action', 'disable');
+					if (!is_object($cmd)) {
+						$cmd = new philipsHueCmd();
+						$cmd->setName(__('Désactiver', __FILE__));
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setIsVisible(0);
+						$cmd->setLogicalId('disable');
+					}
+					$cmd->setType('action');
+					$cmd->setSubtype('other');
 					$cmd->save();
 				}
 				if ($service['rtype'] == 'relative_rotary') {

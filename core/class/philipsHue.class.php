@@ -562,7 +562,7 @@ class philipsHue extends eqLogic {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Effet état', __FILE__));
 							$cmd->setEqLogic_id($eqLogic->getId());
-							$cmd->setIsVisible(1);
+							$cmd->setIsVisible(0);
 							$cmd->setLogicalId('effect_status');
 						}
 						$cmd->setType('info');
@@ -757,7 +757,7 @@ class philipsHue extends eqLogic {
 			$cmd->save();*/
 		}
       	
-      	$scenes = $hue->smart_scene();
+      	        $scenes = $hue->smart_scene();
 		foreach ($scenes['data'] as $scene) {
 			$eqLogic = self::byLogicalId($scene['group']['rid'], 'philipsHue');
 			if (!is_object($eqLogic)) {

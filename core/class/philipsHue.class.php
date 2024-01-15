@@ -975,27 +975,7 @@ class philipsHueCmd extends cmd {
 			}
 			return;
 		}
-		if ($this->getConfiguration('category') == 'scene') {
-			$data = array('recall' => array('action' => 'dynamic_palette'));
-			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $this->getLogicalId() . ' => ' . json_encode($data));
-			$result = $hue->scene($this->getLogicalId(), $data);
-			usleep(100000);
-			if (isset($result['errors']) && count($result['errors']) > 0) {
-				throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));
-			}
-			return;
-		}
-      
-      		if ($this->getConfiguration('category') == 'smart_scene') {
-			$data = array('recall' => array('action' => 'activate'));
-			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $this->getLogicalId() . ' => ' . json_encode($data));
-			$result = $hue->smart_scene($this->getLogicalId(), $data);
-			usleep(100000);
-			if (isset($result['errors']) && count($result['errors']) > 0) {
-				throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));
-			}
-			return;
-		}
+
 		if (isset($_options['transition'])) {
 			$transistion_time = $_options['transition'] * 1000;
 		} else {
@@ -1006,6 +986,35 @@ class philipsHueCmd extends cmd {
 			}
 			$transistion_time = ($transistion_time == 0) ? 0 : $transistion_time * 1000;
 		}
+
+		if ($this->getConfiguration('category') == 'scene') {
+			$data = array(
+				'recall' => array('action' => 'dynamic_palette'),
+				'dynamics' => array('duration' => $transistion_time)
+			);
+			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $this->getLogicalId() . ' => ' . json_encode($data));
+			$result = $hue->scene($this->getLogicalId(), $data);
+			usleep(100000);
+			if (isset($result['errors']) && count($result['errors']) > 0) {
+				throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));
+			}
+			return;
+		}
+      
+      	if ($this->getConfiguration('category') == 'smart_scene') {
+			$data = array(
+				'recall' => array('action' => 'activate'),
+				'dynamics' => array('duration' => $transistion_time)
+			);
+			log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $this->getLogicalId() . ' => ' . json_encode($data));
+			$result = $hue->smart_scene($this->getLogicalId(), $data);
+			usleep(100000);
+			if (isset($result['errors']) && count($result['errors']) > 0) {
+				throw new Exception(__('Erreur d\'éxecution de la commande :', __FILE__) . ' ' . json_encode($result['errors']) . ' => ' . json_encode($data));
+			}
+			return;
+		}
+		
 
 		$data = array();
 		$data['dynamics'] = array('duration' => $transistion_time);

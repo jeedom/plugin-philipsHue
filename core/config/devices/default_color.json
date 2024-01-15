@@ -5,14 +5,7 @@
       "gammut" : "A"
     },
     "commands": [
-      {
-        "name": "Etat",
-        "type": "info",
-        "subtype": "binary",
-        "isVisible": 0,
-        "isHistorized": 0,
-        "logicalId": "state"
-      },
+     
       {
         "name": "Etat Luminosité",
         "type": "info",
@@ -23,30 +16,6 @@
         "isVisible": 0,
         "isHistorized": 0,
         "logicalId": "luminosity_state"
-      },
-      {
-        "name": "On",
-        "type": "action",
-        "subtype": "other",
-        "display": {
-          "generic_type": "LIGHT_ON"
-        },
-        "value" : "Etat Luminosité",
-        "isVisible": 0,
-        "isHistorized": 0,
-        "logicalId": "on"
-      },
-      {
-        "name": "Off",
-        "type": "action",
-        "subtype": "other",
-        "display": {
-          "generic_type": "LIGHT_OFF"
-        },
-        "value" : "Etat Luminosité",
-        "isVisible": 0,
-        "isHistorized": 0,
-        "logicalId": "off"
       },
       {
         "name": "Luminosité",

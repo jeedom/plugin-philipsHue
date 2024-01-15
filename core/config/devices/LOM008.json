@@ -20,7 +20,6 @@
         "display": {
           "generic_type": "ENERGY_ON"
         },
-        "value" : "Etat Luminosité",
         "isVisible": 0,
         "isHistorized": 0,
         "logicalId": "on"
@@ -32,7 +31,6 @@
         "display": {
           "generic_type": "ENERGY_OFF"
         },
-        "value" : "Etat Luminosité",
         "isVisible": 0,
         "isHistorized": 0,
         "logicalId": "off"

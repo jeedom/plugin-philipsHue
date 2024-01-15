@@ -712,14 +712,6 @@ class philipsHue extends eqLogic {
 			}
 			$cmd = $eqLogic->getCmd('action', $scene['id']);
 			if (!is_object($cmd)) {
-				foreach ($eqLogic->getCmd() as $cmd_found) {
-					if (strtolower($cmd_found->getName()) == strtolower(__('Scene ', __FILE__) . $scene['metadata']['name'])) {
-						$cmd = $cmd_found;
-						break;
-					}
-				}
-			}
-			if (!is_object($cmd)) {
 				$cmd = new philipsHueCmd();
 				$cmd->setName(__('Scene ', __FILE__) . $scene['metadata']['name']);
 				$cmd->setEqLogic_id($eqLogic->getId());
@@ -767,14 +759,6 @@ class philipsHue extends eqLogic {
 				continue;
 			}
 			$cmd = $eqLogic->getCmd('action', $scene['id']);
-			if (!is_object($cmd)) {
-				foreach ($eqLogic->getCmd() as $cmd_found) {
-					if (strtolower($cmd_found->getName()) == strtolower(__('Smart Scene ', __FILE__) . $scene['metadata']['name'])) {
-						$cmd = $cmd_found;
-						break;
-					}
-				}
-			}
 			if (!is_object($cmd)) {
 				$cmd = new philipsHueCmd();
 				$cmd->setName(__('Smart Scene ', __FILE__) . $scene['metadata']['name']);

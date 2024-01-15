@@ -532,7 +532,7 @@ class philipsHue extends eqLogic {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Etat Couleur temp', __FILE__));
 							$cmd->setEqLogic_id($eqLogic->getId());
-							$cmd->setIsVisible(1);
+							$cmd->setIsVisible(0);
 							$cmd->setLogicalId('color_temp_state');
 						}
 						$cmd->setType('info');

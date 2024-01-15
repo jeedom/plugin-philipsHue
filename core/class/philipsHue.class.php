@@ -628,7 +628,7 @@ class philipsHue extends eqLogic {
 				$eqLogic->save();
 			}
 			try {
-				$eqLogic->import(is_json(file_get_contents(dirname(__FILE__) . '/../config/devices/ROOM.json'),array()));
+				$eqLogic->import(is_json(file_get_contents(dirname(__FILE__) . '/../config/devices/ROOM.json'),array()),true);
 			} catch (Exception $e) {
 				log::add('philipsHue', 'error', 'Error apply configuration => ' . $e->getMessage());
 			}
@@ -663,7 +663,7 @@ class philipsHue extends eqLogic {
 				$eqLogic->save();
 			}
 			try {
-				$eqLogic->import(is_json(file_get_contents(dirname(__FILE__) . '/../config/devices/ZONE.json'),array()));
+				$eqLogic->import(is_json(file_get_contents(dirname(__FILE__) . '/../config/devices/ZONE.json'),array()),true);
 			} catch (Exception $e) {
 				log::add('philipsHue', 'error', 'Error apply configuration => ' . $e->getMessage());
 			}
@@ -698,7 +698,7 @@ class philipsHue extends eqLogic {
 				$eqLogic->save();
 			}
 			try {
-				$eqLogic->import(is_json(file_get_contents(dirname(__FILE__) . '/../config/devices/GROUPED_LIGHT.json'),array()));
+				$eqLogic->import(is_json(file_get_contents(dirname(__FILE__) . '/../config/devices/GROUPED_LIGHT.json'),array()),true);
 			} catch (Exception $e) {
 				log::add('philipsHue', 'error', 'Error apply configuration => ' . $e->getMessage());
 			}

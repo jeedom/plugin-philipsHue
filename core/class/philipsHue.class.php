@@ -143,11 +143,6 @@ class philipsHue extends eqLogic {
 			$type = $device['services'][0]['rtype'];
 			$modelId = $device['product_data']['model_id'];
 			log::add('philipsHue', 'debug', 'Found device type ' . $type . ' model : ' . $modelId . ' => ' . json_encode($device));
-			if (count(self::devicesParameters($modelId)) == 0) {
-				log::add('philipsHue', 'warning', 'No configuration found for device : ' . $modelId . ' => ' . json_encode($device));
-				$modelId = 'default_color';
-				log::add('philipsHue', 'warning', 'Use generic configuration : ' . $modelId);
-			}
 			$id = $device['id'];
 			$eqLogic = self::byLogicalId($id, 'philipsHue');
 			if (!is_object($eqLogic)) {
@@ -785,49 +780,12 @@ class philipsHue extends eqLogic {
 		}
 	}
 
-	public static function devicesParameters($_device = '') {
-		$return = array();
-		foreach (ls(dirname(__FILE__) . '/../config/devices/', '*.json') as $file) {
-			try {
-				$content = file_get_contents(dirname(__FILE__) . '/../config/devices/' . $file);
-				$return += is_json($content, array());
-			} catch (Exception $e) {
-			}
-		}
-		if (isset($_device) && $_device != '') {
-			if (isset($return[$_device])) {
-				return $return[$_device];
-			}
-			return array();
-		}
-		return $return;
-	}
-
 	/*     * *********************Méthodes d'instance************************* */
 
 	public function preInsert() {
 		if ($this->getConfiguration('category') != 'sensor') {
 			$this->setCategory('light', 1);
 		}
-	}
-
-	public function postSave() {
-		if ($this->getConfiguration('applyDevice') != $this->getConfiguration('device')) {
-			$this->applyModuleConfiguration();
-		}
-	}
-
-	public function applyModuleConfiguration() {
-		$this->setConfiguration('applyDevice', $this->getConfiguration('device'));
-		$this->save(true);
-		if ($this->getConfiguration('device') == '') {
-			return true;
-		}
-		$device = self::devicesParameters($this->getConfiguration('device'));
-		if (!is_array($device)) {
-			return true;
-		}
-		$this->import($device);
 	}
 
 	public function getImgFilePath() {

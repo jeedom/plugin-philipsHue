@@ -1,5 +1,4 @@
 {
-    "ZONE": {
       "name": "Groupe",
       "commands": [
         {
@@ -121,7 +120,22 @@
           "isVisible": 0,
           "isHistorized": 0,
           "logicalId": "transition_state"
+        },
+        {
+          "name": "Transition",
+          "type": "action",
+          "subtype": "slider",
+          "display": {
+            "generic_type": "DONT"
+          },
+          "configuration" :{
+            "minValue" : 0,
+            "maxValue" : 1800
+          },
+          "value" : "Transition status",
+          "isVisible": 0,
+          "isHistorized": 0,
+          "logicalId": "transition"
         }
       ]
     }
-  }

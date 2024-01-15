@@ -549,19 +549,11 @@ class philipsHue extends eqLogic {
 				$eqLogic->setName($eqLogic->getName().' '.config::genKey(4));
 				$eqLogic->save();
 			}
-
-			$cmd = $eqLogic->getCmd('info', 'current_scene');
-			if (!is_object($cmd)) {
-				$cmd = new philipsHueCmd();
-				$cmd->setName(__('Scène en cours', __FILE__));
-				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setIsVisible(1);
-				$cmd->setLogicalId('current_scene');
+			try {
+				$eqLogic->import(is_json(file_get_contents(dirname(__FILE__) . '/../config/devices/ROOM.json'),array()));
+			} catch (Exception $e) {
+				log::add('philipsHue', 'error', 'Error apply configuration => ' . $e->getMessage());
 			}
-			$cmd->setType('info');
-			$cmd->setSubtype('string');
-			$cmd->setConfiguration('category', 'current_scene');
-			$cmd->save();
 		}
 
 		$zones = $hue->zone();
@@ -591,6 +583,11 @@ class philipsHue extends eqLogic {
 			} catch (Exception $e) {
 				$eqLogic->setName($eqLogic->getName().' '.config::genKey(4));
 				$eqLogic->save();
+			}
+			try {
+				$eqLogic->import(is_json(file_get_contents(dirname(__FILE__) . '/../config/devices/ZONE.json'),array()));
+			} catch (Exception $e) {
+				log::add('philipsHue', 'error', 'Error apply configuration => ' . $e->getMessage());
 			}
 		}
 
@@ -622,6 +619,11 @@ class philipsHue extends eqLogic {
 				$eqLogic->setName($eqLogic->getName().' '.config::genKey(4));
 				$eqLogic->save();
 			}
+			try {
+				$eqLogic->import(is_json(file_get_contents(dirname(__FILE__) . '/../config/devices/GROUPED_LIGHT.json'),array()));
+			} catch (Exception $e) {
+				log::add('philipsHue', 'error', 'Error apply configuration => ' . $e->getMessage());
+			}
 		}
 
 		$scenes = $hue->scene();
@@ -652,7 +654,7 @@ class philipsHue extends eqLogic {
 			$cmd->save();
 		}
       	
-      		$scenes = $hue->smart_scene();
+      	$scenes = $hue->smart_scene();
 		foreach ($scenes['data'] as $scene) {
 			$eqLogic = self::byLogicalId($scene['group']['rid'], 'philipsHue');
 			if (!is_object($eqLogic)) {
@@ -810,6 +812,24 @@ class philipsHue extends eqLogic {
 		}
 	}
 
+	public static function devicesParameters($_device = '') {
+		$return = array();
+		foreach (ls(dirname(__FILE__) . '/../config/devices/', '*.json') as $file) {
+			try {
+				$content = file_get_contents(dirname(__FILE__) . '/../config/devices/' . $file);
+				$return += is_json($content, array());
+			} catch (Exception $e) {
+			}
+		}
+		if (isset($_device) && $_device != '') {
+			if (isset($return[$_device])) {
+				return $return[$_device];
+			}
+			return array();
+		}
+		return $return;
+	}
+
 	/*     * *********************Méthodes d'instance************************* */
 
 	public function preInsert() {
@@ -960,7 +980,7 @@ class philipsHueCmd extends cmd {
 				}
 			}
 		}else{
-            		log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_light') . ' => ' . json_encode($data));
+            log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_light') . ' => ' . json_encode($data));
 			try {
 				$hue->light($eqLogic->getConfiguration('service_light'), $data);
 			} catch (\Throwable $th) {

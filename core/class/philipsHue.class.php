@@ -34,7 +34,7 @@ class philipsHue extends eqLogic {
 		$return['state'] = 'nok';
 		$pid_file = jeedom::getTmpFolder('philipsHue') . '/deamon.pid';
 		if (file_exists($pid_file)) {
-			if (@posix_getsid(trim(file_get_contents($pid_file)))) {
+			if (@posix_getsid((int) trim(file_get_contents($pid_file)))) {
 				$return['state'] = 'ok';
 			} else {
 				if (trim(file_get_contents($pid_file)) != '') {
@@ -1008,12 +1008,12 @@ class philipsHueCmd extends cmd {
 		}
 		$transistion_time = null;
 		if (isset($_options['transition'])) {
-			$transistion_time = $_options['transition'] * 1000;
+			$transistion_time = (int) $_options['transition'] * 1000;
 		} else {
 			$transition = $eqLogic->getCmd(null, 'transition_state');
 			if (is_object($transition)) {
 				$transistion_time = $transition->execCmd(null, 2);
-				$transistion_time = ($transistion_time == 0) ? 0 : $transistion_time * 1000;
+				$transistion_time = ($transistion_time == 0) ? 0 : (int) $transistion_time * 1000;
 			}
 		}
 

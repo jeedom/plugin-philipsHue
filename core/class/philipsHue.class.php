@@ -445,6 +445,7 @@ class philipsHue extends eqLogic {
 						}
 						$cmd->setType('info');
 						$cmd->setSubtype('numeric');
+						$cmd->setUnite('%');
 						$cmd->save();
 						$cmd_luminosity_state_id = $cmd->getId();
 
@@ -464,6 +465,7 @@ class philipsHue extends eqLogic {
 						$cmd->setType('action');
 						$cmd->setSubtype('slider');
 						$cmd->setValue($cmd_luminosity_state_id);
+						$cmd->setUnite('%');
 						$cmd->save();
 
 						$cmd = $eqLogic->getCmd('info', 'transition_state');

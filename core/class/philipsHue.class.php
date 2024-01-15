@@ -997,7 +997,7 @@ class philipsHueCmd extends cmd {
 			$transition = $eqLogic->getCmd(null, 'transition_state');
 			if (is_object($transition)) {
 				$transistion_time = $transition->execCmd(null, 2);
-				$transistion_time = ($transistion_time == 0) ? 0 : (int) $transistion_time * 1000;
+				$transistion_time = (int) $transistion_time * 1000;
 			}
 		}
 

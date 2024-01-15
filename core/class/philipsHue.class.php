@@ -1019,7 +1019,7 @@ class philipsHueCmd extends cmd {
 				'recall' => array('action' => 'dynamic_palette')
 			);
 			if($transistion_time !== null){
-				$data['actions'] = array(array('dynamics' => array('duration' => $transistion_time)))
+				$data['recall']['duration'] = $transistion_time;
 			}
 			/*$speed = $eqLogic->getCmd(null, 'speed_state');
 			if (is_object($speed)) {

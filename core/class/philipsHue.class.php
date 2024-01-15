@@ -319,6 +319,8 @@ class philipsHue extends eqLogic {
 					$cmd->save();
 				}
 				if ($service['rtype'] == 'light') {
+					$light = $hue->light($service['rid']);
+
 					$cmd = $eqLogic->getCmd('info', 'state');
 					if (!is_object($cmd)) {
 						$cmd = new philipsHueCmd();
@@ -361,7 +363,7 @@ class philipsHue extends eqLogic {
 					$cmd->setValue($cmd_state_id);
 					$cmd->save();
 
-					if(false){ // Si luminosité
+					if (isset($light['data'][0]['dimming'])) {
 						$cmd = $eqLogic->getCmd('info', 'luminosity_state');
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
@@ -422,10 +424,38 @@ class philipsHue extends eqLogic {
 						$cmd->setSubtype('slider');
 						$cmd->setValue($cmd_transistion_state_id);
 						$cmd->save();
-
 					}
 
-					$light = $hue->light($service['rid']);
+					if (isset($light['data'][0]['color'])) {
+						$cmd = $eqLogic->getCmd('info', 'color_state');
+						if (!is_object($cmd)) {
+							$cmd = new philipsHueCmd();
+							$cmd->setName(__('Etat Couleur', __FILE__));
+							$cmd->setEqLogic_id($eqLogic->getId());
+							$cmd->setIsVisible(1);
+							$cmd->setLogicalId('color_state');
+							$cmd->setGeneric_type('LIGHT_COLOR');
+						}
+						$cmd->setType('info');
+						$cmd->setSubtype('string');
+						$cmd->save();
+						$cmd_color_state_id = $cmd->getId();
+
+						$cmd = $eqLogic->getCmd('info', 'color');
+						if (!is_object($cmd)) {
+							$cmd = new philipsHueCmd();
+							$cmd->setName(__('Couleur', __FILE__));
+							$cmd->setEqLogic_id($eqLogic->getId());
+							$cmd->setIsVisible(1);
+							$cmd->setLogicalId('color');
+							$cmd->setGeneric_type('LIGHT_SET_COLOR');
+						}
+						$cmd->setType('action');
+						$cmd->setSubtype('color');
+						$cmd->setValue($cmd_color_state_id);
+						$cmd->save();
+					}
+					
 					if (isset($light['data'][0]['effects']['effect_values'])) {
 						$cmd = $eqLogic->getCmd('info', 'effect_status');
 						if (!is_object($cmd)) {

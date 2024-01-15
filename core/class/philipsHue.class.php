@@ -330,7 +330,7 @@ class philipsHue extends eqLogic {
 					$cmd->save();
 					$cmd_state_id = $cmd->getId();
 
-					$cmd = $eqLogic->getCmd('info', 'on');
+					$cmd = $eqLogic->getCmd('action', 'on');
 					if (!is_object($cmd)) {
 						$cmd = new philipsHueCmd();
 						$cmd->setName(__('On', __FILE__));
@@ -344,7 +344,7 @@ class philipsHue extends eqLogic {
 					$cmd->setValue($cmd_state_id);
 					$cmd->save();
 
-					$cmd = $eqLogic->getCmd('info', 'off');
+					$cmd = $eqLogic->getCmd('action', 'off');
 					if (!is_object($cmd)) {
 						$cmd = new philipsHueCmd();
 						$cmd->setName(__('Off', __FILE__));
@@ -373,7 +373,7 @@ class philipsHue extends eqLogic {
 						$cmd->save();
 						$cmd_luminosity_state_id = $cmd->getId();
 
-						$cmd = $eqLogic->getCmd('info', 'luminosity');
+						$cmd = $eqLogic->getCmd('action', 'luminosity');
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Luminosité', __FILE__));
@@ -404,7 +404,7 @@ class philipsHue extends eqLogic {
 						$cmd->save();
 						$cmd_transistion_state_id = $cmd->getId();
 
-						$cmd = $eqLogic->getCmd('info', 'transition');
+						$cmd = $eqLogic->getCmd('action', 'transition');
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Transition', __FILE__));
@@ -436,7 +436,7 @@ class philipsHue extends eqLogic {
 						$cmd->save();
 						$cmd_color_state_id = $cmd->getId();
 
-						$cmd = $eqLogic->getCmd('info', 'color');
+						$cmd = $eqLogic->getCmd('action', 'color');
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Couleur', __FILE__));
@@ -465,7 +465,7 @@ class philipsHue extends eqLogic {
 						$cmd->save();
 						$cmd_temp_state_id = $cmd->getId();
 
-						$cmd = $eqLogic->getCmd('info', 'color_temp');
+						$cmd = $eqLogic->getCmd('action', 'color_temp');
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Couleur temp', __FILE__));

@@ -131,11 +131,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 							<legend><i class="fas fa-cogs"></i> {{Paramètres spécifiques}}</legend>
 							<div class="form-group">
-								<label class="col-sm-4 control-label">{{Modèle}}
-									<sup><i class="fas fa-question-circle tooltips" title="{{Sélectionner le modèle d'équipement Philips Hue à piloter}}"></i></sup>
-								</label>
-							</div>
-							<div class="form-group">
 								<label class="col-sm-4 control-label">{{Pont}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{Pont Philips Hue sur lequel l'équipement est connecté}}"></i></sup>
 								</label>
@@ -174,7 +169,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Id du modele}}</label>
+								<label class="col-sm-3 control-label">{{Id du modèle}}</label>
 								<div class="col-sm-7">
 									<span class="eqLogicAttr tooltips label label-default" data-l1key="configuration" data-l2key="device" style="font-size : 1em"></span>
 								</div>

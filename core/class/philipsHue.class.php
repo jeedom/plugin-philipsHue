@@ -1003,25 +1003,24 @@ class philipsHueCmd extends cmd {
 			}
 			return;
 		}
-
+		$transistion_time = null;
 		if (isset($_options['transition'])) {
 			$transistion_time = $_options['transition'] * 1000;
 		} else {
 			$transition = $eqLogic->getCmd(null, 'transition_state');
-			$transistion_time = 0;
 			if (is_object($transition)) {
 				$transistion_time = $transition->execCmd(null, 2);
+				$transistion_time = ($transistion_time == 0) ? 0 : $transistion_time * 1000;
 			}
-			$transistion_time = ($transistion_time == 0) ? 0 : $transistion_time * 1000;
 		}
 
 		if ($this->getConfiguration('category') == 'scene') {
 			$data = array(
-				'recall' => array('action' => 'dynamic_palette'),
-				'actions' => array(
-					'dynamics' => array('duration' => $transistion_time)
-				)
+				'recall' => array('action' => 'dynamic_palette')
 			);
+			if($transistion_time !== null){
+				$data['actions'] = array(array('dynamics' => array('duration' => $transistion_time)))
+			}
 			/*$speed = $eqLogic->getCmd(null, 'speed_state');
 			if (is_object($speed)) {
 				$data['speed'] = $speed->execCmd(null, 2);
@@ -1051,7 +1050,9 @@ class philipsHueCmd extends cmd {
 		
 
 		$data = array();
-		$data['dynamics'] = array('duration' => $transistion_time);
+		if($transistion_time !== null){
+			$data['dynamics'] = array('duration' => $transistion_time);
+		}
 		if ($this->getLogicalId() != 'off') {
 			$data['on'] = array('on' => true);
 		} else {

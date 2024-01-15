@@ -5,21 +5,13 @@
       {
         "name": "Etat",
         "type": "info",
-        "subtype": "binary",
-        "isVisible": 0,
-        "isHistorized": 0,
-        "logicalId": "state"
-      },
-      {
-        "name": "Etat",
-        "type": "info",
         "subtype": "numeric",
         "display": {
           "generic_type": "ENERGY_STATE"
         },
         "isVisible": 0,
         "isHistorized": 0,
-        "logicalId": "luminosity_state"
+        "logicalId": "state"
       },
       {
         "name": "On",

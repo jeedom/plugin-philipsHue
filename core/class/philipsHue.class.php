@@ -446,6 +446,7 @@ class philipsHue extends eqLogic {
 						$cmd->setType('info');
 						$cmd->setSubtype('numeric');
 						$cmd->setUnite('%');
+						$cmd->setConfiguration('historizeRound',0);
 						$cmd->save();
 						$cmd_luminosity_state_id = $cmd->getId();
 
@@ -457,11 +458,11 @@ class philipsHue extends eqLogic {
 							$cmd->setIsVisible(1);
 							$cmd->setLogicalId('luminosity');
 							$cmd->setGeneric_type('LIGHT_SLIDER');
-							$cmd->setConfiguration('minValue',0);
-							$cmd->setConfiguration('maxValue',100);
 							$cmd->setTemplate('dashboard','light');
 							$cmd->setTemplate('mobile','light');
 						}
+						$cmd->setConfiguration('minValue',0);
+						$cmd->setConfiguration('maxValue',100);
 						$cmd->setType('action');
 						$cmd->setSubtype('slider');
 						$cmd->setValue($cmd_luminosity_state_id);
@@ -489,9 +490,9 @@ class philipsHue extends eqLogic {
 							$cmd->setIsVisible(0);
 							$cmd->setLogicalId('transition');
 							$cmd->setGeneric_type('LIGHT_SLIDER');
-							$cmd->setConfiguration('minValue',0);
-							$cmd->setConfiguration('maxValue',1800);
 						}
+						$cmd->setConfiguration('minValue',0);
+						$cmd->setConfiguration('maxValue',1800);
 						$cmd->setType('action');
 						$cmd->setSubtype('slider');
 						$cmd->setValue($cmd_transistion_state_id);
@@ -549,9 +550,9 @@ class philipsHue extends eqLogic {
 							$cmd->setEqLogic_id($eqLogic->getId());
 							$cmd->setIsVisible(1);
 							$cmd->setLogicalId('color_temp');
-							$cmd->setConfiguration('minValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_minimum']);
-							$cmd->setConfiguration('maxValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_maximum']);
 						}
+						$cmd->setConfiguration('minValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_minimum']);
+						$cmd->setConfiguration('maxValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_maximum']);
 						$cmd->setType('action');
 						$cmd->setSubtype('slider');
 						$cmd->setValue($cmd_temp_state_id);

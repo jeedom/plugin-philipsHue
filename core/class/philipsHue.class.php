@@ -681,6 +681,8 @@ class philipsHue extends eqLogic {
 			$cmd->setConfiguration('category', 'smart_scene');
 			$cmd->save();
 		}
+
+		philipsHue::syncState($_bridge_number);
 	}
 
 	public static function cron15() {

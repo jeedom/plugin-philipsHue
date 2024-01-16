@@ -8,6 +8,7 @@
 
 - Ajout des transistions sur les zones, pieces et lumieres groupées
 - Refonte complete de la créations des commandes : plus besoin d'avoir une configuration pour que votre lampe ait les bonnes commandes, tout vient du pont
+- Ajout de la commande alerte
 
 # 16/01/2024
 

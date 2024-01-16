@@ -11,7 +11,7 @@
 
 # 16/01/2024
 
-- Ajout d'illustation produits HUE (LTV001, LTA011, LTA009, 5047431P6, 929003479601)
+- Ajout d'illustations produits HUE (LTV001, LTA011, LTA009, 5047431P6, 929003479601)
 
 # 15/01/2024
 

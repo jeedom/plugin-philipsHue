@@ -592,6 +592,26 @@ class philipsHue extends eqLogic {
 						$cmd->setValue($effect_status_id);
 						$cmd->save();
 					}
+
+					if (isset($light['data'][0]['alert']['action_values'])) {
+						$cmd = $eqLogic->getCmd('action', 'alert');
+						if (!is_object($cmd)) {
+							$cmd = new philipsHueCmd();
+							$cmd->setName(__('Alerte', __FILE__));
+							$cmd->setEqLogic_id($eqLogic->getId());
+							$cmd->setIsVisible(1);
+							$cmd->setLogicalId('alert');
+						}
+						$cmd->setType('action');
+						$cmd->setSubtype('select');
+						$select = '';
+						foreach ($light['data'][0]['alert']['action_values'] as $alert) {
+							$select .= $alert . '|' . $alert . ';';
+						}
+						$select = trim($select, ';');
+						$cmd->setConfiguration('listValue', $select);
+						$cmd->save();
+					}
 				}
 			}
 		}
@@ -1068,6 +1088,9 @@ class philipsHueCmd extends cmd {
 				break;
 			case 'effect':
 				$data['effects'] = array('effect' => $_options['select']);
+				break;
+			case 'alert':
+				$data['alert'] = array('action' => $_options['select']);
 				break;
 		}
 		if (isset($data['dimming']['brightness']) && $data['dimming']['brightness'] > 100) {

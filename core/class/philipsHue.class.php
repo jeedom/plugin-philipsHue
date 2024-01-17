@@ -1065,6 +1065,7 @@ class philipsHueCmd extends cmd {
 		} else {
 			$data['on'] = array('on' => false);
 		}
+
 		switch ($this->getLogicalId()) {
 			case 'luminosity':
 				if ($_options['slider'] == 0) {
@@ -1091,6 +1092,11 @@ class philipsHueCmd extends cmd {
 				break;
 			case 'alert':
 				$data['alert'] = array('action' => $_options['select']);
+				break;
+			case 'on':
+				if($eqLogic->getCache('previous_luminosity',null) != null){
+					$data['dimming'] = array('brightness' => (int) $eqLogic->getCache('previous_luminosity'));
+				}
 				break;
 		}
 		if (isset($data['dimming']['brightness']) && $data['dimming']['brightness'] > 100) {

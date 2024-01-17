@@ -81,17 +81,7 @@ function launchConnection(_bridge_id,_retry){
       return
     }
     Jeedom.log.error('[launchConnection] Lost connection to SSE server. Try reconnect...')
-    bridges[_bridge_id]['es'] = new EventSource('https://'+bridges[_bridge_id]['ip']+'/eventstream/clip/v2',{
-      headers:{
-        'hue-application-key': bridges[_bridge_id]['key'],
-        'Connection':'keep-alive',
-        'Accept':'text/event-stream',
-        'Cache-Control':'no-cache'
-      },
-      https: {
-        rejectUnauthorized: false
-      }
-    });
+    launchConnection(_bridge_id,(_retry+1))
     Jeedom.com.add_changes('bridge::'+_bridge_id,'resync');
   },30000);
 }

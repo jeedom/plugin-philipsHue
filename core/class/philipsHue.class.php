@@ -1094,7 +1094,9 @@ class philipsHueCmd extends cmd {
 				$data['alert'] = array('action' => $_options['select']);
 				break;
 			case 'on':
-				$data['dimming'] = array('brightness' => (int) $eqLogic->getCache('previous_luminosity'));
+				if($eqLogic->getCache('previous_luminosity',null) != null){
+					$data['dimming'] = array('brightness' => (int) $eqLogic->getCache('previous_luminosity',50));
+				}
 				break;
 		}
 		if (isset($data['dimming']['brightness']) && $data['dimming']['brightness'] > 100) {

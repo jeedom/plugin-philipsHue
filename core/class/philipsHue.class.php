@@ -163,8 +163,8 @@ class philipsHue extends eqLogic {
 				$eqLogic->setEqType_name('philipsHue');
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
-				$eqLogic->setConfiguration('device', $modelId);
 			}
+			$eqLogic->setConfiguration('device', $modelId);
 			$eqLogic->setConfiguration('bridge', $_bridge_number);
 			$eqLogic->setConfiguration('category', $type);
 			$eqLogic->setConfiguration('id', $id);

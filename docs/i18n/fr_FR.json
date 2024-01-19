@@ -4,6 +4,7 @@
         "Changelog plugin Philips Hue": "Changelog plugin Philips Hue",
         "IMPORTANT": "IMPORTANT",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte",
+        "19\/01\/2024": "19\/01\/2024",
         "Workarround pour corrigé le bug de la luminosité lors d'un on de l'apiv2 de Hue": "Workarround pour corrigé le bug de la luminosité lors d'un on de l'apiv2 de Hue",
         "17\/01\/2024": "17\/01\/2024",
         "Reprise de la luminosité précedente lors d'un on": "Reprise de la luminosité précedente lors d'un on",
@@ -135,9 +136,7 @@
         "utilise son propre démon afin de rester en contact constant avec le(s) pont(s) Philips Hue": "utilise son propre démon afin de rester en contact constant avec le(s) pont(s) Philips Hue",
         "Vous pouvez en contrôler le statut sur la page de configuration du plugin": "Vous pouvez en contrôler le statut sur la page de configuration du plugin",
         "Compatibilité": "Compatibilité",
-        "ici": "ici",
-        "Vous pouvez trouver": "Vous pouvez trouver",
-        "la liste des modules compatible avec le plugin": "la liste des modules compatible avec le plugin",
+        "Tous les modules compatible avec le pont Hue sont compatibles avec le plugin Jeedom": "Tous les modules compatible avec le pont Hue sont compatibles avec le plugin Jeedom",
         "Configuration des équipements": "Configuration des équipements",
         "Plugins → Communication → Philips Hue": "Plugins → Communication → Philips Hue",
         "Pour accéder aux différents équipements": "Pour accéder aux différents équipements",
@@ -147,10 +146,6 @@
         "Elle permet de définir la durée en secondes de la transition entre l'état actuel et la prochaine commande": "Elle permet de définir la durée en secondes de la transition entre l'état actuel et la prochaine commande",
         "Par exemple le matin vous pouvez vouloir simuler le lever du soleil en 3 minutes": "Par exemple le matin vous pouvez vouloir simuler le lever du soleil en 3 minutes",
         "Dans votre scénario vous avez donc juste à appeler la commande transition avec": "Dans votre scénario vous avez donc juste à appeler la commande transition avec",
-        "en paramètre puis appeler la commande couleur vers la couleur désirée": "en paramètre puis appeler la commande couleur vers la couleur désirée",
-        "FAQ": "FAQ",
-        "Mon équipement (lampe, interrupteur, etc...) n'est pas reconnu par le plugin, comment faire": "Mon équipement (lampe, interrupteur, etc...) n'est pas reconnu par le plugin, comment faire",
-        "Il faut": "Il faut",
-        "nous décrire l'équipement que vous voulez qu'on ajoute avec photos et les possibilités de celui-ci et nous envoyer le log en debug de la synchronisation avec le pont, le tout en nous contactant par une demande de support": "nous décrire l'équipement que vous voulez qu'on ajoute avec photos et les possibilités de celui-ci et nous envoyer le log en debug de la synchronisation avec le pont, le tout en nous contactant par une demande de support"
+        "en paramètre puis appeler la commande couleur vers la couleur désirée": "en paramètre puis appeler la commande couleur vers la couleur désirée"
     }
 }

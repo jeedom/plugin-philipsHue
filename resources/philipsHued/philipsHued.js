@@ -65,6 +65,7 @@ function launchConnection(_bridge_id,_retry){
     },1000)
   };
   bridges[_bridge_id]['es'].addEventListener('message', function (e) {
+    e.stopImmediatePropagation();
     if(_retry != 0){
       _retry = 0;
     }

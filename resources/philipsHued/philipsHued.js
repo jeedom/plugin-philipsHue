@@ -72,11 +72,14 @@ function launchConnection(_bridge_id,_retry){
     if(_retry != 0){
       _retry = 0;
     }
-    if(e.data.id == bridges[_bridge_id]['lastEvent']){
+    let data = JSON.parse(e.data);
+    if(data[0].id && data[0].id == bridges[_bridge_id]['lastEvent']){
         return;
     }
     bridges[_bridge_id]['lastMessage'] = Math.floor(new Date().getTime() / 1000)
-    bridges[_bridge_id]['lastEvent'] = e.data.id;
+    if(data[0].id){
+    	bridges[_bridge_id]['lastEvent'] = data[0].id;
+    }
     Jeedom.com.add_changes('bridge::'+_bridge_id,e.data);
   })
 

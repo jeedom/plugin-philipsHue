@@ -42,6 +42,10 @@ for (i in bridges) {
 }
 
 function launchConnection(_bridge_id,_retry){
+  if(!bridges[_bridge_id]['lastEvent']){
+      bridges[_bridge_id]['lastEvent'] = '';
+  }
+  
   if(_retry > 10){
     Jeedom.log.error('[launchConnection] Too much retry, I will kill me...')
     process.exit()
@@ -65,11 +69,14 @@ function launchConnection(_bridge_id,_retry){
     },1000)
   };
   bridges[_bridge_id]['es'].addEventListener('message', function (e) {
-    e.stopImmediatePropagation();
     if(_retry != 0){
       _retry = 0;
     }
+    if(e.data.id == bridges[_bridge_id]['lastEvent']){
+        return;
+    }
     bridges[_bridge_id]['lastMessage'] = Math.floor(new Date().getTime() / 1000)
+    bridges[_bridge_id]['lastEvent'] = e.data.id;
     Jeedom.com.add_changes('bridge::'+_bridge_id,e.data);
   })
 

@@ -1057,7 +1057,7 @@ class philipsHueCmd extends cmd {
 		
 
 		$data = array();
-		if($transistion_time !== null){
+		if($transistion_time !== null && $transistion_time > 0){
 			$data['dynamics'] = array('duration' => $transistion_time);
 		}
 		if ($this->getLogicalId() != 'off') {

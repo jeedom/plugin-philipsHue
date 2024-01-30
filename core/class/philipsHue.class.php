@@ -443,6 +443,8 @@ class philipsHue extends eqLogic {
 							$cmd->setLogicalId('luminosity_state');
 							$cmd->setGeneric_type('LIGHT_STATE');
 						}
+						$cmd->setConfiguration('minValue',0);
+						$cmd->setConfiguration('maxValue',100);
 						$cmd->setType('info');
 						$cmd->setSubtype('numeric');
 						$cmd->setUnite('%');
@@ -477,6 +479,8 @@ class philipsHue extends eqLogic {
 							$cmd->setIsVisible(0);
 							$cmd->setLogicalId('transition_state');
 						}
+						$cmd->setConfiguration('minValue',0);
+						$cmd->setConfiguration('maxValue',1800);
 						$cmd->setType('info');
 						$cmd->setSubtype('numeric');
 						$cmd->save();
@@ -538,6 +542,8 @@ class philipsHue extends eqLogic {
 							$cmd->setIsVisible(0);
 							$cmd->setLogicalId('color_temp_state');
 						}
+						$cmd->setConfiguration('minValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_minimum']);
+						$cmd->setConfiguration('maxValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_maximum']);
 						$cmd->setType('info');
 						$cmd->setSubtype('numeric');
 						$cmd->save();

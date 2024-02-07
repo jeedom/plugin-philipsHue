@@ -443,6 +443,8 @@ class philipsHue extends eqLogic {
 							$cmd->setLogicalId('luminosity_state');
 							$cmd->setGeneric_type('LIGHT_STATE');
 						}
+						$cmd->setConfiguration('minValue',0);
+						$cmd->setConfiguration('maxValue',100);
 						$cmd->setType('info');
 						$cmd->setSubtype('numeric');
 						$cmd->setUnite('%');
@@ -477,6 +479,8 @@ class philipsHue extends eqLogic {
 							$cmd->setIsVisible(0);
 							$cmd->setLogicalId('transition_state');
 						}
+						$cmd->setConfiguration('minValue',0);
+						$cmd->setConfiguration('maxValue',1800);
 						$cmd->setType('info');
 						$cmd->setSubtype('numeric');
 						$cmd->save();
@@ -538,6 +542,8 @@ class philipsHue extends eqLogic {
 							$cmd->setIsVisible(0);
 							$cmd->setLogicalId('color_temp_state');
 						}
+						$cmd->setConfiguration('minValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_minimum']);
+						$cmd->setConfiguration('maxValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_maximum']);
 						$cmd->setType('info');
 						$cmd->setSubtype('numeric');
 						$cmd->save();
@@ -647,11 +653,7 @@ class philipsHue extends eqLogic {
 				$eqLogic->setName($eqLogic->getName().' '.config::genKey(4));
 				$eqLogic->save();
 			}
-			try {
-				$eqLogic->import(is_json(file_get_contents(dirname(__FILE__) . '/../config/devices/ROOM.json'),array()),true);
-			} catch (Exception $e) {
-				log::add('philipsHue', 'error', 'Error apply configuration => ' . $e->getMessage());
-			}
+			$eqLogic->createDefaultCmd();
 		}
 
 		$zones = $hue->zone();
@@ -682,11 +684,7 @@ class philipsHue extends eqLogic {
 				$eqLogic->setName($eqLogic->getName().' '.config::genKey(4));
 				$eqLogic->save();
 			}
-			try {
-				$eqLogic->import(is_json(file_get_contents(dirname(__FILE__) . '/../config/devices/ZONE.json'),array()),true);
-			} catch (Exception $e) {
-				log::add('philipsHue', 'error', 'Error apply configuration => ' . $e->getMessage());
-			}
+			$eqLogic->createDefaultCmd();
 		}
 
 		$grouped_lights = $hue->grouped_light();
@@ -717,11 +715,7 @@ class philipsHue extends eqLogic {
 				$eqLogic->setName($eqLogic->getName().' '.config::genKey(4));
 				$eqLogic->save();
 			}
-			try {
-				$eqLogic->import(is_json(file_get_contents(dirname(__FILE__) . '/../config/devices/GROUPED_LIGHT.json'),array()),true);
-			} catch (Exception $e) {
-				log::add('philipsHue', 'error', 'Error apply configuration => ' . $e->getMessage());
-			}
+			$eqLogic->createDefaultCmd();
 		}
 
 		$scenes = $hue->scene();
@@ -962,6 +956,176 @@ class philipsHue extends eqLogic {
 			return 'plugins/philipsHue/plugin_info/philipsHue_icon.png';
 		}
 		return 'plugins/philipsHue/core/config/devices/' . $imgpath;
+	}
+
+	public function createDefaultCmd(){
+		$cmd = $this->getCmd('info', 'state');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setName(__('Etat', __FILE__));
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->setIsVisible(0);
+			$cmd->setLogicalId('state');
+			$cmd->setGeneric_type('LIGHT_STATE');
+		}
+		$cmd->setType('info');
+		$cmd->setSubtype('binary');
+		$cmd->save();
+		$cmd_state_id = $cmd->getId();
+
+		$cmd = $this->getCmd('action', 'on');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setName(__('On', __FILE__));
+			$cmd->setEqLogic_id($eqLthisogic->getId());
+			$cmd->setIsVisible(0);
+			$cmd->setLogicalId('on');
+			$cmd->setGeneric_type('LIGHT_ON');
+		}
+		$cmd->setType('action');
+		$cmd->setSubtype('other');
+		$cmd->setValue($cmd_state_id);
+		$cmd->save();
+
+		$cmd = $this->getCmd('action', 'off');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setName(__('Off', __FILE__));
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->setIsVisible(0);
+			$cmd->setLogicalId('off');
+			$cmd->setGeneric_type('LIGHT_OFF');
+		}
+		$cmd->setType('action');
+		$cmd->setSubtype('other');
+		$cmd->setValue($cmd_state_id);
+		$cmd->save();
+
+		$cmd = $this->getCmd('info', 'luminosity_state');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setName(__('Etat Luminosité', __FILE__));
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->setIsVisible(0);
+			$cmd->setLogicalId('luminosity_state');
+			$cmd->setGeneric_type('LIGHT_STATE');
+		}
+		$cmd->setConfiguration('minValue',0);
+		$cmd->setConfiguration('maxValue',100);
+		$cmd->setType('info');
+		$cmd->setSubtype('numeric');
+		$cmd->setUnite('%');
+		$cmd->setConfiguration('historizeRound',0);
+		$cmd->save();
+		$cmd_luminosity_state_id = $cmd->getId();
+
+		$cmd = $this->getCmd('action', 'luminosity');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setName(__('Luminosité', __FILE__));
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->setIsVisible(1);
+			$cmd->setLogicalId('luminosity');
+			$cmd->setGeneric_type('LIGHT_SLIDER');
+			$cmd->setTemplate('dashboard','light');
+			$cmd->setTemplate('mobile','light');
+		}
+		$cmd->setConfiguration('minValue',0);
+		$cmd->setConfiguration('maxValue',100);
+		$cmd->setType('action');
+		$cmd->setSubtype('slider');
+		$cmd->setValue($cmd_luminosity_state_id);
+		$cmd->setUnite('%');
+		$cmd->save();
+
+		$cmd = $this->getCmd('info', 'transition_state');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setName(__('Transition status', __FILE__));
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->setIsVisible(0);
+			$cmd->setLogicalId('transition_state');
+		}
+		$cmd->setConfiguration('minValue',0);
+		$cmd->setConfiguration('maxValue',1800);
+		$cmd->setType('info');
+		$cmd->setSubtype('numeric');
+		$cmd->save();
+		$cmd_transistion_state_id = $cmd->getId();
+
+		$cmd = $this->getCmd('action', 'transition');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setName(__('Transition', __FILE__));
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->setIsVisible(0);
+			$cmd->setLogicalId('transition');
+			$cmd->setGeneric_type('LIGHT_SLIDER');
+		}
+		$cmd->setConfiguration('minValue',0);
+		$cmd->setConfiguration('maxValue',1800);
+		$cmd->setType('action');
+		$cmd->setSubtype('slider');
+		$cmd->setValue($cmd_transistion_state_id);
+		$cmd->save();
+
+		$cmd = $this->getCmd('info', 'color_state');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setName(__('Etat Couleur', __FILE__));
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->setIsVisible(1);
+			$cmd->setLogicalId('color_state');
+			$cmd->setGeneric_type('LIGHT_COLOR');
+		}
+		$cmd->setType('info');
+		$cmd->setSubtype('string');
+		$cmd->save();
+		$cmd_color_state_id = $cmd->getId();
+
+		$cmd = $this->getCmd('action', 'color');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setName(__('Couleur', __FILE__));
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->setIsVisible(1);
+			$cmd->setLogicalId('color');
+			$cmd->setGeneric_type('LIGHT_SET_COLOR');
+		}
+		$cmd->setType('action');
+		$cmd->setSubtype('color');
+		$cmd->setValue($cmd_color_state_id);
+		$cmd->save();
+
+		$cmd = $this->getCmd('info', 'color_temp_state');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setName(__('Etat Couleur temp', __FILE__));
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->setIsVisible(0);
+			$cmd->setLogicalId('color_temp_state');
+		}
+		$cmd->setConfiguration('minValue',153);
+		$cmd->setConfiguration('maxValue',500);
+		$cmd->setType('info');
+		$cmd->setSubtype('numeric');
+		$cmd->save();
+		$cmd_temp_state_id = $cmd->getId();
+
+		$cmd = $this->getCmd('action', 'color_temp');
+		if (!is_object($cmd)) {
+			$cmd = new philipsHueCmd();
+			$cmd->setName(__('Couleur temp', __FILE__));
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->setIsVisible(1);
+			$cmd->setLogicalId('color_temp');
+		}
+		$cmd->setConfiguration('minValue',153);
+		$cmd->setConfiguration('maxValue',500);
+		$cmd->setType('action');
+		$cmd->setSubtype('slider');
+		$cmd->setValue($cmd_temp_state_id);
+		$cmd->save();
 	}
 }
 

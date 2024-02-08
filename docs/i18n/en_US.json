@@ -3,6 +3,7 @@
         "Changelog Philips Hue": "Changelog Philips Hue",
         "Changelog plugin Philips Hue": "Changelog plugin Philips Hue",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text",
+        "07\/02\/2024": "02\/07\/2024",
         "Correction d'un bug qui changait la configuration des commandes pour les pieces, groupe de lampe et zone lors de la synchronisation": "Fixed a bug that changed the configuration of controls for rooms, lamp groups and zones during synchronization",
         "25\/01\/2024": "01\/25\/2024",
         "Amélioration de la gestion des transition": "Improved transition management",

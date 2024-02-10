@@ -977,7 +977,7 @@ class philipsHue extends eqLogic {
 		if (!is_object($cmd)) {
 			$cmd = new philipsHueCmd();
 			$cmd->setName(__('On', __FILE__));
-			$cmd->setEqLogic_id($eqLthisogic->getId());
+			$cmd->setEqLogic_id($this->getId());
 			$cmd->setIsVisible(0);
 			$cmd->setLogicalId('on');
 			$cmd->setGeneric_type('LIGHT_ON');

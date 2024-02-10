@@ -22,10 +22,10 @@
 class pHueApi {
     /*     * *************************Attributs****************************** */
     public static $CURL_OPTS = array(
-        CURLOPT_CONNECTTIMEOUT => 10,
+        CURLOPT_CONNECTTIMEOUT => 30,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HEADER         => false,
-        CURLOPT_TIMEOUT        => 60,
+        CURLOPT_TIMEOUT        => 90,
         CURLOPT_USERAGENT      => 'jeedom',
         CURLOPT_SSL_VERIFYPEER => false,
         CURLOPT_SSL_VERIFYHOST => false,

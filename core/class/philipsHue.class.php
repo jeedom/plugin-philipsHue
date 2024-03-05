@@ -735,8 +735,12 @@ class philipsHue extends eqLogic {
 			$cmd->setType('action');
 			$cmd->setSubtype('other');
 			$cmd->setConfiguration('category', 'scene');
-			$cmd->save();
-
+			try {
+				$cmd->save();
+			} catch (Exception $e) {
+				$cmd->setName($cmd->getName().' - '.$scene['id']);
+				$cmd->save();
+			}
 			/*$cmd = $eqLogic->getCmd('info', 'scene_speed_state');
 			if (!is_object($cmd)) {
 				$cmd = new philipsHueCmd();
@@ -766,7 +770,7 @@ class philipsHue extends eqLogic {
 			$cmd->save();*/
 		}
       	
-      	$scenes = $hue->smart_scene();
+      	        $scenes = $hue->smart_scene();
 		foreach ($scenes['data'] as $scene) {
 			$eqLogic = self::byLogicalId($scene['group']['rid'], 'philipsHue');
 			if (!is_object($eqLogic)) {
@@ -784,6 +788,12 @@ class philipsHue extends eqLogic {
 			$cmd->setSubtype('other');
 			$cmd->setConfiguration('category', 'smart_scene');
 			$cmd->save();
+			try {
+				$cmd->save();
+			} catch (Exception $e) {
+				$cmd->setName($cmd->getName().' - '.$scene['id']);
+				$cmd->save();
+			}
 		}
 		philipsHue::syncState($_bridge_number);
 	}

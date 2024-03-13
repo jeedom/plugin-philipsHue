@@ -236,17 +236,21 @@ class philipsHue extends eqLogic {
 					$cmd->setType('info');
 					$cmd->setSubtype('binary');
 					$cmd->save();
+					$enabled_info_id = $cmd->getId(); 
 
 					$cmd = $eqLogic->getCmd('action', 'enable');
 					if (!is_object($cmd)) {
 						$cmd = new philipsHueCmd();
 						$cmd->setName(__('Activer', __FILE__));
 						$cmd->setEqLogic_id($eqLogic->getId());
-						$cmd->setIsVisible(0);
+						$cmd->setIsVisible(1);
 						$cmd->setLogicalId('enable');
+						$cmd->setTemplate('dashboard','binarySwitch');
+						$cmd->setTemplate('mobile','binarySwitch');
 					}
 					$cmd->setType('action');
 					$cmd->setSubtype('other');
+					$cmd->setValue($enabled_info_id);
 					$cmd->save();
 
 					$cmd = $eqLogic->getCmd('action', 'disable');
@@ -254,11 +258,14 @@ class philipsHue extends eqLogic {
 						$cmd = new philipsHueCmd();
 						$cmd->setName(__('Désactiver', __FILE__));
 						$cmd->setEqLogic_id($eqLogic->getId());
-						$cmd->setIsVisible(0);
+						$cmd->setIsVisible(1);
 						$cmd->setLogicalId('disable');
+						$cmd->setTemplate('dashboard','binarySwitch');
+						$cmd->setTemplate('mobile','binarySwitch');
 					}
 					$cmd->setType('action');
 					$cmd->setSubtype('other');
+					$cmd->setValue($enabled_info_id);
 					$cmd->save();
 				}
 

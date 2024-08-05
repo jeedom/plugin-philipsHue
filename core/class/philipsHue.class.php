@@ -968,6 +968,12 @@ class philipsHue extends eqLogic {
 	}
 
 	public function getImage() {
+		if(method_exists($this,'getCustomImage')){
+			$customImage = $this->getCustomImage();
+		 	if($customImage !== null){
+		    		return $customImage;
+		 	}
+	        }
 		$imgpath = $this->getImgFilePath();
 		if ($imgpath === false) {
 			return 'plugins/philipsHue/plugin_info/philipsHue_icon.png';

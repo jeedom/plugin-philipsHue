@@ -80,6 +80,9 @@ function launchConnection(_bridge_id,_retry){
     if(data[0].id){
     	bridges[_bridge_id]['lastEvent'] = data[0].id;
     }
+    if(date['data'] && date['data'].length == 1 && date['data'][0]['type'] == 'geofence_client' && date['data'][0]['name'].indexOf('jeedom') === 0){
+      return;
+    }
     Jeedom.com.add_changes('bridge::'+_bridge_id,e.data);
   })
 
@@ -166,7 +169,7 @@ function createJeedomGeoloc(_bridge_id){
   });
   req.write(JSON.stringify({
     'type' : 'geofence_client',
-    'is_at_home' : true,
+    'is_at_home' : false,
     'name' : 'jeedom'
   }));
   req.end();
@@ -204,7 +207,7 @@ function updateJeedomGeolocName(_bridge_id){
     req.write(JSON.stringify({
       'type' : 'geofence_client',
       'is_at_home' : false,
-      'name' : 'jeedom_'+((Math.random() + 1).toString(36).substring(7))
+      'name' : 'jeedom'
     }));
     req.end();
  }, 30000)

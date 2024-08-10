@@ -996,15 +996,17 @@ class philipsHue extends eqLogic {
 		if(count($cmds) == 0){
 			return null;
 		}
-		if(count($cmds) == 1){
-			return $cmds[0];
-		}
 		foreach ($cmds as $cmd) {
 			if($cmd->getConfiguration('service_'.$_service_type) == $_service_id){
 				return $cmd;
 			}
 		}
-		return $cmds[0];
+        foreach ($cmds as $cmd) {
+			if($cmd->getConfiguration('service_'.$_service_type) == ''){
+				return $cmd;
+			}
+        }
+		return null;
 	}
 
 	public function createDefaultCmd(){

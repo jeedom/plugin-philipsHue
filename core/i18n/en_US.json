@@ -84,7 +84,7 @@
         "Connecté": "Connected",
         "On": "On",
         "Off": "Off",
-        "Etat Luminosité": "Brightness Status",
+        "Etat Luminosité ": "Brightness Status",
         "Transition status": "Transition status",
         "Transition": "Transition",
         "Etat Couleur": "Status Color",
@@ -92,10 +92,11 @@
         "Etat Couleur temp": "Status Color temp",
         "Couleur temp": "Temp color",
         "Effet état": "Status effect",
-        "Effet": "Effect",
+        "Effet ": "Effect",
         "Alerte": "Alert",
         "Scene ": "Scene",
         "Smart Scene ": "Smart Scene",
+        "Etat Luminosité": "Brightness Status",
         "Erreur d\\'éxecution de la commande :": "Command execution error:"
     },
     "info.json": {

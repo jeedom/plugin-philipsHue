@@ -84,7 +84,7 @@
         "Connecté": "In Verbindung gebracht",
         "On": "Wir",
         "Off": "Aus",
-        "Etat Luminosité": "Helligkeitsstatus",
+        "Etat Luminosité ": "Helligkeitsstatus",
         "Transition status": "Übergangsstatus",
         "Transition": "Übergang",
         "Etat Couleur": "Statusfarbe",
@@ -92,10 +92,11 @@
         "Etat Couleur temp": "Status Farbtemp",
         "Couleur temp": "Temp. Farbe",
         "Effet état": "Statuseffekt",
-        "Effet": "Wirkung",
+        "Effet ": "Wirkung",
         "Alerte": "Alarm",
         "Scene ": "Szene",
         "Smart Scene ": "Intelligente Szene",
+        "Etat Luminosité": "Helligkeitsstatus",
         "Erreur d\\'éxecution de la commande :": "Fehler bei der Befehlsausführung:"
     },
     "info.json": {

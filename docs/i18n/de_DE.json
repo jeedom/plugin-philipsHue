@@ -4,6 +4,7 @@
         "Changelog plugin Philips Hue": "Changelog Plugin Philips Hue",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt",
         "Amélioration des commandes d'activation\/desactivation des capteurs": "Verbesserte Steuerung zum Aktivieren\/Deaktivieren von Sensoren",
+        "Gestion des modules avec plusieurs fois le meme service (comme les modules à double sorties relais": "Verwaltung von Modulen mit dem gleichen Dienst mehrmals (z. B. Module mit doppelten Relaisausgängen)",
         "28\/02\/2024": "28.02.2024",
         "Meilleure gestion des cas ou deux scénes ont le meme nom": "Bessere Handhabung von Fällen, in denen zwei Szenen denselben Namen haben",
         "Ajout d'image manquante pour les modules": "Fehlendes Bild für Module hinzugefügt",

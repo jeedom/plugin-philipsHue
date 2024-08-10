@@ -80,7 +80,7 @@ function launchConnection(_bridge_id,_retry){
     if(data[0].id){
     	bridges[_bridge_id]['lastEvent'] = data[0].id;
     }
-    if(data.length == 0 && data[0]['data'] && data[0]['data'].length == 1 && data[0]['data'][0]['type'] == 'geofence_client' && data[0]['data'][0]['name'].indexOf('jeedom') === 0){
+    if(data.length == 1 && data[0]['data'] && data[0]['data'].length == 1 && data[0]['data'][0]['type'] == 'geofence_client' && data[0]['data'][0]['name'].indexOf('jeedom') === 0){
       return;
     }
     Jeedom.com.add_changes('bridge::'+_bridge_id,e.data);

@@ -128,7 +128,7 @@ class philipsHue extends eqLogic {
 	}
 
 	public static function serviceSuffix($_count){
-		return ($_count == 0) ? '' : ' '.$_count;
+		return ($_count == < 2) ? '' : ' '.$_count;
 	}
 
 	public static function syncBridge($_bridge_number = 1) {

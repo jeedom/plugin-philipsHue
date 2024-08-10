@@ -207,7 +207,7 @@ function updateJeedomGeolocName(_bridge_id){
     req.write(JSON.stringify({
       'type' : 'geofence_client',
       'is_at_home' : false,
-      'name' : 'jeedom'
+      'name' : 'jeedom_'+((Math.random() + 1).toString(36).substring(7))
     }));
     req.end();
  }, 30000)

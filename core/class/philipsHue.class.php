@@ -896,12 +896,7 @@ class philipsHue extends eqLogic {
 			}
 			if (isset($data['on']['on'])) {
 				$states[$data['owner']['rid']] = $data['on']['on'];
-				$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('state','light',$data['id']);
-				if(is_object($cmd)){
-					$eqLogic->checkAndUpdateCmd($cmd, $data['on']['on']);
-				}else{
-					$eqLogic->checkAndUpdateCmd('state', $data['on']['on']);
-				}
+				$eqLogic->checkAndUpdateCmd($eqLogic->getCmdByLogicalIdAndServiceId('state','light',$data['id']), $data['on']['on']);
 				if (!isset($data['dimming'])) {
 					$data['dimming'] = array();
 				}
@@ -918,7 +913,7 @@ class philipsHue extends eqLogic {
 				if (isset($states[$data['owner']['rid']]) && !$states[$data['owner']['rid']]) {
 					$data['dimming']['brightness'] = 0;
 				}
-				$eqLogic->checkAndUpdateCmd('luminosity_state', $data['dimming']['brightness']);
+				$eqLogic->checkAndUpdateCmd($eqLogic->getCmdByLogicalIdAndServiceId('luminosity_state','light',$data['id']), $data['dimming']['brightness']);
 				if ($data['dimming']['brightness'] != 0) {
 					$to_cache['previous_luminosity'] = $data['dimming']['brightness'];
 				}
@@ -927,7 +922,7 @@ class philipsHue extends eqLogic {
 				}
 			}
 			if (isset($data['color_temperature']['mirek'])) {
-				$eqLogic->checkAndUpdateCmd('color_temp_state', $data['color_temperature']['mirek']);
+				$eqLogic->checkAndUpdateCmd($eqLogic->getCmdByLogicalIdAndServiceId('color_temp_state','light',$data['id']), $data['color_temperature']['mirek']);
 			}
 			if (isset($data['color']['xy']) && $data['color']['xy']['x'] !== '' && $data['color']['xy']['y'] !== '') {
 				if (!isset($data['dimming']['brightness'])) {
@@ -937,11 +932,11 @@ class philipsHue extends eqLogic {
 					$to_cache['previous_color_x'] = $data['color']['xy']['x'];
 					$to_cache['previous_color_y'] = $data['color']['xy']['y'];
 					$rgb = pHueApi::convertXYToRGB($data['color']['xy']['x'], $data['color']['xy']['y'], $data['dimming']['brightness'] * 2.55);
-					$eqLogic->checkAndUpdateCmd('color_state', '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']));
+					$eqLogic->checkAndUpdateCmd($eqLogic->getCmdByLogicalIdAndServiceId('color_state','light',$data['id']), '#' . sprintf('%02x', $rgb['red']) . sprintf('%02x', $rgb['green']) . sprintf('%02x', $rgb['blue']));
 				}
 			}
 			if (isset($data['effects']['status'])) {
-				$eqLogic->checkAndUpdateCmd('effect_status', $data['effects']['status']);
+				$eqLogic->checkAndUpdateCmd($eqLogic->getCmdByLogicalIdAndServiceId('effect_status','light',$data['id']), $data['effects']['status']);
 			}
 			if (count($to_cache) > 0) {
 				$eqLogic->setCache($to_cache);

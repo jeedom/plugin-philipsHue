@@ -45,7 +45,7 @@ function launchConnection(_bridge_id,_retry){
   if(!bridges[_bridge_id]['lastEvent']){
       bridges[_bridge_id]['lastEvent'] = '';
   }
-  
+  bridges[_bridge_id]['lastMessage'] = Math.floor(new Date().getTime() / 1000)
   if(_retry > 10){
     Jeedom.log.error('[launchConnection] Too much retry, I will kill me...')
     process.exit()

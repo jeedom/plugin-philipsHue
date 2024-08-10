@@ -397,22 +397,22 @@ class philipsHue extends eqLogic {
 				}
 				if ($service['rtype'] == 'light') {
 					$light = $hue->light($service['rid']);
-
-					$cmd = $eqLogic->getCmd('info', 'state');
+					$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('state','light',$service['rid']);
 					if (!is_object($cmd)) {
 						$cmd = new philipsHueCmd();
 						$cmd->setName(__('Etat', __FILE__));
 						$cmd->setEqLogic_id($eqLogic->getId());
 						$cmd->setIsVisible(0);
-						$cmd->setLogicalId('state');
 						$cmd->setGeneric_type('LIGHT_STATE');
+						$cmd->setLogicalId('state');
 					}
 					$cmd->setType('info');
 					$cmd->setSubtype('binary');
+					$cmd->setConfiguration('service_light',$service['rid']);
 					$cmd->save();
 					$cmd_state_id = $cmd->getId();
 
-					$cmd = $eqLogic->getCmd('action', 'on');
+					$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('on','light',$service['rid']);
 					if (!is_object($cmd)) {
 						$cmd = new philipsHueCmd();
 						$cmd->setName(__('On', __FILE__));
@@ -423,10 +423,11 @@ class philipsHue extends eqLogic {
 					}
 					$cmd->setType('action');
 					$cmd->setSubtype('other');
+					$cmd->setConfiguration('service_light',$service['rid']);
 					$cmd->setValue($cmd_state_id);
 					$cmd->save();
 
-					$cmd = $eqLogic->getCmd('action', 'off');
+					$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('off','light',$service['rid']);
 					if (!is_object($cmd)) {
 						$cmd = new philipsHueCmd();
 						$cmd->setName(__('Off', __FILE__));
@@ -437,11 +438,12 @@ class philipsHue extends eqLogic {
 					}
 					$cmd->setType('action');
 					$cmd->setSubtype('other');
+					$cmd->setConfiguration('service_light',$service['rid']);
 					$cmd->setValue($cmd_state_id);
 					$cmd->save();
 
 					if (isset($light['data'][0]['dimming'])) {
-						$cmd = $eqLogic->getCmd('info', 'luminosity_state');
+						$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('luminosity_state','light',$service['rid']);
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Etat Luminosité', __FILE__));
@@ -456,10 +458,11 @@ class philipsHue extends eqLogic {
 						$cmd->setSubtype('numeric');
 						$cmd->setUnite('%');
 						$cmd->setConfiguration('historizeRound',0);
+						$cmd->setConfiguration('service_light',$service['rid']);
 						$cmd->save();
 						$cmd_luminosity_state_id = $cmd->getId();
 
-						$cmd = $eqLogic->getCmd('action', 'luminosity');
+						$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('luminosity','light',$service['rid']);
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Luminosité', __FILE__));
@@ -476,9 +479,10 @@ class philipsHue extends eqLogic {
 						$cmd->setSubtype('slider');
 						$cmd->setValue($cmd_luminosity_state_id);
 						$cmd->setUnite('%');
+						$cmd->setConfiguration('service_light',$service['rid']);
 						$cmd->save();
 
-						$cmd = $eqLogic->getCmd('info', 'transition_state');
+						$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('transition_state','light',$service['rid']);
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Transition status', __FILE__));
@@ -490,10 +494,11 @@ class philipsHue extends eqLogic {
 						$cmd->setConfiguration('maxValue',1800);
 						$cmd->setType('info');
 						$cmd->setSubtype('numeric');
+						$cmd->setConfiguration('service_light',$service['rid']);
 						$cmd->save();
 						$cmd_transistion_state_id = $cmd->getId();
 
-						$cmd = $eqLogic->getCmd('action', 'transition');
+						$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('transition','light',$service['rid']);
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Transition', __FILE__));
@@ -507,11 +512,12 @@ class philipsHue extends eqLogic {
 						$cmd->setType('action');
 						$cmd->setSubtype('slider');
 						$cmd->setValue($cmd_transistion_state_id);
+						$cmd->setConfiguration('service_light',$service['rid']);
 						$cmd->save();
 					}
 
 					if (isset($light['data'][0]['color'])) {
-						$cmd = $eqLogic->getCmd('info', 'color_state');
+						$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('color_state','light',$service['rid']);
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Etat Couleur', __FILE__));
@@ -522,10 +528,11 @@ class philipsHue extends eqLogic {
 						}
 						$cmd->setType('info');
 						$cmd->setSubtype('string');
+						$cmd->setConfiguration('service_light',$service['rid']);
 						$cmd->save();
 						$cmd_color_state_id = $cmd->getId();
 
-						$cmd = $eqLogic->getCmd('action', 'color');
+						$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('color','light',$service['rid']);
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Couleur', __FILE__));
@@ -537,11 +544,12 @@ class philipsHue extends eqLogic {
 						$cmd->setType('action');
 						$cmd->setSubtype('color');
 						$cmd->setValue($cmd_color_state_id);
+						$cmd->setConfiguration('service_light',$service['rid']);
 						$cmd->save();
 					}
 
 					if (isset($light['data'][0]['color_temperature'])) {
-						$cmd = $eqLogic->getCmd('info', 'color_temp_state');
+						$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('color_temp_state','light',$service['rid']);
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Etat Couleur temp', __FILE__));
@@ -553,10 +561,11 @@ class philipsHue extends eqLogic {
 						$cmd->setConfiguration('maxValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_maximum']);
 						$cmd->setType('info');
 						$cmd->setSubtype('numeric');
+						$cmd->setConfiguration('service_light',$service['rid']);
 						$cmd->save();
 						$cmd_temp_state_id = $cmd->getId();
 
-						$cmd = $eqLogic->getCmd('action', 'color_temp');
+						$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('color_temp','light',$service['rid']);
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Couleur temp', __FILE__));
@@ -569,11 +578,12 @@ class philipsHue extends eqLogic {
 						$cmd->setType('action');
 						$cmd->setSubtype('slider');
 						$cmd->setValue($cmd_temp_state_id);
+						$cmd->setConfiguration('service_light',$service['rid']);
 						$cmd->save();
 					}
 					
 					if (isset($light['data'][0]['effects']['effect_values'])) {
-						$cmd = $eqLogic->getCmd('info', 'effect_status');
+						$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('effect_status','light',$service['rid']);
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Effet état', __FILE__));
@@ -583,10 +593,11 @@ class philipsHue extends eqLogic {
 						}
 						$cmd->setType('info');
 						$cmd->setSubtype('string');
+						$cmd->setConfiguration('service_light',$service['rid']);
 						$cmd->save();
 						$effect_status_id = $cmd->getId();
 
-						$cmd = $eqLogic->getCmd('action', 'effect');
+						$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('effect','light',$service['rid']);
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Effet', __FILE__));
@@ -603,11 +614,12 @@ class philipsHue extends eqLogic {
 						$select = trim($select, ';');
 						$cmd->setConfiguration('listValue', $select);
 						$cmd->setValue($effect_status_id);
+						$cmd->setConfiguration('service_light',$service['rid']);
 						$cmd->save();
 					}
 
 					if (isset($light['data'][0]['alert']['action_values'])) {
-						$cmd = $eqLogic->getCmd('action', 'alert');
+						$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('alert','light',$service['rid']);
 						if (!is_object($cmd)) {
 							$cmd = new philipsHueCmd();
 							$cmd->setName(__('Alerte', __FILE__));
@@ -623,6 +635,7 @@ class philipsHue extends eqLogic {
 						}
 						$select = trim($select, ';');
 						$cmd->setConfiguration('listValue', $select);
+						$cmd->setConfiguration('service_light',$service['rid']);
 						$cmd->save();
 					}
 				}
@@ -748,36 +761,9 @@ class philipsHue extends eqLogic {
 				$cmd->setName($cmd->getName().' - '.$scene['id']);
 				$cmd->save();
 			}
-			/*$cmd = $eqLogic->getCmd('info', 'scene_speed_state');
-			if (!is_object($cmd)) {
-				$cmd = new philipsHueCmd();
-				$cmd->setName(__('Vitesse scène état', __FILE__));
-				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setIsVisible(0);
-				$cmd->setLogicalId('scene_speed_state');
-			}
-			$cmd->setType('info');
-			$cmd->setSubtype('numeric');
-			$cmd->save();
-			$cmd_scene_speed_state_id = $cmd->getId();
-
-			$cmd = $eqLogic->getCmd('action', 'scene_speed');
-			if (!is_object($cmd)) {
-				$cmd = new philipsHueCmd();
-				$cmd->setName(__('Vitesse scène', __FILE__));
-				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setIsVisible(0);
-				$cmd->setLogicalId('scene_speed');
-				$cmd->setConfiguration('minValue',0);
-				$cmd->setConfiguration('maxValue',9);
-			}
-			$cmd->setType('action');
-			$cmd->setSubtype('slider');
-			$cmd->setValue($cmd_scene_speed_state_id);
-			$cmd->save();*/
 		}
       	
-      	        $scenes = $hue->smart_scene();
+      	$scenes = $hue->smart_scene();
 		foreach ($scenes['data'] as $scene) {
 			$eqLogic = self::byLogicalId($scene['group']['rid'], 'philipsHue');
 			if (!is_object($eqLogic)) {
@@ -886,7 +872,12 @@ class philipsHue extends eqLogic {
 			}
 			if (isset($data['on']['on'])) {
 				$states[$data['owner']['rid']] = $data['on']['on'];
-				$eqLogic->checkAndUpdateCmd('state', $data['on']['on']);
+				$cmd = $eqLogic->getCmdByLogicalIdAndServiceId('state','light',$data['id']);
+				if(is_object($cmd)){
+					$eqLogic->checkAndUpdateCmd($cmd, $data['on']['on']);
+				}else{
+					$eqLogic->checkAndUpdateCmd('state', $data['on']['on']);
+				}
 				if (!isset($data['dimming'])) {
 					$data['dimming'] = array();
 				}
@@ -970,15 +961,31 @@ class philipsHue extends eqLogic {
 	public function getImage() {
 		if(method_exists($this,'getCustomImage')){
 			$customImage = $this->getCustomImage();
-		 	if($customImage !== null){
-		    		return $customImage;
-		 	}
+				if($customImage !== null){
+						return $customImage;
+				}
 	        }
 		$imgpath = $this->getImgFilePath();
 		if ($imgpath === false) {
 			return 'plugins/philipsHue/plugin_info/philipsHue_icon.png';
 		}
 		return 'plugins/philipsHue/core/config/devices/' . $imgpath;
+	}
+
+	public function getCmdByLogicalIdAndServiceId($_logical_id,$_service_type,$_service_id){
+		$cmds = $this->getCmd(null,$_logical_id,null,true);
+		if(count($cmds) == 0){
+			return null;
+		}
+		if(count($cmds) == 1){
+			return $cmds[0];
+		}
+		foreach ($cmds as $cmd) {
+			if($cmd->getConfiguration('service_'.$_service_type) == $_service_id){
+				return $cmd;
+			}
+		}
+		return $cmds[0];
 	}
 
 	public function createDefaultCmd(){
@@ -1303,16 +1310,17 @@ class philipsHueCmd extends cmd {
 				}
 			}
 		}else{
-            log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $eqLogic->getConfiguration('service_light') . ' => ' . json_encode($data));
+			$light_service = $this->getConfiguration('service_light',$eqLogic->getConfiguration('service_light'));
+            log::add('philipsHue', 'debug', 'Execution of ' . $this->getHumanName() . ' ' . $light_service . ' => ' . json_encode($data));
 			try {
-				$hue->light($eqLogic->getConfiguration('service_light'), $data);
+				$hue->light($light_service, $data);
 			} catch (\Throwable $th) {
 				try {
 					usleep(500000);
-					$hue->light($eqLogic->getConfiguration('service_light'), $data);
+					$hue->light($light_service, $data);
 				} catch (\Throwable $th) {
 					sleep(3);
-					$hue->light($eqLogic->getConfiguration('service_light'), $data);
+					$hue->light($light_service, $data);
 				}
 			} 
         }

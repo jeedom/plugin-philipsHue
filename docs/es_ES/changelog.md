@@ -6,6 +6,10 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+- Controles de activación/desactivación de sensores mejorados
+- Gestión de módulos con el mismo servicio varias veces (como módulos con doble salida de relé))
+- Optimización del demonio
+
 # 28/02/2024
 
 - Mejor manejo de casos en los que dos escenas tienen el mismo nombre

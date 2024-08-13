@@ -84,7 +84,7 @@
         "Connecté": "Conectado",
         "On": "Nosotros",
         "Off": "Apagado",
-        "Etat Luminosité": "Estado de brillo",
+        "Etat Luminosité ": "Estado de brillo",
         "Transition status": "Estado de transición",
         "Transition": "Transición",
         "Etat Couleur": "Color de estado",
@@ -92,12 +92,11 @@
         "Etat Couleur temp": "Estado Temperatura de color",
         "Couleur temp": "Color temporal",
         "Effet état": "Efecto de estado",
-        "Effet": "Efecto",
+        "Effet ": "Efecto",
         "Alerte": "Alerta",
         "Scene ": "Escena",
-        "Vitesse scène état": "Velocidad de la escena estatal",
-        "Vitesse scène": "Velocidad de escena",
         "Smart Scene ": "Escena inteligente",
+        "Etat Luminosité": "Estado de brillo",
         "Erreur d\\'éxecution de la commande :": "Error de ejecución del comando:"
     },
     "info.json": {

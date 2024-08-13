@@ -84,7 +84,7 @@
         "Connecté": "Connecté",
         "On": "On",
         "Off": "Off",
-        "Etat Luminosité": "Etat Luminosité",
+        "Etat Luminosité ": "Etat Luminosité ",
         "Transition status": "Transition status",
         "Transition": "Transition",
         "Etat Couleur": "Etat Couleur",
@@ -92,12 +92,11 @@
         "Etat Couleur temp": "Etat Couleur temp",
         "Couleur temp": "Couleur temp",
         "Effet état": "Effet état",
-        "Effet": "Effet",
+        "Effet ": "Effet ",
         "Alerte": "Alerte",
         "Scene ": "Scene ",
-        "Vitesse scène état": "Vitesse scène état",
-        "Vitesse scène": "Vitesse scène",
         "Smart Scene ": "Smart Scene ",
+        "Etat Luminosité": "Etat Luminosité",
         "Erreur d\\'éxecution de la commande :": "Erreur d\\'éxecution de la commande :"
     },
     "info.json": {

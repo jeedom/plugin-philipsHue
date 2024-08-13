@@ -3,6 +3,8 @@
         "Changelog Philips Hue": "Changelog Philips Hue",
         "Changelog plugin Philips Hue": "Changelog Plugin Philips Hue",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt",
+        "13\/08\/2024": "13.08.2024",
+        "Correction d'un bug sur la detection de l'état du démon": "Ein Fehler bei der Daemon-Statuserkennung wurde behoben",
         "Amélioration des commandes d'activation\/desactivation des capteurs": "Verbesserte Steuerung zum Aktivieren\/Deaktivieren von Sensoren",
         "Gestion des modules avec plusieurs fois le meme service (comme les modules à double sorties relais": "Verwaltung von Modulen mit dem gleichen Dienst mehrmals (z. B. Module mit doppelten Relaisausgängen)",
         "Optimisation du démon": "Daemon-Optimierung",

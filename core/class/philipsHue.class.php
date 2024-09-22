@@ -881,7 +881,7 @@ class philipsHue extends eqLogic {
 			if (isset($data['temperature'])) {
 				$eqLogic->checkAndUpdateCmd($data['id'], $data['temperature']['temperature']);
 			}
-			if (isset($data['button'])) {
+			if (isset($data['button']) && isset($data['button']['last_event'])) {
 				$eqLogic->checkAndUpdateCmd($data['id'], $data['button']['last_event']);
 			}
 			if (isset($data['contact_report'])) {

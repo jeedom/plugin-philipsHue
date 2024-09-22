@@ -26,15 +26,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<br />
 				<span>{{Configuration}}</span>
 			</div>
-			<?php
-			$jeedomVersion  = jeedom::version() ?? '0';
-			if (version_compare($jeedomVersion, '4.4.0', '>=')) {
-				echo '<div class="cursor eqLogicAction info" data-action="createCommunityPost">';
-				echo '<i class="fas fa-ambulance"></i><br>';
-				echo '<span>{{Community}}</span>';
-				echo '</div>';
-			}
-			?>
 		</div>
 		<legend><i class="far fa-lightbulb"></i> {{Mes Philips Hue}}</legend>
 		<div class="input-group" style="margin:5px;">

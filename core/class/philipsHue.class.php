@@ -872,25 +872,25 @@ class philipsHue extends eqLogic {
 			if (isset($data['enabled'])) {
 				$eqLogic->checkAndUpdateCmd('enabled', $data['enabled']);
 			}
-			if (isset($data['motion'])) {
+			if (isset($data['motion']['motion'])) {
 				$eqLogic->checkAndUpdateCmd($data['id'], $data['motion']['motion']);
 			}
-			if (isset($data['light'])) {
+			if (isset($data['light']['light_level'])) {
 				$eqLogic->checkAndUpdateCmd($data['id'], $data['light']['light_level']);
 			}
-			if (isset($data['temperature'])) {
+			if (isset($data['temperature']['temperature'])) {
 				$eqLogic->checkAndUpdateCmd($data['id'], $data['temperature']['temperature']);
 			}
-			if (isset($data['button']) && isset($data['button']['last_event'])) {
+			if (isset($data['button']['last_event'])) {
 				$eqLogic->checkAndUpdateCmd($data['id'], $data['button']['last_event']);
 			}
-			if (isset($data['contact_report'])) {
+			if (isset($data['contact_report']['state'])) {
 				$eqLogic->checkAndUpdateCmd($data['id'],  ($data['contact_report']['state'] == 'contact'));
 			}
-			if (isset($data['tamper_reports'])) {
+			if (isset($data['tamper_reports']['state'])) {
 				$eqLogic->checkAndUpdateCmd($data['id'], ($data['tamper_reports']['state'] == 'tampered'));
 			}
-			if (isset($data['relative_rotary'])) {
+			if (isset($data['relative_rotary']['last_event']['rotation']['direction']) && isset($data['relative_rotary']['last_event']['rotation']['steps'])) {
 				$direction = ($data['relative_rotary']['last_event']['rotation']['direction'] == 'counter_clock_wise') ? 1 : - 1;
 				$eqLogic->checkAndUpdateCmd($data['id'], $direction * $data['relative_rotary']['last_event']['rotation']['steps']);
 			}

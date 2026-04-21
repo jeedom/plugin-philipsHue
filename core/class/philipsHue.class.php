@@ -903,10 +903,11 @@ class philipsHue extends eqLogic {
 				if (!$data['on']['on']) {
 					$data['dimming']['brightness'] = 0;
 				} elseif (!isset($data['dimming']['brightness'])) {
-					$data['dimming']['brightness'] = $eqLogic->getCache('previous_luminosity');
+					$data['dimming']['brightness'] = floatval($eqLogic->getCache('previous_luminosity'));
 				}
 			}
 			if (isset($data['dimming']['brightness'])) {
+				$data['dimming']['brightness'] = floatval($data['dimming']['brightness']);
 				if ($data['dimming']['brightness'] < 1) {
 					$data['dimming']['brightness'] = 0;
 				}
@@ -926,7 +927,7 @@ class philipsHue extends eqLogic {
 			}
 			if (isset($data['color']['xy']) && $data['color']['xy']['x'] !== '' && $data['color']['xy']['y'] !== '') {
 				if (!isset($data['dimming']['brightness'])) {
-					$data['dimming']['brightness'] = $eqLogic->getCache('previous_luminosity');
+					$data['dimming']['brightness'] = floatval($eqLogic->getCache('previous_luminosity'));
 				}
 				if ($data['dimming']['brightness'] != 0) {
 					$to_cache['previous_color_x'] = $data['color']['xy']['x'];

@@ -474,7 +474,7 @@ class philipsHue extends eqLogic {
 							$cmd->setEqLogic_id($eqLogic->getId());
 							$cmd->setIsVisible(0);
 							$cmd->setLogicalId('luminosity_state');
-							$cmd->setGeneric_type('LIGHT_STATE');
+							$cmd->setGeneric_type('LIGHT_BRIGHTNESS');
 						}
 						$cmd->setConfiguration('minValue',0);
 						$cmd->setConfiguration('maxValue',100);
@@ -529,7 +529,6 @@ class philipsHue extends eqLogic {
 							$cmd->setEqLogic_id($eqLogic->getId());
 							$cmd->setIsVisible(0);
 							$cmd->setLogicalId('transition');
-							$cmd->setGeneric_type('LIGHT_SLIDER');
 						}
 						$cmd->setConfiguration('minValue',0);
 						$cmd->setConfiguration('maxValue',1800);
@@ -580,6 +579,7 @@ class philipsHue extends eqLogic {
 							$cmd->setEqLogic_id($eqLogic->getId());
 							$cmd->setIsVisible(0);
 							$cmd->setLogicalId('color_temp_state');
+							$cmd->setGeneric_type('LIGHT_COLOR_TEMP');
 						}
 						$cmd->setConfiguration('minValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_minimum']);
 						$cmd->setConfiguration('maxValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_maximum']);
@@ -596,6 +596,7 @@ class philipsHue extends eqLogic {
 							$cmd->setEqLogic_id($eqLogic->getId());
 							$cmd->setIsVisible(1);
 							$cmd->setLogicalId('color_temp');
+							$cmd->setGeneric_type('LIGHT_SET_COLOR_TEMP');
 						}
 						$cmd->setConfiguration('minValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_minimum']);
 						$cmd->setConfiguration('maxValue',$light['data'][0]['color_temperature']['mirek_schema']['mirek_maximum']);
@@ -1059,7 +1060,7 @@ class philipsHue extends eqLogic {
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->setIsVisible(0);
 			$cmd->setLogicalId('luminosity_state');
-			$cmd->setGeneric_type('LIGHT_STATE');
+			$cmd->setGeneric_type('LIGHT_BRIGHTNESS');
 		}
 		$cmd->setConfiguration('minValue',0);
 		$cmd->setConfiguration('maxValue',100);
@@ -1111,7 +1112,6 @@ class philipsHue extends eqLogic {
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->setIsVisible(0);
 			$cmd->setLogicalId('transition');
-			$cmd->setGeneric_type('LIGHT_SLIDER');
 		}
 		$cmd->setConfiguration('minValue',0);
 		$cmd->setConfiguration('maxValue',1800);
@@ -1155,6 +1155,7 @@ class philipsHue extends eqLogic {
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->setIsVisible(0);
 			$cmd->setLogicalId('color_temp_state');
+			$cmd->setGeneric_type('LIGHT_COLOR_TEMP');
 		}
 		$cmd->setConfiguration('minValue',153);
 		$cmd->setConfiguration('maxValue',500);
@@ -1170,6 +1171,7 @@ class philipsHue extends eqLogic {
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->setIsVisible(1);
 			$cmd->setLogicalId('color_temp');
+			$cmd->setGeneric_type('LIGHT_SET_COLOR_TEMP');
 		}
 		$cmd->setConfiguration('minValue',153);
 		$cmd->setConfiguration('maxValue',500);

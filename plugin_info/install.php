@@ -21,6 +21,38 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 function philipsHue_install() {
 }
 
+/**
+ * Migration of generic types (PR #64) for existing eq.
+ * Only change default values, not changed done by the user.
+ */
+function philipsHue_migrateGenericTypes() {
+	foreach (eqLogic::byType('philipsHue') as $eqLogic) {
+		// logicalId => [old expected type (null = empty), new type (null = delete)]
+		$migrations = array(
+			'luminosity_state' => array('LIGHT_STATE',  'LIGHT_BRIGHTNESS'),
+			'transition'       => array('LIGHT_SLIDER', null),
+			'color_temp_state' => array(null,           'LIGHT_COLOR_TEMP'),
+			'color_temp'       => array(null,           'LIGHT_SET_COLOR_TEMP'),
+		);
+		foreach ($migrations as $logicalId => $types) {
+			$cmd = $eqLogic->getCmd(null, $logicalId);
+			if (!is_object($cmd)) {
+				continue;
+			}
+			$current = $cmd->getGeneric_type();
+			$old = $types[0];
+			$new = $types[1];
+			// only modify if the generic type is still the default value from the plugin
+			if (($old === null && $current !== null && $current !== '') || ($old !== null && $current !== $old)) {
+				continue;
+			}
+			$cmd->setGeneric_type($new);
+			$cmd->save();
+			log::add('philipsHue', 'info', 'Migration type générique ' . $logicalId . ' (' . $eqLogic->getHumanName() . ') : ' . ($current ?: 'vide') . ' => ' . ($new ?: 'vide'));
+		}
+	}
+}
+
 function philipsHue_update() {
 	$cron = cron::byClassAndFunction('philipsHue', 'pull');
 	if (is_object($cron)) {
@@ -35,6 +67,7 @@ function philipsHue_update() {
 			}
 		}
 	}
+	philipsHue_migrateGenericTypes();
 }
 
 function philipsHue_remove() {
